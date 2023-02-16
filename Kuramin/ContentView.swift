@@ -79,8 +79,27 @@ struct ContentView_Previews: PreviewProvider {
 
 struct MainPageView: View {
     var body: some View {
-        Text("This is going to be the main page")
-            .navigationBarTitle("Main Page")
-            .navigationBarBackButtonHidden(true)
+        
+        VStack {
+            Text("Start New Game")
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundColor(.black)
+                .padding(.vertical, 16)
+                .padding(.horizontal, 24)
+                .background(Color.white)
+                .cornerRadius(16)
+                .shadow(radius: 4, x: 0, y: 4)
+            
+            Text("Join Game")
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundColor(.black)
+                .padding(.vertical, 16)
+                .padding(.horizontal, 24)
+                .background(Color.white)
+                .cornerRadius(16)
+                .shadow(radius: 4, x: 0, y: 4)
+        
+        }
+        
     }
 }
