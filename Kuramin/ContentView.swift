@@ -81,7 +81,20 @@ struct MainPageView: View {
     var body: some View {
         
         VStack {
-            Text("Start New Game")
+            NavigationLink(destination: GamePageView()) {
+                Text("Start New Game")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(.black)
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 24)
+                    .background(Color.white)
+                    .cornerRadius(16)
+                    .shadow(radius: 4, x: 0, y: 4)
+            }
+            
+            
+            
+            Text("Join Game")
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(.black)
                 .padding(.vertical, 16)
@@ -90,7 +103,7 @@ struct MainPageView: View {
                 .cornerRadius(16)
                 .shadow(radius: 4, x: 0, y: 4)
             
-            Text("Join Game")
+            Text("How To Play?")
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(.black)
                 .padding(.vertical, 16)
