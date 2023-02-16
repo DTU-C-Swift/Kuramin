@@ -12,29 +12,23 @@ struct ContentView: View {
         
         NavigationView {
             VStack {
-                Button(action: {
-                    
-                }) {
+                NavigationLink(destination: MainPageView()) {
                     HStack {
                         Image(systemName: "applelogo")
                             .font(.system(size: 24))
                             .foregroundColor(.white)
                         Text("Login with Apple")
-                            .font(.system(size: 24, weight:
-                                    .semibold))
-                                    .foregroundColor(.white)
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.white)
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 24)
                     .background(Color.black)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
-                    
                 }
                 
-                Button(action: {
-                    
-                }) {
+                NavigationLink(destination: MainPageView()) {
                     HStack {
                         Image(systemName: "book")
                             .font(.system(size: 24))
@@ -49,7 +43,6 @@ struct ContentView: View {
                     .background(Color.blue)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
-                    
                 }
                 
             }
