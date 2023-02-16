@@ -10,10 +10,47 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello from Xcode!")
+            
+            Button(action: {
+                
+            }) {
+                HStack {
+                    Image(systemName: "applelogo")
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                    Text("Login with Apple")
+                        .font(.system(size: 24, weight:
+                                .semibold))
+                                .foregroundColor(.white)
+                }
+                .padding(.vertical, 16)
+                .padding(.horizontal, 24)
+                .background(Color.black)
+                .cornerRadius(16)
+                .shadow(radius: 4, x: 0, y: 4)
+                
+            }
+            
+            Button(action: {
+                
+            }) {
+                HStack {
+                    Image(systemName: "book")
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                    Text("Login with Facebook")
+                        .font(.system(size: 24, weight:
+                                .semibold))
+                                .foregroundColor(.white)
+                }
+                .padding(.vertical, 16)
+                .padding(.horizontal, 24)
+                .background(Color.blue)
+                .cornerRadius(16)
+                .shadow(radius: 4, x: 0, y: 4)
+                
+            }
+            
         }
         .padding()
     }
