@@ -16,6 +16,6 @@ struct GamePageView: View {
 struct GamePageView_Previews: PreviewProvider {
     static var previews: some View {
         GamePageView()
-            .previewInterfaceOrientation(.landscapeRight)
+        
     }
 }
