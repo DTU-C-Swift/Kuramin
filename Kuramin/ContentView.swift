@@ -73,7 +73,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .previewInterfaceOrientation(.landscapeRight)
+            
     }
 }
 
@@ -113,6 +113,9 @@ struct MainPageView: View {
                 .shadow(radius: 4, x: 0, y: 4)
         
         }
+        .navigationBarBackButtonHidden(true)
+        
+        //
         
     }
 }
