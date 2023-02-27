@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct GamePageView: View {
+    @State private var isAnimating = false
+    
+    
     var body: some View {
         ZStack {
         
@@ -20,8 +23,23 @@ struct GamePageView: View {
                 .strokeBorder(Color.black, lineWidth: 30)
                 .scaleEffect(0.8)
                 .shadow(color: Color.cyan, radius: 10, x: 0, y: 5)
+            
+            
 
         }
+        
+        
+//        .onAppear {
+//            withAnimation(Animation.easeIn(duration: 1).repeatForever(autoreverses: true)) {
+//                isAnimating.toggle()
+//            }
+//        }
+        
+
+    }
+    
+    private var lineWidth: CGFloat {
+        isAnimating ? 10 : 30
     }
 }
 
