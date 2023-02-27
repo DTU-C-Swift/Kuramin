@@ -9,13 +9,19 @@ import SwiftUI
 
 struct GamePageView: View {
     var body: some View {
-        Text("Welcome to a game of Kuramin")
+        ZStack {
+        
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.cyan, Color.blue, Color.black]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: .trailing)
+                .ignoresSafeArea()
+        }
     }
 }
+
 
 struct GamePageView_Previews: PreviewProvider {
     static var previews: some View {
         GamePageView()
+        
         
     }
 }
