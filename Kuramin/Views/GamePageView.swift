@@ -28,15 +28,21 @@ struct GamePageView: View {
                 
                 HStack() {
                     Spacer()
-                    Image("person_34")
-                        .frame(width: 60, height: 60)
-                        .scaleEffect(1.5)
-                        .clipShape(Circle())
-                        .overlay{
-                            Circle().stroke(Color.white, lineWidth: 4)
-                        .shadow(radius: 7)
-    
+                    VStack {
+                        Image("person_34")
+                            .frame(width: 60, height: 60)
+                            .scaleEffect(1.5)
+                            .clipShape(Circle())
+                            .overlay{
+                                Circle().stroke(Color.white, lineWidth: 4)
+                            .shadow(radius: 7)
+        
                         }
+                        Text("Player1")
+                            .font(.footnote)
+                            .foregroundColor(Color.white)
+
+                    }
                         
                     Spacer()
                 
@@ -46,26 +52,38 @@ struct GamePageView: View {
                 Spacer()
                 HStack() {
             
-                    Image("person_34")
-                        .frame(width: 60, height: 60)
-                        .scaleEffect(1.5)
-                        .clipShape(Circle())
-                        .overlay{
-                            Circle().stroke(Color.white, lineWidth: 4)
-                        .shadow(radius: 7)
-                        
+                    VStack {
+                        Image("person_34")
+                            .frame(width: 60, height: 60)
+                            .scaleEffect(1.5)
+                            .clipShape(Circle())
+                            .overlay{
+                                Circle().stroke(Color.white, lineWidth: 4)
+                            .shadow(radius: 7)
+        
                         }
+                        Text("Player2")
+                            .font(.footnote)
+                            .foregroundColor(Color.white)
+
+                    }
                     Spacer()
                     
-                    Image("person_34")
-                        .frame(width: 60, height: 60)
-                        .scaleEffect(1.5)
-                        .clipShape(Circle())
-                        .overlay{
-                            Circle().stroke(Color.white, lineWidth: 4)
-                        .shadow(radius: 7)
-                        
+                    VStack {
+                        Image("person_34")
+                            .frame(width: 60, height: 60)
+                            .scaleEffect(1.5)
+                            .clipShape(Circle())
+                            .overlay{
+                                Circle().stroke(Color.white, lineWidth: 4)
+                            .shadow(radius: 7)
+        
                         }
+                        Text("Player3")
+                            .font(.footnote)
+                            .foregroundColor(Color.white)
+
+                    }
                 
                 }
                 
