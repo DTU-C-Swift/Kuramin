@@ -76,15 +76,30 @@ struct GamePageView: View {
                 
                 HStack() {
                     Spacer()
-                    Image("person_34")
-                        .frame(width: 60, height: 60)
-                        .scaleEffect(1.5)
-                        .clipShape(Circle())
-                        .overlay{
-                            Circle().stroke(Color.white, lineWidth: 4)
-                        .shadow(radius: 7)
+                    ZStack {
+                        Rectangle()
+                            .fill(Color.cyan)
+                            .frame(width: 300, height: 40)
+                            .cornerRadius(20)
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.black, lineWidth: 0.5)
+                                )
                         
+                            .shadow(radius: 20)
+
+                            
+                        
+                        Image("person_34")
+                            .frame(width: 60, height: 60)
+                            .scaleEffect(1.5)
+                            .clipShape(Circle())
+                            .overlay{
+                                Circle().stroke(Color.white, lineWidth: 4)
+                            .shadow(radius: 7)
+                            
                         }
+                    }
                     Spacer()
                 
                 }
