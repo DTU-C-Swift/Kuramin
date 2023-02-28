@@ -10,10 +10,17 @@ import SwiftUI
 struct GamePageView: View {
     @State private var isAnimating = false
     
+    var playerName1 = "Player1"
+    var playerName2 = "Player2"
+    var playerName3 = "Player3"
+    var playerName4 = "Player4"
+    var imageName = "person_34"
+    
+    
     
     var body: some View {
         ZStack {
-        
+            
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.cyan, Color.blue, Color.black]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: .trailing)
                 .ignoresSafeArea()
             RoundedRectangle(cornerRadius: 150)
@@ -28,66 +35,24 @@ struct GamePageView: View {
                 
                 HStack() {
                     Spacer()
-                    VStack {
-                        Image("person_34")
-                            .frame(width: 60, height: 60)
-                            .scaleEffect(1.5)
-                            .clipShape(Circle())
-                            .overlay{
-                                Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-        
-                        }
-                        Text("Player1")
-                            .font(.footnote)
-                            .foregroundColor(Color.white)
-
-                    }
-                        
+                    CirclePicView(playerName: playerName1, imageName: imageName)
+                    
                     Spacer()
-                
+                    
                 }
                 
                 
                 Spacer()
                 HStack() {
-            
-                    VStack {
-                        Image("person_34")
-                            .frame(width: 60, height: 60)
-                            .scaleEffect(1.5)
-                            .clipShape(Circle())
-                            .overlay{
-                                Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-        
-                        }
-                        Text("Player2")
-                            .font(.footnote)
-                            .foregroundColor(Color.white)
-
-                    }
+                    
+                    CirclePicView(playerName: playerName2, imageName: imageName)
                     Spacer()
                     
-                    VStack {
-                        Image("person_34")
-                            .frame(width: 60, height: 60)
-                            .scaleEffect(1.5)
-                            .clipShape(Circle())
-                            .overlay{
-                                Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-        
-                        }
-                        Text("Player3")
-                            .font(.footnote)
-                            .foregroundColor(Color.white)
-
-                    }
-                
+                    CirclePicView(playerName: playerName3, imageName: imageName)
+                    
                 }
                 
-
+                
                 
                 Spacer()
                 
@@ -100,52 +65,30 @@ struct GamePageView: View {
                             .frame(width: 300, height: 40)
                             .cornerRadius(20)
                             .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.black, lineWidth: 0.5)
-                                )
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
                         
                             .shadow(radius: 20)
-
-                            
                         
-                        Image("person_34")
-                            .frame(width: 60, height: 60)
-                            .scaleEffect(1.5)
-                            .clipShape(Circle())
-                            .overlay{
-                                Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-                            
-                        }
+                        CirclePicView(playerName: "", imageName: imageName)
+                        
                     }
                     Spacer()
-                
                 }
                 
                 
             }
             
             
-            
-
         }
         
         
-        
-        
-//        .onAppear {
-//            withAnimation(Animation.easeIn(duration: 1).repeatForever(autoreverses: true)) {
-//                isAnimating.toggle()
-//            }
-//        }
-        
-
     }
     
-    private var lineWidth: CGFloat {
-        isAnimating ? 10 : 30
-    }
+    
 }
+
 
 
 struct GamePageView_Previews: PreviewProvider {

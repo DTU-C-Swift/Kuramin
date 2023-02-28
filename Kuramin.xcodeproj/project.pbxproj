@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5689AD7229AE77650062A6CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7129AE77650062A6CD /* Game.swift */; };
 		5689AD7429AE77E10062A6CD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7329AE77E10062A6CD /* Player.swift */; };
+		5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */; };
 		BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */; };
 		BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */; };
 		BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F78299E2B23003E5D85 /* ContentView.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		5689AD7129AE77650062A6CD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		5689AD7329AE77E10062A6CD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
 		BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		BF6C4F73299E2B23003E5D85 /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		560EFDA529AD43CC00087FC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5689AD7529AE79F10062A6CD /* ContecViews */,
 				BF6C4FA1299E620A003E5D85 /* GamePageView.swift */,
 				BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */,
 				BF6C4F78299E2B23003E5D85 /* ContentView.swift */,
@@ -97,6 +100,14 @@
 				5689AD7329AE77E10062A6CD /* Player.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5689AD7529AE79F10062A6CD /* ContecViews */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */,
+			);
+			path = ContecViews;
 			sourceTree = "<group>";
 		};
 		BF6C4F6A299E2B23003E5D85 = {
@@ -290,6 +301,7 @@
 				BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */,
 				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
 				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
+				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
 				BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */,
 				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
 				BF6C4FA2299E620A003E5D85 /* GamePageView.swift in Sources */,
