@@ -24,29 +24,75 @@ struct GamePageView: View {
                 .scaleEffect(0.8)
                 .shadow(color: Color.cyan, radius: 10, x: 0, y: 5)
             
-            HStack() {
-                Image("person_34")
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(1.5)
-                    .clipShape(Circle())
-                    .overlay{
-                        Circle().stroke(Color.white, lineWidth: 4)
-                    .shadow(radius: 7)
+            VStack {
+                
+                HStack() {
+                    Spacer()
+                    Image("person_34")
+                        .frame(width: 60, height: 60)
+                        .scaleEffect(1.5)
+                        .clipShape(Circle())
+                        .overlay{
+                            Circle().stroke(Color.white, lineWidth: 4)
+                        .shadow(radius: 7)
+    
+                        }
+                        
+                    Spacer()
+                
+                }
+                
+                
+                Spacer()
+                HStack() {
+            
+                    Image("person_34")
+                        .frame(width: 60, height: 60)
+                        .scaleEffect(1.5)
+                        .clipShape(Circle())
+                        .overlay{
+                            Circle().stroke(Color.white, lineWidth: 4)
+                        .shadow(radius: 7)
+                        
+                        }
+                    Spacer()
                     
-                    }
+                    Image("person_34")
+                        .frame(width: 60, height: 60)
+                        .scaleEffect(1.5)
+                        .clipShape(Circle())
+                        .overlay{
+                            Circle().stroke(Color.white, lineWidth: 4)
+                        .shadow(radius: 7)
+                        
+                        }
+                
+                }
+                
+
+                
                 Spacer()
                 
-                Image("person_34")
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(1.5)
-                    .clipShape(Circle())
-                    .overlay{
-                        Circle().stroke(Color.white, lineWidth: 4)
-                    .shadow(radius: 7)
-                    
-                    }
+                
+                HStack() {
+                    Spacer()
+                    Image("person_34")
+                        .frame(width: 60, height: 60)
+                        .scaleEffect(1.5)
+                        .clipShape(Circle())
+                        .overlay{
+                            Circle().stroke(Color.white, lineWidth: 4)
+                        .shadow(radius: 7)
+                        
+                        }
+                    Spacer()
+                
+                }
+                
                 
             }
+            
+            
             
 
         }
