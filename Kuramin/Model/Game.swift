@@ -9,8 +9,11 @@ import Foundation
 import SwiftUI
 
 class Game : ObservableObject {
+    var controller: Controller
     var isLoggedIn = false
     @Published var players = [Player]()
-    
-    
+    init(controller: Controller?) {
+        self.controller = controller ?? Controller()
+    }
+
 }
