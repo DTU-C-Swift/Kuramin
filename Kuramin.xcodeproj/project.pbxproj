@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */; };
 		5689AD7229AE77650062A6CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7129AE77650062A6CD /* Game.swift */; };
 		5689AD7429AE77E10062A6CD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7329AE77E10062A6CD /* Player.swift */; };
 		5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5689AD7129AE77650062A6CD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		5689AD7329AE77E10062A6CD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */,
+				566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */,
 			);
 			path = ContecViews;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */,
 				5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */,
 				BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */,
 				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
