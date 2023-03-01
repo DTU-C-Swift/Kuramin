@@ -12,7 +12,7 @@ struct KuraminApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(Game(controller: nil))
+                .environmentObject(Controller(game: nil))
         }
     }
 }

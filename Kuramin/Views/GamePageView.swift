@@ -16,7 +16,7 @@ struct GamePageView: View {
     var playerName4 = "Player4"
     var imageName = "person_34"
     
-    
+    @EnvironmentObject var controller: Controller
     
     var body: some View {
         ZStack {
@@ -26,16 +26,21 @@ struct GamePageView: View {
             RoundedRectangle(cornerRadius: 150)
                 .strokeBorder(Color.cyan, lineWidth: 35)
                 .scaleEffect(0.68)
+                .padding(.top, 30)
             RoundedRectangle(cornerRadius: 150)
                 .strokeBorder(Color.black, lineWidth: 30)
                 .scaleEffect(0.7)
                 .shadow(color: Color.cyan, radius: 10, x: 0, y: 5)
+                .padding(.top, 30)
+
             
             VStack {
                 
                 HStack() {
                     Spacer()
+                    
                     CirclePicView(playerName: playerName1, imageName: imageName)
+                        .padding(.top, 3)
                     
                     Spacer()
                     
@@ -82,6 +87,7 @@ struct GamePageView: View {
             
             
         }
+        .navigationBarBackButtonHidden(true)
         
         
     }

@@ -19,7 +19,7 @@ struct CirclePicView: View {
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 1) {
             Image(imageName)
                 .frame(width: 60, height: 60)
                 .scaleEffect(1.5)
@@ -27,13 +27,15 @@ struct CirclePicView: View {
                 .overlay{
                     Circle().stroke(Color.white, lineWidth: 4)
                 .shadow(radius: 7)
-
+                
             }
             Text(playerName)
                 .font(.footnote)
                 .foregroundColor(Color.white)
+                
 
         }
+    
         
     }
 }

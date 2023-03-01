@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 
-class Controller {
+class Controller : ObservableObject {
     var game: Game;
     
-    init(game: Game) {
-        self.game = game
+    init(game: Game?) {
+        self.game = game ?? Game()
     }
 }
