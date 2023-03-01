@@ -11,6 +11,8 @@ import SwiftUI
 class Player : ObservableObject {
     
     var id = ""
-    @Published var name = ""
+    @Published var name = "NotSet"
+    @Published var image = "person_34"
+
     
 }

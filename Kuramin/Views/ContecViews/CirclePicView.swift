@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct CirclePicView: View {
-    var playerName: String
-    var imageName: String
+//    @Binding var playerName: String
+//    @Binding var imageName: String
     
-    init(playerName: String, imageName: String) {
-        self.playerName = playerName
-        self.imageName = imageName
+//    init(playerName: String, imageName: String) {
+//        self.playerName = playerName
+//        self.imageName = imageName
+//    }
+    
+    @ObservedObject var player: Player
+    
+    init(player: Player) {
+        self.player = player
     }
     
     
     var body: some View {
         
         VStack(spacing: 1) {
-            Image(imageName)
+            Image(player.image)
                 .frame(width: 60, height: 60)
                 .scaleEffect(1.5)
                 .clipShape(Circle())
@@ -29,7 +35,7 @@ struct CirclePicView: View {
                 .shadow(radius: 7)
                 
             }
-            Text(playerName)
+            Text(player.name)
                 .font(.footnote)
                 .foregroundColor(Color.white)
                 

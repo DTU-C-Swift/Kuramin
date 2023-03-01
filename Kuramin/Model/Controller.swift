@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 class Controller : ObservableObject {
-    var game: Game;
+    @Published var game: Game;
+    @Published var kk = "";
     
     init(game: Game?) {
         self.game = game ?? Game()

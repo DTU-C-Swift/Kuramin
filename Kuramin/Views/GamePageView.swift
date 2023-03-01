@@ -28,7 +28,7 @@ struct GamePageView: View {
                 HStack() {
                     Spacer()
                     
-                    CirclePicView(playerName: playerName1, imageName: imageName)
+                    CirclePicView(player: controller.game.player)
                         .padding(.top, 3)
                     
                     Spacer()
@@ -39,11 +39,14 @@ struct GamePageView: View {
                 Spacer()
                 HStack() {
                     
-                    CirclePicView(playerName: playerName2, imageName: imageName)
+                    CirclePicView(player: controller.game.player)
                     Spacer()
                     
-                    CirclePicView(playerName: playerName3, imageName: imageName)
-                    
+                    //var p3 = controller.game.player
+                    CirclePicView(player: controller.game.player)
+                    Text(controller.game.player.name).foregroundColor(.white)
+                    //Text(controller.kk).foregroundColor(.white)
+
                 }
                 
                 
@@ -52,8 +55,19 @@ struct GamePageView: View {
                 
                 
                 HStack() {
-                    Image(systemName: "chevron.backward")
-                        .foregroundColor(.white)
+                    
+                    Button(action: {
+                        controller.game.player.name = "New Name"
+
+                    }) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(.white)
+                    }
+                    
+                    
+                
+                    
+                    
                     Spacer()
                     ZStack {
                         Rectangle()
@@ -67,7 +81,7 @@ struct GamePageView: View {
                         
                             .shadow(radius: 20)
                         
-                        CirclePicView(playerName: "", imageName: imageName)
+                        CirclePicView(player: controller.game.player)
                         
                     }
                     Spacer()

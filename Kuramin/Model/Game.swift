@@ -10,7 +10,9 @@ import SwiftUI
 
 class Game : ObservableObject {
     var isLoggedIn = false
-    @Published var players = [Player]()
-
-
+    @Published var players: [Player] = []
+    @Published var player: Player = Player()
+    
 }
+
+
