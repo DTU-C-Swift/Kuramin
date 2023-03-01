@@ -16,10 +16,20 @@ struct GamePageView: View {
     var playerName4 = "Player4"
     var imageName = "person_34"
     
-    @EnvironmentObject var controller: Controller
+    //@EnvironmentObject var controller: Controller
+    var controller: Controller
+    
+    init() {
+        self.controller = DataHolder.controller
+        controller.game.addDummyPlayers()
+  
+    }
+    
     
     var body: some View {
+        
         ZStack {
+            
             
             BackgroundView()
             
@@ -28,7 +38,7 @@ struct GamePageView: View {
                 HStack() {
                     Spacer()
                     
-                    CirclePicView(player: controller.game.player)
+                    CirclePicView(player: controller.game.players[0])
                         .padding(.top, 3)
                     
                     Spacer()
@@ -39,14 +49,12 @@ struct GamePageView: View {
                 Spacer()
                 HStack() {
                     
-                    CirclePicView(player: controller.game.player)
+                    CirclePicView(player: controller.game.players[1])
                     Spacer()
                     
-                    //var p3 = controller.game.player
-                    CirclePicView(player: controller.game.player)
+                    CirclePicView(player: controller.game.players[2])
                     Text(controller.game.player.name).foregroundColor(.white)
-                    //Text(controller.kk).foregroundColor(.white)
-
+                    
                 }
                 
                 
@@ -58,14 +66,14 @@ struct GamePageView: View {
                     
                     Button(action: {
                         controller.game.player.name = "New Name"
-
+                        
                     }) {
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.white)
                     }
                     
                     
-                
+                    
                     
                     
                     Spacer()
@@ -93,6 +101,9 @@ struct GamePageView: View {
             
         }
         .navigationBarBackButtonHidden(true)
+//        .onAppear {
+//            controller.game.addDummyPlayers()
+//        }
         
         
     }

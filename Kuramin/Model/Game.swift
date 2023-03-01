@@ -13,6 +13,18 @@ class Game : ObservableObject {
     @Published var players: [Player] = []
     @Published var player: Player = Player()
     
+    
+    
+    
+    func addDummyPlayers() {
+        
+        for i in 1...3 {
+            var newPlayer = Player()
+            newPlayer.name = "player" + String(i)
+            players.append(newPlayer)
+        }
+    }
+    
 }
 
 

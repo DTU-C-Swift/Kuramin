@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */; };
+		566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A100029AFF3FE00E71D31 /* DataHolder.swift */; };
 		5689AD7229AE77650062A6CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7129AE77650062A6CD /* Game.swift */; };
 		5689AD7429AE77E10062A6CD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7329AE77E10062A6CD /* Player.swift */; };
 		5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		566A100029AFF3FE00E71D31 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 		5689AD7129AE77650062A6CD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		5689AD7329AE77E10062A6CD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
@@ -99,12 +101,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		566A0FFF29AFF2DB00E71D31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7E29AFA2B00062A6CD /* Controller.swift */,
+				566A100029AFF3FE00E71D31 /* DataHolder.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		5689AD7029AE773D0062A6CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				5689AD7129AE77650062A6CD /* Game.swift */,
 				5689AD7329AE77E10062A6CD /* Player.swift */,
-				5689AD7E29AFA2B00062A6CD /* Controller.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +159,7 @@
 		BF6C4F75299E2B23003E5D85 /* Kuramin */ = {
 			isa = PBXGroup;
 			children = (
+				566A0FFF29AFF2DB00E71D31 /* Controller */,
 				5689AD7B29AFA0E90062A6CD /* Service */,
 				5689AD7029AE773D0062A6CD /* Model */,
 				560EFDA529AD43CC00087FC1 /* Views */,
@@ -321,6 +332,7 @@
 				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
 				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
 				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
+				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,
 				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
 				BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */,
 				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
