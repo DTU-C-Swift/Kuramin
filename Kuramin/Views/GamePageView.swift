@@ -65,7 +65,7 @@ struct GamePageView: View {
                 HStack() {
                     
                     Button(action: {
-                        controller.game.player.name = "New Name"
+                        controller.game.players[0].name = "New Name"
                         
                     }) {
                         Image(systemName: "chevron.backward")
