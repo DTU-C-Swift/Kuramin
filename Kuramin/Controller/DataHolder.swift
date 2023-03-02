@@ -8,4 +8,5 @@
 import Foundation
 struct DataHolder {
     static var controller = Controller(game: nil)
+    
 }

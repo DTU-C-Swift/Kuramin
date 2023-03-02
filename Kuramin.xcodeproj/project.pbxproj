@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */; };
 		566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A100029AFF3FE00E71D31 /* DataHolder.swift */; };
-		566A100829B0ACEF00E71D31 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100729B0ACEF00E71D31 /* FirebaseAnalytics */; };
-		566A100A29B0ACEF00E71D31 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */; };
 		566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100B29B0ACEF00E71D31 /* FirebaseAuth */; };
 		566A100E29B0ACEF00E71D31 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100D29B0ACEF00E71D31 /* FirebaseStorage */; };
 		566A101629B0B5CD00E71D31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 566A101529B0B5CD00E71D31 /* FirebaseFirestore */; };
@@ -77,11 +75,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				566A100A29B0ACEF00E71D31 /* FirebaseAnalyticsSwift in Frameworks */,
 				566A100E29B0ACEF00E71D31 /* FirebaseStorage in Frameworks */,
 				566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */,
 				566A101629B0B5CD00E71D31 /* FirebaseFirestore in Frameworks */,
-				566A100829B0ACEF00E71D31 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,8 +230,6 @@
 			);
 			name = Kuramin;
 			packageProductDependencies = (
-				566A100729B0ACEF00E71D31 /* FirebaseAnalytics */,
-				566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */,
 				566A100B29B0ACEF00E71D31 /* FirebaseAuth */,
 				566A100D29B0ACEF00E71D31 /* FirebaseStorage */,
 				566A101529B0B5CD00E71D31 /* FirebaseFirestore */,
@@ -523,7 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kuramin/Preview Content\"";
-				DEVELOPMENT_TEAM = KSK57QFJAG;
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -560,7 +554,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kuramin/Preview Content\"";
-				DEVELOPMENT_TEAM = KSK57QFJAG;
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -731,16 +725,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		566A100729B0ACEF00E71D31 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
 		566A100B29B0ACEF00E71D31 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

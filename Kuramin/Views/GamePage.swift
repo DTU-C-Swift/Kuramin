@@ -11,12 +11,7 @@ struct GamePage: View {
     @State private var isAnimating = false
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     
-    var playerName1 = "Player1"
-    var playerName2 = "Player2"
-    var playerName3 = "Player3"
-    var playerName4 = "Player4"
-    var imageName = "person_34"
-    
+
     //@EnvironmentObject var controller: Controller
     var controller: Controller
     
@@ -73,6 +68,7 @@ struct GamePage: View {
                     
                     Button(action: {
                         controller.service.fetchData()
+                        controller.service.matchMaker(player: controller.game.players[0])
                         
                     }) {
                         Image(systemName: "chevron.backward")

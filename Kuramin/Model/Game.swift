@@ -20,6 +20,7 @@ class Game : ObservableObject {
         
         for i in 1...3 {
             let newPlayer = Player()
+            newPlayer.id = UUID().uuidString
             newPlayer.name = "player" + String(i)
             players.append(newPlayer)
         }

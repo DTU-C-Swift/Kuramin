@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import FirebaseCore
-import FirebaseFirestore
+import Firebase
+
 
 @main
 struct KuraminApp: App {
 
     init() {
-        
+    
         FirebaseApp.configure()
     }
     var body: some Scene {
