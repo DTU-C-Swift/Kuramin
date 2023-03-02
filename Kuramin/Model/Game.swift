@@ -12,6 +12,7 @@ class Game : ObservableObject {
     var isLoggedIn = false
     @Published var players: [Player] = []
     @Published var me: Player = Player()
+    var host: Player = Player()
     
     
     
