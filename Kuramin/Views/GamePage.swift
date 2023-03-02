@@ -64,6 +64,7 @@ struct GamePage: View {
                     Button(action: {
                         controller.game.players[0].name = "New Name"
                         pm.wrappedValue.dismiss()
+                        print("Hello")
                         
                     }) {
                         Image(systemName: "chevron.backward")

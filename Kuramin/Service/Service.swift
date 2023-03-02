@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
+import FirebaseCore
+
+
+
+class Service {
+}
