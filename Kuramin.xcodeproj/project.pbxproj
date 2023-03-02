@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */; };
+		566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A100029AFF3FE00E71D31 /* DataHolder.swift */; };
+		566A100329B0AB4100E71D31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566A100229B0AB4100E71D31 /* GoogleService-Info.plist */; };
+		566A100529B0AB7600E71D31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566A100429B0AB7500E71D31 /* GoogleService-Info.plist */; };
+		566A100829B0ACEF00E71D31 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100729B0ACEF00E71D31 /* FirebaseAnalytics */; };
+		566A100A29B0ACEF00E71D31 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */; };
+		566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100B29B0ACEF00E71D31 /* FirebaseAuth */; };
+		566A100E29B0ACEF00E71D31 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100D29B0ACEF00E71D31 /* FirebaseStorage */; };
+		5689AD7229AE77650062A6CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7129AE77650062A6CD /* Game.swift */; };
+		5689AD7429AE77E10062A6CD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7329AE77E10062A6CD /* Player.swift */; };
+		5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */; };
+		5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7C29AFA19E0062A6CD /* Service.swift */; };
+		5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7E29AFA2B00062A6CD /* Controller.swift */; };
+		BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */; };
 		BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */; };
 		BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F78299E2B23003E5D85 /* ContentView.swift */; };
 		BF6C4F7B299E2B25003E5D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF6C4F7A299E2B25003E5D85 /* Assets.xcassets */; };
@@ -14,6 +28,7 @@
 		BF6C4F89299E2B25003E5D85 /* KuraminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F88299E2B25003E5D85 /* KuraminTests.swift */; };
 		BF6C4F93299E2B25003E5D85 /* KuraminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */; };
 		BF6C4F95299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */; };
+		BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4FA1299E620A003E5D85 /* GamePage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +49,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		566A100029AFF3FE00E71D31 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
+		566A100229B0AB4100E71D31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		566A100429B0AB7500E71D31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5689AD7129AE77650062A6CD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		5689AD7329AE77E10062A6CD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
+		5689AD7C29AFA19E0062A6CD /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		5689AD7E29AFA2B00062A6CD /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		BF6C4F73299E2B23003E5D85 /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
 		BF6C4F78299E2B23003E5D85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +70,7 @@
 		BF6C4F8E299E2B25003E5D85 /* KuraminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuraminUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITests.swift; sourceTree = "<group>"; };
 		BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BF6C4FA1299E620A003E5D85 /* GamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +78,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566A100A29B0ACEF00E71D31 /* FirebaseAnalyticsSwift in Frameworks */,
+				566A100E29B0ACEF00E71D31 /* FirebaseStorage in Frameworks */,
+				566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */,
+				566A100829B0ACEF00E71D31 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +102,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		560EFDA529AD43CC00087FC1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7529AE79F10062A6CD /* ContentViews */,
+				BF6C4FA1299E620A003E5D85 /* GamePage.swift */,
+				BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */,
+				BF6C4F78299E2B23003E5D85 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		566A0FFF29AFF2DB00E71D31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7E29AFA2B00062A6CD /* Controller.swift */,
+				566A100029AFF3FE00E71D31 /* DataHolder.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5689AD7029AE773D0062A6CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7129AE77650062A6CD /* Game.swift */,
+				5689AD7329AE77E10062A6CD /* Player.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5689AD7529AE79F10062A6CD /* ContentViews */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */,
+				566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */,
+			);
+			path = ContentViews;
+			sourceTree = "<group>";
+		};
+		5689AD7B29AFA0E90062A6CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5689AD7C29AFA19E0062A6CD /* Service.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		BF6C4F6A299E2B23003E5D85 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +171,13 @@
 		BF6C4F75299E2B23003E5D85 /* Kuramin */ = {
 			isa = PBXGroup;
 			children = (
+				566A0FFF29AFF2DB00E71D31 /* Controller */,
+				5689AD7B29AFA0E90062A6CD /* Service */,
+				5689AD7029AE773D0062A6CD /* Model */,
+				560EFDA529AD43CC00087FC1 /* Views */,
 				BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */,
-				BF6C4F78299E2B23003E5D85 /* ContentView.swift */,
 				BF6C4F7A299E2B25003E5D85 /* Assets.xcassets */,
+				566A100429B0AB7500E71D31 /* GoogleService-Info.plist */,
 				BF6C4F7C299E2B25003E5D85 /* Kuramin.entitlements */,
 				BF6C4F7D299E2B25003E5D85 /* Preview Content */,
 			);
@@ -123,6 +203,7 @@
 		BF6C4F91299E2B25003E5D85 /* KuraminUITests */ = {
 			isa = PBXGroup;
 			children = (
+				566A100229B0AB4100E71D31 /* GoogleService-Info.plist */,
 				BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */,
 				BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */,
 			);
@@ -145,6 +226,12 @@
 			dependencies = (
 			);
 			name = Kuramin;
+			packageProductDependencies = (
+				566A100729B0ACEF00E71D31 /* FirebaseAnalytics */,
+				566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */,
+				566A100B29B0ACEF00E71D31 /* FirebaseAuth */,
+				566A100D29B0ACEF00E71D31 /* FirebaseStorage */,
+			);
 			productName = Kuramin;
 			productReference = BF6C4F73299E2B23003E5D85 /* Kuramin.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +304,9 @@
 				Base,
 			);
 			mainGroup = BF6C4F6A299E2B23003E5D85;
+			packageReferences = (
+				566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = BF6C4F74299E2B23003E5D85 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,7 +324,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6C4F7F299E2B25003E5D85 /* Preview Assets.xcassets in Resources */,
+				566A100529B0AB7600E71D31 /* GoogleService-Info.plist in Resources */,
 				BF6C4F7B299E2B25003E5D85 /* Assets.xcassets in Resources */,
+				566A100329B0AB4100E71D31 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +351,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */,
+				5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */,
 				BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */,
+				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
+				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
+				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
+				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,
+				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
 				BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */,
+				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
+				BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,8 +528,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -465,8 +565,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -612,6 +711,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		566A100729B0ACEF00E71D31 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		566A100B29B0ACEF00E71D31 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		566A100D29B0ACEF00E71D31 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF6C4F6B299E2B23003E5D85 /* Project object */;
 }
