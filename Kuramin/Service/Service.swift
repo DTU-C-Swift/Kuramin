@@ -38,8 +38,30 @@ class Service {
     }
     
     
+    func intializeGame(p: Player) {
+        
+        db.collection("lobby").getDocuments { snapshot, err in
+            if snapshot != nil {
+                if snapshot?.count == 0 {
+                    self.matchMaker(player: p)
+                }
+                else {
+                    print("Lobby is not empty")
+                }
+            }
+            
+
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
     func matchMaker(player: Player) {
-        var ref = db.collection("matchMaker")
+        var ref = db.collection("lobby")
         //ref.document(player.id).setData(["id" : player.id])
         
         ref.document(player.id).setData([:

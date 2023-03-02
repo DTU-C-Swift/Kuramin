@@ -68,7 +68,7 @@ struct GamePage: View {
                     
                     Button(action: {
                         controller.service.fetchData()
-                        controller.service.matchMaker(player: controller.game.players[0])
+                        controller.service.intializeGame(p: controller.game.players[0])
                         
                     }) {
                         Image(systemName: "chevron.backward")
