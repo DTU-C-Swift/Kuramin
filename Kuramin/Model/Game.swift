@@ -11,7 +11,7 @@ import SwiftUI
 class Game : ObservableObject {
     var isLoggedIn = false
     @Published var players: [Player] = []
-    @Published var player: Player = Player()
+    @Published var me: Player = Player()
     
     
     
@@ -19,7 +19,7 @@ class Game : ObservableObject {
     func addDummyPlayers() {
         
         for i in 1...3 {
-            var newPlayer = Player()
+            let newPlayer = Player()
             newPlayer.name = "player" + String(i)
             players.append(newPlayer)
         }

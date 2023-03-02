@@ -81,7 +81,7 @@ struct MainPageView: View {
     var body: some View {
         
         VStack {
-            NavigationLink(destination: GamePageView()) {
+            NavigationLink(destination: GamePage()) {
                 Text("Start New Game")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(.black)

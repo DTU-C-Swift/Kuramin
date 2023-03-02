@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct GamePageView: View {
+struct GamePage: View {
     @State private var isAnimating = false
+    @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     
     var playerName1 = "Player1"
     var playerName2 = "Player2"
@@ -22,7 +23,7 @@ struct GamePageView: View {
     init() {
         self.controller = DataHolder.controller
         controller.game.addDummyPlayers()
-  
+        
     }
     
     
@@ -53,27 +54,21 @@ struct GamePageView: View {
                     Spacer()
                     
                     CirclePicView(player: controller.game.players[2])
-                    Text(controller.game.player.name).foregroundColor(.white)
                     
                 }
                 
                 
-                
                 Spacer()
-                
-                
                 HStack() {
                     
                     Button(action: {
                         controller.game.players[0].name = "New Name"
+                        pm.wrappedValue.dismiss()
                         
                     }) {
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.white)
                     }
-                    
-                    
-                    
                     
                     
                     Spacer()
@@ -89,7 +84,7 @@ struct GamePageView: View {
                         
                             .shadow(radius: 20)
                         
-                        CirclePicView(player: controller.game.player)
+                        CirclePicView(player: controller.game.me)
                         
                     }
                     Spacer()
@@ -101,9 +96,9 @@ struct GamePageView: View {
             
         }
         .navigationBarBackButtonHidden(true)
-//        .onAppear {
-//            controller.game.addDummyPlayers()
-//        }
+        //        .onAppear {
+        //            controller.game.addDummyPlayers()
+        //        }
         
         
     }
@@ -115,7 +110,7 @@ struct GamePageView: View {
 
 struct GamePageView_Previews: PreviewProvider {
     static var previews: some View {
-        GamePageView()
+        GamePage()
         
         
     }
