@@ -71,6 +71,14 @@ struct GamePage: View {
                             .foregroundColor(.white)
                     }
                     
+                    Button(action: {
+                        controller.service.fetchData()
+                        
+                    }) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(.white)
+                    }
+                    
                     
                     Spacer()
                     ZStack {

@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */; };
 		566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A100029AFF3FE00E71D31 /* DataHolder.swift */; };
-		566A100329B0AB4100E71D31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566A100229B0AB4100E71D31 /* GoogleService-Info.plist */; };
-		566A100529B0AB7600E71D31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566A100429B0AB7500E71D31 /* GoogleService-Info.plist */; };
 		566A100829B0ACEF00E71D31 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100729B0ACEF00E71D31 /* FirebaseAnalytics */; };
 		566A100A29B0ACEF00E71D31 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */; };
 		566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100B29B0ACEF00E71D31 /* FirebaseAuth */; };
 		566A100E29B0ACEF00E71D31 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100D29B0ACEF00E71D31 /* FirebaseStorage */; };
+		566A101029B0B35900E71D31 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 566A100F29B0B35800E71D31 /* .gitignore */; };
+		566A101129B0B35900E71D31 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 566A100F29B0B35800E71D31 /* .gitignore */; };
+		566A101229B0B35900E71D31 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 566A100F29B0B35800E71D31 /* .gitignore */; };
+		566A101629B0B5CD00E71D31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 566A101529B0B5CD00E71D31 /* FirebaseFirestore */; };
+		566A101829B0BC8300E71D31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566A101729B0BC8200E71D31 /* GoogleService-Info.plist */; };
 		5689AD7229AE77650062A6CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7129AE77650062A6CD /* Game.swift */; };
 		5689AD7429AE77E10062A6CD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7329AE77E10062A6CD /* Player.swift */; };
 		5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */; };
@@ -51,8 +54,8 @@
 /* Begin PBXFileReference section */
 		566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		566A100029AFF3FE00E71D31 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
-		566A100229B0AB4100E71D31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		566A100429B0AB7500E71D31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		566A100F29B0B35800E71D31 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../../../csharp/Programming/new/LiveScorer/.gitignore; sourceTree = "<group>"; };
+		566A101729B0BC8200E71D31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5689AD7129AE77650062A6CD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		5689AD7329AE77E10062A6CD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 				566A100A29B0ACEF00E71D31 /* FirebaseAnalyticsSwift in Frameworks */,
 				566A100E29B0ACEF00E71D31 /* FirebaseStorage in Frameworks */,
 				566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */,
+				566A101629B0B5CD00E71D31 /* FirebaseFirestore in Frameworks */,
 				566A100829B0ACEF00E71D31 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +126,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		566A101429B0B5CD00E71D31 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5689AD7029AE773D0062A6CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,10 +162,12 @@
 		BF6C4F6A299E2B23003E5D85 = {
 			isa = PBXGroup;
 			children = (
+				566A100F29B0B35800E71D31 /* .gitignore */,
 				BF6C4F75299E2B23003E5D85 /* Kuramin */,
 				BF6C4F87299E2B25003E5D85 /* KuraminTests */,
 				BF6C4F91299E2B25003E5D85 /* KuraminUITests */,
 				BF6C4F74299E2B23003E5D85 /* Products */,
+				566A101429B0B5CD00E71D31 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,7 +190,7 @@
 				560EFDA529AD43CC00087FC1 /* Views */,
 				BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */,
 				BF6C4F7A299E2B25003E5D85 /* Assets.xcassets */,
-				566A100429B0AB7500E71D31 /* GoogleService-Info.plist */,
+				566A101729B0BC8200E71D31 /* GoogleService-Info.plist */,
 				BF6C4F7C299E2B25003E5D85 /* Kuramin.entitlements */,
 				BF6C4F7D299E2B25003E5D85 /* Preview Content */,
 			);
@@ -203,7 +216,6 @@
 		BF6C4F91299E2B25003E5D85 /* KuraminUITests */ = {
 			isa = PBXGroup;
 			children = (
-				566A100229B0AB4100E71D31 /* GoogleService-Info.plist */,
 				BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */,
 				BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */,
 			);
@@ -231,6 +243,7 @@
 				566A100929B0ACEF00E71D31 /* FirebaseAnalyticsSwift */,
 				566A100B29B0ACEF00E71D31 /* FirebaseAuth */,
 				566A100D29B0ACEF00E71D31 /* FirebaseStorage */,
+				566A101529B0B5CD00E71D31 /* FirebaseFirestore */,
 			);
 			productName = Kuramin;
 			productReference = BF6C4F73299E2B23003E5D85 /* Kuramin.app */;
@@ -323,10 +336,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566A101029B0B35900E71D31 /* .gitignore in Resources */,
+				566A101829B0BC8300E71D31 /* GoogleService-Info.plist in Resources */,
 				BF6C4F7F299E2B25003E5D85 /* Preview Assets.xcassets in Resources */,
-				566A100529B0AB7600E71D31 /* GoogleService-Info.plist in Resources */,
 				BF6C4F7B299E2B25003E5D85 /* Assets.xcassets in Resources */,
-				566A100329B0AB4100E71D31 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566A101129B0B35900E71D31 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566A101229B0B35900E71D31 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,6 +758,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		566A101529B0B5CD00E71D31 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566A100629B0ACEF00E71D31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
