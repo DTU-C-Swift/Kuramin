@@ -11,6 +11,36 @@
 			<array>
 				<string>com.googleusercontent.apps.1009889916252-6iahem0hadjc98qre2stqmtbhe16aal5</string>
 			</array>
+
+
+
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>fb141816885460551</string>
+  </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>141816885460551</string>
+<key>FacebookClientToken</key>
+<string>ee9527604aa7a096cac66b83bc214868</string>
+<key>FacebookDisplayName</key>
+<string>Kuramin</string>
+
+
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-share-api</string>
+</array>
+
+
+
+
 		</dict>
 	</array>
 </dict>

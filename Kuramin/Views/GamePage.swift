@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
+
 
 struct GamePage: View {
     @State private var isAnimating = false
@@ -57,9 +61,10 @@ struct GamePage: View {
                 HStack() {
                     
                     Button(action: {
-                        controller.game.players[0].name = "New Name"
-                        pm.wrappedValue.dismiss()
+//                        controller.game.players[0].name = "New Name"
+//                        pm.wrappedValue.dismiss()
                         print("Hello")
+                        
                         
                     }) {
                         Image(systemName: "chevron.backward")
@@ -108,6 +113,7 @@ struct GamePage: View {
         
     }
     
+
     
 }
 
