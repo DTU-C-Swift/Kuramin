@@ -100,6 +100,8 @@ struct ContentView: View {
 //}
 
 struct MainPageView: View {
+    @State var showMenu = false
+    
     var body: some View {
         
         VStack {
@@ -107,11 +109,13 @@ struct MainPageView: View {
                 Spacer()
                 Button(action: {
     
+                    showMenu = true
                 }, label: {
                     Image(systemName: "gearshape.circle.fill")
                         .font(.system(size: 30))
-                        
+                    
                 })
+
                 
             }.padding(.top, 10)
             Spacer()
@@ -152,6 +156,9 @@ struct MainPageView: View {
         
         }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showMenu) {
+            MenuPopup()
+        }
         
         //
         
