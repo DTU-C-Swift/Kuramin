@@ -11,9 +11,11 @@ import SwiftUI
 class Controller : ObservableObject {
     @Published var game: Game;
     var service = Service()
-    @Published var kk = "";
+    @Published var isLoggedIn: Bool = false
     
     init(game: Game?) {
         self.game = game ?? Game()
     }
+    
+    
 }

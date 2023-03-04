@@ -21,11 +21,10 @@
 		56B68F8A29B296880070844D /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8929B296880070844D /* FacebookCore */; };
 		56B68F8C29B296880070844D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8B29B296880070844D /* FacebookLogin */; };
 		56B68F8E29B296880070844D /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8D29B296880070844D /* FacebookShare */; };
-		56B68F9029B296F90070844D /* FbAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68F8F29B296F90070844D /* FbAuth.swift */; };
-		56B68F9229B29EF20070844D /* ReadPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68F9129B29EF20070844D /* ReadPermission.swift */; };
 		56EF7BCA29B101D0007D6027 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 56EF7BC929B101D0007D6027 /* GoogleSignIn */; };
 		56EF7BCD29B1074F007D6027 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF7BCC29B1074F007D6027 /* ServiceHelper.swift */; };
 		56EF7BCF29B1127F007D6027 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 56EF7BCE29B1127F007D6027 /* GoogleSignInSwift */; };
+		56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F75F2D29B3879500E651B3 /* FbAuth.swift */; };
 		BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */; };
 		BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */; };
 		BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F78299E2B23003E5D85 /* ContentView.swift */; };
@@ -63,10 +62,9 @@
 		5689AD7829AE7A6A0062A6CD /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
 		5689AD7C29AFA19E0062A6CD /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		5689AD7E29AFA2B00062A6CD /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
-		56B68F8F29B296F90070844D /* FbAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FbAuth.swift; sourceTree = "<group>"; };
-		56B68F9129B29EF20070844D /* ReadPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPermission.swift; sourceTree = "<group>"; };
 		56EF7BCB29B10231007D6027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56EF7BCC29B1074F007D6027 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
+		56F75F2D29B3879500E651B3 /* FbAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FbAuth.swift; sourceTree = "<group>"; };
 		BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		BF6C4F73299E2B23003E5D85 /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			children = (
 				5689AD7129AE77650062A6CD /* Game.swift */,
 				5689AD7329AE77E10062A6CD /* Player.swift */,
-				56B68F9129B29EF20070844D /* ReadPermission.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,9 +163,16 @@
 			children = (
 				5689AD7C29AFA19E0062A6CD /* Service.swift */,
 				56EF7BCC29B1074F007D6027 /* ServiceHelper.swift */,
-				56B68F8F29B296F90070844D /* FbAuth.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		56F75F2A29B386EC00E651B3 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				56F75F2D29B3879500E651B3 /* FbAuth.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		BF6C4F6A299E2B23003E5D85 = {
@@ -195,6 +199,7 @@
 		BF6C4F75299E2B23003E5D85 /* Kuramin */ = {
 			isa = PBXGroup;
 			children = (
+				56F75F2A29B386EC00E651B3 /* Auth */,
 				56EF7BCB29B10231007D6027 /* Info.plist */,
 				566A0FFF29AFF2DB00E71D31 /* Controller */,
 				5689AD7B29AFA0E90062A6CD /* Service */,
@@ -380,7 +385,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56B68F9229B29EF20070844D /* ReadPermission.swift in Sources */,
 				566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */,
 				5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */,
 				BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */,
@@ -390,9 +394,9 @@
 				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,
 				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
 				BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */,
+				56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */,
 				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
 				BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */,
-				56B68F9029B296F90070844D /* FbAuth.swift in Sources */,
 				56EF7BCD29B1074F007D6027 /* ServiceHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
