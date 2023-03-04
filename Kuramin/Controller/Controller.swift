@@ -19,5 +19,14 @@ class Controller : ObservableObject {
     }
     
     
+    
+    
+    func listenForLogout() {
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if user == nil {
+                
+            }
+        }
+    }
 
 }
