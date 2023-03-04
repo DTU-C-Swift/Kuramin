@@ -103,6 +103,19 @@ struct MainPageView: View {
     var body: some View {
         
         VStack {
+            HStack {
+                Spacer()
+                Button(action: {
+    
+                }, label: {
+                    Image(systemName: "gearshape.circle.fill")
+                        .font(.system(size: 30))
+                        
+                })
+                
+            }.padding(.top, 10)
+            Spacer()
+            
             NavigationLink(destination: GamePage()) {
                 Text("Start New Game")
                     .font(.system(size: 24, weight: .semibold))
@@ -134,20 +147,8 @@ struct MainPageView: View {
                 .cornerRadius(16)
                 .shadow(radius: 4, x: 0, y: 4)
             
-            Spacer()
             
-            HStack {
-                 
-                Button(action: {
-    
-                }, label: {
-                    Image(systemName: "gearshape.circle.fill")
-                        .font(.system(size: 30))
-                        
-                })
-                Spacer()
-                
-            }
+            Spacer()
         
         }
         .navigationBarBackButtonHidden(true)
