@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 class Controller : ObservableObject {
     @Published var game: Game;
@@ -18,4 +19,5 @@ class Controller : ObservableObject {
     }
     
     
+
 }

@@ -38,7 +38,6 @@ struct ContentView: View {
                 }
                 
                 FbAuth(width: 257, height: 50)
-                    .background(Color.blue)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
                     

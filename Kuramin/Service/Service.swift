@@ -19,7 +19,7 @@ class Service {
     
     func fetchData(){
         db.collection("matches").getDocuments { snapshot, err in
-        
+            
             if err == nil {
                 
                 for it in snapshot!.documents {
@@ -36,7 +36,7 @@ class Service {
             }
             
         }
-    
+        
     }
     
     
@@ -52,7 +52,7 @@ class Service {
                 }
             }
             
-
+            
         }
         
     }
@@ -67,13 +67,34 @@ class Service {
         //ref.document(player.id).setData(["id" : player.id])
         
         ref.document(player.id).setData([:
-        ]) { err in
+                                        ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
             }
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+    func isUserloggedIn_viaFacebook() -> Bool {
+        
+        
+        if let providerData = Auth.auth().currentUser?.providerData {
+            for userInfo in providerData {
+                if userInfo.providerID == "facebook.com" {
+                    return true
+                }
+            }
+        }
+        
+        
+        return false
     }
     
 }

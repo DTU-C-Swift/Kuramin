@@ -5,11 +5,13 @@
 //  Created by MD. Zahed on 04/03/2023.
 //
 
+import Firebase
+
 import SwiftUI
 
 struct MenuPopup: View {
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
-    
+    var controller = DataHolder.controller
     
     var body: some View {
         
@@ -33,7 +35,11 @@ struct MenuPopup: View {
                 
                 Spacer()
                 
-                FbAuth(width: 80, height: 50)
+                if controller.service.isUserloggedIn_viaFacebook() {
+                    
+                    FbAuth(width: 80, height: 50)
+                }
+                
                 
                 Spacer()
             }
