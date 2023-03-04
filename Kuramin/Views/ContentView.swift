@@ -92,12 +92,12 @@ struct ContentView: View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-        
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//
+//    }
+//}
 
 struct MainPageView: View {
     var body: some View {
@@ -133,11 +133,34 @@ struct MainPageView: View {
                 .background(Color.white)
                 .cornerRadius(16)
                 .shadow(radius: 4, x: 0, y: 4)
+            
+            Spacer()
+            
+            HStack {
+                 
+                Button(action: {
+    
+                }, label: {
+                    Image(systemName: "gearshape.circle.fill")
+                        .font(.system(size: 30))
+                        
+                })
+                Spacer()
+                
+            }
         
         }
         .navigationBarBackButtonHidden(true)
         
         //
+        
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainPageView()
         
     }
 }
