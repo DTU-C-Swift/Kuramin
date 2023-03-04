@@ -112,7 +112,7 @@ struct MainPageView: View {
                     showMenu = true
                 }, label: {
                     Image(systemName: "gearshape.circle.fill")
-                        .font(.system(size: 30))
+                        .font(.system(size: 40))
                     
                 })
 
