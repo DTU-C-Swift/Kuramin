@@ -14,6 +14,7 @@ struct MenuPopup: View {
     var body: some View {
         
         ZStack(alignment: .topTrailing) {
+            
             VStack {
                 HStack {
                     Spacer()
@@ -26,10 +27,13 @@ struct MenuPopup: View {
                     }
                     .padding(.top, 20)
                     .font(.system(size: 35))
-//                    .background(.red)
-                    
+                    //                    .background(.red)
                     
                 }
+                
+                Spacer()
+                
+                FbAuth(width: 80, height: 50)
                 
                 Spacer()
             }
