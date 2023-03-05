@@ -88,6 +88,7 @@ struct login : UIViewRepresentable {
         
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
             try! Auth.auth().signOut()
+            DataHolder.controller.isLoggedIn = false
             
         }
     }

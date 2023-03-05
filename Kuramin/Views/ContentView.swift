@@ -13,6 +13,7 @@ struct ContentView: View {
     @ObservedObject var controller: Controller
     @State var navigateToMainPage = false
     @State var selection: String? = "NON"
+    @ObservedObject var navSate: NavState = NavState()
     
     init() {
         controller = DataHolder.controller
@@ -22,7 +23,7 @@ struct ContentView: View {
         
         NavigationView {
             VStack {
-                NavigationLink(destination: MainPageView(selection: $selection)) {
+                NavigationLink(destination: MainPageView()) {
                     HStack {
                         Image(systemName: "applelogo")
                             .font(.system(size: 24))
@@ -42,11 +43,11 @@ struct ContentView: View {
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
                 
-                NavigationLink(destination: MainPageView(selection: $selection), tag: "MainPageView", selection: $selection){}
+                NavigationLink(destination: MainPageView(), tag: "MainPageView", selection: $navSate.state){}
                     
 
                 
-                NavigationLink(destination: MainPageView(selection: $selection)) {
+                NavigationLink(destination: MainPageView()) {
                     HStack {
                         Image(systemName: "tree")
                             .font(.system(size: 24))
@@ -72,7 +73,9 @@ struct ContentView: View {
             if newValue == true {
                 print("Navigate to main page")
                 navigateToMainPage = true
-                selection = "MainPageView"
+                //selection = "MainPageView"
+                navSate.state = "MainPageView"
+                print("Again")
             }
             else{
                 print("Login with facebook failed")
@@ -90,10 +93,15 @@ struct ContentView: View {
 //
 //        }
      
+        .environmentObject(navSate)
   
     }
 }
 
+
+class NavState: ObservableObject {
+    @Published var state: String? = nil
+}
 
 
 //struct ContentView_Previews: PreviewProvider {
@@ -103,17 +111,18 @@ struct ContentView: View {
 //    }
 //}
 
+
 struct MainPageView: View {
     @State private var showMenu = false
-    @Binding var selection: String?
-    
+    //@Binding var selection: String?
+    @EnvironmentObject var navState: NavState
     var body: some View {
         
         VStack {
             HStack {
                 Spacer()
                 Button(action: {
-                    selection = ""
+                    navState.state = ""
                     //showMenu = true
                 }, label: {
                     Image(systemName: "gearshape.circle.fill")
