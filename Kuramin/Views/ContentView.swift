@@ -42,11 +42,9 @@ struct ContentView: View {
                 FbAuth(width: 257, height: 50)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
-                
-                NavigationLink(destination: MainPageView(), tag: "MainPageView", selection: $navSate.state){}
                     
-
                 
+                    
                 NavigationLink(destination: MainPageView()) {
                     HStack {
                         Image(systemName: "tree")
@@ -64,6 +62,9 @@ struct ContentView: View {
                     .shadow(radius: 4, x: 0, y: 4)
                 }
                 
+                
+                NavigationLink(destination: MainPageView(), tag: "MainPageView", selection: $navSate.state){}
+                
             }
             .padding()
         }
@@ -75,7 +76,6 @@ struct ContentView: View {
                 navigateToMainPage = true
                 //selection = "MainPageView"
                 navSate.state = "MainPageView"
-                print("Again")
             }
             else{
                 print("Login with facebook failed")
@@ -114,16 +114,16 @@ class NavState: ObservableObject {
 
 struct MainPageView: View {
     @State private var showMenu = false
-    //@Binding var selection: String?
+
     @EnvironmentObject var navState: NavState
     var body: some View {
         
         VStack {
             HStack {
                 Spacer()
+                
                 Button(action: {
-                    navState.state = ""
-                    //showMenu = true
+                    showMenu = true
                 }, label: {
                     Image(systemName: "gearshape.circle.fill")
                         .font(.system(size: 40))
@@ -144,7 +144,6 @@ struct MainPageView: View {
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
             }
-            
             
             
             Text("Join Game")
