@@ -12,6 +12,7 @@ import Firebase
 struct ContentView: View {
     @ObservedObject var controller: Controller
     @State var navigateToMainPage = false
+    @State var selection: String? = "NON"
     
     init() {
         controller = DataHolder.controller
@@ -21,7 +22,7 @@ struct ContentView: View {
         
         NavigationView {
             VStack {
-                NavigationLink(destination: MainPageView()) {
+                NavigationLink(destination: MainPageView(selection: $selection)) {
                     HStack {
                         Image(systemName: "applelogo")
                             .font(.system(size: 24))
@@ -40,10 +41,12 @@ struct ContentView: View {
                 FbAuth(width: 257, height: 50)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
+                
+                NavigationLink(destination: MainPageView(selection: $selection), tag: "MainPageView", selection: $selection){}
                     
 
                 
-                NavigationLink(destination: MainPageView()) {
+                NavigationLink(destination: MainPageView(selection: $selection)) {
                     HStack {
                         Image(systemName: "tree")
                             .font(.system(size: 24))
@@ -69,22 +72,24 @@ struct ContentView: View {
             if newValue == true {
                 print("Navigate to main page")
                 navigateToMainPage = true
+                selection = "MainPageView"
             }
             else{
                 print("Login with facebook failed")
             }
         }
-        .sheet(isPresented: $navigateToMainPage) {
-            MainPageView()
-        }
-        .onAppear() {
-            print("on appearing")
-            if Auth.auth().currentUser?.uid != nil {
-                print("Is not nill")
-                navigateToMainPage = true
-            }
-            
-        }
+//        .sheet(isPresented: $navigateToMainPage) {
+//            MainPageView()
+//        }
+//        .onAppear() {
+//            print("on appearing")
+//            if Auth.auth().currentUser?.uid != nil {
+//                print("Is not nill")
+//                navigateToMainPage = true
+//            }
+//
+//        }
+     
   
     }
 }
@@ -99,7 +104,8 @@ struct ContentView: View {
 //}
 
 struct MainPageView: View {
-    @State var showMenu = false
+    @State private var showMenu = false
+    @Binding var selection: String?
     
     var body: some View {
         
@@ -107,8 +113,8 @@ struct MainPageView: View {
             HStack {
                 Spacer()
                 Button(action: {
-    
-                    showMenu = true
+                    selection = ""
+                    //showMenu = true
                 }, label: {
                     Image(systemName: "gearshape.circle.fill")
                         .font(.system(size: 40))
@@ -165,9 +171,9 @@ struct MainPageView: View {
 }
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainPageView()
-        
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainPageView()
+//
+//    }
+//}
