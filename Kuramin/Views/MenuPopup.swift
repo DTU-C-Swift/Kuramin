@@ -12,6 +12,9 @@ import SwiftUI
 struct MenuPopup: View {
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     var controller = DataHolder.controller
+    @State var isLoggedOut = false
+    
+    
     
     var body: some View {
         
