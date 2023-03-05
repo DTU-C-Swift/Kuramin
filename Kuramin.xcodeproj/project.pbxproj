@@ -25,6 +25,7 @@
 		56EF7BCD29B1074F007D6027 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF7BCC29B1074F007D6027 /* ServiceHelper.swift */; };
 		56EF7BCF29B1127F007D6027 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 56EF7BCE29B1127F007D6027 /* GoogleSignInSwift */; };
 		56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F75F2D29B3879500E651B3 /* FbAuth.swift */; };
+		BF07FE5029B4D5C900D7E0C8 /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF07FE4F29B4D5C900D7E0C8 /* GoogleAuth.swift */; };
 		BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */; };
 		BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */; };
 		BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F78299E2B23003E5D85 /* ContentView.swift */; };
@@ -65,6 +66,7 @@
 		56EF7BCB29B10231007D6027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56EF7BCC29B1074F007D6027 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		56F75F2D29B3879500E651B3 /* FbAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FbAuth.swift; sourceTree = "<group>"; };
+		BF07FE4F29B4D5C900D7E0C8 /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
 		BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		BF6C4F73299E2B23003E5D85 /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				56F75F2D29B3879500E651B3 /* FbAuth.swift */,
+				BF07FE4F29B4D5C900D7E0C8 /* GoogleAuth.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */,
 				BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */,
 				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
+				BF07FE5029B4D5C900D7E0C8 /* GoogleAuth.swift in Sources */,
 				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
 				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
 				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,

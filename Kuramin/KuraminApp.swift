@@ -8,10 +8,13 @@
 import SwiftUI
 import Firebase
 import FBSDKCoreKit
-
+import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -21,7 +24,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return ApplicationDelegate.shared.application(app, open: url, options: options)
-    } }
+    }
+    
+    
+    
+}
 
 
 @main

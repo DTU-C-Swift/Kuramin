@@ -12,11 +12,6 @@ import AuthenticationServices
 
 
 
-import Foundation
-import SwiftUI
-import CryptoKit
-import AuthenticationServices
-
 class ServiceHelper {
     
 }

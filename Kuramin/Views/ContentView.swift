@@ -12,6 +12,7 @@ import Firebase
 struct ContentView: View {
     @ObservedObject var controller: Controller
     @State var navigateToMainPage = false
+    @StateObject var googleAuth = GoogleAuth()
     
     init() {
         controller = DataHolder.controller
@@ -41,6 +42,13 @@ struct ContentView: View {
                     .background(Color.blue)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
+                
+                if googleAuth.signedIn {
+                    Text("You are signed in with Google!")
+                    Button("Sign out", action: googleAuth.signOut)
+                } else {
+                    Button("Sign in with Google", action: googleAuth.signIn)
+                }
                     
 
                 
@@ -137,7 +145,7 @@ struct MainPageView: View {
         }
         .navigationBarBackButtonHidden(true)
         
-        //
+        
         
     }
 }
