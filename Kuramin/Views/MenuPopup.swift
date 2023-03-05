@@ -11,8 +11,9 @@ import SwiftUI
 
 struct MenuPopup: View {
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
-    var controller = DataHolder.controller
-    @State var isLoggedOut = false
+    @ObservedObject var controller = DataHolder.controller
+    @EnvironmentObject var navState: NavState
+    
     
     
     
@@ -32,7 +33,7 @@ struct MenuPopup: View {
                     }
                     .padding(.top, 20)
                     .font(.system(size: 35))
-                    //                    .background(.red)
+             
                     
                 }
                 
@@ -47,11 +48,20 @@ struct MenuPopup: View {
                 Spacer()
             }
             
+        }.onChange(of: controller.isLoggedIn) { newValue in
+            if !newValue {
+                navState.state = ""
+                pm.wrappedValue.dismiss()
+            }
         }
         
         
         
     }
+    
+    
+    
+    
 }
 
 struct MenuPopup_Previews: PreviewProvider {

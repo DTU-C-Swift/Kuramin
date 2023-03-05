@@ -80,7 +80,7 @@ struct login : UIViewRepresentable {
                     }
                     
                     print("Login with facebook success")
-                    DataHolder.controller.isLoggedIn = true
+                    //DataHolder.controller.isLoggedIn = true
                 }
             }
         }
@@ -88,7 +88,7 @@ struct login : UIViewRepresentable {
         
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
             try! Auth.auth().signOut()
-            DataHolder.controller.isLoggedIn = false
+            //DataHolder.controller.isLoggedIn = false
             
         }
     }

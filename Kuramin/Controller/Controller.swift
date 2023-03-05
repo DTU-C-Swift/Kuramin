@@ -16,6 +16,7 @@ class Controller : ObservableObject {
     
     init(game: Game?) {
         self.game = game ?? Game()
+        //self.listenForLogout()
     }
     
     
@@ -24,8 +25,13 @@ class Controller : ObservableObject {
     func listenForLogout() {
         Auth.auth().addStateDidChangeListener { auth, user in
             if user == nil {
-                
+                self.isLoggedIn = false
             }
+            else {
+                self.isLoggedIn = true
+            }
+            
+            print("Controller")
         }
     }
 

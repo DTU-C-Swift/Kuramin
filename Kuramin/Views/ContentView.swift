@@ -17,6 +17,7 @@ struct ContentView: View {
     
     init() {
         controller = DataHolder.controller
+        controller.listenForLogout()
 
     }
     var body: some View {
