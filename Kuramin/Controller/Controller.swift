@@ -16,7 +16,7 @@ class Controller : ObservableObject {
     
     init(game: Game?) {
         self.game = game ?? Game()
-        //self.listenForLogout()
+        self.listenForLogout()
     }
     
     
@@ -31,7 +31,6 @@ class Controller : ObservableObject {
                 self.isLoggedIn = true
             }
             
-            print("Controller")
         }
     }
 

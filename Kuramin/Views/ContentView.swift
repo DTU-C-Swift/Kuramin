@@ -17,7 +17,6 @@ struct ContentView: View {
     
     init() {
         controller = DataHolder.controller
-        controller.listenForLogout()
 
     }
     var body: some View {
@@ -82,18 +81,7 @@ struct ContentView: View {
                 print("Login with facebook failed")
             }
         }
-//        .sheet(isPresented: $navigateToMainPage) {
-//            MainPageView()
-//        }
-//        .onAppear() {
-//            print("on appearing")
-//            if Auth.auth().currentUser?.uid != nil {
-//                print("Is not nill")
-//                navigateToMainPage = true
-//            }
-//
-//        }
-     
+
         .environmentObject(navSate)
   
     }
