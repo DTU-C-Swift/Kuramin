@@ -11,6 +11,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import GoogleSignIn
+import Firebase
 
 
 

@@ -64,6 +64,9 @@ struct login : UIViewRepresentable {
         // Implementation of login button delegate methods
         
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+            DataHolder.controller.loginBtnClicked = true
+            
+            
             if error != nil {
                 print(error?.localizedDescription)
                 return
@@ -80,7 +83,8 @@ struct login : UIViewRepresentable {
                     }
                     
                     print("Login with facebook success")
-                    //DataHolder.controller.isLoggedIn = true
+                    DataHolder.controller.loginBtnClicked = false
+                    DataHolder.controller.isLoggedIn = true
                 }
             }
         }

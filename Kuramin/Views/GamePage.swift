@@ -69,14 +69,14 @@ struct GamePage: View {
                             .foregroundColor(.white)
                     }
                     
-//                    Button(action: {
-//                        controller.service.fetchData()
-//                        controller.service.intializeGame(p: controller.game.players[0])
-//
-//                    }) {
-//                        Image(systemName: "chevron.backward")
-//                            .foregroundColor(.white)
-//                    }
+                    Button(action: {
+                        controller.service.fetchData()
+                        controller.service.intializeGame(p: controller.game.players[0])
+
+                    }) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(.white)
+                    }
                     
                     
                     Spacer()

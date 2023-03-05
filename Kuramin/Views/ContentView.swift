@@ -17,56 +17,70 @@ struct ContentView: View {
     
     init() {
         controller = DataHolder.controller
+        //controller.listenForLogout()
 
     }
     var body: some View {
         
         NavigationView {
-            VStack {
-                NavigationLink(destination: MainPageView()) {
-                    HStack {
-                        Image(systemName: "applelogo")
-                            .font(.system(size: 24))
-                            .foregroundColor(.white)
-                        Text("Login with Apple")
-                            .font(.system(size: 24, weight: .semibold))
-                            .foregroundColor(.white)
+            
+            ZStack {
+                VStack {
+                    NavigationLink(destination: MainPageView()) {
+                        HStack {
+                            Image(systemName: "applelogo")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white)
+                            Text("Login with Apple")
+                                .font(.system(size: 24, weight: .semibold))
+                                .foregroundColor(.white)
+                        }
+                        .padding(.vertical, 16)
+                        .padding(.horizontal, 24)
+                        .background(Color.black)
+                        .cornerRadius(16)
+                        .shadow(radius: 4, x: 0, y: 4)
                     }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 24)
-                    .background(Color.black)
-                    .cornerRadius(16)
-                    .shadow(radius: 4, x: 0, y: 4)
-                }
-                
-                FbAuth(width: 257, height: 50)
-                    .cornerRadius(16)
-                    .shadow(radius: 4, x: 0, y: 4)
                     
-                
+                    FbAuth(width: 257, height: 50)
+                        .cornerRadius(16)
+                        .shadow(radius: 4, x: 0, y: 4)
+                        
+                        
                     
-                NavigationLink(destination: MainPageView()) {
-                    HStack {
-                        Image(systemName: "tree")
-                            .font(.system(size: 24))
-                            .foregroundColor(.black)
-                        Text("Login with Google")
-                            .font(.system(size: 24, weight:
-                                    .semibold))
-                                    .foregroundColor(.black)
+                        
+                    NavigationLink(destination: MainPageView()) {
+                        HStack {
+                            Image(systemName: "tree")
+                                .font(.system(size: 24))
+                                .foregroundColor(.black)
+                            Text("Login with Google")
+                                .font(.system(size: 24, weight:
+                                        .semibold))
+                                        .foregroundColor(.black)
+                        }
+                        .padding(.vertical, 16)
+                        .padding(.horizontal, 24)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                        .shadow(radius: 4, x: 0, y: 4)
                     }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 24)
-                    .background(Color.white)
-                    .cornerRadius(16)
-                    .shadow(radius: 4, x: 0, y: 4)
+                    
+                    
+                    NavigationLink(destination: MainPageView(), tag: "MainPageView", selection: $navSate.state){}
+                    
                 }
+                .padding()
                 
                 
-                NavigationLink(destination: MainPageView(), tag: "MainPageView", selection: $navSate.state){}
-                
+//                if controller.loginBtnClicked {
+//                    ProgressBar()
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                        .background(Color.black.opacity(0.5))
+//                        .edgesIgnoringSafeArea(.all)
+//
+//                }
             }
-            .padding()
         }
         .navigationTitle("Login")
         
@@ -83,6 +97,7 @@ struct ContentView: View {
         }
 
         .environmentObject(navSate)
+        
   
     }
 }
