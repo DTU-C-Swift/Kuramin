@@ -13,7 +13,7 @@ class Controller : ObservableObject {
     @Published var game: Game;
     var service = Service()
     @Published var isLoggedIn: Bool = false
-    @Published var loginBtnClicked: Bool = false
+    @Published var showBuffer: Bool = false
     
     init(game: Game?) {
         self.game = game ?? Game()

@@ -64,7 +64,7 @@ struct login : UIViewRepresentable {
         // Implementation of login button delegate methods
         
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-            DataHolder.controller.loginBtnClicked = true
+            DataHolder.controller.showBuffer = true
             
             
             if error != nil {
@@ -83,7 +83,7 @@ struct login : UIViewRepresentable {
                     }
                     
                     print("Login with facebook success")
-                    DataHolder.controller.loginBtnClicked = false
+                    DataHolder.controller.showBuffer = false
                     //DataHolder.controller.isLoggedIn = true
                 }
             }
