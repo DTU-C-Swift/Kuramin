@@ -40,11 +40,13 @@ struct MenuPopup: View {
                 Spacer()
                 
                 if controller.service.isUserloggedIn_viaFacebook() {
-                    
-                    FbAuth(width: 80, height: 50)
+
+                    FbAuth(width: 200, height: 50)
+                        .cornerRadius(16)
+                        .shadow(radius: 1, x: 0, y: 1)
                 }
                 
-                
+
                 Spacer()
             }
             
