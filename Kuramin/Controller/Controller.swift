@@ -17,7 +17,7 @@ class Controller : ObservableObject {
     
     init(game: Game?) {
         self.game = game ?? Game()
-        //self.listenForLogout()
+        self.listenForLogout()
     }
     
     

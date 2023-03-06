@@ -84,7 +84,7 @@ struct login : UIViewRepresentable {
                     
                     print("Login with facebook success")
                     DataHolder.controller.loginBtnClicked = false
-                    DataHolder.controller.isLoggedIn = true
+                    //DataHolder.controller.isLoggedIn = true
                 }
             }
         }
