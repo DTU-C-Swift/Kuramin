@@ -35,7 +35,6 @@ struct FbAuth: View {
 
 
 
-
 struct login : UIViewRepresentable {
     
     typealias UIViewType = FBLoginButton
@@ -108,54 +107,6 @@ struct login : UIViewRepresentable {
         }
     }
 
-    
-    
-//    class loginCoordinator: NSObject, LoginButtonDelegate {
-//
-//
-//        // Implementation of login button delegate methods
-//
-//        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-//
-//
-//            if error != nil {
-//                print(error?.localizedDescription)
-//                return
-//            }
-//
-//
-//            if AccessToken.current != nil {
-//
-//
-//
-//
-//
-//                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-//                DataHolder.controller.showBuffer = true
-//                Auth.auth().signIn(with: credential) { (res, er) in
-//
-//                    if er != nil {
-//
-//                        print(er?.localizedDescription)
-//                        return
-//                    }
-//
-//                    print("Login with facebook success")
-//
-//                    DataHolder.controller.showBuffer = false
-//                    //DataHolder.controller.isLoggedIn = true
-//                }
-//            }
-//        }
-//
-//
-//        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-//            try! Auth.auth().signOut()
-//            //DataHolder.controller.isLoggedIn = false
-//
-//        }
-//    }
-    
 
     
 }
