@@ -60,45 +60,97 @@ struct login : UIViewRepresentable {
     
     class loginCoordinator: NSObject, LoginButtonDelegate {
         
-        
-        // Implementation of login button delegate methods
-        
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
             
-
             if error != nil {
                 print(error?.localizedDescription)
                 return
             }
             
-            
             if AccessToken.current != nil {
-                
                 let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
                 DataHolder.controller.showBuffer = true
                 Auth.auth().signIn(with: credential) { (res, er) in
-                    
                     if er != nil {
-                        
                         print(er?.localizedDescription)
                         return
                     }
                     
-                    print("Login with facebook success")
+                    print("Login with Facebook success")
+                    
+                    // Get user's profile picture
+                    let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "200", "height": "200", "redirect": "false"], tokenString: AccessToken.current!.tokenString, version: nil, httpMethod: .get)
+                    graphRequest.start { (connection, result, error) in
+                        if error == nil, let result = result as? [String:Any], let data = result["data"] as? [String:Any], let url = data["url"] as? String {
+                            
+                            // Download user's profile picture
+                            URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
+                                if let data = data {
+                                    let image = UIImage(data: data)
+                                    // Use the image as needed
+                                    DataHolder.controller.image = image
+                                }
+                            }.resume()
+                        }
+                    }
                     
                     DataHolder.controller.showBuffer = false
-                    //DataHolder.controller.isLoggedIn = true
                 }
             }
         }
         
-        
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
             try! Auth.auth().signOut()
-            //DataHolder.controller.isLoggedIn = false
-            
         }
     }
+
+    
+    
+//    class loginCoordinator: NSObject, LoginButtonDelegate {
+//
+//
+//        // Implementation of login button delegate methods
+//
+//        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+//
+//
+//            if error != nil {
+//                print(error?.localizedDescription)
+//                return
+//            }
+//
+//
+//            if AccessToken.current != nil {
+//
+//
+//
+//
+//
+//                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+//                DataHolder.controller.showBuffer = true
+//                Auth.auth().signIn(with: credential) { (res, er) in
+//
+//                    if er != nil {
+//
+//                        print(er?.localizedDescription)
+//                        return
+//                    }
+//
+//                    print("Login with facebook success")
+//
+//                    DataHolder.controller.showBuffer = false
+//                    //DataHolder.controller.isLoggedIn = true
+//                }
+//            }
+//        }
+//
+//
+//        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+//            try! Auth.auth().signOut()
+//            //DataHolder.controller.isLoggedIn = false
+//
+//        }
+//    }
     
 
     

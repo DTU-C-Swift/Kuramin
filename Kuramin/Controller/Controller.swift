@@ -14,6 +14,7 @@ class Controller : ObservableObject {
     var service = Service()
     @Published var isLoggedIn: Bool = false
     @Published var showBuffer: Bool = false
+    @Published var image: UIImage? = nil
     
     init(game: Game?) {
         self.game = game ?? Game()

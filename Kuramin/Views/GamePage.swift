@@ -15,6 +15,7 @@ struct GamePage: View {
     @State private var isAnimating = false
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @EnvironmentObject var navState: NavState
+    @State var user: User? = nil
     
     
     //@EnvironmentObject var controller: Controller
@@ -72,6 +73,14 @@ struct GamePage: View {
                     Button(action: {
                         controller.service.fetchData()
                         controller.service.intializeGame(p: controller.game.players[0])
+                        user = controller.service.getUser()
+                        if user != nil {
+                            
+
+                            
+                        }
+                        
+
 
                     }) {
                         Image(systemName: "chevron.backward")
@@ -92,7 +101,15 @@ struct GamePage: View {
                         
                             .shadow(radius: 20)
                         
-                        CirclePicView(player: controller.game.me)
+                        //CirclePicView(player: controller.game.me)
+                        
+                        if controller.image != nil {
+                            Image(uiImage: controller.image!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                             
+                 
                         
                     }
                     Spacer()
