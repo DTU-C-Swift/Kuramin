@@ -28,6 +28,7 @@
 		56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F75F2D29B3879500E651B3 /* FbAuth.swift */; };
 		56F75F3029B3BA6300E651B3 /* MenuPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F75F2F29B3BA6300E651B3 /* MenuPopup.swift */; };
 		BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */; };
+		BF481FE729B7B95B007400D3 /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF481FE629B7B95B007400D3 /* GoogleAuth.swift */; };
 		BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */; };
 		BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F78299E2B23003E5D85 /* ContentView.swift */; };
 		BF6C4F7B299E2B25003E5D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF6C4F7A299E2B25003E5D85 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		56F75F2D29B3879500E651B3 /* FbAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FbAuth.swift; sourceTree = "<group>"; };
 		56F75F2F29B3BA6300E651B3 /* MenuPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopup.swift; sourceTree = "<group>"; };
 		BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
+		BF481FE629B7B95B007400D3 /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
 		BF6C4F73299E2B23003E5D85 /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6C4F76299E2B23003E5D85 /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
 		BF6C4F78299E2B23003E5D85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				56F75F2D29B3879500E651B3 /* FbAuth.swift */,
+				BF481FE629B7B95B007400D3 /* GoogleAuth.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
 				BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */,
 				56F75F3029B3BA6300E651B3 /* MenuPopup.swift in Sources */,
+				BF481FE729B7B95B007400D3 /* GoogleAuth.swift in Sources */,
 				56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */,
 				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
 				BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */,

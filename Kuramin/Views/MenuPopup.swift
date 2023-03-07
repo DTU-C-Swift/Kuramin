@@ -6,7 +6,6 @@
 //
 
 import Firebase
-
 import SwiftUI
 
 struct MenuPopup: View {

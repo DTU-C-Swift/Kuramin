@@ -1,53 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-        <!--	<key>CFBundleIdentifier</key>-->
-        <!--	<string></string>-->
-        <!--	<key>CFBundleURLTypes</key>-->
-        <!--	<array>-->
-        <!--		<dict>-->
-        <!--			<key>CFBundleTypeRole</key>-->
-        <!--			<string>Editor</string>-->
-        <!--			<key>CFBundleURLSchemes</key>-->
-        <!--			<array>-->
-        <!--				<string>fb141816885460551</string>-->
-        <!--				<string>com.googleusercontent.apps.1009889916252-6iahem0hadjc98qre2stqmtbhe16aal5</string>-->
-        <!--			</array>-->
-        <!--		</dict>-->
-        <!--	</array>-->
-        <!--	<key>FacebookAppID</key>-->
-        <!--	<string>141816885460551</string>-->
-        <!--	<key>FacebookClientToken</key>-->
-        <!--	<string>ee9527604aa7a096cac66b83bc214868</string>-->
-        <!--	<key>FacebookDisplayName</key>-->
-        <!--	<string>Kuramin</string>-->
-        <!--	<key>LSApplicationQueriesSchemes</key>-->
-        <!--	<array>-->
-        <!--		<string>fbapi</string>-->
-        <!--		<string>fb-messenger-share-api</string>-->
-        <!--	</array>-->
-        
-        
-        
-        <key>CFBundleURLTypes</key>
-        <array>
-            <dict>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>fb141816885460551</string>
-                </array>
-            </dict>
-        </array>
-        <key>FacebookAppID</key>
-        <string>141816885460551</string>
-        <key>FacebookDisplayName</key>
-        <string>Kuramin</string>
-        <key>FacebookClientToken</key>
-        <string>ee9527604aa7a096cac66b83bc214868</string>
-        
-        
-        
-        
-    </dict>
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb141816885460551</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1009889916252-6iahem0hadjc98qre2stqmtbhe16aal5</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>141816885460551</string>
+	<key>FacebookClientToken</key>
+	<string>ee9527604aa7a096cac66b83bc214868</string>
+	<key>FacebookDisplayName</key>
+	<string>Kuramin</string>
+</dict>
 </plist>

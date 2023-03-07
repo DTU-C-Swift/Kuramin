@@ -108,12 +108,12 @@ class NavState: ObservableObject {
 }
 
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+
+    }
+}
 
 
 struct MainPageView: View {
