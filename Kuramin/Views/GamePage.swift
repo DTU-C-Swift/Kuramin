@@ -73,7 +73,7 @@ struct GamePage: View {
                     Button(action: {
                         controller.service.fetchData()
                         controller.service.intializeGame(p: controller.game.players[0])
-                        user = controller.service.getUser()
+                        //user = controller.service.getUser()
                         if user != nil {
                             
 

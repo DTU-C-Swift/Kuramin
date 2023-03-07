@@ -80,6 +80,9 @@ struct login : UIViewRepresentable {
                     
                     // Get user's profile picture
                     let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "200", "height": "200", "redirect": "false"], tokenString: AccessToken.current!.tokenString, version: nil, httpMethod: .get)
+                    
+                    
+                    
                     graphRequest.start { (connection, result, error) in
                         if error == nil, let result = result as? [String:Any], let data = result["data"] as? [String:Any], let url = data["url"] as? String {
                             
@@ -88,7 +91,8 @@ struct login : UIViewRepresentable {
                                 if let data = data {
                                     let image = UIImage(data: data)
                                     // Use the image as needed
-                                    DataHolder.controller.image = image
+                                    //DataHolder.controller.image = image
+                                    //DataHolder.controller.service.createUser(userImage: image)
                                 }
                             }.resume()
                         }

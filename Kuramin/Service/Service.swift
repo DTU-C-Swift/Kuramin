@@ -99,37 +99,68 @@ class Service {
     }
     
     
-    func getUser() -> User? {
+    //    func getUser() -> User? {
+    //
+    //
+    //          // ...
+    //
+    //            return user
+    //        }
+    //
+    //        //var url = user.getPhotoUrl() + "?access_token=ee9527604aa7a096cac66b83bc214868"
+    //
+    //
+    //        return nil
+    //
+    //    }
+    
+    
+    func createUser(userImage: UIImage?) {
+        if userImage == nil {return}
         
-        var user = Auth.auth().currentUser
-        
-        
-        
+        let user = Auth.auth().currentUser
         
         if let user = user {
-          // The user's ID, unique to the Firebase project.
-          // Do NOT use this value to authenticate with your backend server,
-          // if you have one. Use getTokenWithCompletion:completion: instead.
-          let uid = user.uid
-          let email = user.email
-          let photoURL = user.photoURL
-          var multiFactorString = "MultiFactor: "
-          for info in user.multiFactor.enrolledFactors {
-            multiFactorString += info.displayName ?? "[DispayName]"
-            multiFactorString += " "
-          }
-          // ...
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            _ = user.uid
+            _ = user.email
+            _ = user.photoURL
+            var multiFactorString = "MultiFactor: "
+            for info in user.multiFactor.enrolledFactors {
+                multiFactorString += info.displayName ?? "[DispayName]"
+                multiFactorString += " "
+            }
             
-            return user
+            //var ref = db.collection("users")
+            
+            
+            let arr = user.displayName?.split(separator: " ")
+            
+            
+            var dictionary: [String: Any] = [:]
+            
+            dictionary["uid"] = user.uid
+            dictionary["email"] = user.email
+            dictionary["firs_name"] = arr?[0]
+            dictionary["fullName"] = user.displayName
+            
+            
+            
+            
+            do {
+                try db.collection("users").document(user.uid).setData(dictionary)
+            } catch let error {
+                print("Error writing city to Firestore: \(error)")
+            }
+            
+            
+            
+            
+            
+            
+            
         }
-        
-        //var url = user.getPhotoUrl() + "?access_token=ee9527604aa7a096cac66b83bc214868"
-
-        
-        return nil
-        
     }
-    
-    
-    
 }
