@@ -12,11 +12,12 @@ import FirebaseFirestore
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
-
+import FirebaseStorage
 
 
 class Service {
     var db = Firestore.firestore()
+    let storage = Storage.storage()
     
     func fetchData(){
         db.collection("matches").getDocuments { snapshot, err in
@@ -100,18 +101,6 @@ class Service {
     
     
     //    func getUser() -> User? {
-    //
-    //
-    //          // ...
-    //
-    //            return user
-    //        }
-    //
-    //        //var url = user.getPhotoUrl() + "?access_token=ee9527604aa7a096cac66b83bc214868"
-    //
-    //
-    //        return nil
-    //
     //    }
     
     
@@ -133,20 +122,14 @@ class Service {
                 multiFactorString += " "
             }
             
-            //var ref = db.collection("users")
+            //let arr = user.displayName?.split(separator: " ")
             
-            
-            let arr = user.displayName?.split(separator: " ")
-            
-            
+    
             var dictionary: [String: Any] = [:]
-            
             dictionary["uid"] = user.uid
             dictionary["email"] = user.email
-            dictionary["firs_name"] = arr?[0]
+            //dictionary["firs_name"] = arr?[0]
             dictionary["fullName"] = user.displayName
-            
-            
             
             
             do {
@@ -155,12 +138,43 @@ class Service {
                 print("Error writing city to Firestore: \(error)")
             }
             
+            if let userImage = userImage {
+                uploadImg(userId: user.uid, img: userImage)
+            }
             
-            
-            
-            
-            
-            
+  
         }
+        
     }
+    
+    
+    private func uploadImg(userId: String, img: UIImage) {
+        
+        guard let imageData = img.jpegData(compressionQuality: 0.8) else {
+            return
+        }
+
+        let storageRef = storage.reference()
+        let imagesRef = storageRef.child("images")
+        let filename = "\(userId).jpg"
+        let imageRef = imagesRef.child(filename)
+
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+
+        let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
+            if let error = error {
+                print("Error uploading image: \(error.localizedDescription)")
+                return
+            }
+            
+            print("Image uploaded successfully!")
+        }
+        
+    }
+    
+    
+    
+    
 }
