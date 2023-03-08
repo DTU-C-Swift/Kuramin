@@ -102,14 +102,7 @@ struct GamePage: View {
                             .shadow(radius: 20)
                         
                         CirclePicView(player: controller.game.me)
-                        
-//                        if controller.image != nil {
-//                            Image(uiImage: controller.image!)
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                        }
-                             
-                 
+
                         
                     }
                     Spacer()
