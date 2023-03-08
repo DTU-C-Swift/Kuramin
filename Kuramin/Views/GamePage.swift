@@ -38,14 +38,30 @@ struct GamePage: View {
             VStack {
                 
                 HStack() {
-                    Spacer()
-                    CirclePicView(player: controller.game.players[0])
-                    Spacer()
-                    CirclePicView(player: controller.game.players[0])
-                    Spacer()
-                    CirclePicView(player: controller.game.players[0])
-                    Spacer()
-                    CirclePicView(player: controller.game.players[0])
+                    
+                    
+                    
+                    if controller.game.players[0].isNotDummy{
+                        Spacer()
+                        CirclePicView(player: controller.game.players[0])
+                    }
+                    
+                    if controller.game.players[3].isNotDummy {
+                        Spacer()
+                        CirclePicView(player: controller.game.players[3])
+                    }
+
+                    if controller.game.players[4].isNotDummy {
+                        Spacer()
+                        CirclePicView(player: controller.game.players[4])
+                    }
+
+                    
+                    if controller.game.players[5].isNotDummy{
+                        Spacer()
+                        CirclePicView(player: controller.game.players[5])
+                    }
+                    
                     Spacer()
                     
                 }
@@ -57,10 +73,15 @@ struct GamePage: View {
                 Spacer()
                 HStack() {
                     
-                    CirclePicView(player: controller.game.players[1])
-                    Spacer()
+                    if controller.game.players[1].isNotDummy {
+                        CirclePicView(player: controller.game.players[1])
+                        Spacer()
+                    }
                     
-                    CirclePicView(player: controller.game.players[2])
+                    if controller.game.players[2].isNotDummy {
+                        CirclePicView(player: controller.game.players[2])
+                    }
+                    
                     
                 }
                 
@@ -107,7 +128,10 @@ struct GamePage: View {
                         
                             .shadow(radius: 20)
                         
-                        CirclePicView(player: controller.game.me)
+                        if controller.game.me.isNotDummy {
+                            CirclePicView(player: controller.game.me)
+                        }
+                        
 
                         
                     }

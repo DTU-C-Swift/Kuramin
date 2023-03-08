@@ -25,6 +25,8 @@ struct CirclePicView: View {
     
     var body: some View {
         
+        
+        
         VStack(spacing: 1) {
             Image(uiImage: player.image)
                 .frame(width: 60, height: 60)
@@ -41,8 +43,8 @@ struct CirclePicView: View {
                 
 
         }
-    
         
+    
     }
 }
 
