@@ -39,13 +39,19 @@ struct GamePage: View {
                 
                 HStack() {
                     Spacer()
-                    
                     CirclePicView(player: controller.game.players[0])
-                        .padding(.top, 3)
-                    
+                    Spacer()
+                    CirclePicView(player: controller.game.players[0])
+                    Spacer()
+                    CirclePicView(player: controller.game.players[0])
+                    Spacer()
+                    CirclePicView(player: controller.game.players[0])
                     Spacer()
                     
                 }
+                .padding(.top, 4)
+                
+               
                 
                 
                 Spacer()
