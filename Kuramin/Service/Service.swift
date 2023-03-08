@@ -154,8 +154,7 @@ class Service {
             return
         }
 
-        let storageRef = storage.reference()
-        let imagesRef = storageRef.child("images")
+        let imagesRef = storage.reference().child("images").child(userId)
         let filename = "\(userId).jpg"
         let imageRef = imagesRef.child(filename)
 
