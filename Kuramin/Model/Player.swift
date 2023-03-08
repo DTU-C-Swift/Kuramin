@@ -12,7 +12,7 @@ class Player : ObservableObject {
     
     var id = ""
     @Published var name = "NotSet"
-    @Published var image = "person_34"
+    @Published var image: UIImage = UIImage(imageLiteralResourceName: "person_34")
 
     
 }

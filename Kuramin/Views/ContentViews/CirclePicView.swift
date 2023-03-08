@@ -26,9 +26,9 @@ struct CirclePicView: View {
     var body: some View {
         
         VStack(spacing: 1) {
-            Image(player.image)
+            Image(uiImage: player.image)
                 .frame(width: 60, height: 60)
-                .scaleEffect(1.5)
+                .scaleEffect(0.6)
                 .clipShape(Circle())
                 .overlay{
                     Circle().stroke(Color.white, lineWidth: 4)

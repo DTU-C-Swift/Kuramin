@@ -78,7 +78,7 @@ struct login : UIViewRepresentable {
                     print("Login with Facebook success")
                     
                     // Get user's profile picture
-                    let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "200", "height": "200", "redirect": "false"], tokenString: AccessToken.current!.tokenString, version: nil, httpMethod: .get)
+                    let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "100", "height": "100", "redirect": "false"], tokenString: AccessToken.current!.tokenString, version: nil, httpMethod: .get)
                     
                     
                     
@@ -90,7 +90,11 @@ struct login : UIViewRepresentable {
                                 if let data = data {
                                     let image = UIImage(data: data)
                                     // Use the image as needed
-                                    DataHolder.controller.image = image
+                                    //DataHolder.controller.image = image
+                                    if let image = image {
+                                        DataHolder.controller.game.me.image = image
+                                    }
+                                    
                                     DataHolder.controller.service.createUser(userImage: image)
                                 }
                             }.resume()
