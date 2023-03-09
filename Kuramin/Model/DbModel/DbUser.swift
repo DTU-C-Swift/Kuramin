@@ -9,11 +9,6 @@ import Foundation
 import FirebaseFirestoreSwift
 
 
-//class DbUser {
-//    var uid: String = ""
-//    var fullName: String = ""
-//}
-
 struct DbUser: Codable {
     @DocumentID var uid: String?
     var fullName: String
