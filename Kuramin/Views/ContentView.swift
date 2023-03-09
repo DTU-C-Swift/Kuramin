@@ -89,6 +89,7 @@ struct ContentView: View {
                 print("Navigate to main page")
                 navigateToMainPage = true
                 //selection = "MainPageView"
+                controller.service.getUser(uid: nil)
                 navSate.state = "MainPageView"
             }
             else{
@@ -118,8 +119,9 @@ class NavState: ObservableObject {
 
 struct MainPageView: View {
     @State private var showMenu = false
-
+    @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
+    
     var body: some View {
         
         VStack {

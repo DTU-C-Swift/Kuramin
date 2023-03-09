@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5602085A29B949BA00631C27 /* DbUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602085929B949BA00631C27 /* DbUser.swift */; };
 		566A0FFE29AFD40F00E71D31 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */; };
 		566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A100029AFF3FE00E71D31 /* DataHolder.swift */; };
 		566A100C29B0ACEF00E71D31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 566A100B29B0ACEF00E71D31 /* FirebaseAuth */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5602085929B949BA00631C27 /* DbUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUser.swift; sourceTree = "<group>"; };
 		566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		566A100029AFF3FE00E71D31 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 		566A101729B0BC8200E71D31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5602085829B9498A00631C27 /* DbModel */ = {
+			isa = PBXGroup;
+			children = (
+				5602085929B949BA00631C27 /* DbUser.swift */,
+			);
+			path = DbModel;
+			sourceTree = "<group>";
+		};
 		560EFDA529AD43CC00087FC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 		5689AD7029AE773D0062A6CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5602085829B9498A00631C27 /* DbModel */,
 				5689AD7129AE77650062A6CD /* Game.swift */,
 				5689AD7329AE77E10062A6CD /* Player.swift */,
 			);
@@ -403,6 +414,7 @@
 				56F75F3029B3BA6300E651B3 /* MenuPopup.swift in Sources */,
 				56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */,
 				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
+				5602085A29B949BA00631C27 /* DbUser.swift in Sources */,
 				BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */,
 				56BA237E29B54E4F004D8168 /* ProgressBar.swift in Sources */,
 				56EF7BCD29B1074F007D6027 /* ServiceHelper.swift in Sources */,

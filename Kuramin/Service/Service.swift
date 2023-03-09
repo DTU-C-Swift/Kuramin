@@ -19,6 +19,88 @@ class Service {
     var db = Firestore.firestore()
     let storage = Storage.storage()
     
+    
+    
+    
+    
+    
+    func getUser(uid: String?) {
+        var userId = ""
+        if uid == nil {
+            var user = Auth.auth().currentUser
+            if let user = user {
+                userId = user.uid
+            }
+        }
+        
+        
+//        db.collection("users").document(userId).getDocument(as: DbUser.self) { result in
+//
+//            switch result {
+//            case .success(let use):
+//
+//            }
+//        }
+//
+//        db.collection("users").document(userId).getDocument(as: DbUser.self) { result in
+//
+//            switch result {
+//            case .success(let city):
+//                print("City: \(city)")
+//            case .failure(let error):
+//                print("Error decoding city: \(error)")
+//            }
+//        }
+        
+        
+//        db.collection("users").document(userId).getDocument { document, error in
+//            if let document = document , document.exists {
+//                let data = document.data()
+//                var dd = data.map(String.init(describing: )) ?? "nil"
+//
+//                print(dd)
+//            }
+//            else {
+//                print("User data not found")
+//            }
+//        }
+
+    }
+    
+    
+    
+    
+    
+//    func goToLobddby() {
+//        goToLobby()
+//
+//    }
+    
+    
+    
+    func goToLobby(player: Player) {
+        var ref = db.collection("lobby")
+        //ref.document(player.id).setData(["id" : player.id])
+        
+        ref.document(player.id).setData([:
+                                        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func fetchData(){
         db.collection("matches").getDocuments { snapshot, err in
             
@@ -47,7 +129,7 @@ class Service {
         db.collection("lobby").getDocuments { snapshot, err in
             if snapshot != nil {
                 if snapshot?.count == 0 {
-                    self.matchMaker(player: p)
+                    self.goToLobby(player: p)
                 }
                 else {
                     print("Lobby is not empty")
@@ -64,19 +146,7 @@ class Service {
     
     
     
-    func matchMaker(player: Player) {
-        var ref = db.collection("lobby")
-        //ref.document(player.id).setData(["id" : player.id])
-        
-        ref.document(player.id).setData([:
-                                        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
+
     
     
     

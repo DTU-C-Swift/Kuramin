@@ -23,6 +23,7 @@ struct GamePage: View {
     
     init() {
         self.controller = DataHolder.controller
+        
         controller.game.addDummyPlayers()
         
     }

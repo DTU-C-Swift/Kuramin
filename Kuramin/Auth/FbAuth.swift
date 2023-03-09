@@ -91,9 +91,9 @@ struct login : UIViewRepresentable {
                                     let image = UIImage(data: data)
                                     // Use the image as needed
                                     //DataHolder.controller.image = image
-                                    if let image = image {
-                                        DataHolder.controller.game.me.image = image
-                                    }
+//                                    if let image = image {
+//                                        DataHolder.controller.game.me.image = image
+//                                    }
                                     
                                     DataHolder.controller.service.createUser(userImage: image)
                                 }

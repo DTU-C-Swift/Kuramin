@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class Game : ObservableObject {
-    var isLoggedIn = false
+    var id: String = ""
     @Published var players: [Player] = []
     @Published var me: Player = Player()
     var host: Player = Player()
@@ -25,7 +25,7 @@ class Game : ObservableObject {
             let newPlayer = Player()
             newPlayer.id = UUID().uuidString
             newPlayer.name = "player" + String(i)
-            if i <= 3 {
+            if i <= 6 {
                 newPlayer.isNotDummy = true
             }
             players.append(newPlayer)
