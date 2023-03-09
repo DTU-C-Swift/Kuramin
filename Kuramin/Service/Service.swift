@@ -90,10 +90,7 @@ class Service {
     
     
     
-    
-    
-    
-    
+
     
     
     
@@ -105,9 +102,7 @@ class Service {
                 for it in snapshot!.documents {
                     print("\(it.documentID) => \(it.data())")
                 }
-                
-                
-                
+
             }
             else {
                 
@@ -136,13 +131,6 @@ class Service {
         }
         
     }
-    
-    
-    
-    
-    
-    
-
     
     
     
@@ -229,6 +217,8 @@ class Service {
         
     }
     
+    // Downloads the profile picture of the given player and sets the fetched picture to the given player.
+    
     func downloadImg(_ player: Player) {
         let uid = player.id
         let path = storage.reference().child("images").child(uid)
@@ -246,12 +236,11 @@ class Service {
                 
             }
         }
-        
-        
-
-
-        
+         
     }
+    
+    
+    
     
     
     
