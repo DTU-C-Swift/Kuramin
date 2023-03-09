@@ -18,4 +18,9 @@ struct DbUser: Codable {
     @DocumentID var uid: String?
     var fullName: String
     var coins: Int
+    
+    func toString() -> String {
+        return "UserId: \(uid ?? "nil"), fullName: \(fullName), coins: \(coins)"
+
+    }
 }

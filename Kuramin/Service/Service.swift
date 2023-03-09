@@ -46,17 +46,29 @@ class Service {
                 return
             }
             
-            self.printer.print_(str: "Current data: \(data)")
+            
+            do {
+                let dbUser = try document.data(as: DbUser.self)
+                
+                
+                self.printer.print_(str: "Retrieved user: \(dbUser.toString())")
+
+//                self.printer.print_(str: dbUser.uid ?? " ")
+//                self.printer.print_(str: dbUser.fullName)
+
+
+            }
+            catch{
+                self.printer.print_(str: "getUser failed: \(data)")
+
+            }
+            
+           
             
             
-//            do {
-//                let decoder = JSONDecoder()
-//                let user = try decoder.decode(DbUser, from: data)
-//            }
-//            catch {
-//                self.printer.print_("Error when trying to encode book: \(error)")
-//
-//            }
+            
+
+            
             
             
             
