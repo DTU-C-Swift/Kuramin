@@ -24,7 +24,7 @@ class Game : ObservableObject {
         for i in 1...6 {
             let newPlayer = Player()
             newPlayer.id = UUID().uuidString
-            newPlayer.name = "player" + String(i)
+            newPlayer.displayName = "player" + String(i)
             if i <= 6 {
                 newPlayer.isNotDummy = true
             }

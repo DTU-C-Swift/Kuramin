@@ -89,7 +89,7 @@ struct ContentView: View {
                 print("Navigate to main page")
                 navigateToMainPage = true
                 //selection = "MainPageView"
-                controller.service.getUser(uid: nil)
+                controller.service.listenUser(player: controller.game.me)
                 navSate.state = "MainPageView"
             }
             else{

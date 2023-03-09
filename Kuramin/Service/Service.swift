@@ -26,15 +26,21 @@ class Service {
     
     
     
-    func getUser() {
+    func listenUser(player: Player) {
         
-        var userId = ""
+        var uid = ""
         var user = Auth.auth().currentUser
         if let user = user {
-            userId = user.uid
+            uid = user.uid
         }
+        player.id = uid
+        // Gets user image from storage
+        self.downloadImg(player)
         
-        db.collection("users").document(userId).addSnapshotListener { snapshot, error in
+        
+        
+        // Gets user from firestore
+        db.collection("users").document(uid).addSnapshotListener { snapshot, error in
             guard let document = snapshot else {
                 self.printer.print_(str: "Error fetching document: \(error!)")
             
@@ -49,6 +55,7 @@ class Service {
             do {
                 let dbUser = try document.data(as: DbUser.self)
                 self.printer.print_(str: "Retrieved user: \(dbUser.toString())")
+                player.update(dbUser)
 
             }
             catch{
@@ -203,9 +210,9 @@ class Service {
             return
         }
 
-        let imagesRef = storage.reference().child("images").child(userId)
+        let path = storage.reference().child("images").child(userId)
         let filename = "\(userId).jpg"
-        let imageRef = imagesRef.child(filename)
+        let imageRef = path.child(filename)
 
         
         let metadata = StorageMetadata()
@@ -219,6 +226,30 @@ class Service {
             
             print("Image uploaded successfully!")
         }
+        
+    }
+    
+    func downloadImg(_ player: Player) {
+        let uid = player.id
+        let path = storage.reference().child("images").child(uid)
+        let filename = "\(uid).jpg"
+        let imageRef = path.child(filename)
+        imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
+            if let error = error {
+                self.printer.print_(str: "Error occured while fetching imge for UID: \(uid), error: \(error)")
+                
+            }
+            else {
+                if let img = UIImage(data: data!) {
+                    player.image = img
+                }
+                
+            }
+        }
+        
+        
+
+
         
     }
     
