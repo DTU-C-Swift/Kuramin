@@ -26,7 +26,7 @@ struct ContentView: View {
             
             ZStack {
                 VStack {
-                    NavigationLink(destination: MainPageView()) {
+                    NavigationLink(destination: MainPage()) {
                         HStack {
                             Image(systemName: "applelogo")
                                 .font(.system(size: 24))
@@ -49,7 +49,7 @@ struct ContentView: View {
                         
                     
                         
-                    NavigationLink(destination: MainPageView()) {
+                    NavigationLink(destination: MainPage()) {
                         HStack {
                             Image(systemName: "tree")
                                 .font(.system(size: 24))
@@ -67,7 +67,7 @@ struct ContentView: View {
                     }
                     
                     
-                    NavigationLink(destination: MainPageView(), tag: "MainPageView", selection: $navSate.state){}
+                    NavigationLink(destination: MainPage(), tag: "MainPageView", selection: $navSate.state){}
                     
                 }
                 .padding()
@@ -109,80 +109,15 @@ class NavState: ObservableObject {
 }
 
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
 
-
-struct MainPageView: View {
-    @State private var showMenu = false
-    @ObservedObject var controller: Controller = DataHolder.controller
-    @EnvironmentObject var navState: NavState
-    
-    var body: some View {
-        
-        VStack {
-            HStack {
-                Spacer()
-                
-                Button(action: {
-                    showMenu = true
-                }, label: {
-                    Image(systemName: "gearshape.circle.fill")
-                        .font(.system(size: 40))
-                    
-                })
-
-                
-            }.padding(.top, 10)
-            Spacer()
-            
-            NavigationLink(destination: GamePage()) {
-                Text("Start New Game")
-                    .font(.system(size: 24, weight: .semibold))
-                    .foregroundColor(.black)
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 24)
-                    .background(Color.white)
-                    .cornerRadius(16)
-                    .shadow(radius: 4, x: 0, y: 4)
-            }
-            
-            
-            Text("Join Game")
-                .font(.system(size: 24, weight: .semibold))
-                .foregroundColor(.black)
-                .padding(.vertical, 16)
-                .padding(.horizontal, 24)
-                .background(Color.white)
-                .cornerRadius(16)
-                .shadow(radius: 4, x: 0, y: 4)
-            
-            Text("How To Play?")
-                .font(.system(size: 24, weight: .semibold))
-                .foregroundColor(.black)
-                .padding(.vertical, 16)
-                .padding(.horizontal, 24)
-                .background(Color.white)
-                .cornerRadius(16)
-                .shadow(radius: 4, x: 0, y: 4)
-            
-            
-            Spacer()
-        
-        }
-        .navigationBarBackButtonHidden(true)
-        .sheet(isPresented: $showMenu) {
-            MenuPopup()
-        }
-        
-        //
-        
     }
 }
+
+
+
 
 
 //struct ContentView_Previews: PreviewProvider {

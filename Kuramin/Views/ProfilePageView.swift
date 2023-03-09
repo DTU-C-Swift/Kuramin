@@ -9,7 +9,23 @@ import SwiftUI
 
 struct ProfilePageView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            Text("Test")
+                .padding()
+            
+            ZStack {
+                HStack {
+                    Text("Test1")
+                    
+                    Text("Test2")
+                }
+            }
+
+            
+        }
+        
+        
     }
 }
 

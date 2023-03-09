@@ -37,6 +37,7 @@
 		BF6C4F93299E2B25003E5D85 /* KuraminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */; };
 		BF6C4F95299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */; };
 		BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4FA1299E620A003E5D85 /* GamePage.swift */; };
+		BFC3944629BA334800148A69 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC3944529BA334800148A69 /* MainPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITests.swift; sourceTree = "<group>"; };
 		BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BF6C4FA1299E620A003E5D85 /* GamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePage.swift; sourceTree = "<group>"; };
+		BFC3944529BA334800148A69 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				BF1EDEAC29A782E80016B49C /* ProfilePageView.swift */,
 				BF6C4F78299E2B23003E5D85 /* ContentView.swift */,
 				56F75F2F29B3BA6300E651B3 /* MenuPopup.swift */,
+				BFC3944529BA334800148A69 /* MainPage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
 				BF6C4F77299E2B23003E5D85 /* KuraminApp.swift in Sources */,
 				56F75F3029B3BA6300E651B3 /* MenuPopup.swift in Sources */,
+				BFC3944629BA334800148A69 /* MainPage.swift in Sources */,
 				56F75F2E29B3879500E651B3 /* FbAuth.swift in Sources */,
 				5689AD7429AE77E10062A6CD /* Player.swift in Sources */,
 				5602085A29B949BA00631C27 /* DbUser.swift in Sources */,
