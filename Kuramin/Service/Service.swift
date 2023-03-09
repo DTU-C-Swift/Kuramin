@@ -8,16 +8,18 @@
 import Foundation
 import SwiftUI
 import FirebaseCore
-import FirebaseFirestore
+//import FirebaseFirestore
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
 import FirebaseStorage
+import FirebaseFirestoreSwift
 
 
 class Service {
     var db = Firestore.firestore()
     let storage = Storage.storage()
+    let printer = Printer(tag: "Service", displayPrints: true)
     
     
     
@@ -33,37 +35,35 @@ class Service {
             }
         }
         
+        db.collection("users").document(userId).addSnapshotListener { snapshot, error in
+            guard let document = snapshot else {
+                self.printer.print_(str: "Error fetching document: \(error!)")
+            
+                return
+            }
+            guard let data = document.data() else {
+                self.printer.print_(str: "Document data was empty.")
+                return
+            }
+            
+            self.printer.print_(str: "Current data: \(data)")
+            
+            
+//            do {
+//                let decoder = JSONDecoder()
+//                let user = try decoder.decode(DbUser, from: data)
+//            }
+//            catch {
+//                self.printer.print_("Error when trying to encode book: \(error)")
+//
+//            }
+            
+            
+            
+
+            
+        }
         
-//        db.collection("users").document(userId).getDocument(as: DbUser.self) { result in
-//
-//            switch result {
-//            case .success(let use):
-//
-//            }
-//        }
-//
-//        db.collection("users").document(userId).getDocument(as: DbUser.self) { result in
-//
-//            switch result {
-//            case .success(let city):
-//                print("City: \(city)")
-//            case .failure(let error):
-//                print("Error decoding city: \(error)")
-//            }
-//        }
-        
-        
-//        db.collection("users").document(userId).getDocument { document, error in
-//            if let document = document , document.exists {
-//                let data = document.data()
-//                var dd = data.map(String.init(describing: )) ?? "nil"
-//
-//                print(dd)
-//            }
-//            else {
-//                print("User data not found")
-//            }
-//        }
 
     }
     
@@ -176,13 +176,11 @@ class Service {
     
     func createUser(userImage: UIImage?) {
         if userImage == nil {return}
+        // TODO check if the user is already exist in the db
         
         let user = Auth.auth().currentUser
         
         if let user = user {
-            // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server,
-            // if you have one. Use getTokenWithCompletion:completion: instead.
             _ = user.uid
             _ = user.email
             _ = user.photoURL
@@ -195,15 +193,18 @@ class Service {
             //let arr = user.displayName?.split(separator: " ")
             
     
-            var dictionary: [String: Any] = [:]
-            dictionary["uid"] = user.uid
-            dictionary["email"] = user.email
-            //dictionary["firs_name"] = arr?[0]
-            dictionary["fullName"] = user.displayName
+//            var dictionary: [String: Any] = [:]
+//            dictionary["uid"] = user.uid
+//            dictionary["email"] = user.email
+//            //dictionary["firs_name"] = arr?[0]
+//            dictionary["fullName"] = user.displayName
+//            dictionary["coins"] = 0
+            let dbUser = DbUser(uid: "dddlslslslsls", fullName: user.displayName ?? "", coins: 0)
+            
             
             
             do {
-                try db.collection("users").document(user.uid).setData(dictionary)
+                try db.collection("users").document(user.uid).setData(from: dbUser)
             } catch let error {
                 print("Error writing city to Firestore: \(error)")
             }

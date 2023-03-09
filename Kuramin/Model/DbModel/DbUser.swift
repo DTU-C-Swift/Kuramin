@@ -6,8 +6,16 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-class DbUser {
-    var uid: String = ""
-    var fullName: String = ""
+
+//class DbUser {
+//    var uid: String = ""
+//    var fullName: String = ""
+//}
+
+struct DbUser: Codable {
+    @DocumentID var uid: String?
+    var fullName: String
+    var coins: Int
 }
