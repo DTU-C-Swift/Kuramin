@@ -26,13 +26,12 @@ class Service {
     
     
     
-    func getUser(uid: String?) {
+    func getUser() {
+        
         var userId = ""
-        if uid == nil {
-            var user = Auth.auth().currentUser
-            if let user = user {
-                userId = user.uid
-            }
+        var user = Auth.auth().currentUser
+        if let user = user {
+            userId = user.uid
         }
         
         db.collection("users").document(userId).addSnapshotListener { snapshot, error in
@@ -49,13 +48,7 @@ class Service {
             
             do {
                 let dbUser = try document.data(as: DbUser.self)
-                
-                
                 self.printer.print_(str: "Retrieved user: \(dbUser.toString())")
-
-//                self.printer.print_(str: dbUser.uid ?? " ")
-//                self.printer.print_(str: dbUser.fullName)
-
 
             }
             catch{
@@ -63,16 +56,6 @@ class Service {
 
             }
             
-           
-            
-            
-            
-
-            
-            
-            
-            
-
             
         }
         
@@ -81,13 +64,7 @@ class Service {
     
     
     
-    
-    
-//    func goToLobddby() {
-//        goToLobby()
-//
-//    }
-    
+
     
     
     func goToLobby(player: Player) {
@@ -202,19 +179,8 @@ class Service {
                 multiFactorString += " "
             }
             
-            //let arr = user.displayName?.split(separator: " ")
-            
-    
-//            var dictionary: [String: Any] = [:]
-//            dictionary["uid"] = user.uid
-//            dictionary["email"] = user.email
-//            //dictionary["firs_name"] = arr?[0]
-//            dictionary["fullName"] = user.displayName
-//            dictionary["coins"] = 0
             let dbUser = DbUser(uid: "dddlslslslsls", fullName: user.displayName ?? "", coins: 0)
-            
-            
-            
+
             do {
                 try db.collection("users").document(user.uid).setData(from: dbUser)
             } catch let error {
