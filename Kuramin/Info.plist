@@ -24,6 +24,21 @@
 	<key>FacebookClientToken</key>
 	<string>ee9527604aa7a096cac66b83bc214868</string>
 	<key>FacebookDisplayName</key>
-	<string>Kuramin</string>
+    
+    <!-- Google start -->
+    <key>GIDClientID</key>
+    <string>1009889916252-6iahem0hadjc98qre2stqmtbhe16aal5.apps.googleusercontent.com</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.1009889916252-6iahem0hadjc98qre2stqmtbhe16aal5</string>
+        </array>
+      </dict>
+    </array>
+    <!-- Google end -->
+    
+    <string>Kuramin</string>
 </dict>
 </plist>

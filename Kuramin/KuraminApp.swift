@@ -13,18 +13,51 @@ import FirebaseAuth
 import GoogleSignIn
 
 
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+    /*func application(_ application: UIApplication,
+     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+     }*/
+    
+    /*func application(_ app: UIApplication,
+     open url: URL,
+     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+     return ApplicationDelegate.shared.application(app, open: url, options: options)
+     }*/
+    
+    func application(
+        _ app: UIApplication,
+        open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+        var handled: Bool
+        
+        handled = GIDSignIn.sharedInstance.handle(url)
+        if handled {
+            return true
+        }
+        
+        // Handle other custom URL types.
+        
+        // If not handled by this app, return false.
+        return false
     }
     
-    func application(_ app: UIApplication,
-                     open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return ApplicationDelegate.shared.application(app, open: url, options: options)
+    func application(
+      _ application: UIApplication,
+      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+      GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+        if error != nil || user == nil {
+          // Show the app's signed-out state.
+        } else {
+          // Show the app's signed-in state.
+        }
+      }
+      return true
     }
+    
     
     
     
@@ -34,15 +67,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct KuraminApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-    init() {
     
+    init() {
+        
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
             ContentView()
-                //.environmentObject(Controller(game: nil))
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url) }
+            //.environmentObject(Controller(game: nil))
         }
     }
 }
