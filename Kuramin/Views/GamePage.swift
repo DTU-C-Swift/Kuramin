@@ -25,8 +25,8 @@ struct GamePage: View {
     
     init() {
         self.controller = DataHolder.controller
-        
         controller.game.addDummyPlayers()
+        
         
     }
     
@@ -101,14 +101,9 @@ struct GamePage: View {
                     }
                     
                     Button(action: {
-                        controller.service.fetchData()
-                        controller.service.intializeGame(p: controller.game.players[0])
-                        //user = controller.service.getUser()
+                        
                         controller.service.goToLobby(player: controller.game.me)
-
                         if user != nil {
-                            
-
                             
                         }
                         
@@ -154,7 +149,6 @@ struct GamePage: View {
                 // App is about to be closed
                 self.printer.printt("app is closing")
                 
-                controller.service.goToLobby(player: controller.game.me)
             }
             else {
                 self.printer.printt("app is oppening")

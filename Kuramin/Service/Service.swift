@@ -21,9 +21,7 @@ class Service {
     let storage = Storage.storage()
     let printer = Printer(tag: "Service", displayPrints: true)
     
-    
-    
-    
+
     
     
     func listenUser(player: Player) {
@@ -78,12 +76,18 @@ class Service {
         var ref = db.collection("lobby")
         //ref.document(player.id).setData(["id" : player.id])
         
-        
         ref.document(player.id).setData([:]) { err in
             if let err = err {
-                self.printer.printt("Error writing document: \(err)")
+                self.printer.printt("Error while lading to lobby: \(err)")
             } else {
-                self.printer.printt("Document successfully written!")
+                self.printer.printt("Landed successfully in lobby")
+                
+                ref.document("lock").delete() { error in
+                    
+
+                    
+
+                }
             }
         }
     }
@@ -95,7 +99,7 @@ class Service {
     
     
     func fetchData(){
-        db.collection("matches").getDocuments { snapshot, err in
+        db.collection("lobby").getDocuments { snapshot, err in
             
             if err == nil {
                 
@@ -115,22 +119,21 @@ class Service {
     }
     
     
-    func intializeGame(p: Player) {
-        
-        db.collection("lobby").getDocuments { snapshot, err in
-            if snapshot != nil {
-                if snapshot?.count == 0 {
-                    self.goToLobby(player: p)
-                }
-                else {
-                    self.printer.printt("Lobby is not empty")
-                }
-            }
-            
-            
-        }
-        
-    }
+//    func intializeGame(p: Player) {
+//
+//        db.collection("lobby").getDocuments { snapshot, err in
+//            if snapshot != nil {
+//                if snapshot?.count == 0 {
+//                    self.goToLobby(player: p)
+//                }
+//                else {
+//                    self.printer.printt("Lobby is not empty")
+//                }
+//            }
+//
+//        }
+//
+//    }
     
     
     
@@ -154,8 +157,6 @@ class Service {
     }
     
     
-    //    func getUser() -> User? {
-    //    }
     
     
     func createUser(userImage: UIImage?) {
