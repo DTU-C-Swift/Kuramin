@@ -10,6 +10,7 @@ import SwiftUI
 struct MainPage: View {
     
     @State private var showMenu = false
+    @State private var showProfile = false
     @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
     
@@ -20,7 +21,7 @@ struct MainPage: View {
                 Spacer()
                 
                 Button(action: {
-                    showMenu = true
+                    showProfile = true
                 }, label: {
                     Image(systemName: "person.circle.fill")
                         .font(.system(size: 50))
@@ -76,6 +77,9 @@ struct MainPage: View {
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showMenu) {
             MenuPopup()
+        }
+        .sheet(isPresented: $showProfile) {
+            ProfilePageView()
         }
         
         //
