@@ -32,6 +32,7 @@ class Service {
         var user = Auth.auth().currentUser
         if let user = user {
             uid = user.uid
+            //uid = "test_uid"
         }
         player.id = uid
         // Gets user image from storage
@@ -50,7 +51,6 @@ class Service {
                 self.printer.printt("Document data was empty.")
                 return
             }
-            
             
             do {
                 let dbUser = try document.data(as: DbUser.self)
