@@ -150,10 +150,12 @@ struct GamePage: View {
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .background {
                 // App is about to be closed
-                print("app is closing")
+                self.printer.printt("app is closing")
+                
+                //controller.service.goToLobby(player: controller.game.me)
             }
             else {
-                print("app is oppening")
+                self.printer.printt("app is oppening")
             }
         }
         

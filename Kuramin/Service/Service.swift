@@ -78,8 +78,8 @@ class Service {
         var ref = db.collection("lobby")
         //ref.document(player.id).setData(["id" : player.id])
         
-        ref.document(player.id).setData([:
-                                        ]) { err in
+        
+        ref.document(player.id).setData([:]) { err in
             if let err = err {
                 self.printer.printt("Error writing document: \(err)")
             } else {
