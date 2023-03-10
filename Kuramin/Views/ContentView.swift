@@ -83,6 +83,7 @@ struct ContentView: View {
             }
         }
         .navigationTitle("Login")
+        .navigationViewStyle(StackNavigationViewStyle())
         
         .onChange(of: controller.isLoggedIn) { newValue in
             if newValue == true {
