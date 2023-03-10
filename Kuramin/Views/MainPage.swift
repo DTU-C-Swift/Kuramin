@@ -22,8 +22,16 @@ struct MainPage: View {
                 Button(action: {
                     showMenu = true
                 }, label: {
+                    Image(systemName: "person.circle.fill")
+                        .font(.system(size: 50))
+                    
+                })
+                
+                Button(action: {
+                    showMenu = true
+                }, label: {
                     Image(systemName: "gearshape.circle.fill")
-                        .font(.system(size: 40))
+                        .font(.system(size: 50))
                     
                 })
 
