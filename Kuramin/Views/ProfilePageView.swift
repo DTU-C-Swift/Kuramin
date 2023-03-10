@@ -8,20 +8,53 @@
 import SwiftUI
 
 struct ProfilePageView: View {
+    let statsTitles = ["Matches", "Wins", "Win Rate", "Losses", "Loss Rate"]
+    let statsValues = ["100", "60", "60%", "40", "40%"]
+    
     var body: some View {
         
         VStack {
-            Text("Test")
-                .padding()
             
-            ZStack {
-                HStack {
-                    Text("Test1")
-                    
-                    Text("Test2")
+            Image("person_34")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 100, height: 100)
+                .clipShape(Circle())
+                .padding(.top, 50)
+                .shadow(radius: 10)
+            
+            VStack {
+                Text("Player Name")
+                    .font(.title)
+                    .bold()
+                Text("User Bio")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 5)
+                
+                // Stats grid
+                LazyVGrid(columns: [GridItem(.flexible(), alignment: .leading)], spacing: 5) {
+                    ForEach(0..<statsTitles.count, id: \.self) { index in
+                        HStack() {
+                            Text(statsTitles[index])
+                                .font(.headline)
+                            Spacer()
+                            Text(statsValues[index])
+                                .font(.subheadline)
+                        }
+                        .padding(.horizontal, 50)
+                        .padding(.vertical, 5)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(20)
+                    }
                 }
+                .padding(.horizontal, 175)
+                
             }
-
+            .padding(.horizontal, 50)
+            
+            Spacer()
+            
             
         }
         
