@@ -42,24 +42,24 @@ class Service {
         // Gets user from firestore
         db.collection("users").document(uid).addSnapshotListener { snapshot, error in
             guard let document = snapshot else {
-                self.printer.print_(str: "Error fetching document: \(error!)")
+                self.printer.printt("Error fetching document: \(error!)")
             
                 return
             }
             guard let data = document.data() else {
-                self.printer.print_(str: "Document data was empty.")
+                self.printer.printt("Document data was empty.")
                 return
             }
             
             
             do {
                 let dbUser = try document.data(as: DbUser.self)
-                self.printer.print_(str: "Retrieved user: \(dbUser.toString())")
+                self.printer.printt("Retrieved user: \(dbUser.toString())")
                 player.update(dbUser)
 
             }
             catch{
-                self.printer.print_(str: "getUser failed: \(data)")
+                self.printer.printt("getUser failed: \(data)")
 
             }
             
@@ -81,9 +81,9 @@ class Service {
         ref.document(player.id).setData([:
                                         ]) { err in
             if let err = err {
-                print("Error writing document: \(err)")
+                self.printer.printt("Error writing document: \(err)")
             } else {
-                print("Document successfully written!")
+                self.printer.printt("Document successfully written!")
             }
         }
     }
@@ -100,13 +100,13 @@ class Service {
             if err == nil {
                 
                 for it in snapshot!.documents {
-                    print("\(it.documentID) => \(it.data())")
+                    self.printer.printt("\(it.documentID) => \(it.data())")
                 }
 
             }
             else {
                 
-                print("Error getting documents: \(err)")
+                self.printer.printt("Error getting documents: \(err)")
                 
             }
             
@@ -123,7 +123,7 @@ class Service {
                     self.goToLobby(player: p)
                 }
                 else {
-                    print("Lobby is not empty")
+                    self.printer.printt("Lobby is not empty")
                 }
             }
             
@@ -179,7 +179,7 @@ class Service {
             do {
                 try db.collection("users").document(user.uid).setData(from: dbUser)
             } catch let error {
-                print("Error writing city to Firestore: \(error)")
+                self.printer.printt("Error writing city to Firestore: \(error)")
             }
             
             if let userImage = userImage {
@@ -208,11 +208,11 @@ class Service {
 
         let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
             if let error = error {
-                print("Error uploading image: \(error.localizedDescription)")
+                self.printer.printt("Error uploading image: \(error.localizedDescription)")
                 return
             }
             
-            print("Image uploaded successfully!")
+            self.printer.printt("Image uploaded successfully!")
         }
         
     }
@@ -226,7 +226,7 @@ class Service {
         let imageRef = path.child(filename)
         imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
             if let error = error {
-                self.printer.print_(str: "Error occured while fetching imge for UID: \(uid), error: \(error)")
+                self.printer.printt("Error occured while fetching imge for UID: \(uid), error: \(error)")
                 
             }
             else {

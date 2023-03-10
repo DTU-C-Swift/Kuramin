@@ -18,7 +18,7 @@ class Printer {
         self.displayPrints = displayPrints
     }
     
-    func print_(str: String) {
+    func printt(_ str: String) {
         print(tag,": ", str)
 
     }

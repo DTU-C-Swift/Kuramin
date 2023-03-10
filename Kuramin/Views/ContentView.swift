@@ -15,10 +15,11 @@ struct ContentView: View {
     @State var selection: String? = "NON"
     @ObservedObject var navSate: NavState = NavState()
     
+    
     init() {
         controller = DataHolder.controller
         //controller.listenForLogout()
-
+        
     }
     var body: some View {
         
@@ -45,10 +46,10 @@ struct ContentView: View {
                     FbAuth(width: 257, height: 50)
                         .cornerRadius(16)
                         .shadow(radius: 4, x: 0, y: 4)
-                        
-                        
                     
-                        
+                    
+                    
+                    
                     NavigationLink(destination: MainPageView()) {
                         HStack {
                             Image(systemName: "tree")
@@ -57,7 +58,7 @@ struct ContentView: View {
                             Text("Login with Google")
                                 .font(.system(size: 24, weight:
                                         .semibold))
-                                        .foregroundColor(.black)
+                                .foregroundColor(.black)
                         }
                         .padding(.vertical, 16)
                         .padding(.horizontal, 24)
@@ -78,7 +79,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.black.opacity(0.5))
                         .edgesIgnoringSafeArea(.all)
-
+                    
                 }
             }
         }
@@ -97,10 +98,10 @@ struct ContentView: View {
                 print("Login with facebook failed")
             }
         }
-
+       
         .environmentObject(navSate)
         
-  
+        
     }
 }
 
@@ -136,7 +137,7 @@ struct MainPageView: View {
                         .font(.system(size: 40))
                     
                 })
-
+                
                 
             }.padding(.top, 10)
             Spacer()
@@ -173,7 +174,7 @@ struct MainPageView: View {
             
             
             Spacer()
-        
+            
         }
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showMenu) {

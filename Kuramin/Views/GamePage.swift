@@ -16,6 +16,8 @@ struct GamePage: View {
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @EnvironmentObject var navState: NavState
     @State var user: User? = nil
+    @Environment(\.scenePhase) private var scenePhase
+    let printer = Printer(tag: "GamePage", displayPrints: true)
     
     
     //@EnvironmentObject var controller: Controller
@@ -145,10 +147,15 @@ struct GamePage: View {
             
         }
         .navigationBarBackButtonHidden(true)
-        //        .onAppear {
-        //            controller.game.addDummyPlayers()
-        //        }
-        
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                // App is about to be closed
+                print("app is closing")
+            }
+            else {
+                print("app is oppening")
+            }
+        }
         
     }
     
