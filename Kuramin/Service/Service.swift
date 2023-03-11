@@ -73,10 +73,10 @@ class Service {
     
     
     func goToLobby(player: Player) {
-        var ref = db.collection("matches").document("lobby")
+        var ref = db.collection("matches").document("lobby").collection(player.id)
         //ref.document(player.id).setData(["id" : player.id])
         
-        ref.setData(["playerId" : player.id]) { err in
+        ref.addDocument(data: ["playerId" : player.id]) { err in
             if let err = err {
                 self.printer.printt("Error while lading to lobby: \(err)")
             } else {
@@ -90,6 +90,20 @@ class Service {
     
     
 
+    func amIHost() {
+        var ref = db.collection("matches").document("lobby")
+        
+//        ref.getDocument { snapshot, err in
+//            if err == nil {
+//
+//            }
+//        }
+//
+//        ref.getDocument(as: List<String>) { result in
+//
+//        }
+        
+    }
     
     
     
