@@ -21,29 +21,35 @@ class Service {
     let storage = Storage.storage()
     let printer = Printer(tag: "Service", displayPrints: true)
     
-
+    
     
     
     
     func createUser(userImage: UIImage?) {
-        if userImage == nil {return}
+        if userImage == nil {
+            self.logOut()
+            return
+            
+        }
         // TODO check if the user is already exist in the db
         
         if let user = Auth.auth().currentUser {
             let dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 0)
-
+            
             do {
                 try db.collection("users").document(user.uid).setData(from: dbUser)
             } catch let error {
-                self.printer.printt("Error writing city to Firestore: \(error)")
+                self.printer.printt("Error creating user in db: \(error)")
             }
             
             if let userImage = userImage {
                 uploadImg(userId: user.uid, img: userImage)
             }
+            
         }
-        
-
+        else {
+            self.printer.printt("User in nil")
+        }
         
     }
     
@@ -51,17 +57,19 @@ class Service {
     private func uploadImg(userId: String, img: UIImage) {
         
         guard let imageData = img.jpegData(compressionQuality: 0.8) else {
+            //self.logOut()
+            self.printer.printt("Error converting image")
             return
         }
-
+        
         let path = storage.reference().child("images").child(userId)
         let filename = "\(userId).jpg"
         let imageRef = path.child(filename)
-
+        
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-
+        
         let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
             if let error = error {
                 self.printer.printt("Error uploading image: \(error.localizedDescription)")
@@ -89,7 +97,7 @@ class Service {
             
         }
         
-
+        
         // Gets user image from storage
         self.downloadImg(player)
         
@@ -99,7 +107,7 @@ class Service {
         db.collection("users").document(player.id).addSnapshotListener { snapshot, error in
             guard let document = snapshot else {
                 self.printer.printt("Error fetching document: \(error!)")
-            
+                
                 return
             }
             guard let data = document.data() else {
@@ -111,20 +119,20 @@ class Service {
                 let dbUser = try document.data(as: DbUser.self)
                 self.printer.printt("Retrieved user: \(dbUser.toString())")
                 player.update(dbUser)
-
+                
             }
             catch{
                 self.printer.printt("getUser failed: \(data)")
-
+                
             }
             
             
         }
         
-
+        
     }
     
-
+    
     
     // Downloads the profile picture of the given player and sets the fetched picture to the given player.
     
@@ -145,7 +153,7 @@ class Service {
                 
             }
         }
-         
+        
     }
     
     
@@ -205,7 +213,7 @@ class Service {
         
         
     }
-
+    
     
     
     
@@ -218,7 +226,7 @@ class Service {
                 for it in snapshot!.documents {
                     self.printer.printt("\(it.documentID) => \(it.data())")
                 }
-
+                
             }
             else {
                 
@@ -231,7 +239,7 @@ class Service {
     }
     
     
-
+    
     
     
     
@@ -252,6 +260,19 @@ class Service {
         return false
     }
     
+    
+    
+    func logOut() {
+        if let user = Auth.auth().currentUser {
+            
+            do {
+                try user.signOut()
+            } catch {
+                
+            }
+        }
+        
+    }
     
     
 }
