@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseCore
-//import FirebaseFirestore
+import FirebaseFirestore
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
@@ -81,6 +81,7 @@ class Service {
                 self.printer.printt("Error while lading to lobby: \(err)")
             } else {
                 self.printer.printt("Landed successfully in lobby")
+                self.amIHost()
                 
                 
             }
@@ -93,16 +94,15 @@ class Service {
     func amIHost() {
         var ref = db.collection("matches").document("lobby")
         
-//        ref.getDocument { snapshot, err in
-//            if err == nil {
-//
-//            }
-//        }
-//
-//        ref.getDocument(as: List<String>) { result in
-//
-//        }
-        
+        ref.getDocument { snapshot, err in
+            if err == nil {
+                let data = snapshot.
+                //if let uidList = data[""]
+                //self.printer.printt(data)
+                print("service: ",data)
+            }
+        }
+
     }
     
     
