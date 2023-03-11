@@ -67,23 +67,8 @@ class Service {
 
     }
     
-    
-    
 
-    
-    
-//    func goToLobby(player: Player) {
-//        var ref = db.collection("matches").document("lobby")
-//
-//        //ref.setData(["userIds" : player.id])
-//
-//
-//        let result = ref.updateData([
-//            "playerIds" : FieldValue.arrayUnion([player.id])
-//        ])
-//
-//
-//    }
+
     
     
     func goToLobby(player: Player) {
@@ -129,17 +114,6 @@ class Service {
         var ref = db.collection("matches").document("lobby")
         
         
-        
-        
-//        ref.getDocument { snapshot, err in
-//            if err == nil {
-//                let data = snapshot.
-//                //if let uidList = data[""]
-//                //self.printer.printt(data)
-//                print("service: ",data)
-//            }
-//        }
-
     }
     
     
