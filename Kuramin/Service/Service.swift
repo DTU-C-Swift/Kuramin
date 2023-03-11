@@ -24,22 +24,79 @@ class Service {
 
     
     
-    func listenUser(player: Player) {
+    
+    func createUser(userImage: UIImage?) {
+        if userImage == nil {return}
+        // TODO check if the user is already exist in the db
         
-        var uid = ""
-        var user = Auth.auth().currentUser
-        if let user = user {
-            uid = user.uid
-            //uid = "test_uid"
+        if let user = Auth.auth().currentUser {
+            let dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 0)
+
+            do {
+                try db.collection("users").document(user.uid).setData(from: dbUser)
+            } catch let error {
+                self.printer.printt("Error writing city to Firestore: \(error)")
+            }
+            
+            if let userImage = userImage {
+                uploadImg(userId: user.uid, img: userImage)
+            }
         }
-        player.id = uid
+        
+
+        
+    }
+    
+    
+    private func uploadImg(userId: String, img: UIImage) {
+        
+        guard let imageData = img.jpegData(compressionQuality: 0.8) else {
+            return
+        }
+
+        let path = storage.reference().child("images").child(userId)
+        let filename = "\(userId).jpg"
+        let imageRef = path.child(filename)
+
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+
+        let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
+            if let error = error {
+                self.printer.printt("Error uploading image: \(error.localizedDescription)")
+                return
+            }
+            
+            self.printer.printt("Image uploaded successfully!")
+        }
+        
+    }
+    
+    
+    
+    
+    
+    func observeForUserChanges(player: Player) {
+        
+        
+        if player.id.isEmpty {
+            
+            if let user = Auth.auth().currentUser {
+                player.id = user.uid
+                //uid = "test_uid"
+            }
+            
+        }
+        
+
         // Gets user image from storage
         self.downloadImg(player)
         
         
         
         // Gets user from firestore
-        db.collection("users").document(uid).addSnapshotListener { snapshot, error in
+        db.collection("users").document(player.id).addSnapshotListener { snapshot, error in
             guard let document = snapshot else {
                 self.printer.printt("Error fetching document: \(error!)")
             
@@ -68,7 +125,28 @@ class Service {
     }
     
 
-
+    
+    // Downloads the profile picture of the given player and sets the fetched picture to the given player.
+    
+    func downloadImg(_ player: Player) {
+        let uid = player.id
+        let path = storage.reference().child("images").child(uid)
+        let filename = "\(uid).jpg"
+        let imageRef = path.child(filename)
+        imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
+            if let error = error {
+                self.printer.printt("Error occured while fetching imge for UID: \(uid), error: \(error)")
+                
+            }
+            else {
+                if let img = UIImage(data: data!) {
+                    player.image = img
+                }
+                
+            }
+        }
+         
+    }
     
     
     func goToLobby(player: Player) {
@@ -106,11 +184,11 @@ class Service {
             }
         }
     }
-
     
     
     
-
+    
+    
     func amIHost(_ player: Player) {
         var ref = db.collection("matches").document("lobby")
         ref.getDocument { document, err in
@@ -127,6 +205,8 @@ class Service {
         
         
     }
+
+    
     
     
     
@@ -151,23 +231,7 @@ class Service {
     }
     
     
-//    func intializeGame(p: Player) {
-//
-//        db.collection("lobby").getDocuments { snapshot, err in
-//            if snapshot != nil {
-//                if snapshot?.count == 0 {
-//                    self.goToLobby(player: p)
-//                }
-//                else {
-//                    self.printer.printt("Lobby is not empty")
-//                }
-//            }
-//
-//        }
-//
-//    }
-    
-    
+
     
     
     
@@ -187,94 +251,6 @@ class Service {
         
         return false
     }
-    
-    
-    
-    
-    func createUser(userImage: UIImage?) {
-        if userImage == nil {return}
-        // TODO check if the user is already exist in the db
-        
-        let user = Auth.auth().currentUser
-        
-        if let user = user {
-            _ = user.uid
-            _ = user.email
-            _ = user.photoURL
-            var multiFactorString = "MultiFactor: "
-            for info in user.multiFactor.enrolledFactors {
-                multiFactorString += info.displayName ?? "[DispayName]"
-                multiFactorString += " "
-            }
-            
-            let dbUser = DbUser(uid: "dddlslslslsls", fullName: user.displayName ?? "", coins: 0)
-
-            do {
-                try db.collection("users").document(user.uid).setData(from: dbUser)
-            } catch let error {
-                self.printer.printt("Error writing city to Firestore: \(error)")
-            }
-            
-            if let userImage = userImage {
-                uploadImg(userId: user.uid, img: userImage)
-            }
-            
-  
-        }
-        
-    }
-    
-    
-    private func uploadImg(userId: String, img: UIImage) {
-        
-        guard let imageData = img.jpegData(compressionQuality: 0.8) else {
-            return
-        }
-
-        let path = storage.reference().child("images").child(userId)
-        let filename = "\(userId).jpg"
-        let imageRef = path.child(filename)
-
-        
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-
-        let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
-            if let error = error {
-                self.printer.printt("Error uploading image: \(error.localizedDescription)")
-                return
-            }
-            
-            self.printer.printt("Image uploaded successfully!")
-        }
-        
-    }
-    
-    // Downloads the profile picture of the given player and sets the fetched picture to the given player.
-    
-    func downloadImg(_ player: Player) {
-        let uid = player.id
-        let path = storage.reference().child("images").child(uid)
-        let filename = "\(uid).jpg"
-        let imageRef = path.child(filename)
-        imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
-            if let error = error {
-                self.printer.printt("Error occured while fetching imge for UID: \(uid), error: \(error)")
-                
-            }
-            else {
-                if let img = UIImage(data: data!) {
-                    player.image = img
-                }
-                
-            }
-        }
-         
-    }
-    
-    
-    
-    
     
     
     
