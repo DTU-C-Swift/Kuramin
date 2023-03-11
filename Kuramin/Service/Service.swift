@@ -73,21 +73,16 @@ class Service {
     
     
     func goToLobby(player: Player) {
-        var ref = db.collection("lobby")
+        var ref = db.collection("matches").document("lobby")
         //ref.document(player.id).setData(["id" : player.id])
         
-        ref.document(player.id).setData([:]) { err in
+        ref.setData(["playerId" : player.id]) { err in
             if let err = err {
                 self.printer.printt("Error while lading to lobby: \(err)")
             } else {
                 self.printer.printt("Landed successfully in lobby")
                 
-                ref.document("lock").delete() { error in
-                    
-
-                    
-
-                }
+                
             }
         }
     }
