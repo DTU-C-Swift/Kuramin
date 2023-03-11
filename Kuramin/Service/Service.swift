@@ -88,7 +88,7 @@ class Service {
             
             // Checks if document "lobby" exists already in db
             if !lobbyDocument.exists {
-                transaction.setData(["playerIds": [player.id]], forDocument: ref)
+                transaction.setData(["playerIds": [player.id], "host": player.id], forDocument: ref)
             } else {
                 transaction.updateData([
                     "playerIds" : FieldValue.arrayUnion([player.id])
@@ -102,6 +102,7 @@ class Service {
                 self.printer.printt("Transaction failed: \(error)")
             } else {
                 self.printer.printt("Transaction succeeded!")
+                self.amIHost(player)
             }
         }
     }
@@ -110,8 +111,19 @@ class Service {
     
     
 
-    func amIHost() {
+    func amIHost(_ player: Player) {
         var ref = db.collection("matches").document("lobby")
+        ref.getDocument { document, err in
+            
+            if let document = document, document.exists {
+                if let host = document.get("host") as? String {
+                    
+                    if host == player.id {
+                        self.printer.printt("You are the host")
+                    }
+                }
+            }
+        }
         
         
     }
