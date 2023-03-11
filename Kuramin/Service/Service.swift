@@ -72,21 +72,55 @@ class Service {
 
     
     
+//    func goToLobby(player: Player) {
+//        var ref = db.collection("matches").document("lobby")
+//
+//        //ref.setData(["userIds" : player.id])
+//
+//
+//        let result = ref.updateData([
+//            "playerIds" : FieldValue.arrayUnion([player.id])
+//        ])
+//
+//
+//    }
+    
+    
     func goToLobby(player: Player) {
-        var ref = db.collection("matches").document("lobby").collection(player.id)
-        //ref.document(player.id).setData(["id" : player.id])
+        let ref = db.collection("matches").document("lobby")
+        player.id = "testId"
         
-        ref.addDocument(data: ["playerId" : player.id]) { err in
-            if let err = err {
-                self.printer.printt("Error while lading to lobby: \(err)")
+        // Transactional call
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let lobbyDocument: DocumentSnapshot
+            do {
+                lobbyDocument = try transaction.getDocument(ref)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            
+            
+            // Checks if document "lobby" exists already in db
+            if !lobbyDocument.exists {
+                transaction.setData(["playerIds": [player.id]], forDocument: ref)
             } else {
-                self.printer.printt("Landed successfully in lobby")
-                self.amIHost()
-                
-                
+                transaction.updateData([
+                    "playerIds" : FieldValue.arrayUnion([player.id])
+                ], forDocument: ref)
+            }
+            
+            return nil
+            
+        }) { (object, error) in
+            if let error = error {
+                self.printer.printt("Transaction failed: \(error)")
+            } else {
+                self.printer.printt("Transaction succeeded!")
             }
         }
     }
+
     
     
     
@@ -94,14 +128,17 @@ class Service {
     func amIHost() {
         var ref = db.collection("matches").document("lobby")
         
-        ref.getDocument { snapshot, err in
-            if err == nil {
-                let data = snapshot.
-                //if let uidList = data[""]
-                //self.printer.printt(data)
-                print("service: ",data)
-            }
-        }
+        
+        
+        
+//        ref.getDocument { snapshot, err in
+//            if err == nil {
+//                let data = snapshot.
+//                //if let uidList = data[""]
+//                //self.printer.printt(data)
+//                print("service: ",data)
+//            }
+//        }
 
     }
     
