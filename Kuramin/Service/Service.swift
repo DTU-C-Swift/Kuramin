@@ -159,7 +159,7 @@ class Service {
     
     func goToLobby(player: Player) {
         let ref = db.collection("matches").document("lobby")
-        player.id = "testId"
+        //player.id = "testId"
         
         // Transactional call
         db.runTransaction({ (transaction, errorPointer) -> Any? in
@@ -206,7 +206,10 @@ class Service {
                     
                     if host == player.id {
                         self.printer.printt("You are the host")
+                    } else {
+                        self.printer.printt("You aren't the host")
                     }
+                
                 }
             }
         }
@@ -218,25 +221,25 @@ class Service {
     
     
     
-    func fetchData(){
-        db.collection("lobby").getDocuments { snapshot, err in
-            
-            if err == nil {
-                
-                for it in snapshot!.documents {
-                    self.printer.printt("\(it.documentID) => \(it.data())")
-                }
-                
-            }
-            else {
-                
-                self.printer.printt("Error getting documents: \(err)")
-                
-            }
-            
-        }
-        
-    }
+//    func fetchData(){
+//        db.collection("lobby").getDocuments { snapshot, err in
+//            
+//            if err == nil {
+//                
+//                for it in snapshot!.documents {
+//                    self.printer.printt("\(it.documentID) => \(it.data())")
+//                }
+//                
+//            }
+//            else {
+//                
+//                self.printer.printt("Error getting documents: \(err)")
+//                
+//            }
+//            
+//        }
+//        
+//    }
     
 
     

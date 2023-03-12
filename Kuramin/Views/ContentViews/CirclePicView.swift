@@ -50,8 +50,8 @@ struct CirclePicView: View {
     }
 }
 
-struct GamePage_ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        GamePage_ProfileView("person_100", "PlayerName")
-    }
-}
+//struct CirclePicView_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//    }
+//}

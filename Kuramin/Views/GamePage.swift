@@ -122,7 +122,6 @@ struct GamePage: View {
                         
                         Button(action: {
                                                         
-                            controller.service.goToLobby(player: controller.game.me)
                             if user != nil {
                                 
                             }
@@ -157,8 +156,10 @@ struct GamePage: View {
             }
         }
         .persistentSystemOverlays(.hidden)
-        
-        
+        .onAppear() {
+            controller.service.goToLobby(player: controller.game.me)
+
+        }
         
     }
     
