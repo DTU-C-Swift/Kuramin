@@ -9,19 +9,26 @@ import SwiftUI
 
 struct BackgroundView: View {
     var body: some View {
-        
-        LinearGradient(gradient: Gradient(colors: [Color.black, Color.cyan, Color.blue, Color.black]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: .trailing)
-            .ignoresSafeArea(.all)
+        ZStack {
+            
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.cyan, Color.blue, Color.black]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: .trailing)
+                .ignoresSafeArea(.all)
 
-        RoundedRectangle(cornerRadius: 150)
-            .strokeBorder(Color.cyan, lineWidth: 35)
-            .scaleEffect(0.68)
-            .padding(.top, 30)
-        RoundedRectangle(cornerRadius: 150)
-            .strokeBorder(Color.black, lineWidth: 30)
-            .scaleEffect(0.7)
-            .shadow(color: Color.cyan, radius: 10, x: 0, y: 5)
-            .padding(.top, 30)
+            RoundedRectangle(cornerRadius: 100)
+                .strokeBorder(Color.cyan, lineWidth: 30)
+                .scaleEffect(1)
+                .frame(width: UIScreen.main.bounds.width * 0.68, height: UIScreen.main.bounds.height * 0.6, alignment: .center)
+                .padding(.top, 30)
+            RoundedRectangle(cornerRadius: 100)
+                .strokeBorder(Color.black, lineWidth: 30)
+                .scaleEffect(1)
+                .frame(width: UIScreen.main.bounds.width * 0.68, height: UIScreen.main.bounds.height * 0.6, alignment: .center)
+                .shadow(color: Color.cyan, radius: 10, x: 0, y: 5)
+                .padding(.top, 30)
+            
+        }
+        
+
     }
 }
 
