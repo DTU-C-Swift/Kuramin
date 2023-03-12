@@ -46,28 +46,22 @@ struct MenuPopup: View {
 //                        .shadow(radius: 1, x: 0, y: 1)
 //                }
                 
-                Button {
+                Button(action: {
                     controller.service.logOut()
-                } label: {
+                }) {
                     Text("Log out")
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 50)
+                        .background(.blue)
+                        .cornerRadius(15)
+                        .shadow(radius: 1, x: 0, y: 1)
                 }
-                .frame(width: 200, height: 50)
-                .cornerRadius(16)
-                .shadow(radius: 1, x: 0, y: 1)
-                .foregroundColor(.blue)
+
+
 
 
                 Spacer()
                 
-                Button {
-                    controller.service.isUserloggedIn_viaFacebook()
-                } label: {
-                    Text("Log out")
-                }
-                .frame(width: 200, height: 50)
-                .cornerRadius(16)
-                .shadow(radius: 1, x: 0, y: 1)
-                .foregroundColor(.blue)
                 
                 
             }
