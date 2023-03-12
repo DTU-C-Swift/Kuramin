@@ -17,6 +17,7 @@ struct MainPage: View {
     @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
     
+    
     var body: some View {
         
         VStack {
@@ -65,18 +66,19 @@ struct MainPage: View {
                 .cornerRadius(16)
                 .shadow(radius: 4, x: 0, y: 4)
             
-            Text("How To Play?")
-                .font(.system(size: 24, weight: .semibold))
-                .foregroundColor(.black)
-                .padding(.vertical, 16)
-                .padding(.horizontal, 24)
-                .background(Color.white)
-                .cornerRadius(16)
-                .shadow(radius: 4, x: 0, y: 4)
-            
-            Button("How To Play") {
+            Button(action: {
+                showHowTo = true
+            }, label: {
+                Text("How To Play")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(.black)
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 24)
+                    .background(Color.white)
+                    .cornerRadius(16)
+                    .shadow(radius: 4, x: 0, y: 4)
                 
-            }
+            })
             
             
             
@@ -93,6 +95,9 @@ struct MainPage: View {
         }
         .sheet(isPresented: $showGamePage) {
             GamePage()
+        }
+        .sheet(isPresented: $showHowTo) {
+            HowToPlayView()
         }
         
         //

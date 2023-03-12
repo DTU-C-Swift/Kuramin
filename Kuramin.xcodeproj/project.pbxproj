@@ -39,6 +39,7 @@
 		BF6C4F93299E2B25003E5D85 /* KuraminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */; };
 		BF6C4F95299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */; };
 		BF6C4FA2299E620A003E5D85 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C4FA1299E620A003E5D85 /* GamePage.swift */; };
+		BF6D7A7529BE13FA00BD7CB7 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6D7A7429BE13FA00BD7CB7 /* HowToPlayView.swift */; };
 		BFC3944629BA334800148A69 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC3944529BA334800148A69 /* MainPage.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		BF6C4F92299E2B25003E5D85 /* KuraminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITests.swift; sourceTree = "<group>"; };
 		BF6C4F94299E2B25003E5D85 /* KuraminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BF6C4FA1299E620A003E5D85 /* GamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePage.swift; sourceTree = "<group>"; };
+		BF6D7A7429BE13FA00BD7CB7 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		BFC3944529BA334800148A69 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				BF6C4F78299E2B23003E5D85 /* ContentView.swift */,
 				56F75F2F29B3BA6300E651B3 /* MenuPopup.swift */,
 				BFC3944529BA334800148A69 /* MainPage.swift */,
+				BF6D7A7429BE13FA00BD7CB7 /* HowToPlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */,
 				BF6C4F79299E2B23003E5D85 /* ContentView.swift in Sources */,
 				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
+				BF6D7A7529BE13FA00BD7CB7 /* HowToPlayView.swift in Sources */,
 				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
 				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
 				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,
