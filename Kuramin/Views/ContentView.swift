@@ -83,13 +83,13 @@ struct ContentView: View {
             }
         }
         .navigationTitle("Login")
-        
+        .navigationViewStyle(StackNavigationViewStyle())
         .onChange(of: controller.isLoggedIn) { newValue in
             if newValue == true {
                 print("Navigate to main page")
                 navigateToMainPage = true
                 //selection = "MainPageView"
-                controller.service.getUser(uid: nil)
+                controller.service.observeForUserChanges(player: controller.game.me)
                 navSate.state = "MainPageView"
             }
             else{

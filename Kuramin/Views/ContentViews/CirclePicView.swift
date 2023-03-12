@@ -37,7 +37,7 @@ struct CirclePicView: View {
                 .shadow(radius: 7)
                 
             }
-            Text(player.name)
+            Text(player.displayName)
                 .font(.footnote)
                 .foregroundColor(Color.white)
                 

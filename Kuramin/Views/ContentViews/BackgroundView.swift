@@ -11,7 +11,8 @@ struct BackgroundView: View {
     var body: some View {
         
         LinearGradient(gradient: Gradient(colors: [Color.black, Color.cyan, Color.blue, Color.black]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: .trailing)
-            .ignoresSafeArea()
+            .ignoresSafeArea(.all)
+
         RoundedRectangle(cornerRadius: 150)
             .strokeBorder(Color.cyan, lineWidth: 35)
             .scaleEffect(0.68)

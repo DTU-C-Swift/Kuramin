@@ -10,14 +10,13 @@ import SwiftUI
 import Firebase
 
 class Controller : ObservableObject {
-    @Published var game: Game;
-    var service = Service()
+    @Published var game: Game = Game()
+    var service: Service = Service()
     @Published var isLoggedIn: Bool = false
     @Published var showBuffer: Bool = false
     @Published var image: UIImage? = nil
     
-    init(game: Game?) {
-        self.game = game ?? Game()
+    init() {
         self.listenForLogout()
     }
     

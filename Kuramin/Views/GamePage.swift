@@ -16,6 +16,8 @@ struct GamePage: View {
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @EnvironmentObject var navState: NavState
     @State var user: User? = nil
+    @Environment(\.scenePhase) private var scenePhase
+    let printer = Printer(tag: "GamePage", displayPrints: true)
     
     
     //@EnvironmentObject var controller: Controller
@@ -23,8 +25,8 @@ struct GamePage: View {
     
     init() {
         self.controller = DataHolder.controller
-        
         controller.game.addDummyPlayers()
+        
         
     }
     
@@ -58,10 +60,10 @@ struct GamePage: View {
                     }
 
                     
-                    if controller.game.players[5].isNotDummy{
-                        Spacer()
-                        CirclePicView(player: controller.game.players[5])
-                    }
+//                    if controller.game.players[5].isNotDummy{
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[5])
+//                    }
                     
                     Spacer()
                     
@@ -74,14 +76,35 @@ struct GamePage: View {
                 Spacer()
                 HStack() {
                     
-                    if controller.game.players[1].isNotDummy {
-                        CirclePicView(player: controller.game.players[1])
-                        Spacer()
+                    VStack{
+                        
+                        if controller.game.players[1].isNotDummy {
+                            CirclePicView(player: controller.game.players[1])
+                        }
+                        
+                        if controller.game.players[1].isNotDummy {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[1])
+                        }
                     }
                     
-                    if controller.game.players[2].isNotDummy {
-                        CirclePicView(player: controller.game.players[2])
+                    
+                    Spacer()
+                    
+                    VStack {
+                        if controller.game.players[2].isNotDummy {
+                            CirclePicView(player: controller.game.players[2])
+                        }
+                        
+                        if controller.game.players[2].isNotDummy {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[2])
+                        }
+                        
                     }
+
+                    
+
                     
                     
                 }
@@ -99,12 +122,9 @@ struct GamePage: View {
                     }
                     
                     Button(action: {
-                        controller.service.fetchData()
-                        controller.service.intializeGame(p: controller.game.players[0])
-                        //user = controller.service.getUser()
+                        
+                        controller.service.goToLobby(player: controller.game.me)
                         if user != nil {
-                            
-
                             
                         }
                         
@@ -145,12 +165,23 @@ struct GamePage: View {
             
         }
         .navigationBarBackButtonHidden(true)
-        //        .onAppear {
-        //            controller.game.addDummyPlayers()
-        //        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                // App is about to be closed
+                self.printer.printt("app is closing")
+                
+            }
+            else {
+                self.printer.printt("app is oppening")
+            }
+        }
+        .persistentSystemOverlays(.hidden)
+
         
         
     }
+   
+
     
     
     
