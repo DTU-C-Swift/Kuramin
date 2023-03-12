@@ -67,7 +67,7 @@ struct MyPlayerViewInGamePage: View {
         .frame(width: 350, height: 40)
         
         .onChange(of: me.coins) { newValue in
-            if newValue >= 30000000 {
+            if newValue >= 1000000 {
                 coins = newValue/1000
                 str = "K"
 
