@@ -25,31 +25,33 @@ struct CirclePicView: View {
     
     var body: some View {
         
-        
-        
-        VStack(spacing: 1) {
-            Image(uiImage: player.image)
-                .frame(width: 60, height: 60)
-                .scaleEffect(0.6)
-                .clipShape(Circle())
-                .overlay{
-                    Circle().stroke(Color.white, lineWidth: 4)
-                .shadow(radius: 7)
-                
-            }
-            Text(player.displayName)
-                .font(.footnote)
-                .foregroundColor(Color.white)
-                
+        if player.isNotDummy {
+            VStack(spacing: 1) {
+                Image(uiImage: player.image)
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(0.6)
+                    .clipShape(Circle())
+                    .overlay{
+                        Circle().stroke(Color.white, lineWidth: 4)
+                    .shadow(radius: 7)
+                    
+                }
+                Text(player.displayName)
+                    .font(.footnote)
+                    .foregroundColor(Color.white)
+                    
 
+            }
         }
+        
+
         
     
     }
 }
 
-//struct GamePage_ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GamePage_ProfileView("person_34", "PlayerName")
-//    }
-//}
+struct GamePage_ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        GamePage_ProfileView("person_100", "PlayerName")
+    }
+}

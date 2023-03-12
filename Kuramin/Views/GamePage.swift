@@ -35,42 +35,23 @@ struct GamePage: View {
         
         ZStack {
             
-            
             BackgroundView()
             
             VStack {
                 
                 HStack() {
-                    
-                    
-                    
-                    if controller.game.players[0].isNotDummy{
-                        Spacer()
-                        CirclePicView(player: controller.game.players[0])
-                    }
-                    
-                    if controller.game.players[3].isNotDummy {
-                        Spacer()
-                        CirclePicView(player: controller.game.players[3])
-                    }
-
-                    if controller.game.players[4].isNotDummy {
-                        Spacer()
-                        CirclePicView(player: controller.game.players[4])
-                    }
-
-                    
-//                    if controller.game.players[5].isNotDummy{
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[5])
-//                    }
-                    
+                    Spacer()
+                    CirclePicView(player: controller.game.players[0])
+                    Spacer()
+                    CirclePicView(player: controller.game.players[3])
+                    Spacer()
+                    CirclePicView(player: controller.game.players[4])
                     Spacer()
                     
                 }
                 .padding(.top, 4)
                 
-               
+                
                 
                 
                 Spacer()
@@ -78,34 +59,22 @@ struct GamePage: View {
                     
                     VStack{
                         
-                        if controller.game.players[1].isNotDummy {
-                            CirclePicView(player: controller.game.players[1])
-                        }
+                        CirclePicView(player: controller.game.players[1])
                         
-                        if controller.game.players[5].isNotDummy {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[5])
-                        }
+                        Spacer()
+                        CirclePicView(player: controller.game.players[5])
+                        
                     }
                     
                     
                     Spacer()
                     
                     VStack {
-                        if controller.game.players[2].isNotDummy {
-                            CirclePicView(player: controller.game.players[2])
-                        }
-                        
-                        if controller.game.players[6].isNotDummy {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[6])
-                        }
+                        CirclePicView(player: controller.game.players[2])
+                        Spacer()
+                        CirclePicView(player: controller.game.players[6])
                         
                     }
-
-                    
-
-                    
                     
                 }
                 
@@ -133,7 +102,7 @@ struct GamePage: View {
                                 CirclePicView(player: controller.game.me)
                             }
                             
-
+                            
                             
                         }
                         Spacer()
@@ -152,14 +121,14 @@ struct GamePage: View {
                         }
                         
                         Button(action: {
-                            
+                                                        
                             controller.service.goToLobby(player: controller.game.me)
                             if user != nil {
                                 
                             }
                             
-
-
+                            
+                            
                         }) {
                             Image(systemName: "chevron.backward")
                                 .foregroundColor(.white)
@@ -188,12 +157,12 @@ struct GamePage: View {
             }
         }
         .persistentSystemOverlays(.hidden)
-
+        
         
         
     }
-   
-
+    
+    
     
     
     
