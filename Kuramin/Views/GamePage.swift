@@ -82,9 +82,9 @@ struct GamePage: View {
                             CirclePicView(player: controller.game.players[1])
                         }
                         
-                        if controller.game.players[1].isNotDummy {
+                        if controller.game.players[5].isNotDummy {
                             Spacer()
-                            CirclePicView(player: controller.game.players[1])
+                            CirclePicView(player: controller.game.players[5])
                         }
                     }
                     
@@ -96,9 +96,9 @@ struct GamePage: View {
                             CirclePicView(player: controller.game.players[2])
                         }
                         
-                        if controller.game.players[2].isNotDummy {
+                        if controller.game.players[6].isNotDummy {
                             Spacer()
-                            CirclePicView(player: controller.game.players[2])
+                            CirclePicView(player: controller.game.players[6])
                         }
                         
                     }
@@ -111,52 +111,64 @@ struct GamePage: View {
                 
                 
                 Spacer()
-                HStack() {
+                ZStack() {
                     
-                    Button(action: {
-                        pm.wrappedValue.dismiss()
-                        
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(.white)
-                    }
                     
-                    Button(action: {
+                    HStack {
                         
-                        controller.service.goToLobby(player: controller.game.me)
-                        if user != nil {
+                        Spacer()
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.cyan)
+                                .frame(width: 300, height: 40)
+                                .cornerRadius(20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.black, lineWidth: 0.5)
+                                )
+                            
+                                .shadow(radius: 20)
+                            
+                            if controller.game.me.isNotDummy {
+                                CirclePicView(player: controller.game.me)
+                            }
+                            
+
                             
                         }
+                        Spacer()
                         
-
-
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(.white)
                     }
                     
                     
-                    Spacer()
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.cyan)
-                            .frame(width: 300, height: 40)
-                            .cornerRadius(20)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.black, lineWidth: 0.5)
-                            )
-                        
-                            .shadow(radius: 20)
-                        
-                        if controller.game.me.isNotDummy {
-                            CirclePicView(player: controller.game.me)
+                    
+                    HStack {
+                        Button(action: {
+                            pm.wrappedValue.dismiss()
+                            
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.white)
                         }
                         
+                        Button(action: {
+                            
+                            controller.service.goToLobby(player: controller.game.me)
+                            if user != nil {
+                                
+                            }
+                            
 
+
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.white)
+                        }
                         
+                        Spacer()
                     }
-                    Spacer()
+                    
+                    
                 }
                 
                 
