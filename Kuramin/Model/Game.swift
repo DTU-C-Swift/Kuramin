@@ -25,7 +25,7 @@ class Game : ObservableObject {
             let newPlayer = Player()
             newPlayer.id = UUID().uuidString
             newPlayer.displayName = "player" + String(i)
-            if i <= 8 {
+            if i <= 7 {
                 newPlayer.isNotDummy = true
             }
             players.append(newPlayer)

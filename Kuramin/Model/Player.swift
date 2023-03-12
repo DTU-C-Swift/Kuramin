@@ -17,6 +17,10 @@ class Player : ObservableObject {
     @Published var isNotDummy: Bool = false
     @Published var coins: Int = 0
 
+    var p = Printer(tag: "Player", displayPrints: true)
+    
+    
+    
     
     func setStrImg(imgName: String) {
         self.image = UIImage(imageLiteralResourceName: imgName)
@@ -24,7 +28,9 @@ class Player : ObservableObject {
     
     func update(_ dbUser: DbUser) {
         //self.id = dbUser.uid
-        if self.coins != dbUser.coins {self.coins = dbUser.coins}
+        if self.coins != dbUser.coins {
+            self.coins = dbUser.coins
+        }
         
         let newName = dbUser.fullName.split(separator: " ")
         

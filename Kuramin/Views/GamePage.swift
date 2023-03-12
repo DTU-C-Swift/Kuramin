@@ -21,13 +21,10 @@ struct GamePage: View {
     
     
     //@EnvironmentObject var controller: Controller
-    var controller: Controller
+    @ObservedObject var controller = DataHolder.controller
     
     init() {
-        self.controller = DataHolder.controller
         controller.game.addDummyPlayers()
-        
-        
     }
     
     
@@ -35,42 +32,50 @@ struct GamePage: View {
         
         ZStack {
             
-            
             BackgroundView()
             
             VStack {
                 
-                HStack() {
+                ZStack {
                     
                     
+                    HStack{
+                        
+                        Button(action: {
+                            pm.wrappedValue.dismiss()
+                            
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.white)
+                                .scaleEffect(1.8)
+                                .padding(.bottom, 20)
+                                .padding(.leading, 20)
+
+                        }
+                        Spacer()
+                        
+                    }
                     
-                    if controller.game.players[0].isNotDummy{
+                    
+                   
+                    HStack() {
+
                         Spacer()
                         CirclePicView(player: controller.game.players[0])
-                    }
-                    
-                    if controller.game.players[3].isNotDummy {
                         Spacer()
                         CirclePicView(player: controller.game.players[3])
-                    }
-
-                    if controller.game.players[4].isNotDummy {
                         Spacer()
                         CirclePicView(player: controller.game.players[4])
-                    }
+                        Spacer()
 
-                    
-//                    if controller.game.players[5].isNotDummy{
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[5])
-//                    }
-                    
-                    Spacer()
+                    }
+                    .padding(.top, 4)
                     
                 }
-                .padding(.top, 4)
                 
-               
+
+                
+                
                 
                 
                 Spacer()
@@ -78,91 +83,37 @@ struct GamePage: View {
                     
                     VStack{
                         
-                        if controller.game.players[1].isNotDummy {
-                            CirclePicView(player: controller.game.players[1])
-                        }
+                        CirclePicView(player: controller.game.players[1])
+                        Spacer()
+                        CirclePicView(player: controller.game.players[5])
                         
-                        if controller.game.players[1].isNotDummy {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[1])
-                        }
                     }
                     
                     
                     Spacer()
-                    
                     VStack {
-                        if controller.game.players[2].isNotDummy {
-                            CirclePicView(player: controller.game.players[2])
-                        }
-                        
-                        if controller.game.players[2].isNotDummy {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[2])
-                        }
+                        CirclePicView(player: controller.game.players[2])
+                        Spacer()
+                        CirclePicView(player: controller.game.players[6])
                         
                     }
-
-                    
-
-                    
                     
                 }
                 
                 
                 Spacer()
-                HStack() {
                     
-                    Button(action: {
-                        pm.wrappedValue.dismiss()
-                        
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(.white)
-                    }
-                    
-                    Button(action: {
-                        
-                        controller.service.goToLobby(player: controller.game.me)
-                        if user != nil {
-                            
-                        }
-                        
-
-
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(.white)
-                    }
-                    
+                HStack {
                     
                     Spacer()
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.cyan)
-                            .frame(width: 300, height: 40)
-                            .cornerRadius(20)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.black, lineWidth: 0.5)
-                            )
-                        
-                            .shadow(radius: 20)
-                        
-                        if controller.game.me.isNotDummy {
-                            CirclePicView(player: controller.game.me)
-                        }
-                        
-
-                        
-                    }
+                    MyPlayerViewInGamePage(me: controller.game.me)
+                        .padding(.bottom, 10)
                     Spacer()
+                    
                 }
-                
-                
             }
             
-            
+    
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: scenePhase) { newPhase in
@@ -176,12 +127,14 @@ struct GamePage: View {
             }
         }
         .persistentSystemOverlays(.hidden)
+        .onAppear() {
+            controller.service.goToLobby(player: controller.game.me)
 
-        
+        }
         
     }
-   
-
+    
+    
     
     
     
