@@ -21,11 +21,11 @@ class Game : ObservableObject {
     
     func addDummyPlayers() {
         
-        for i in 1...6 {
+        for i in 1...8 {
             let newPlayer = Player()
             newPlayer.id = UUID().uuidString
             newPlayer.displayName = "player" + String(i)
-            if i <= 6 {
+            if i <= 8 {
                 newPlayer.isNotDummy = true
             }
             players.append(newPlayer)

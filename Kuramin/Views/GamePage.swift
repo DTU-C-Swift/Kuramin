@@ -60,10 +60,10 @@ struct GamePage: View {
                     }
 
                     
-                    if controller.game.players[5].isNotDummy{
-                        Spacer()
-                        CirclePicView(player: controller.game.players[5])
-                    }
+//                    if controller.game.players[5].isNotDummy{
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[5])
+//                    }
                     
                     Spacer()
                     
@@ -76,14 +76,35 @@ struct GamePage: View {
                 Spacer()
                 HStack() {
                     
-                    if controller.game.players[1].isNotDummy {
-                        CirclePicView(player: controller.game.players[1])
-                        Spacer()
+                    VStack{
+                        
+                        if controller.game.players[1].isNotDummy {
+                            CirclePicView(player: controller.game.players[1])
+                        }
+                        
+                        if controller.game.players[1].isNotDummy {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[1])
+                        }
                     }
                     
-                    if controller.game.players[2].isNotDummy {
-                        CirclePicView(player: controller.game.players[2])
+                    
+                    Spacer()
+                    
+                    VStack {
+                        if controller.game.players[2].isNotDummy {
+                            CirclePicView(player: controller.game.players[2])
+                        }
+                        
+                        if controller.game.players[2].isNotDummy {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[2])
+                        }
+                        
                     }
+
+                    
+
                     
                     
                 }
