@@ -77,12 +77,16 @@ struct MenuPopup: View {
                 
             }
             
-        }.onChange(of: controller.isLoggedIn) { newValue in
+        }
+        .onChange(of: controller.isLoggedIn) { newValue in
             if !newValue {
                 navState.state = ""
                 pm.wrappedValue.dismiss()
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
+        .persistentSystemOverlays(.hidden)
+
         
         
         

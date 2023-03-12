@@ -154,8 +154,13 @@ struct GamePage: View {
                 self.printer.printt("app is oppening")
             }
         }
+        .persistentSystemOverlays(.hidden)
+
+        
         
     }
+   
+
     
     
     

@@ -85,7 +85,6 @@ struct ContentView: View {
         }
         .navigationTitle("Login")
         .navigationViewStyle(StackNavigationViewStyle())
-        
         .onChange(of: controller.isLoggedIn) { newValue in
             if newValue == true {
                 print("Navigate to main page")
@@ -123,6 +122,7 @@ struct MainPageView: View {
     @State private var showMenu = false
     @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
+    @State private var showGamePage = false
     
     var body: some View {
         
@@ -141,8 +141,22 @@ struct MainPageView: View {
                 
             }.padding(.top, 10)
             Spacer()
+//
+//            NavigationLink(destination: GamePage()) {
+//                Text("Start New Game")
+//                    .font(.system(size: 24, weight: .semibold))
+//                    .foregroundColor(.black)
+//                    .padding(.vertical, 16)
+//                    .padding(.horizontal, 24)
+//                    .background(Color.white)
+//                    .cornerRadius(16)
+//                    .shadow(radius: 4, x: 0, y: 4)
+//            }
             
-            NavigationLink(destination: GamePage()) {
+            
+            Button(action: {
+                showGamePage = true
+            }, label: {
                 Text("Start New Game")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(.black)
@@ -151,7 +165,10 @@ struct MainPageView: View {
                     .background(Color.white)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
-            }
+                
+            })
+            
+            
             
             
             Text("Join Game")
@@ -179,6 +196,9 @@ struct MainPageView: View {
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showMenu) {
             MenuPopup()
+        }
+        .sheet(isPresented: $showGamePage) {
+            GamePage()
         }
         
         //
