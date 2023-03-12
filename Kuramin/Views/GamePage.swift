@@ -21,13 +21,10 @@ struct GamePage: View {
     
     
     //@EnvironmentObject var controller: Controller
-    var controller: Controller
+    @ObservedObject var controller = DataHolder.controller
     
     init() {
-        self.controller = DataHolder.controller
         controller.game.addDummyPlayers()
-        
-        
     }
     
     
@@ -86,25 +83,7 @@ struct GamePage: View {
                     HStack {
                         
                         Spacer()
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.cyan)
-                                .frame(width: 300, height: 40)
-                                .cornerRadius(20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.black, lineWidth: 0.5)
-                                )
-                            
-                                .shadow(radius: 20)
-                            
-                            if controller.game.me.isNotDummy {
-                                CirclePicView(player: controller.game.me)
-                            }
-                            
-                            
-                            
-                        }
+                        MyPlayerViewInGamePage(me: controller.game.me)
                         Spacer()
                         
                     }
