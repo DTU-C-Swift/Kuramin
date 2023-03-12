@@ -254,27 +254,9 @@ class Service {
     
     
     
-    
-    
-    //    func fetchData(){
-    //        db.collection("lobby").getDocuments { snapshot, err in
-    //
-    //            if err == nil {
-    //
-    //                for it in snapshot!.documents {
-    //                    self.printer.printt("\(it.documentID) => \(it.data())")
-    //                }
-    //
-    //            }
-    //            else {
-    //
-    //                self.printer.printt("Error getting documents: \(err)")
-    //
-    //            }
-    //
-    //        }
-    //
-    //    }
+    func bringPlayersFromDb() {
+        
+    }
     
     
     
