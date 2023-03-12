@@ -95,7 +95,7 @@ struct login : UIViewRepresentable {
 //                                        DataHolder.controller.game.me.image = image
 //                                    }
                                     
-                                    DataHolder.controller.service.createUser(userImage: image)
+                                    DataHolder.controller.service.create_or_update_user(userImage: image)
                                 }
                             }.resume()
                         }

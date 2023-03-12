@@ -25,33 +25,68 @@ class Service {
     
     
     
-    func createUser(userImage: UIImage?) {
+    func create_or_update_user(userImage: UIImage?) {
         if userImage == nil {
+            self.printer.printt("Image is nil")
             self.logOut()
             return
             
         }
         // TODO check if the user is already exist in the db
         
+        
+        
+        
         if let user = Auth.auth().currentUser {
-            let dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 0)
+            var dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 500)
             
+            
+            let userRef = db.collection("users").document(user.uid)
+            
+            userRef.getDocument { document, err in
+                
+                if let document = document, document.exists {
+                    if let coins = document.data()?["coins"] as? Int {
+                        self.printer.printt("User already exits in the db")
+                        dbUser.coins = coins
+                        
+                    }
+                    
+                }
+                
+                self.createUser(dbUser, userImage!)
+                
+                
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    func createUser(_ dbUser: DbUser, _ userImage: UIImage) {
+        if let user = Auth.auth().currentUser {
             do {
                 try db.collection("users").document(user.uid).setData(from: dbUser)
+                
             } catch let error {
                 self.printer.printt("Error creating user in db: \(error)")
             }
             
-            if let userImage = userImage {
-                uploadImg(userId: user.uid, img: userImage)
-            }
+            uploadImg(userId: user.uid, img: userImage)
             
-        }
-        else {
+            
+        } else {
             self.printer.printt("User in nil")
+            self.logOut()
         }
         
     }
+    
+    
+    
+    
     
     
     private func uploadImg(userId: String, img: UIImage) {
@@ -209,7 +244,7 @@ class Service {
                     } else {
                         self.printer.printt("You aren't the host")
                     }
-                
+                    
                 }
             }
         }
@@ -221,27 +256,27 @@ class Service {
     
     
     
-//    func fetchData(){
-//        db.collection("lobby").getDocuments { snapshot, err in
-//            
-//            if err == nil {
-//                
-//                for it in snapshot!.documents {
-//                    self.printer.printt("\(it.documentID) => \(it.data())")
-//                }
-//                
-//            }
-//            else {
-//                
-//                self.printer.printt("Error getting documents: \(err)")
-//                
-//            }
-//            
-//        }
-//        
-//    }
+    //    func fetchData(){
+    //        db.collection("lobby").getDocuments { snapshot, err in
+    //
+    //            if err == nil {
+    //
+    //                for it in snapshot!.documents {
+    //                    self.printer.printt("\(it.documentID) => \(it.data())")
+    //                }
+    //
+    //            }
+    //            else {
+    //
+    //                self.printer.printt("Error getting documents: \(err)")
+    //
+    //            }
+    //
+    //        }
+    //
+    //    }
     
-
+    
     
     
     func isUserloggedIn_viaFacebook() -> Bool {
@@ -264,17 +299,16 @@ class Service {
     
     func logOut() {
         if self.isUserloggedIn_viaFacebook() {
-            self.printer.printt("Here")
             login().logOutFb()
         }
-
+        
         do {
             try Auth.auth().signOut()
-
+            
         } catch {
             self.printer.printt("Error while signing out from firebase")
         }
-
+        
         
     }
     
