@@ -20,6 +20,12 @@ struct MyPlayerViewInGamePage: View {
     
     var body: some View {
         ZStack {
+            
+//            CardView()
+//                .padding(.bottom, 80)
+            
+                
+            
             Rectangle()
                 .fill(Color.cyan)
                 .frame(width: 350, height: 40)
@@ -33,7 +39,12 @@ struct MyPlayerViewInGamePage: View {
                 .frame(width: 300, height: 40)
             
             
+            
+            
             ZStack {
+                
+                
+                
                 
                 if me.isNotDummy {
                     
@@ -66,7 +77,8 @@ struct MyPlayerViewInGamePage: View {
             
         }
         .frame(width: 350, height: 40)
-        
+        .shadow(radius: 200)
+
         .onChange(of: me.coins) { newValue in
             if newValue >= 1000000 {
                 coins = newValue/1000

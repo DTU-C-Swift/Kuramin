@@ -21,6 +21,7 @@
 		5689AD7F29AFA2B00062A6CD /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689AD7E29AFA2B00062A6CD /* Controller.swift */; };
 		568D081F29BE34F500201DEB /* MyPlayerViewInGamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D081E29BE34F500201DEB /* MyPlayerViewInGamePage.swift */; };
 		568D082129BE609E00201DEB /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D082029BE609E00201DEB /* Card.swift */; };
+		568D082429BE784F00201DEB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D082329BE784F00201DEB /* CardView.swift */; };
 		56B68F8A29B296880070844D /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8929B296880070844D /* FacebookCore */; };
 		56B68F8C29B296880070844D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8B29B296880070844D /* FacebookLogin */; };
 		56B68F8E29B296880070844D /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8D29B296880070844D /* FacebookShare */; };
@@ -73,6 +74,7 @@
 		5689AD7E29AFA2B00062A6CD /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		568D081E29BE34F500201DEB /* MyPlayerViewInGamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayerViewInGamePage.swift; sourceTree = "<group>"; };
 		568D082029BE609E00201DEB /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		568D082329BE784F00201DEB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		56BA237D29B54E4F004D8168 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		56E9081329BA6F9A005352DD /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
 		56EF7BCB29B10231007D6027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				566A0FFD29AFD40F00E71D31 /* BackgroundView.swift */,
 				56BA237D29B54E4F004D8168 /* ProgressBar.swift */,
 				568D081E29BE34F500201DEB /* MyPlayerViewInGamePage.swift */,
+				568D082329BE784F00201DEB /* CardView.swift */,
 			);
 			path = ContentViews;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
 				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
 				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
+				568D082429BE784F00201DEB /* CardView.swift in Sources */,
 				568D082129BE609E00201DEB /* Card.swift in Sources */,
 				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,
 				5689AD7929AE7A6A0062A6CD /* CirclePicView.swift in Sources */,
