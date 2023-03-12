@@ -263,14 +263,13 @@ class Service {
     
     
     func logOut() {
-        if let user = Auth.auth().currentUser {
+
+        do {
+            try Auth.auth().signOut()
+        } catch {
             
-            do {
-                try user.signOut()
-            } catch {
-                
-            }
         }
+
         
     }
     
