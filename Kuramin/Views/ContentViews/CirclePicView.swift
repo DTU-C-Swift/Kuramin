@@ -50,8 +50,9 @@ struct CirclePicView: View {
     }
 }
 
-//struct CirclePicView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//    }
-//}
+struct CirclePicView_Previews: PreviewProvider {
+    static var previews: some View {
+        CirclePicView(player: DataHolder.controller.game.me)
+
+    }
+}
