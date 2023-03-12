@@ -8,9 +8,22 @@
 import Foundation
 
 
-class Card {
+struct Card {
+    var suit: Suit
+    var value: Int
     
-    
-    
-    
+    init(suit: Suit, value: Int) {
+        self.suit = suit
+        self.value = value
+    }
+}
+
+
+
+
+enum Suit: String, CaseIterable {
+    case heart
+    case dimond
+    case club
+    case spade
 }
