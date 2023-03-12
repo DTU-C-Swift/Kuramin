@@ -75,9 +75,7 @@ struct ContentView: View {
                 
                 if controller.showBuffer {
                     ProgressBar()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.black.opacity(0.5))
-                        .edgesIgnoringSafeArea(.all)
+
 
                 }
             }

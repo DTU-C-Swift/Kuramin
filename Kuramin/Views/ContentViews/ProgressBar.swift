@@ -14,6 +14,9 @@ struct ProgressBar: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: Color.cyan))
                 .scaleEffect(3)
                 .foregroundColor(.cyan)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.opacity(0.5))
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }
