@@ -14,10 +14,14 @@ struct HowToPlayView: View {
     var body: some View {
         
         VStack {
-            Text("""
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis, metus non lacinia venenatis, purus risus sollicitudin ante, eu mattis mi enim lobortis dolor. Quisque fringilla ut neque et fringilla. Maecenas varius pharetra dui, eu venenatis urna blandit ac. In hac habitasse platea dictumst. Curabitur sed purus pulvinar, pharetra augue ac, lobortis magna. Nam nec arcu et nisl semper mattis. Ut ut odio volutpat, finibus augue sit amet, auctor purus.
-                """)
-            .padding()
+            ScrollView {
+                Text("""
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis, metus non lacinia venenatis, purus risus sollicitudin ante, eu mattis mi enim lobortis dolor. Quisque fringilla ut neque et fringilla. Maecenas varius pharetra dui, eu venenatis urna blandit ac. In hac habitasse platea dictumst. Curabitur sed purus pulvinar, pharetra augue ac, lobortis magna. Nam nec arcu et nisl semper mattis. Ut ut odio volutpat, finibus augue sit amet, auctor purus.
+                    """)
+                .padding()
+                .frame(width: 600)
+            }
+            
             Spacer()
             HStack {
                 Button(action: {
