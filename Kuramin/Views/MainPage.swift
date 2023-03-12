@@ -13,7 +13,7 @@ struct MainPage: View {
     @State private var showProfile = false
     @State private var showHowTo = false
     @State private var showGamePage = false
-    @State private var isLoading = false
+    @State private var isLoading = true
     
 
     @ObservedObject var controller: Controller = DataHolder.controller
@@ -44,7 +44,7 @@ struct MainPage: View {
             Spacer()
             
             Button(action: {
-                isLoading = true
+                //isLoading = true
                 showGamePage = true
             }, label: {
                 Text("Start New Game")
