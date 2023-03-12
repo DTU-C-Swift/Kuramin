@@ -36,25 +36,44 @@ struct GamePage: View {
             
             VStack {
                 
-                HStack() {
-                    Button(action: {
-                        pm.wrappedValue.dismiss()
+                ZStack {
+                    
+                    
+                    HStack{
                         
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(.white)
+                        Button(action: {
+                            pm.wrappedValue.dismiss()
+                            
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.white)
+                                .scaleEffect(1.8)
+                                .padding(.bottom, 20)
+                                .padding(.leading, 20)
+
+                        }
+                        Spacer()
+                        
                     }
                     
-                    Spacer()
-                    CirclePicView(player: controller.game.players[0])
-                    Spacer()
-                    CirclePicView(player: controller.game.players[3])
-                    Spacer()
-                    CirclePicView(player: controller.game.players[4])
-                    Spacer()
+                    
+                   
+                    HStack() {
+
+                        Spacer()
+                        CirclePicView(player: controller.game.players[0])
+                        Spacer()
+                        CirclePicView(player: controller.game.players[3])
+                        Spacer()
+                        CirclePicView(player: controller.game.players[4])
+                        Spacer()
+
+                    }
+                    .padding(.top, 4)
                     
                 }
-                .padding(.top, 4)
+                
+
                 
                 
                 
