@@ -52,6 +52,11 @@ struct GamePage: View {
                                 .padding(.leading, 20)
 
                         }
+                        
+                        
+                        
+                        
+                        
                         Spacer()
                         
                     }

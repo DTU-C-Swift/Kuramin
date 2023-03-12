@@ -26,6 +26,23 @@ struct BackgroundView: View {
                 .shadow(color: Color.cyan, radius: 10, x: 0, y: 5)
                 .padding(.top, 30)
             
+            
+            
+            HStack {
+                Spacer()
+                Spacer()
+                Spacer()
+                VStack {
+                    Text("Rewards")
+                    Text("1: 100")
+                    Text("2: 50 ")
+                    Text("3: 25 ")
+
+                }.foregroundColor(.white)
+                Spacer()
+            }
+            
+            
         }
         
 
