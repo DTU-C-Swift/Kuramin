@@ -11,6 +11,8 @@ struct MainPage: View {
     
     @State private var showMenu = false
     @State private var showProfile = false
+    @State private var showHowTo = false
+    
     @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
     
@@ -25,7 +27,6 @@ struct MainPage: View {
                 }, label: {
                     Image(systemName: "person.circle.fill")
                         .font(.system(size: 50))
-                    
                 })
                 
                 Button(action: {
@@ -33,7 +34,6 @@ struct MainPage: View {
                 }, label: {
                     Image(systemName: "gearshape.circle.fill")
                         .font(.system(size: 50))
-                    
                 })
 
                 
@@ -69,6 +69,12 @@ struct MainPage: View {
                 .background(Color.white)
                 .cornerRadius(16)
                 .shadow(radius: 4, x: 0, y: 4)
+            
+            Button("How To Play") {
+                
+            }
+            
+            
             
             
             Spacer()
