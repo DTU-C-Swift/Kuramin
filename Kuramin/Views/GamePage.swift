@@ -37,6 +37,14 @@ struct GamePage: View {
             VStack {
                 
                 HStack() {
+                    Button(action: {
+                        pm.wrappedValue.dismiss()
+                        
+                    }) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(.white)
+                    }
+                    
                     Spacer()
                     CirclePicView(player: controller.game.players[0])
                     Spacer()
@@ -57,7 +65,6 @@ struct GamePage: View {
                     VStack{
                         
                         CirclePicView(player: controller.game.players[1])
-                        
                         Spacer()
                         CirclePicView(player: controller.game.players[5])
                         
@@ -65,7 +72,6 @@ struct GamePage: View {
                     
                     
                     Spacer()
-                    
                     VStack {
                         CirclePicView(player: controller.game.players[2])
                         Spacer()
@@ -77,47 +83,18 @@ struct GamePage: View {
                 
                 
                 Spacer()
-                ZStack() {
                     
+                HStack {
                     
-                    HStack {
-                        
-                        Spacer()
-                        MyPlayerViewInGamePage(me: controller.game.me)
-                            .padding(.bottom, 10)
-                        Spacer()
-                        
-                    }
-                    
-                    
-                    
-                    HStack {
-                        Button(action: {
-                            pm.wrappedValue.dismiss()
-                            
-                        }) {
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.white)
-                        }
-                        
-//                        Button(action: {
-//
-//
-//                        }) {
-//                            Image(systemName: "chevron.backward")
-//                                .foregroundColor(.white)
-//                        }
-                        
-                        Spacer()
-                    }
-                    
+                    Spacer()
+                    MyPlayerViewInGamePage(me: controller.game.me)
+                        .padding(.bottom, 10)
+                    Spacer()
                     
                 }
-                
-                
             }
             
-            
+    
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: scenePhase) { newPhase in
