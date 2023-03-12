@@ -84,6 +84,7 @@ struct GamePage: View {
                         
                         Spacer()
                         MyPlayerViewInGamePage(me: controller.game.me)
+                            .padding(.bottom, 10)
                         Spacer()
                         
                     }
@@ -99,18 +100,13 @@ struct GamePage: View {
                                 .foregroundColor(.white)
                         }
                         
-                        Button(action: {
-                                                        
-                            if user != nil {
-                                
-                            }
-                            
-                            
-                            
-                        }) {
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.white)
-                        }
+//                        Button(action: {
+//
+//
+//                        }) {
+//                            Image(systemName: "chevron.backward")
+//                                .foregroundColor(.white)
+//                        }
                         
                         Spacer()
                     }

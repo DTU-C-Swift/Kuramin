@@ -63,6 +63,7 @@ struct MyPlayerViewInGamePage: View {
             }
             
             
+            
         }
         .frame(width: 350, height: 40)
         
