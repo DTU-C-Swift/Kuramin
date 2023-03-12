@@ -78,7 +78,7 @@ struct login : UIViewRepresentable {
                     print("Login with Facebook success")
                     
                     // Get user's profile picture
-                    let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "100", "height": "100", "redirect": "false"], tokenString: AccessToken.current!.tokenString, version: nil, httpMethod: .get)
+                    let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "100", "height": "100", "redirect": "false"], tokenString: AccessToken.current?.tokenString, version: nil, httpMethod: .get)
                     
                     
                     
@@ -109,6 +109,12 @@ struct login : UIViewRepresentable {
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
             try! Auth.auth().signOut()
         }
+    }
+    
+    
+    func logOutFb() {
+        LoginManager().logOut()
+
     }
 
 

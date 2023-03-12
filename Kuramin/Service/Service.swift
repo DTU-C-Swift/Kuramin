@@ -238,11 +238,7 @@ class Service {
         
     }
     
-    
-    
-    
-    
-    
+
     
     
     func isUserloggedIn_viaFacebook() -> Bool {
@@ -251,6 +247,7 @@ class Service {
         if let providerData = Auth.auth().currentUser?.providerData {
             for userInfo in providerData {
                 if userInfo.providerID == "facebook.com" {
+                    self.printer.printt("Provider: \(userInfo.providerID)")
                     return true
                 }
             }
@@ -263,11 +260,16 @@ class Service {
     
     
     func logOut() {
+        if self.isUserloggedIn_viaFacebook() {
+            self.printer.printt("Here")
+            login().logOutFb()
+        }
 
         do {
             try Auth.auth().signOut()
+
         } catch {
-            
+            self.printer.printt("Error while signing out from firebase")
         }
 
         

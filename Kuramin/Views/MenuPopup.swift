@@ -39,15 +39,37 @@ struct MenuPopup: View {
                 
                 Spacer()
                 
-                if controller.service.isUserloggedIn_viaFacebook() {
-
-                    FbAuth(width: 200, height: 50)
-                        .cornerRadius(16)
-                        .shadow(radius: 1, x: 0, y: 1)
-                }
+//                if controller.service.isUserloggedIn_viaFacebook() {
+//
+//                    FbAuth(width: 200, height: 50)
+//                        .cornerRadius(16)
+//                        .shadow(radius: 1, x: 0, y: 1)
+//                }
                 
+                Button {
+                    controller.service.logOut()
+                } label: {
+                    Text("Log out")
+                }
+                .frame(width: 200, height: 50)
+                .cornerRadius(16)
+                .shadow(radius: 1, x: 0, y: 1)
+                .foregroundColor(.blue)
+
 
                 Spacer()
+                
+                Button {
+                    controller.service.isUserloggedIn_viaFacebook()
+                } label: {
+                    Text("Log out")
+                }
+                .frame(width: 200, height: 50)
+                .cornerRadius(16)
+                .shadow(radius: 1, x: 0, y: 1)
+                .foregroundColor(.blue)
+                
+                
             }
             
         }.onChange(of: controller.isLoggedIn) { newValue in
