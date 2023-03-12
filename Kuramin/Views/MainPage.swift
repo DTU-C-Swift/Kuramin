@@ -12,7 +12,8 @@ struct MainPage: View {
     @State private var showMenu = false
     @State private var showProfile = false
     @State private var showHowTo = false
-    
+    @State private var showGamePage = false
+
     @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
     
@@ -40,7 +41,9 @@ struct MainPage: View {
             }.padding(.top, 10)
             Spacer()
             
-            NavigationLink(destination: GamePage()) {
+            Button(action: {
+                showGamePage = true
+            }, label: {
                 Text("Start New Game")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(.black)
@@ -49,7 +52,8 @@ struct MainPage: View {
                     .background(Color.white)
                     .cornerRadius(16)
                     .shadow(radius: 4, x: 0, y: 4)
-            }
+                
+            })
             
             
             Text("Join Game")
@@ -87,6 +91,9 @@ struct MainPage: View {
         .sheet(isPresented: $showProfile) {
             ProfilePageView()
         }
+        .sheet(isPresented: $showGamePage) {
+            GamePage()
+        }
         
         //
         
@@ -98,3 +105,4 @@ struct MainPage_Previews: PreviewProvider {
         MainPage()
     }
 }
+
