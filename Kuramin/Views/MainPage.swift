@@ -13,6 +13,8 @@ struct MainPage: View {
     @State private var showProfile = false
     @State private var showHowTo = false
     @State private var showGamePage = false
+    @State private var isLoading = false
+    
 
     @ObservedObject var controller: Controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
@@ -42,6 +44,7 @@ struct MainPage: View {
             Spacer()
             
             Button(action: {
+                isLoading = true
                 showGamePage = true
             }, label: {
                 Text("Start New Game")
@@ -79,8 +82,6 @@ struct MainPage: View {
             }
             
             
-            
-            
             Spacer()
         
         }
@@ -91,11 +92,26 @@ struct MainPage: View {
         .sheet(isPresented: $showProfile) {
             ProfilePageView()
         }
-        .sheet(isPresented: $showGamePage) {
-            GamePage()
-        }
+//        .sheet(isPresented: $showGamePage) {
+//            GamePage()
+//        }
         
-        //
+        .sheet(isPresented: $showGamePage) {
+            Group {
+                if isLoading {
+                    ProgressBar()
+                } else {
+                    GamePage()
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    isLoading = false
+                }
+            }
+        }
+
+        
         
     }
 }
