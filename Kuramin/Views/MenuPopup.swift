@@ -13,7 +13,7 @@ struct MenuPopup: View {
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @ObservedObject var controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
-    
+    @State var isPresentingConfirmation = false
     
     
     
@@ -33,21 +33,25 @@ struct MenuPopup: View {
                     }
                     .padding(.top, 20)
                     .font(.system(size: 35))
-             
+                    
                     
                 }
                 
                 Spacer()
                 
-//                if controller.service.isUserloggedIn_viaFacebook() {
-//
-//                    FbAuth(width: 200, height: 50)
-//                        .cornerRadius(16)
-//                        .shadow(radius: 1, x: 0, y: 1)
-//                }
+                //                if controller.service.isUserloggedIn_viaFacebook() {
+                //
+                //                    FbAuth(width: 200, height: 50)
+                //                        .cornerRadius(16)
+                //                        .shadow(radius: 1, x: 0, y: 1)
+                //                }
+                
+                
+                
                 
                 Button(action: {
-                    controller.service.logOut()
+                    isPresentingConfirmation = true
+                
                 }) {
                     Text("Log out")
                         .foregroundColor(.white)
@@ -55,11 +59,18 @@ struct MenuPopup: View {
                         .background(.blue)
                         .cornerRadius(15)
                         .shadow(radius: 1, x: 0, y: 1)
+                }.confirmationDialog("Are you sure?", isPresented: $isPresentingConfirmation) {
+                    
+                    Button("Confirm", role: .destructive) {
+                        controller.service.logOut()
+                        
+                    }
+                    
                 }
-
-
-
-
+                
+                
+                
+                
                 Spacer()
                 
                 
