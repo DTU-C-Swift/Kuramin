@@ -39,7 +39,6 @@ struct login : UIViewRepresentable {
     
     typealias UIViewType = FBLoginButton
     typealias Coordinator = loginCoordinator
-    var p = Printer(tag: "FbAuth", displayPrints: true)
     
     
     func makeCoordinator() -> Coordinator {
@@ -58,12 +57,30 @@ struct login : UIViewRepresentable {
         print("View updated")
     }
     
+    func logOutFb() {
+        LoginManager().logOut()
+    }
+    
+    func somethingWentWrong() {
+        self.logOutFb()
+        DataHolder.controller.showBuffer = false
+
+    }
+    
+    
+    
+    
+    
     class loginCoordinator: NSObject, LoginButtonDelegate {
+        var p = Printer(tag: "FbAuth", displayPrints: true)
+
+        
         
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
             
             if error != nil {
-                login().p.printt("Error in login button: \(error?.localizedDescription)")
+                self.p.printt("Error in login button: \(error?.localizedDescription)")
+                self.setShowBuffer(false)
                 return
             }
             
@@ -72,11 +89,13 @@ struct login : UIViewRepresentable {
                 DataHolder.controller.showBuffer = true
                 Auth.auth().signIn(with: credential) { (res, er) in
                     if er != nil {
-                        login().p.printt("Error signing in: \(er?.localizedDescription)")
+                        self.p.printt("Error signing in: \(er?.localizedDescription)")
+                        login().logOutFb()
+                        self.setShowBuffer(false)
                         return
                     }
                     
-                    login().p.printt("Login with Facebook success")
+                    self.p.printt("Login with Facebook success")
                     
                     // Get user's profile picture
                     let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "100", "height": "100", "redirect": "false"], tokenString: AccessToken.current?.tokenString, version: nil, httpMethod: .get)
@@ -95,17 +114,24 @@ struct login : UIViewRepresentable {
 //                                    if let image = image {
 //                                        DataHolder.controller.game.me.image = image
 //                                    }
-                                    login().p.printt("Facebook login fully done, and create_or_update_user has been called")
+                                    self.p.printt("Facebook login fully done, and create_or_update_user has been called")
                                     DataHolder.controller.service.create_or_update_user(userImage: image)
                                 }
                                 
-                                else {login().p.printt("Image is nil")}
+                                else {
+                                    self.p.printt("Image is nil")
+                                    login().logOutFb()
+                                    self.setShowBuffer(false)
+                                }
                                 
                             }.resume()
                         }
                         
                         else {
-                            login().p.printt("The result of GraphRequest.start is nil")
+                            self.p.printt("The result of GraphRequest.start is nil")
+                            
+                            login().logOutFb()
+                            self.setShowBuffer(false)
                         }
                         
                     }
@@ -114,20 +140,23 @@ struct login : UIViewRepresentable {
                 }
             }
             else {
-                login().p.printt("AccessToken is nil")
+                self.p.printt("AccessToken is nil")
+                login().logOutFb()
+                self.setShowBuffer(false)
             }
         }
         
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
             try! Auth.auth().signOut()
         }
+        
+        func setShowBuffer(_ val: Bool) {
+            DataHolder.controller.showBuffer = val
+        }
     }
     
     
-    func logOutFb() {
-        LoginManager().logOut()
 
-    }
 
 
     
