@@ -39,6 +39,7 @@ struct login : UIViewRepresentable {
     
     typealias UIViewType = FBLoginButton
     typealias Coordinator = loginCoordinator
+    var p = Printer(tag: "FbAuth", displayPrints: true)
     
     
     func makeCoordinator() -> Coordinator {
@@ -62,7 +63,7 @@ struct login : UIViewRepresentable {
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
             
             if error != nil {
-                print(error?.localizedDescription)
+                login().p.printt("Error in login button: \(error?.localizedDescription)")
                 return
             }
             
@@ -71,11 +72,11 @@ struct login : UIViewRepresentable {
                 DataHolder.controller.showBuffer = true
                 Auth.auth().signIn(with: credential) { (res, er) in
                     if er != nil {
-                        print(er?.localizedDescription)
+                        login().p.printt("Error signing in: \(er?.localizedDescription)")
                         return
                     }
                     
-                    print("Login with Facebook success")
+                    login().p.printt("Login with Facebook success")
                     
                     // Get user's profile picture
                     let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "100", "height": "100", "redirect": "false"], tokenString: AccessToken.current?.tokenString, version: nil, httpMethod: .get)
@@ -94,15 +95,26 @@ struct login : UIViewRepresentable {
 //                                    if let image = image {
 //                                        DataHolder.controller.game.me.image = image
 //                                    }
-                                    
+                                    login().p.printt("Facebook login fully done, and create_or_update_user has been called")
                                     DataHolder.controller.service.create_or_update_user(userImage: image)
                                 }
+                                
+                                else {login().p.printt("Image is nil")}
+                                
                             }.resume()
                         }
+                        
+                        else {
+                            login().p.printt("The result of GraphRequest.start is nil")
+                        }
+                        
                     }
                     
                     DataHolder.controller.showBuffer = false
                 }
+            }
+            else {
+                login().p.printt("AccessToken is nil")
             }
         }
         
