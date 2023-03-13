@@ -193,7 +193,7 @@ class Service {
     
     
     func goToLobby(player: Player) {
-        let ref = db.collection("matches").document("lobby")
+        let ref = db.collection("matchMaker").document("lobby")
         //player.id = "testId"
         
         // Transactional call
@@ -233,7 +233,7 @@ class Service {
     
     
     func amIHost(_ player: Player) {
-        var ref = db.collection("matches").document("lobby")
+        var ref = db.collection("matchMaker").document("lobby")
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
@@ -247,6 +247,10 @@ class Service {
                     
                 }
             }
+            
+            else {
+                self.printer.printt("Document not found in lobby")
+            }
         }
         
         
@@ -254,7 +258,8 @@ class Service {
     
     
     
-    func bringPlayersFromDb() {
+    func observeOther_PlayersInDB() {
+        
         
     }
     
