@@ -79,7 +79,7 @@ struct login : UIViewRepresentable {
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
             
             if error != nil {
-                self.p.printt("Error in login button: \(error?.localizedDescription)")
+                self.p.write("Error in login button: \(error?.localizedDescription)")
                 login().somethingWentWrong()
                 return
             }
@@ -90,12 +90,12 @@ struct login : UIViewRepresentable {
                 
                 Auth.auth().signIn(with: credential) { (res, er) in
                     if er != nil {
-                        self.p.printt("Error signing in: \(er?.localizedDescription)")
+                        self.p.write("Error signing in: \(er?.localizedDescription)")
                         login().somethingWentWrong()
                         return
                     }
                     
-                    self.p.printt("Login with Facebook success")
+                    self.p.write("Login with Facebook success")
                     
                     // Get user's profile picture
                     let graphRequest = GraphRequest(graphPath: "me/picture", parameters: ["width": "100", "height": "100", "redirect": "false"], tokenString: AccessToken.current?.tokenString, version: nil, httpMethod: .get)
@@ -114,12 +114,12 @@ struct login : UIViewRepresentable {
 //                                    if let image = image {
 //                                        DataHolder.controller.game.me.image = image
 //                                    }
-                                    self.p.printt("Facebook login fully done, and create_or_update_user has been called")
+                                    self.p.write("Facebook login fully done, and create_or_update_user has been called")
                                     DataHolder.controller.service.create_or_update_user(userImage: image)
                                 }
                                 
                                 else {
-                                    self.p.printt("Image is nil")
+                                    self.p.write("Image is nil")
                                     login().somethingWentWrong()
 
                                 }
@@ -128,7 +128,7 @@ struct login : UIViewRepresentable {
                         }
                         
                         else {
-                            self.p.printt("The result of GraphRequest.start is nil")
+                            self.p.write("The result of GraphRequest.start is nil")
                             login().somethingWentWrong()
 
                         }
@@ -139,7 +139,7 @@ struct login : UIViewRepresentable {
                 }
             }
             else {
-                self.p.printt("AccessToken is nil")
+                self.p.write("AccessToken is nil")
                 //login().somethingWentWrong()
 
             }

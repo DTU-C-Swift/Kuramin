@@ -40,9 +40,10 @@ class Player : ObservableObject {
             
         }
 
-
-        
-        
-
     }
+    
+    
+    
+    
+    
 }

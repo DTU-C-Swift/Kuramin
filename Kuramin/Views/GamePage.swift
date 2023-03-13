@@ -124,16 +124,16 @@ struct GamePage: View {
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .background {
                 // App is about to be closed
-                self.printer.printt("app is closing")
+                self.printer.write("app is closing")
                 
             }
             else {
-                self.printer.printt("app is oppening")
+                self.printer.write("app is oppening")
             }
         }
         .persistentSystemOverlays(.hidden)
         .onAppear() {
-            controller.service.goToLobby(player: controller.game.me)
+            controller.service.goToLobby(game: controller.game)
 
         }
         

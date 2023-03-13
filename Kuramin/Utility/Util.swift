@@ -18,10 +18,20 @@ class Printer {
         self.displayPrints = displayPrints
     }
     
-    func printt(_ str: Any) {
+    func write(_ str: Any) {
         print(tag,": ", str)
 
     }
+    
+    func writeRed(_ str: Any) {
+        //print(tag,": ", str, modifier: .red )
+        //print("\(tag): \("\u{001B}[31m\(str)\u{001B}[0m")")
+        self.write(str)
+
+
+    }
+    
+    
 }
 
 struct Util {

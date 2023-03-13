@@ -20,6 +20,7 @@ class Service {
     var db = Firestore.firestore()
     let storage = Storage.storage()
     let printer = Printer(tag: "Service", displayPrints: true)
+    //let controller = DataHolder.controller
     
     
     
@@ -27,14 +28,14 @@ class Service {
     
     func create_or_update_user(userImage: UIImage?) {
         if userImage == nil {
-            self.printer.printt("Image is nil")
+            self.printer.write("Image is nil")
             self.logOut()
             return
             
         }
         // TODO check if the user is already exist in the db
         
-        
+        printer.writeRed("hello")
         
         
         if let user = Auth.auth().currentUser {
@@ -47,7 +48,7 @@ class Service {
                 
                 if let document = document, document.exists {
                     if let coins = document.data()?["coins"] as? Int {
-                        self.printer.printt("User already exits in the db")
+                        self.printer.write("User already exits in the db")
                         dbUser.coins = coins
                         
                     }
@@ -71,14 +72,14 @@ class Service {
                 try db.collection("users").document(user.uid).setData(from: dbUser)
                 
             } catch let error {
-                self.printer.printt("Error creating user in db: \(error)")
+                self.printer.write("Error creating user in db: \(error)")
             }
             
             uploadImg(userId: user.uid, img: userImage)
             
             
         } else {
-            self.printer.printt("User in nil")
+            self.printer.write("User in nil")
             self.logOut()
         }
         
@@ -93,7 +94,7 @@ class Service {
         
         guard let imageData = img.jpegData(compressionQuality: 0.8) else {
             //self.logOut()
-            self.printer.printt("Error converting image")
+            self.printer.write("Error converting image")
             return
         }
         
@@ -107,11 +108,11 @@ class Service {
         
         let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
             if let error = error {
-                self.printer.printt("Error uploading image: \(error.localizedDescription)")
+                self.printer.write("Error uploading image: \(error.localizedDescription)")
                 return
             }
             
-            self.printer.printt("Image uploaded successfully!")
+            self.printer.write("Image uploaded successfully!")
         }
         
     }
@@ -120,8 +121,8 @@ class Service {
     
     
     
-    func observeForUserChanges(player: Player) {
-        
+    func observeMeInDB(_ game: Game) {
+        var player = game.me
         
         if player.id.isEmpty {
             
@@ -141,23 +142,23 @@ class Service {
         // Gets user from firestore
         db.collection("users").document(player.id).addSnapshotListener { snapshot, error in
             guard let document = snapshot else {
-                self.printer.printt("Error fetching document: \(error!)")
+                self.printer.write("Error fetching document: \(error!)")
                 
                 return
             }
             guard let data = document.data() else {
-                self.printer.printt("Document data was empty.")
+                self.printer.write("Document data was empty.")
                 return
             }
             
             do {
                 let dbUser = try document.data(as: DbUser.self)
-                self.printer.printt("Retrieved user: \(dbUser.toString())")
+                self.printer.write("Retrieved user: \(dbUser.toString())")
                 player.update(dbUser)
                 
             }
             catch{
-                self.printer.printt("getUser failed: \(data)")
+                self.printer.write("getUser failed: \(data)")
                 
             }
             
@@ -178,21 +179,24 @@ class Service {
         let imageRef = path.child(filename)
         imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
             if let error = error {
-                self.printer.printt("Error occured while fetching imge for UID: \(uid), error: \(error)")
+                self.printer.write("Error occured while fetching imge for UID: \(uid), error: \(error)")
                 
             }
             else {
                 if let img = UIImage(data: data!) {
                     player.image = img
+                    return
                 }
-                
+                self.printer.write("Error in converting image")
+
             }
         }
         
     }
     
     
-    func goToLobby(player: Player) {
+    func goToLobby(game: Game) {
+        var player = game.me
         let ref = db.collection("matchMaker").document("lobby")
         //player.id = "testId"
         
@@ -220,11 +224,11 @@ class Service {
             
         }) { (object, error) in
             if let error = error {
-                self.printer.printt("Transaction failed: \(error)")
+                self.printer.write("Transaction failed: \(error)")
             } else {
-                self.printer.printt("Transaction succeeded!")
-                self.amIHost(player)
-                self.observeLobby()
+                self.printer.write("Transaction succeeded!")
+                self.amIHost(game)
+                self.observeLobby(game)
             }
         }
     }
@@ -233,7 +237,8 @@ class Service {
     
     
     
-    func amIHost(_ player: Player) {
+    func amIHost(_ game: Game) {
+        var player = game.me
         var ref = db.collection("matchMaker").document("lobby")
         ref.getDocument { document, err in
             
@@ -241,16 +246,16 @@ class Service {
                 if let host = document.get("host") as? String {
                     
                     if host == player.id {
-                        self.printer.printt("You are the host")
+                        self.printer.write("You are the host")
                     } else {
-                        self.printer.printt("You aren't the host")
+                        self.printer.write("You aren't the host")
                     }
                     
                 }
             }
             
             else {
-                self.printer.printt("Document not found in lobby")
+                self.printer.write("Document not found in lobby")
             }
         }
         
@@ -259,7 +264,7 @@ class Service {
     
     
     
-    func observeLobby() {
+    func observeLobby(_ game: Game) {
         var ref = db.collection("matchMaker").document("lobby")
         
         ref.addSnapshotListener { snapshot, err in
@@ -267,14 +272,30 @@ class Service {
             do {
                 if let data = try snapshot?.data(as: Lobby.self) {
                     
+                    game.updatePlayerList(lobby: data)
+                    
                     for uid in data.playerIds {
-                        self.printer.printt(uid)
+                        self.printer.write(uid)
+                        if uid == game.me.id {continue}
                         
-                    } 
+                        var player = game.getPlayerObj(uid)
+                        
+                        if let player = player {
+                            player.isNotDummy = true
+                            self.fetchUser(game, player)
+                            
+                        } else {
+                            self.printer.write("Player object not found")
+                        }
+                        
+                        
+                        
+                    }
                 }
             }
             catch {
                 
+                self.printer.write("Error in observing lobby. \(err)")
             }
             
         }
@@ -285,10 +306,27 @@ class Service {
     
     
     
-//    func fetchUser(_ uid: String) {
-//
-//        db.collection("users").document(player.id)
-//    }
+    func fetchUser(_ game: Game, _ player: Player) {
+        
+        self.downloadImg(player)
+        
+        
+        
+    
+        db.collection("users").document(player.id).getDocument(as: DbUser.self) { result in
+            
+            switch result {
+            case .success(let user):
+                player.update(user)
+                self.printer.write("User info has been fetched")
+                
+            case .failure(let err):
+                self.printer.write("Error while fetching user info of id: \(player.id).\n Error type: \(err)")
+                
+            }
+            
+        }
+    }
     
     
     
@@ -299,7 +337,7 @@ class Service {
         if let providerData = Auth.auth().currentUser?.providerData {
             for userInfo in providerData {
                 if userInfo.providerID == "facebook.com" {
-                    self.printer.printt("Provider: \(userInfo.providerID)")
+                    self.printer.write("Provider: \(userInfo.providerID)")
                     return true
                 }
             }
@@ -320,7 +358,7 @@ class Service {
             try Auth.auth().signOut()
             
         } catch {
-            self.printer.printt("Error while signing out from firebase")
+            self.printer.write("Error while signing out from firebase")
         }
         
         

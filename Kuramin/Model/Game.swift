@@ -14,6 +14,8 @@ class Game : ObservableObject {
     @Published var me: Player = Player()
     var host: Player = Player()
     
+    let p = Printer(tag: "Player", displayPrints: true)
+    
     init() {
         me.isNotDummy = true
     }
@@ -34,6 +36,45 @@ class Game : ObservableObject {
         
     }
     
+    
+    func getPlayerObj(_ id: String) -> Player? {
+  // {$0.id == player.id} is the same as { player in player.id == player id }
+        
+        for p in players {
+            if p.id == id {
+                return p
+                
+            } else if !p.isNotDummy {
+                p.id = id
+                return p
+            }
+        }
+        
+        self.p.write("Player with id \(id) not found")
+        return nil
+        
+    }
+    
+    
+    
+    func updatePlayerList(lobby: Lobby) {
+        
+        for p in players {
+            if !lobby.playerIds.contains(p.id) {
+                p.isNotDummy = false
+            }
+        }
+        
+        
+
+        
+    }
+    
+    private func addPlayer(player: Player) {
+        
+    }
+    
+
 }
 
 

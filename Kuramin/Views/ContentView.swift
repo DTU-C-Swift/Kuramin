@@ -95,7 +95,7 @@ struct ContentView: View {
                 print("Navigate to main page")
                 navigateToMainPage = true
                 //selection = "MainPageView"
-                controller.service.observeForUserChanges(player: controller.game.me)
+                controller.service.observeMeInDB(controller.game)
                 navSate.state = "MainPageView"
             }
             else{
