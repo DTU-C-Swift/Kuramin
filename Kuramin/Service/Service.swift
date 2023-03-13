@@ -224,6 +224,7 @@ class Service {
             } else {
                 self.printer.printt("Transaction succeeded!")
                 self.amIHost(player)
+                self.observeLobby()
             }
         }
     }
@@ -266,6 +267,10 @@ class Service {
             do {
                 if let data = try snapshot?.data(as: Lobby.self) {
                     
+                    for uid in data.playerIds {
+                        self.printer.printt(uid)
+                        
+                    } 
                 }
             }
             catch {
@@ -280,10 +285,10 @@ class Service {
     
     
     
-    func fetchUser(_ uid: String) {
-        
-        
-    }
+//    func fetchUser(_ uid: String) {
+//
+//        db.collection("users").document(player.id)
+//    }
     
     
     
