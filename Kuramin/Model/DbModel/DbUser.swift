@@ -19,3 +19,10 @@ struct DbUser: Codable {
 
     }
 }
+
+
+struct Lobby: Codable {
+    var host: String
+    var playerIds: [String]
+
+}

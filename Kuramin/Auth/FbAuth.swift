@@ -140,7 +140,7 @@ struct login : UIViewRepresentable {
             }
             else {
                 self.p.printt("AccessToken is nil")
-                login().somethingWentWrong()
+                //login().somethingWentWrong()
 
             }
         }

@@ -258,7 +258,29 @@ class Service {
     
     
     
-    func observeOther_PlayersInDB() {
+    func observeLobby() {
+        var ref = db.collection("matchMaker").document("lobby")
+        
+        ref.addSnapshotListener { snapshot, err in
+            
+            do {
+                if let data = try snapshot?.data(as: Lobby.self) {
+                    
+                }
+            }
+            catch {
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    func fetchUser(_ uid: String) {
         
         
     }
