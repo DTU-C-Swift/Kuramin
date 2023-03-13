@@ -23,3 +23,9 @@ class Printer {
 
     }
 }
+
+struct Util {
+    let PROGRESSING = "display"
+    let SUCCEDED = "succeded"
+    let FAILED = "failed"
+}

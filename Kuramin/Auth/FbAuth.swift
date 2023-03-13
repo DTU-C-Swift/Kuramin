@@ -63,7 +63,7 @@ struct login : UIViewRepresentable {
     
     func somethingWentWrong() {
         self.logOutFb()
-        DataHolder.controller.showBuffer = false
+        DataHolder.controller.bufferState = Util().FAILED
 
     }
     
@@ -80,18 +80,18 @@ struct login : UIViewRepresentable {
             
             if error != nil {
                 self.p.printt("Error in login button: \(error?.localizedDescription)")
-                self.setShowBuffer(false)
+                login().somethingWentWrong()
                 return
             }
             
             if AccessToken.current != nil {
                 let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                DataHolder.controller.showBuffer = true
+                DataHolder.controller.bufferState = Util().PROGRESSING
+                
                 Auth.auth().signIn(with: credential) { (res, er) in
                     if er != nil {
                         self.p.printt("Error signing in: \(er?.localizedDescription)")
-                        login().logOutFb()
-                        self.setShowBuffer(false)
+                        login().somethingWentWrong()
                         return
                     }
                     
@@ -120,8 +120,8 @@ struct login : UIViewRepresentable {
                                 
                                 else {
                                     self.p.printt("Image is nil")
-                                    login().logOutFb()
-                                    self.setShowBuffer(false)
+                                    login().somethingWentWrong()
+
                                 }
                                 
                             }.resume()
@@ -129,20 +129,19 @@ struct login : UIViewRepresentable {
                         
                         else {
                             self.p.printt("The result of GraphRequest.start is nil")
-                            
-                            login().logOutFb()
-                            self.setShowBuffer(false)
+                            login().somethingWentWrong()
+
                         }
                         
                     }
                     
-                    DataHolder.controller.showBuffer = false
+                    DataHolder.controller.bufferState = Util().SUCCEDED
                 }
             }
             else {
                 self.p.printt("AccessToken is nil")
-                login().logOutFb()
-                self.setShowBuffer(false)
+                login().somethingWentWrong()
+
             }
         }
         
@@ -150,9 +149,7 @@ struct login : UIViewRepresentable {
             try! Auth.auth().signOut()
         }
         
-        func setShowBuffer(_ val: Bool) {
-            DataHolder.controller.showBuffer = val
-        }
+
     }
     
     

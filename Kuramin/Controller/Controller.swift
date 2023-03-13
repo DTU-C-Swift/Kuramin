@@ -13,7 +13,7 @@ class Controller : ObservableObject {
     @Published var game: Game = Game()
     var service: Service = Service()
     @Published var isLoggedIn: Bool = false
-    @Published var showBuffer: Bool = false
+    @Published var bufferState: String = ""
     @Published var image: UIImage? = nil
     
     init() {

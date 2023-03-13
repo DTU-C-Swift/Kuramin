@@ -13,6 +13,7 @@ struct ContentView: View {
     @ObservedObject var controller: Controller
     @State var navigateToMainPage = false
     @State var selection: String? = "NON"
+    @State var showAlert = false
     @ObservedObject var navSate: NavState = NavState()
     
     init() {
@@ -69,19 +70,26 @@ struct ContentView: View {
                     
                     NavigationLink(destination: MainPage(), tag: "MainPageView", selection: $navSate.state){}
                     
+                    
+                    
                 }
                 .padding()
+                .alert("There was an error. Please try again", isPresented: $showAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
                 
                 
-                if controller.showBuffer {
+                if controller.bufferState == Util().PROGRESSING {
                     ProgressBar()
 
-
                 }
+                
+                
             }
         }
         .navigationTitle("Login")
         .navigationViewStyle(StackNavigationViewStyle())
+        .environmentObject(navSate)
         .onChange(of: controller.isLoggedIn) { newValue in
             if newValue == true {
                 print("Navigate to main page")
@@ -95,7 +103,14 @@ struct ContentView: View {
             }
         }
 
-        .environmentObject(navSate)
+        .onChange(of: controller.bufferState) { newValue in
+            if newValue == Util().FAILED {
+                showAlert = true
+
+            }
+        }
+        
+
         
   
     }
