@@ -44,7 +44,7 @@ struct MainPage: View {
             Spacer()
             
             Button(action: {
-                //isLoading = true
+                isLoading = true
                 showGamePage = true
             }, label: {
                 Text("Start New Game")
