@@ -72,6 +72,15 @@ class Player : ObservableObject, Identifiable{
     }
     
     
+    func setDisplayName() {
+        let newName = self.fullName.split(separator: " ")
+        if self.displayName != newName[0] {
+            self.displayName = String(newName[0])
+            
+        }
+    }
+    
+    
     
     
     

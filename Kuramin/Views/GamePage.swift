@@ -116,16 +116,17 @@ struct GamePage: View {
                     
                     Spacer()
                     VStack {
+                        Spacer()
+                        if game.players.count > 6 {
+                            CirclePicView(player: controller.game.players[6])
+                            Spacer()
+                        }
                         
                         if game.players.count > 2 {
                             CirclePicView(player: controller.game.players[2])
                         }
                         
-                        
-                        if game.players.count > 6 {
-                            CirclePicView(player: controller.game.players[6])
-                        }
-                        
+                        Spacer()
                     }
                     
                 }

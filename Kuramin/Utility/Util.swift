@@ -42,6 +42,10 @@ struct Util {
     
     
     
+    
+    
+    
+    
     func convertDbuserToPlayer(dbUser: DbUser, player: Player) {
         if dbUser.uid == nil {
             print("Util: dbuser id is nill")
@@ -50,6 +54,8 @@ struct Util {
         player.id = dbUser.uid ?? MY_DUMMY_ID
         player.fullName = dbUser.fullName
         player.coins = dbUser.coins
+        
+        player.setDisplayName()
         
     }
     
@@ -65,9 +71,10 @@ struct Util {
             }
         }
         
-    
+        
         
         lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+        lobby.removeDuplicates()
     }
 }
 

@@ -14,7 +14,7 @@ class Game : ObservableObject {
     @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
 
     var hostId = ""
-    //private let lock = NSLock()
+    private let playersLock = NSLock()
     let p = Printer(tag: "Game", displayPrints: true)
 
     
@@ -34,7 +34,7 @@ class Game : ObservableObject {
         var idsToBeDeleted: [Int] = []
         var matchFound = false
         
-        
+        playersLock.lock()
         for (index, p) in players.enumerated() {
             matchFound = false
 
@@ -56,15 +56,9 @@ class Game : ObservableObject {
         
         
         players.remove(atOffsets: IndexSet(playesToBeDeleted))
-        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+        playersLock.unlock()
         
-//        for index in playesToBeDeleted {
-//            players.remove(at: index)
-//        }
-//
-//        for index in idsToBeDeleted {
-//            lobby.playerIds.remove(at: index)
-//        }
+        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
         
         self.p.write("Player list has been updated")
     }
@@ -88,8 +82,10 @@ class Game : ObservableObject {
 //        }
         
         
+        playersLock.lock()
         
         players.append(player)
+        playersLock.unlock()
     }
     
     

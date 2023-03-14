@@ -286,13 +286,15 @@ class Service {
         ref.addSnapshotListener { snapshot, err in
             
             do {
-                if var data = try snapshot?.data(as: Lobby.self) {
-                    Util().deleteEmptyIds(lobby: &data)
-                    game.updatePlayerList(lobby: &data)
+                if var lobby = try snapshot?.data(as: Lobby.self) {
+                                        
+                    
+                    Util().deleteEmptyIds(lobby: &lobby)
+                    game.updatePlayerList(lobby: &lobby)
                     
                     
                     
-                    for uid in data.playerIds {
+                    for uid in lobby.playerIds {
                         self.printer.write(uid)
                         //if uid == game.me.id || uid.isEmpty {continue}
                         self.printer.write("id: \(uid)")
@@ -327,7 +329,6 @@ class Service {
             switch result {
             case .success(let dbUser):
                 Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
-                
                 
                 game.addPlayer(player: newPlayer)
                 self.printer.write("User info has been fetched")
