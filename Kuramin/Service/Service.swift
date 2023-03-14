@@ -18,19 +18,19 @@ import FirebaseStorage
 
 
 class Service {
-    var db = Firestore.firestore()
-    let storage = Storage.storage()
-    let printer = Printer(tag: "Service", displayPrints: true)
-    //let controller = DataHolder.controller
-    //var game = DataHolder.controller.game
+    private var db = Firestore.firestore()
+    private let storage = Storage.storage()
+    private let printer = Printer(tag: "Service", displayPrints: true)
+
 
     let lobby = "lobby"
     
     
     
     
-    
     func create_or_update_user(userImage: UIImage?) {
+        let game = DataHolder.controller.game
+
         if userImage == nil {
             self.printer.write("Image is nil")
             self.logOut()
@@ -43,7 +43,7 @@ class Service {
         if let user = Auth.auth().currentUser {
             var dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 500)
             
-            DataHolder.controller.game.me.id = user.uid
+            game.me.id = user.uid
             
             
             let userRef = db.collection("users").document(user.uid)
@@ -128,7 +128,8 @@ class Service {
     
     
     func observeMeInDB() {
-        var me = DataHolder.controller.game.me
+        let game = DataHolder.controller.game
+        var me = game.me
         
         if me.id == Util().MY_DUMMY_ID {
             
@@ -139,7 +140,7 @@ class Service {
         
         
         // Gets user image from storage
-        self.downloadImg(pid: me.id)
+        self.downloadImg(pid: me.id, game: game)
         
         
         
@@ -176,7 +177,7 @@ class Service {
     
     // Downloads the profile picture of the given player and sets the fetched picture to the given player.
     
-    func downloadImg(pid: String) {
+    func downloadImg(pid: String, game: Game) {
         
         let path = storage.reference().child("images").child(pid)
         let filename = "\(pid).jpg"
@@ -189,7 +190,7 @@ class Service {
             else {
                 if let img = UIImage(data: data!) {
                     //player.image = img
-                    DataHolder.controller.game.setPlayerImg(pid: pid, image: img)
+                    game.setPlayerImg(pid: pid, image: img)
                     return
                 }
                 self.printer.write("Error in converting image")
@@ -201,7 +202,8 @@ class Service {
     
     
     func goToLobby() {
-        var me = DataHolder.controller.game.me
+        let game = DataHolder.controller.game
+        var me = game.me
         let ref = db.collection("matchMaker").document(lobby)
         //player.id = "testId"
         
@@ -232,8 +234,8 @@ class Service {
                 self.printer.write("Transaction failed: \(error)")
             } else {
                 self.printer.write("Transaction succeeded!")
-                self.amIHost()
-                self.observeLobby()
+                self.amIHost(game: game)
+                self.observeLobby(game: game)
             }
         }
     }
@@ -242,15 +244,16 @@ class Service {
     
     
     
-    func amIHost() {
-        var me = DataHolder.controller.game.me
+    func amIHost(game: Game) {
+        var me = game.me
+        
         var ref = db.collection("matchMaker").document(lobby)
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
                 if let hostId = document.get("host") as? String {
                     
-                    DataHolder.controller.game.hostId = hostId
+                    game.hostId = hostId
                     
                     if hostId == me.id {
                         self.printer.write("You are the host")
@@ -273,8 +276,8 @@ class Service {
     
     
     
-    func observeLobby() {
-        var game = DataHolder.controller.game
+    func observeLobby(game: Game) {
+        
         var ref = db.collection("matchMaker").document(lobby)
         
         ref.addSnapshotListener { snapshot, err in
@@ -308,7 +311,7 @@ class Service {
     
     func fetchUser(uid: String, game: Game) {
         
-        self.downloadImg(pid: uid)
+        self.downloadImg(pid: uid, game: game)
         
     
         db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
