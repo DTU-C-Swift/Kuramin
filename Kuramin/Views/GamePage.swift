@@ -151,7 +151,7 @@ struct GamePage: View {
         }
         .persistentSystemOverlays(.hidden)
         .onAppear() {
-            controller.service.goToLobby()
+            //controller.service.goToLobby()
 
         }
 

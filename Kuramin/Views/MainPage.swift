@@ -86,16 +86,15 @@ struct MainPage: View {
         
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            controller.service.goToLobby()
+        }
         .sheet(isPresented: $showMenu) {
             MenuPopup()
         }
         .sheet(isPresented: $showProfile) {
             ProfilePageView()
         }
-//        .sheet(isPresented: $showGamePage) {
-//            GamePage()
-//        }
-        
         .sheet(isPresented: $showGamePage) {
             Group {
                 if isLoading {
