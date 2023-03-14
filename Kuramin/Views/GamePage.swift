@@ -60,23 +60,23 @@ struct GamePage: View {
                         
                         
                         
-                        Button(action: {
-                            if controller.test.isLoggedIn == true {
-                                controller.test.isLoggedIn = false
-
-                            }
-                            else {
-                                controller.test.isLoggedIn = true
-
-                            }
-                        }) {
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.white)
-                                .scaleEffect(1.8)
-                                .padding(.bottom, 20)
-                                .padding(.leading, 20)
-
-                        }
+//                        Button(action: {
+//                            if controller.test.isLoggedIn == true {
+//                                controller.test.isLoggedIn = false
+//
+//                            }
+//                            else {
+//                                controller.test.isLoggedIn = true
+//
+//                            }
+//                        }) {
+//                            Image(systemName: "chevron.backward")
+//                                .foregroundColor(.white)
+//                                .scaleEffect(1.8)
+//                                .padding(.bottom, 20)
+//                                .padding(.leading, 20)
+//
+//                        }
                         
                         
                         
@@ -87,14 +87,26 @@ struct GamePage: View {
                     
                    
                     HStack() {
-
+                        Spacer()
                         if game.players.count > 0 {
                             CirclePicView(player: controller.game.players[0])
                         
-                            Text("Player")
                         }
                         
-
+                        if game.players.count > 3 {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[3])
+                            
+                        }
+                        
+                        
+                        if game.players.count > 4 {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[4])
+                            
+                        }
+                        
+                        Spacer()
                         
                         
 //                        List(controller.game.players) { item in
@@ -124,22 +136,41 @@ struct GamePage: View {
                 Spacer()
                 HStack() {
                     
-//                    VStack{
-//
-//                        CirclePicView(player: controller.game.players[1])
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[5])
-//
-//                    }
+                    VStack{
+                        
+                        Spacer()
+                        
+                        if game.players.count > 5 {
+                            CirclePicView(player: controller.game.players[5])
+                            Spacer()
+                        }
+                        
+                        
+                        
+                        if game.players.count > 1 {
+                            CirclePicView(player: controller.game.players[1])
+                        }
+                        
+                        Spacer()
+
+                    }
                     
                     
                     Spacer()
-//                    VStack {
-//                        CirclePicView(player: controller.game.players[2])
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[6])
-//
-//                    }
+                    VStack {
+                        
+                        if game.players.count > 2 {
+                            CirclePicView(player: controller.game.players[2])
+
+                        }
+                        
+                        
+                        if game.players.count > 6 {
+                            CirclePicView(player: controller.game.players[6])
+                        }
+                        
+
+                    }
                     
                 }
                 
