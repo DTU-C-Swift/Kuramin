@@ -7,20 +7,23 @@
 
 import Foundation
 import SwiftUI
-import FirebaseCore
-//import FirebaseFirestore
-import FirebaseAuth
-import GoogleSignIn
-import Firebase
-import FirebaseStorage
 import FirebaseFirestoreSwift
+
+//import FirebaseCore
+//import FirebaseFirestore
+import Firebase
+
+import FirebaseAuth
+import FirebaseStorage
 
 
 class Service {
     var db = Firestore.firestore()
     let storage = Storage.storage()
     let printer = Printer(tag: "Service", displayPrints: true)
-    let controller = DataHolder.controller
+    //let controller = DataHolder.controller
+    //var game = DataHolder.controller.game
+
     let lobby = "lobby"
     
     
@@ -39,7 +42,7 @@ class Service {
         
         if let user = Auth.auth().currentUser {
             var dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 500)
-            controller.game.me.id = user.uid
+            DataHolder.controller.game.me.id = user.uid
             
             
             let userRef = db.collection("users").document(user.uid)
@@ -67,21 +70,23 @@ class Service {
     
     
     func createUser(_ dbUser: DbUser, _ userImage: UIImage) {
-        if let user = Auth.auth().currentUser {
+        
+        if let uid = dbUser.uid {
+            
             do {
-                try db.collection("users").document(user.uid).setData(from: dbUser)
-                
+                try db.collection("users").document(uid).setData(from: dbUser)
+
             } catch let error {
                 self.printer.write("Error creating user in db: \(error)")
             }
             
-            uploadImg(userId: user.uid, img: userImage)
-            
+            uploadImg(userId: uid, img: userImage)
             
         } else {
             self.printer.write("User in nil")
             self.logOut()
         }
+        
         
     }
     
@@ -121,8 +126,8 @@ class Service {
     
     
     
-    func observeMeInDB(_ game: Game) {
-        var me = game.me
+    func observeMeInDB() {
+        var me = DataHolder.controller.game.me
         
         if me.id == Util().MY_DUMMY_ID {
             
@@ -133,7 +138,7 @@ class Service {
         
         
         // Gets user image from storage
-        self.downloadImg(me)
+        self.downloadImg(pid: me.id)
         
         
         
@@ -170,20 +175,20 @@ class Service {
     
     // Downloads the profile picture of the given player and sets the fetched picture to the given player.
     
-    func downloadImg(_ player: Player) {
-        let uid = player.id
-        let path = storage.reference().child("images").child(uid)
-        let filename = "\(uid).jpg"
+    func downloadImg(pid: String) {
+        
+        let path = storage.reference().child("images").child(pid)
+        let filename = "\(pid).jpg"
         let imageRef = path.child(filename)
         imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
             if let error = error {
-                self.printer.write("Error occured while fetching imge for UID: \(uid), error: \(error)")
+                self.printer.write("Error occured while fetching imge for UID: \(pid), error: \(error)")
                 
             }
             else {
                 if let img = UIImage(data: data!) {
                     //player.image = img
-                    controller.game.setPlayerImg(pid: player.id, image: img)
+                    DataHolder.controller.game.setPlayerImg(pid: pid, image: img)
                     return
                 }
                 self.printer.write("Error in converting image")
@@ -194,8 +199,8 @@ class Service {
     }
     
     
-    func goToLobby(game: Game) {
-        var me = game.me
+    func goToLobby() {
+        var me = DataHolder.controller.game.me
         let ref = db.collection("matchMaker").document(lobby)
         //player.id = "testId"
         
@@ -226,8 +231,8 @@ class Service {
                 self.printer.write("Transaction failed: \(error)")
             } else {
                 self.printer.write("Transaction succeeded!")
-                self.amIHost(game)
-                self.observeLobby(game)
+                self.amIHost()
+                self.observeLobby()
             }
         }
     }
@@ -236,16 +241,15 @@ class Service {
     
     
     
-    func amIHost(_ game: Game) {
-        var me = game.me
+    func amIHost() {
+        var me = DataHolder.controller.game.me
         var ref = db.collection("matchMaker").document(lobby)
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
                 if let hostId = document.get("host") as? String {
                     
-                    // TODO: Set host
-                    DataHolder.controller.game.host = hostId
+                    DataHolder.controller.game.hostId = hostId
                     
                     if hostId == me.id {
                         self.printer.write("You are the host")
@@ -268,7 +272,8 @@ class Service {
     
     
     
-    func observeLobby(_ game: Game) {
+    func observeLobby() {
+        var game = DataHolder.controller.game
         var ref = db.collection("matchMaker").document(lobby)
         
         ref.addSnapshotListener { snapshot, err in
@@ -280,18 +285,9 @@ class Service {
                     
                     for uid in data.playerIds {
                         self.printer.write(uid)
-                        if uid == game.me.id || uid.isEmpty || uid == " " {continue}
+                        if uid == game.me.id || uid.isEmpty {continue}
                         
-                        var player = game.getPlayerObj(uid)
-                        
-                        if let player = player {
-                            self.fetchUser(game, player)
-                            
-                        } else {
-                            self.printer.write("Player object not found")
-                        }
-                        
-                        
+                        self.fetchUser(uid: uid, game: game)
                         
                     }
                 }
@@ -309,24 +305,19 @@ class Service {
     
     
     
-    func fetchUser(_ game: Game, _ player: Player) {
+    func fetchUser(uid: String, game: Game) {
         
-        self.downloadImg(player)
-        
-        
+        self.downloadImg(pid: uid)
         
     
-        db.collection("users").document(player.id).getDocument(as: DbUser.self) { result in
+        db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
             
             switch result {
             case .success(let user):
-                player.update(user)
+                game.addPlayer(dbUser: user)
                 self.printer.write("User info has been fetched")
-                player.isNotDummy = true
-
-                
             case .failure(let err):
-                self.printer.write("Error while fetching user info of id: \(player.id).\n Error type: \(err)")
+                self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
                 
             }
             

@@ -67,15 +67,11 @@ struct GamePage: View {
                     HStack() {
 
                         
-                        List(controller.game.players) { item in
-                       
-                            if item.isNotDummy {
-                                CirclePicView(player: item)
-                                Spacer()
-
-                            }
-                            
-                        }
+//                        List(controller.game.players) { item in
+//                       
+//                            CirclePicView(player: item)
+//                            Spacer()
+//                        }
                         
 //                        Spacer()
 //                        CirclePicView(player: controller.game.players[0])
@@ -145,7 +141,7 @@ struct GamePage: View {
         }
         .persistentSystemOverlays(.hidden)
         .onAppear() {
-            controller.service.goToLobby(game: controller.game)
+            controller.service.goToLobby()
 
         }
         

@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 
-struct DbUser: Codable {
+public struct DbUser: Codable {
     @DocumentID var uid: String?
     var fullName: String
     var coins: Int
@@ -21,7 +21,7 @@ struct DbUser: Codable {
 }
 
 
-struct Lobby: Codable {
+public struct Lobby: Codable {
     var host: String
     var playerIds: [String]
 

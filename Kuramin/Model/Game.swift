@@ -12,17 +12,15 @@ class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
     @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
-    var hostId: Player = Player(id: "hostId")
+    var hostId = ""
     
+    private let lock = NSLock()
     let p = Printer(tag: "Game", displayPrints: true)
     
     init() {
         //self.addDummyPlayers()
 
     }
-    
-    
-
     
     
 
@@ -51,19 +49,41 @@ class Game : ObservableObject {
     
     
     func addPlayer(player: Player) {
-        if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return }
+        if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
+            return }
 
         
         for (index, p) in players.enumerated() {
             
             if p.id == player.id {
-                // Update
                 p.update(player: player)
                 return
             }
         }
         
         players.append(player)
+    }
+    
+    
+    
+    func addPlayer(dbUser: DbUser) {
+        if dbUser.uid?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == nil {
+            self.p.write("AddPlayer: playerId is empty. Id: \(dbUser.uid)")
+            return
+        }
+        
+        for p in players {
+            if p.id == dbUser.uid {
+                p.update(dbUser)
+                return
+            }
+        }
+        var newPlayer = Player(id: dbUser.uid!)
+        newPlayer.update(dbUser)
+        players.append(newPlayer)
+        
+        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid)")
     }
     
     
