@@ -7,6 +7,8 @@
 
 import Foundation
 struct DataHolder {
-    static var controller = Controller()
-    
+    static let controller = Controller()
+    static var playerGerbage: [Player] = []
 }
+
+

@@ -21,10 +21,6 @@ struct MyPlayerViewInGamePage: View {
     var body: some View {
         ZStack {
             
-            //            CardView()
-            //                .padding(.bottom, 80)
-            
-            
             
             Rectangle()
                 .fill(Color.cyan)
@@ -50,11 +46,9 @@ struct MyPlayerViewInGamePage: View {
                     Spacer()
                     
                 }
-                
-                
+
                 
                 HStack {
-                    
                     Spacer()
                     CirclePicView(player: me)
                     Spacer()

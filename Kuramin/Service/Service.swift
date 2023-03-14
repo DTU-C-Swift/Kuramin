@@ -139,8 +139,10 @@ class Service {
         }
         
         
+
+        
         // Gets user image from storage
-        self.downloadImg(pid: me.id, game: game)
+        self.downloadImg(player: me)
         
         
         
@@ -177,20 +179,21 @@ class Service {
     
     // Downloads the profile picture of the given player and sets the fetched picture to the given player.
     
-    func downloadImg(pid: String, game: Game) {
+    func downloadImg(player: Player) {
         
-        let path = storage.reference().child("images").child(pid)
-        let filename = "\(pid).jpg"
+        let path = storage.reference().child("images").child(player.id)
+        let filename = "\(player.id).jpg"
         let imageRef = path.child(filename)
         imageRef.getData(maxSize: 1 * 100 * 100) { data, error in
             if let error = error {
-                self.printer.write("Error occured while fetching imge for UID: \(pid), error: \(error)")
+                self.printer.write("Error occured while fetching imge for UID: \(player.id), error: \(error)")
                 
             }
             else {
                 if let img = UIImage(data: data!) {
-                    //player.image = img
-                    game.setPlayerImg(pid: pid, image: img)
+                    player.image = img
+                    DataHolder.playerGerbage.append(player)
+                    //game.setPlayerImg(pid: pid, image: img)
                     return
                 }
                 self.printer.write("Error in converting image")
@@ -283,13 +286,16 @@ class Service {
         ref.addSnapshotListener { snapshot, err in
             
             do {
-                if let data = try snapshot?.data(as: Lobby.self) {
+                if var data = try snapshot?.data(as: Lobby.self) {
+                    Util().deleteEmptyIds(lobby: &data)
+                    game.updatePlayerList(lobby: &data)
                     
-                    game.updatePlayerList(lobby: data)
+                    
                     
                     for uid in data.playerIds {
                         self.printer.write(uid)
-                        if uid == game.me.id || uid.isEmpty {continue}
+                        //if uid == game.me.id || uid.isEmpty {continue}
+                        self.printer.write("id: \(uid)")
                         
                         self.fetchUser(uid: uid, game: game)
                         
@@ -311,14 +317,19 @@ class Service {
     
     func fetchUser(uid: String, game: Game) {
         
-        self.downloadImg(pid: uid, game: game)
+        var newPlayer = Player(id: uid)
+        
+        self.downloadImg(player: newPlayer)
         
     
         db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
             
             switch result {
-            case .success(let user):
-                game.addPlayer(dbUser: user)
+            case .success(let dbUser):
+                Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
+                
+                
+                game.addPlayer(player: newPlayer)
                 self.printer.write("User info has been fetched")
             case .failure(let err):
                 self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")

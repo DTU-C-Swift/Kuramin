@@ -28,19 +28,43 @@ class Game : ObservableObject {
     
     
     
-    func updatePlayerList(lobby: Lobby) {
-        var toBeDeleted: [Int] = []
+    func updatePlayerList(lobby: inout Lobby) {
+        
+        var playesToBeDeleted: [Int] = []
+        var idsToBeDeleted: [Int] = []
+        var matchFound = false
+        
         
         for (index, p) in players.enumerated() {
+            matchFound = false
+
+            for (idIndex, id) in lobby.playerIds.enumerated() {
+                
+                if id == p.id {
+                    idsToBeDeleted.append(idIndex)
+                    matchFound = true
+                    break
+                }
+            }
             
-            if !lobby.playerIds.contains(p.id) {
-                toBeDeleted.append(index)
+            if !matchFound {
+                playesToBeDeleted.append(index)
+
             }
         }
         
-        for index in toBeDeleted {
-            players.remove(at: index)
-        }
+        
+        
+        players.remove(atOffsets: IndexSet(playesToBeDeleted))
+        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+        
+//        for index in playesToBeDeleted {
+//            players.remove(at: index)
+//        }
+//
+//        for index in idsToBeDeleted {
+//            lobby.playerIds.remove(at: index)
+//        }
         
         self.p.write("Player list has been updated")
     }
@@ -55,13 +79,15 @@ class Game : ObservableObject {
             return }
 
         
-        for (_, p) in players.enumerated() {
-            
-            if p.id == player.id {
-                p.update(player: player)
-                return
-            }
-        }
+//        for (_, p) in players.enumerated() {
+//
+//            if p.id == player.id {
+//                p.update(player: player)
+//                return
+//            }
+//        }
+        
+        
         
         players.append(player)
     }
