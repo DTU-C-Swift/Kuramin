@@ -38,4 +38,5 @@ struct Util {
     let PROGRESSING = "display"
     let SUCCEDED = "succeded"
     let FAILED = "failed"
+    let MY_DUMMY_ID = "myId"
 }

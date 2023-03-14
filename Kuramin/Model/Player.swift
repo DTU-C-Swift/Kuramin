@@ -10,7 +10,7 @@ import SwiftUI
 
 class Player : ObservableObject, Identifiable {
     
-    var id = ""
+    var id: String
     var fullName: String = ""
     @Published var displayName = "NotSet"
     @Published var image: UIImage = UIImage(imageLiteralResourceName: "person_100")
@@ -19,6 +19,9 @@ class Player : ObservableObject, Identifiable {
 
     var p = Printer(tag: "Player", displayPrints: true)
     
+    init(id: String) {
+        self.id = id
+    }
     
     
     
@@ -37,6 +40,24 @@ class Player : ObservableObject, Identifiable {
         if self.displayName != newName[0] {
             self.displayName = String(newName[0])
             self.fullName = dbUser.fullName
+            
+        }
+
+    }
+    
+    
+    
+    func update(player: Player) {
+        //self.id = dbUser.uid
+        if self.coins != player.coins {
+            self.coins = player.coins
+        }
+        
+        let newName = player.fullName.split(separator: " ")
+        
+        if self.displayName != newName[0] {
+            self.displayName = String(newName[0])
+            self.fullName = player.fullName
             
         }
 

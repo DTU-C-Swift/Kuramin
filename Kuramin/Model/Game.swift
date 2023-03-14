@@ -11,22 +11,89 @@ import SwiftUI
 class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
-    @Published var me: Player = Player()
-    var host: Player = Player()
+    @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
+    var hostId: Player = Player(id: "hostId")
     
     let p = Printer(tag: "Game", displayPrints: true)
     
     init() {
-        me.isNotDummy = true
-        //controller.game.addDummyPlayers()
+        //self.addDummyPlayers()
 
     }
+    
+    
+
+    
+    
+
+    
+    
+    
+    func updatePlayerList(lobby: Lobby) {
+        var toBeDeleted: [Int] = []
+        
+        for (index, p) in players.enumerated() {
+            
+            if !lobby.playerIds.contains(p.id) {
+                toBeDeleted.append(index)
+            }
+        }
+        
+        for index in toBeDeleted {
+            players.remove(at: index)
+        }
+        
+        self.p.write("Player list has been updated")
+    }
+    
+    
+    
+    
+    
+    func addPlayer(player: Player) {
+        if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return }
+
+        
+        for (index, p) in players.enumerated() {
+            
+            if p.id == player.id {
+                // Update
+                p.update(player: player)
+                return
+            }
+        }
+        
+        players.append(player)
+    }
+    
+    
+    
+    func setPlayerImg(pid: String, image: UIImage) {
+        
+        if me.id == pid {
+            me.image = image
+            return
+        }
+        
+        for p in players {
+            if p.id == pid {
+                p.image = image
+            }
+        }
+        
+        self.p.write("PlayerId: \(pid) not found")
+        
+    }
+    
+    
+    
+    
     
     
     func addDummyPlayers() {
         
         for i in 1...8 {
-            let newPlayer = Player()
+            let newPlayer = Player(id: "id\(i)")
             newPlayer.id = UUID().uuidString
             newPlayer.displayName = "player" + String(i)
             if i <= 7 {
@@ -37,51 +104,6 @@ class Game : ObservableObject {
         
         
     }
-    
-    
-    func getPlayerObj(_ id: String) -> Player? {
-  // {$0.id == player.id} is the same as { player in player.id == player id }
-        
-        for p in players {
-            if p.id == id {
-                return p
-                
-            }
-        }
-        
-        for p in players {
-            if !p.isNotDummy {
-                p.id = id
-                return p
-            }
-        }
-        
-        
-        
-        self.p.write("Player with id \(id) not found")
-        return nil
-        
-    }
-    
-    
-    
-    func updatePlayerList(lobby: Lobby) {
-        
-        for p in players {
-            if !lobby.playerIds.contains(p.id) {
-                p.isNotDummy = false
-            }
-        }
-        
-        
-
-        self.p.write("Player list has been updated")
-    }
-    
-    private func addPlayer(player: Player) {
-        
-    }
-    
 
 }
 

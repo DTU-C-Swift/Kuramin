@@ -20,7 +20,7 @@ class Service {
     var db = Firestore.firestore()
     let storage = Storage.storage()
     let printer = Printer(tag: "Service", displayPrints: true)
-    //let controller = DataHolder.controller
+    let controller = DataHolder.controller
     let lobby = "lobby"
     
     
@@ -35,12 +35,11 @@ class Service {
             
         }
         // TODO check if the user is already exist in the db
-        
-        printer.writeRed("hello")
-        
+                
         
         if let user = Auth.auth().currentUser {
             var dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 500)
+            controller.game.me.id = user.uid
             
             
             let userRef = db.collection("users").document(user.uid)
@@ -123,25 +122,23 @@ class Service {
     
     
     func observeMeInDB(_ game: Game) {
-        var player = game.me
+        var me = game.me
         
-        if player.id.isEmpty {
+        if me.id == Util().MY_DUMMY_ID {
             
             if let user = Auth.auth().currentUser {
-                player.id = user.uid
-                //uid = "test_uid"
+                me.id = user.uid
             }
-            
         }
         
         
         // Gets user image from storage
-        self.downloadImg(player)
+        self.downloadImg(me)
         
         
         
         // Gets user from firestore
-        db.collection("users").document(player.id).addSnapshotListener { snapshot, error in
+        db.collection("users").document(me.id).addSnapshotListener { snapshot, error in
             guard let document = snapshot else {
                 self.printer.write("Error fetching document: \(error!)")
                 
@@ -155,7 +152,7 @@ class Service {
             do {
                 let dbUser = try document.data(as: DbUser.self)
                 self.printer.write("Retrieved user: \(dbUser.toString())")
-                player.update(dbUser)
+                me.update(dbUser)
                 
             }
             catch{
@@ -185,7 +182,8 @@ class Service {
             }
             else {
                 if let img = UIImage(data: data!) {
-                    player.image = img
+                    //player.image = img
+                    controller.game.setPlayerImg(pid: player.id, image: img)
                     return
                 }
                 self.printer.write("Error in converting image")
@@ -197,7 +195,7 @@ class Service {
     
     
     func goToLobby(game: Game) {
-        var player = game.me
+        var me = game.me
         let ref = db.collection("matchMaker").document(lobby)
         //player.id = "testId"
         
@@ -214,10 +212,10 @@ class Service {
             
             // Checks if document "lobby" exists already in db
             if !lobbyDocument.exists {
-                transaction.setData(["playerIds": [player.id], "host": player.id], forDocument: ref)
+                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
             } else {
                 transaction.updateData([
-                    "playerIds" : FieldValue.arrayUnion([player.id])
+                    "playerIds" : FieldValue.arrayUnion([me.id])
                 ], forDocument: ref)
             }
             
@@ -239,15 +237,20 @@ class Service {
     
     
     func amIHost(_ game: Game) {
-        var player = game.me
+        var me = game.me
         var ref = db.collection("matchMaker").document(lobby)
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
-                if let host = document.get("host") as? String {
+                if let hostId = document.get("host") as? String {
                     
-                    if host == player.id {
+                    // TODO: Set host
+                    DataHolder.controller.game.host = hostId
+                    
+                    if hostId == me.id {
                         self.printer.write("You are the host")
+                        
+
                     } else {
                         self.printer.write("You aren't the host")
                     }
