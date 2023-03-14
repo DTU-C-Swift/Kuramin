@@ -6,24 +6,16 @@
 //
 
 import SwiftUI
-import Firebase
-import FBSDKCoreKit
-import FBSDKLoginKit
 
 
 struct GamePage: View {
     @State private var isAnimating = false
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @EnvironmentObject var navState: NavState
-    @State var user: User? = nil
     @Environment(\.scenePhase) private var scenePhase
     let printer = Printer(tag: "GamePage", displayPrints: true)
     @State private var changedTopColumn = false
-    //@State private var changedTopColumn = false
 
-    
-    
-    
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
     @ObservedObject var game = DataHolder.controller.game
