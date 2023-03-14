@@ -14,7 +14,7 @@ class Game : ObservableObject {
     @Published var me: Player = Player()
     var host: Player = Player()
     
-    let p = Printer(tag: "Player", displayPrints: true)
+    let p = Printer(tag: "Game", displayPrints: true)
     
     init() {
         me.isNotDummy = true
@@ -44,11 +44,17 @@ class Game : ObservableObject {
             if p.id == id {
                 return p
                 
-            } else if !p.isNotDummy {
+            }
+        }
+        
+        for p in players {
+            if !p.isNotDummy {
                 p.id = id
                 return p
             }
         }
+        
+        
         
         self.p.write("Player with id \(id) not found")
         return nil
@@ -67,7 +73,7 @@ class Game : ObservableObject {
         
         
 
-        
+        self.p.write("Player list has been updated")
     }
     
     private func addPlayer(player: Player) {

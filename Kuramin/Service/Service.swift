@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseCore
-import FirebaseFirestore
+//import FirebaseFirestore
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
@@ -21,6 +21,7 @@ class Service {
     let storage = Storage.storage()
     let printer = Printer(tag: "Service", displayPrints: true)
     //let controller = DataHolder.controller
+    let lobby = "lobby"
     
     
     
@@ -197,7 +198,7 @@ class Service {
     
     func goToLobby(game: Game) {
         var player = game.me
-        let ref = db.collection("matchMaker").document("lobby")
+        let ref = db.collection("matchMaker").document(lobby)
         //player.id = "testId"
         
         // Transactional call
@@ -239,7 +240,7 @@ class Service {
     
     func amIHost(_ game: Game) {
         var player = game.me
-        var ref = db.collection("matchMaker").document("lobby")
+        var ref = db.collection("matchMaker").document(lobby)
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
@@ -265,7 +266,7 @@ class Service {
     
     
     func observeLobby(_ game: Game) {
-        var ref = db.collection("matchMaker").document("lobby")
+        var ref = db.collection("matchMaker").document(lobby)
         
         ref.addSnapshotListener { snapshot, err in
             
@@ -276,12 +277,11 @@ class Service {
                     
                     for uid in data.playerIds {
                         self.printer.write(uid)
-                        if uid == game.me.id {continue}
+                        if uid == game.me.id || uid.isEmpty || uid == " " {continue}
                         
                         var player = game.getPlayerObj(uid)
                         
                         if let player = player {
-                            player.isNotDummy = true
                             self.fetchUser(game, player)
                             
                         } else {
@@ -319,6 +319,8 @@ class Service {
             case .success(let user):
                 player.update(user)
                 self.printer.write("User info has been fetched")
+                player.isNotDummy = true
+
                 
             case .failure(let err):
                 self.printer.write("Error while fetching user info of id: \(player.id).\n Error type: \(err)")
