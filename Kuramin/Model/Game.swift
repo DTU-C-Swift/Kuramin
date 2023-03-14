@@ -18,6 +18,8 @@ class Game : ObservableObject {
     
     init() {
         me.isNotDummy = true
+        //controller.game.addDummyPlayers()
+
     }
     
     

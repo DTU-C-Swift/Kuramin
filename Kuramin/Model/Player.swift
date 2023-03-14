@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class Player : ObservableObject {
+class Player : ObservableObject, Identifiable {
     
     var id = ""
     var fullName: String = ""

@@ -22,9 +22,10 @@ struct GamePage: View {
     
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
+    //@ObservedObject var players = DataHolder.controller.game.players
+    
     
     init() {
-        controller.game.addDummyPlayers()
     }
     
     
@@ -65,13 +66,24 @@ struct GamePage: View {
                    
                     HStack() {
 
-                        Spacer()
-                        CirclePicView(player: controller.game.players[0])
-                        Spacer()
-                        CirclePicView(player: controller.game.players[3])
-                        Spacer()
-                        CirclePicView(player: controller.game.players[4])
-                        Spacer()
+                        
+                        List(controller.game.players) { item in
+                       
+                            if item.isNotDummy {
+                                CirclePicView(player: item)
+                                Spacer()
+
+                            }
+                            
+                        }
+                        
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[0])
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[3])
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[4])
+//                        Spacer()
 
                     }
                     .padding(.top, 4)
@@ -86,22 +98,22 @@ struct GamePage: View {
                 Spacer()
                 HStack() {
                     
-                    VStack{
-                        
-                        CirclePicView(player: controller.game.players[1])
-                        Spacer()
-                        CirclePicView(player: controller.game.players[5])
-                        
-                    }
+//                    VStack{
+//
+//                        CirclePicView(player: controller.game.players[1])
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[5])
+//
+//                    }
                     
                     
                     Spacer()
-                    VStack {
-                        CirclePicView(player: controller.game.players[2])
-                        Spacer()
-                        CirclePicView(player: controller.game.players[6])
-                        
-                    }
+//                    VStack {
+//                        CirclePicView(player: controller.game.players[2])
+//                        Spacer()
+//                        CirclePicView(player: controller.game.players[6])
+//
+//                    }
                     
                 }
                 
