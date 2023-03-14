@@ -15,6 +15,8 @@ class Controller : ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
     @Published var image: UIImage? = nil
+    @Published var test: Test = Test()
+
     
     init() {
         self.listenForLogout()

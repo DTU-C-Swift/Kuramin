@@ -29,7 +29,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct KuraminApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    
     init() {
     
         FirebaseApp.configure()
@@ -37,7 +37,7 @@ struct KuraminApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                //.environmentObject(Controller(game: nil))
+                //.environmentObject(DataHolder.controller)
         }
     }
 }

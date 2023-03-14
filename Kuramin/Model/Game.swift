@@ -12,10 +12,12 @@ class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
     @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
+    @Published var playerListChanged: Bool = true
+
     var hostId = ""
-    
-    private let lock = NSLock()
+    //private let lock = NSLock()
     let p = Printer(tag: "Game", displayPrints: true)
+
     
     init() {
         //self.addDummyPlayers()
@@ -73,7 +75,8 @@ class Game : ObservableObject {
             return
         }
         
-        for p in players {
+        
+        for p in self.players {
             if p.id == dbUser.uid {
                 p.update(dbUser)
                 return
@@ -81,9 +84,11 @@ class Game : ObservableObject {
         }
         var newPlayer = Player(id: dbUser.uid!)
         newPlayer.update(dbUser)
-        players.append(newPlayer)
-        
-        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid)")
+        self.players.append(newPlayer)
+        ///////////////////  
+        //self.playerListChanged = true
+        DataHolder.controller.game.playerListChanged = true
+        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid).")
     }
     
     

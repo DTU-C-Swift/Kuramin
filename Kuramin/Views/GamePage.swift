@@ -18,11 +18,15 @@ struct GamePage: View {
     @State var user: User? = nil
     @Environment(\.scenePhase) private var scenePhase
     let printer = Printer(tag: "GamePage", displayPrints: true)
+    @State private var changedTopColumn = false
+    //@State private var changedTopColumn = false
+
+    
     
     
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
-    //@ObservedObject var players = DataHolder.controller.game.players
+    @ObservedObject var game = DataHolder.controller.game
     
     
     init() {
@@ -56,6 +60,24 @@ struct GamePage: View {
                         
                         
                         
+                        Button(action: {
+                            if controller.test.isLoggedIn == true {
+                                controller.test.isLoggedIn = false
+
+                            }
+                            else {
+                                controller.test.isLoggedIn = true
+
+                            }
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.white)
+                                .scaleEffect(1.8)
+                                .padding(.bottom, 20)
+                                .padding(.leading, 20)
+
+                        }
+                        
                         
                         
                         Spacer()
@@ -66,9 +88,17 @@ struct GamePage: View {
                    
                     HStack() {
 
+                        if game.players.count > 0 {
+                            CirclePicView(player: controller.game.players[0])
+                        
+                            Text("Player")
+                        }
+                        
+
+                        
                         
 //                        List(controller.game.players) { item in
-//                       
+//
 //                            CirclePicView(player: item)
 //                            Spacer()
 //                        }
@@ -144,7 +174,12 @@ struct GamePage: View {
             controller.service.goToLobby()
 
         }
-        
+//        .onChange(of: controller.game.players) { newValue in
+//            if
+//        }
+        .onChange(of: controller.test.isLoggedIn) { newValue in
+            self.printer.write("Player list changed: \(newValue)")
+        }
     }
     
     

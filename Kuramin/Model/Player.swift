@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class Player : ObservableObject, Identifiable {
+class Player : ObservableObject, Identifiable{
     
     var id: String
     var fullName: String = ""
@@ -16,13 +16,17 @@ class Player : ObservableObject, Identifiable {
     @Published var image: UIImage = UIImage(imageLiteralResourceName: "person_100")
     @Published var isNotDummy: Bool = false
     @Published var coins: Int = 0
-
+    
     var p = Printer(tag: "Player", displayPrints: true)
     
     init(id: String) {
         self.id = id
     }
     
+    
+//    static func == (lhs: Player, rhs: Player) -> Bool {
+//        return lhs.id == rhs.id
+//    }
     
     
     func setStrImg(imgName: String) {
@@ -46,7 +50,7 @@ class Player : ObservableObject, Identifiable {
         }
         
         self.p.write("Player updated: \(self.displayName), \(self.id)")
-
+        
     }
     
     
@@ -64,7 +68,7 @@ class Player : ObservableObject, Identifiable {
             self.fullName = player.fullName
             
         }
-
+        
     }
     
     
@@ -72,3 +76,4 @@ class Player : ObservableObject, Identifiable {
     
     
 }
+
