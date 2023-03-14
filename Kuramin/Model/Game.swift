@@ -19,8 +19,6 @@ class Game : ObservableObject {
 
     
     init() {
-        //self.addDummyPlayers()
-
     }
     
     
@@ -57,7 +55,6 @@ class Game : ObservableObject {
         
         players.remove(atOffsets: IndexSet(playesToBeDeleted))
         playersLock.unlock()
-        
         lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
         
         self.p.write("Player list has been updated")
@@ -72,62 +69,54 @@ class Game : ObservableObject {
             self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
             return }
 
-        
-//        for (_, p) in players.enumerated() {
-//
-//            if p.id == player.id {
-//                p.update(player: player)
-//                return
-//            }
-//        }
-        
-        
         playersLock.lock()
-        
         players.append(player)
         playersLock.unlock()
     }
     
     
     
-    func addPlayer(dbUser: DbUser) {
-        if dbUser.uid?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == nil {
-            self.p.write("AddPlayer: playerId is empty. Id: \(dbUser.uid ?? "nil ")")
-            return
-        }
-        
-        
-        for p in self.players {
-            if p.id == dbUser.uid {
-                p.update(dbUser)
-                return
-            }
-        }
-        var newPlayer = Player(id: dbUser.uid!)
-        newPlayer.update(dbUser)
-        self.players.append(newPlayer)
-        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid ?? "nil ")")
-    }
+//    func addPlayer(dbUser: DbUser) {
+//        if dbUser.uid?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == nil {
+//            self.p.write("AddPlayer: playerId is empty. Id: \(dbUser.uid ?? "nil ")")
+//            return
+//        }
+//
+//
+//        for p in self.players {
+//            if p.id == dbUser.uid {
+//                p.update(dbUser)
+//                return
+//            }
+//        }
+//        var newPlayer = Player(id: dbUser.uid!)
+//        newPlayer.update(dbUser)
+//        self.players.append(newPlayer)
+//        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid ?? "nil ")")
+//    }
     
     
     
-    func setPlayerImg(pid: String, image: UIImage) {
-        
-        if me.id == pid {
-            me.image = image
-            return
-        }
-        
-        for p in players {
-            if p.id == pid {
-                p.image = image
-                return
-            }
-        }
-        
-        self.p.write("PlayerId: \(pid) not found")
-        
-    }
+    
+    
+    
+//    func setPlayerImg(pid: String, image: UIImage) {
+//
+//        if me.id == pid {
+//            me.image = image
+//            return
+//        }
+//
+//        for p in players {
+//            if p.id == pid {
+//                p.image = image
+//                return
+//            }
+//        }
+//
+//        self.p.write("PlayerId: \(pid) not found")
+//
+//    }
     
     
     
