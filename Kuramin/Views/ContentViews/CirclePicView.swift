@@ -8,14 +8,6 @@
 import SwiftUI
 
 struct CirclePicView: View {
-    //    @Binding var playerName: String
-    //    @Binding var imageName: String
-    
-    //    init(playerName: String, imageName: String) {
-    //        self.playerName = playerName
-    //        self.imageName = imageName
-    //    }
-    
     @ObservedObject var player: Player
     
     init(player: Player) {

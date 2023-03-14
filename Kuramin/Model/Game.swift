@@ -12,7 +12,6 @@ class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
     @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
-    @Published var playerListChanged: Bool = true
 
     var hostId = ""
     //private let lock = NSLock()
@@ -56,7 +55,7 @@ class Game : ObservableObject {
             return }
 
         
-        for (index, p) in players.enumerated() {
+        for (_, p) in players.enumerated() {
             
             if p.id == player.id {
                 p.update(player: player)
@@ -71,7 +70,7 @@ class Game : ObservableObject {
     
     func addPlayer(dbUser: DbUser) {
         if dbUser.uid?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == nil {
-            self.p.write("AddPlayer: playerId is empty. Id: \(dbUser.uid)")
+            self.p.write("AddPlayer: playerId is empty. Id: \(dbUser.uid ?? "nil ")")
             return
         }
         
@@ -85,10 +84,7 @@ class Game : ObservableObject {
         var newPlayer = Player(id: dbUser.uid!)
         newPlayer.update(dbUser)
         self.players.append(newPlayer)
-        ///////////////////  
-        //self.playerListChanged = true
-        DataHolder.controller.game.playerListChanged = true
-        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid).")
+        self.p.write("AddPlayer: Player successfully added Id: \(dbUser.uid ?? "nil ")")
     }
     
     

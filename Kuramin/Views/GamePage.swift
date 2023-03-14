@@ -57,29 +57,6 @@ struct GamePage: View {
                                 .padding(.leading, 20)
 
                         }
-                        
-                        
-                        
-//                        Button(action: {
-//                            if controller.test.isLoggedIn == true {
-//                                controller.test.isLoggedIn = false
-//
-//                            }
-//                            else {
-//                                controller.test.isLoggedIn = true
-//
-//                            }
-//                        }) {
-//                            Image(systemName: "chevron.backward")
-//                                .foregroundColor(.white)
-//                                .scaleEffect(1.8)
-//                                .padding(.bottom, 20)
-//                                .padding(.leading, 20)
-//
-//                        }
-                        
-                        
-                        
                         Spacer()
                         
                     }
@@ -90,38 +67,21 @@ struct GamePage: View {
                         Spacer()
                         if game.players.count > 0 {
                             CirclePicView(player: controller.game.players[0])
-                        
                         }
                         
                         if game.players.count > 3 {
                             Spacer()
                             CirclePicView(player: controller.game.players[3])
-                            
                         }
                         
                         
                         if game.players.count > 4 {
                             Spacer()
                             CirclePicView(player: controller.game.players[4])
-                            
                         }
                         
                         Spacer()
                         
-                        
-//                        List(controller.game.players) { item in
-//
-//                            CirclePicView(player: item)
-//                            Spacer()
-//                        }
-                        
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[0])
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[3])
-//                        Spacer()
-//                        CirclePicView(player: controller.game.players[4])
-//                        Spacer()
 
                     }
                     .padding(.top, 4)
@@ -144,9 +104,7 @@ struct GamePage: View {
                             CirclePicView(player: controller.game.players[5])
                             Spacer()
                         }
-                        
-                        
-                        
+
                         if game.players.count > 1 {
                             CirclePicView(player: controller.game.players[1])
                         }
@@ -161,7 +119,6 @@ struct GamePage: View {
                         
                         if game.players.count > 2 {
                             CirclePicView(player: controller.game.players[2])
-
                         }
                         
                         
@@ -169,7 +126,6 @@ struct GamePage: View {
                             CirclePicView(player: controller.game.players[6])
                         }
                         
-
                     }
                     
                 }
@@ -205,12 +161,7 @@ struct GamePage: View {
             controller.service.goToLobby()
 
         }
-//        .onChange(of: controller.game.players) { newValue in
-//            if
-//        }
-        .onChange(of: controller.test.isLoggedIn) { newValue in
-            self.printer.write("Player list changed: \(newValue)")
-        }
+
     }
     
     
