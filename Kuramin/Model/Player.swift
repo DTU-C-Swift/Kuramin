@@ -29,8 +29,10 @@ class Player : ObservableObject, Identifiable {
         self.image = UIImage(imageLiteralResourceName: imgName)
     }
     
+    
+    
     func update(_ dbUser: DbUser) {
-        //self.id = dbUser.uid
+        
         if self.coins != dbUser.coins {
             self.coins = dbUser.coins
         }
@@ -42,6 +44,8 @@ class Player : ObservableObject, Identifiable {
             self.fullName = dbUser.fullName
             
         }
+        
+        self.p.write("Player updated: \(self.displayName), \(self.id)")
 
     }
     

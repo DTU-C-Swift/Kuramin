@@ -21,10 +21,10 @@ struct MyPlayerViewInGamePage: View {
     var body: some View {
         ZStack {
             
-//            CardView()
-//                .padding(.bottom, 80)
+            //            CardView()
+            //                .padding(.bottom, 80)
             
-                
+            
             
             Rectangle()
                 .fill(Color.cyan)
@@ -43,32 +43,21 @@ struct MyPlayerViewInGamePage: View {
             
             ZStack {
                 
-                
-                
-                
-                if me.isNotDummy {
-                    
-                    HStack {
-                        Image("coins_30")
-                        
-                        Text("\(coins)\(str)")
-                        
-                        
-                        Spacer()
-                        
-                    }
-                    
-                    
-                    
-                    HStack {
-                        Spacer()
-                        CirclePicView(player: me)
-                        Spacer()
-                        
-                    }
 
+                HStack {
+                    Image("coins_30")
+                    Text("\(coins)\(str)")
+                    Spacer()
                     
-
+                }
+                
+                
+                
+                HStack {
+                    
+                    Spacer()
+                    CirclePicView(player: me)
+                    Spacer()
 
                 }
             }
@@ -78,12 +67,12 @@ struct MyPlayerViewInGamePage: View {
         }
         .frame(width: 350, height: 40)
         .shadow(radius: 200)
-
+        
         .onChange(of: me.coins) { newValue in
             if newValue >= 1000000 {
                 coins = newValue/1000
                 str = "K"
-
+                
             } else {
                 coins = newValue
                 str = ""

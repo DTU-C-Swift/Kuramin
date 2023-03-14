@@ -42,6 +42,7 @@ class Service {
         
         if let user = Auth.auth().currentUser {
             var dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 500)
+            
             DataHolder.controller.game.me.id = user.uid
             
             

@@ -98,6 +98,7 @@ class Game : ObservableObject {
         for p in players {
             if p.id == pid {
                 p.image = image
+                return
             }
         }
         
