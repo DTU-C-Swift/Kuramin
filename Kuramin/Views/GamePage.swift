@@ -19,6 +19,8 @@ struct GamePage: View {
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
     @ObservedObject var game = DataHolder.controller.game
+    @State var earlier: String = ""
+    @State var later: String = ""
     
     
     init() {
@@ -53,6 +55,19 @@ struct GamePage: View {
                         
                         Button(action: {
                             controller.game.isGameStarted = true
+                            
+                            
+                            
+
+                            if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
+                                self.printer.write("Earlier")
+                            }
+                            
+                            else {
+                                self.printer.write("Later")
+                            }
+                            
+                            
                         }) {
                             Text("Start Game")
 
@@ -162,6 +177,12 @@ struct GamePage: View {
         .persistentSystemOverlays(.hidden)
         .onAppear() {
             //controller.service.goToLobby()
+            
+            earlier = MyDate().getTime()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                later = MyDate().getTime()
+            }
 
         }
 

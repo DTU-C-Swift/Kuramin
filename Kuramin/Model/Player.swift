@@ -19,6 +19,12 @@ class Player : ObservableObject, Identifiable{
     let lock = NSLock()
     var p = Printer(tag: "Player", displayPrints: true)
     
+    
+
+    
+    
+    
+    
     init(id: String) {
         self.id = id
     }
@@ -26,6 +32,15 @@ class Player : ObservableObject, Identifiable{
     
 
     
+    
+    func dd() {
+        
+
+
+        
+
+        
+    }
     
 //    func setStrImg(imgName: String) {
 //        self.image = UIImage(imageLiteralResourceName: imgName)

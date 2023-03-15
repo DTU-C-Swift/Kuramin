@@ -27,6 +27,7 @@
 		56B68F8C29B296880070844D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8B29B296880070844D /* FacebookLogin */; };
 		56B68F8E29B296880070844D /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 56B68F8D29B296880070844D /* FacebookShare */; };
 		56BA237E29B54E4F004D8168 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BA237D29B54E4F004D8168 /* ProgressBar.swift */; };
+		56D9807929C1CA1E0059DF8F /* MyDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D9807829C1CA1E0059DF8F /* MyDate.swift */; };
 		56E9081429BA6F9A005352DD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E9081329BA6F9A005352DD /* Util.swift */; };
 		56E9081629BA7EBB005352DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 56E9081529BA7EBB005352DD /* FirebaseFirestoreSwift */; };
 		56EF7BCA29B101D0007D6027 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 56EF7BC929B101D0007D6027 /* GoogleSignIn */; };
@@ -78,6 +79,7 @@
 		568D082029BE609E00201DEB /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		568D082329BE784F00201DEB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		56BA237D29B54E4F004D8168 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		56D9807829C1CA1E0059DF8F /* MyDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDate.swift; sourceTree = "<group>"; };
 		56E9081329BA6F9A005352DD /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		56EF7BCB29B10231007D6027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56EF7BCC29B1074F007D6027 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				56E9081329BA6F9A005352DD /* Util.swift */,
 				5683593C29C12A820002E261 /* Printer.swift */,
+				56D9807829C1CA1E0059DF8F /* MyDate.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				5689AD7D29AFA19E0062A6CD /* Service.swift in Sources */,
 				5689AD7229AE77650062A6CD /* Game.swift in Sources */,
 				BF1EDEAD29A782E80016B49C /* ProfilePageView.swift in Sources */,
+				56D9807929C1CA1E0059DF8F /* MyDate.swift in Sources */,
 				568D082429BE784F00201DEB /* CardView.swift in Sources */,
 				568D082129BE609E00201DEB /* Card.swift in Sources */,
 				566A100129AFF3FE00E71D31 /* DataHolder.swift in Sources */,
