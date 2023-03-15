@@ -12,6 +12,7 @@ class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
     @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
+    var actualPlayerSize = 0
 
     var hostId = ""
     private let playersLock = NSLock()
@@ -54,7 +55,7 @@ class Game : ObservableObject {
             
             if !matchFound {
                 playesToBeDeleted.append(index)
-
+                actualPlayerSize += -1
             }
         }
         
@@ -79,6 +80,7 @@ class Game : ObservableObject {
         var matchFound = false
         
         playersLock.lock()
+        
         for p in players {
             
             if p.isLeft {continue}
@@ -97,6 +99,7 @@ class Game : ObservableObject {
                 
                 p.isLeft = true
                 p.leftAt = MyDate().getTime()
+                actualPlayerSize += -1
                 self.p.write("Player: \(p.id), leftAt \(p.leftAt)")
             }
         }
@@ -116,27 +119,92 @@ class Game : ObservableObject {
     
     func addPlayer(player: Player) {
         
-        if players.count >= 7 {
-            self.p.write("Player can't be added (player size already 8)")
-            return
-        }
         
         if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
             return }
-
-        playersLock.lock()
         
-        if players.contains(where: {$0.id == player.id}) {
-            playersLock.unlock()
+        
+        
+        if players.count >= 7 {
+            
+            if actualPlayerSize < 7 {
+                replace_with_quitPlayer(player: player)
+            }
+            
+            self.p.write("Player can't be added (player size already \(actualPlayerSize)")
             return
         }
         
         
+        
+
+        playersLock.lock()
+        
+        for (index, curr) in players.enumerated() {
+            
+            if curr.id == player.id {
+                
+                if curr.isLeft {
+                    players[index] = player
+                    
+                }
+                
+
+                playersLock.unlock()
+                return
+            }
+        }
+        
+        
+        
         players.append(player)
+        actualPlayerSize += 1
         printPlayerList()
         playersLock.unlock()
     }
+    
+    
+    
+    
+    
+    private func replace_with_quitPlayer(player: Player) {
+        
+        var earliestPlayerIndex = -1
+        var earliestTime = ""
+        
+        
+        playersLock.lock()
+        for (index, currP) in players.enumerated() {
+            
+            if !currP.isLeft {continue}
+            
+            if earliestPlayerIndex == -1 {
+                earliestPlayerIndex = index
+                earliestTime = currP.leftAt
+                continue
+            }
+            
+            
+            if MyDate().isEarlier(earlierTime: currP.leftAt, laterTime: earliestTime) {
+                earliestPlayerIndex = index
+                earliestTime = currP.leftAt
+            }
+            
+        }
+        
+        
+        self.p.write("Replacing \(players[earliestPlayerIndex].displayName) by \(player.displayName)")
+
+        players[earliestPlayerIndex] = player
+        playersLock.unlock()
+    }
+    
+    
+    
+    
+    
+    
     
     
     

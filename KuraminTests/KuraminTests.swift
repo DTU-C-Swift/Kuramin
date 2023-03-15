@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Kuramin
 
 final class KuraminTests: XCTestCase {
 
@@ -32,4 +33,55 @@ final class KuraminTests: XCTestCase {
         }
     }
 
+    
+    
+    func testAddPlayer() {
+        var controller = Controller()
+        let LOBBY = "lobby"
+        
+        var game = controller.game
+        
+        
+        //var lobby = Lobby(host: "", )
+        
+        
+        
+        
+        var p1 = Player(id: UUID())
+        var p2 = Player(id: UUID())
+        var p3 = Player(id: UUID())
+        var p4 = Player(id: UUID())
+        var p5 = Player(id: UUID())
+        var p6 = Player(id: UUID())
+        var p7 = Player(id: UUID())
+
+        
+        game.addPlayer(player: p1)
+        game.addPlayer(player: p2)
+        game.addPlayer(player: p3)
+        
+        XCTAssert(game.actualPlayerSize, 3)
+        XCTAssert(game.players.count, 3)
+        
+        game.addPlayer(player: p4)
+        game.addPlayer(player: p5)
+        game.addPlayer(player: p6)
+        game.addPlayer(player: p7)
+
+        
+        XCTAssert(game.actualPlayerSize, 7)
+        XCTAssert(game.players.count, 7)
+
+
+        
+        
+        
+        XCTAssert(2, 2)
+
+
+
+        
+        
+        
+    }
 }
