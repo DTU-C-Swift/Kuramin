@@ -16,7 +16,7 @@ class Player : ObservableObject, Identifiable{
     @Published var image: UIImage = UIImage(imageLiteralResourceName: "person_100")
     @Published var isNotDummy: Bool = false
     @Published var coins: Int = 0
-    
+    let lock = NSLock()
     var p = Printer(tag: "Player", displayPrints: true)
     
     init(id: String) {
@@ -24,52 +24,50 @@ class Player : ObservableObject, Identifiable{
     }
     
     
-//    static func == (lhs: Player, rhs: Player) -> Bool {
-//        return lhs.id == rhs.id
+
+    
+    
+//    func setStrImg(imgName: String) {
+//        self.image = UIImage(imageLiteralResourceName: imgName)
 //    }
-    
-    
-    func setStrImg(imgName: String) {
-        self.image = UIImage(imageLiteralResourceName: imgName)
-    }
     
     
     
     func update(_ dbUser: DbUser) {
-        
+
         if self.coins != dbUser.coins {
             self.coins = dbUser.coins
         }
-        
+
         let newName = dbUser.fullName.split(separator: " ")
-        
+
         if self.displayName != newName[0] {
             self.displayName = String(newName[0])
             self.fullName = dbUser.fullName
-            
+
         }
-        
+
         self.p.write("Player updated: \(self.displayName), \(self.id)")
-        
+
     }
     
     
     
-    func update(player: Player) {
-        //self.id = dbUser.uid
-        if self.coins != player.coins {
-            self.coins = player.coins
-        }
-        
-        let newName = player.fullName.split(separator: " ")
-        
-        if self.displayName != newName[0] {
-            self.displayName = String(newName[0])
-            self.fullName = player.fullName
-            
-        }
-        
-    }
+//    func update(player: Player) {
+//        //self.id = dbUser.uid
+//        if self.coins != player.coins {
+//            self.coins = player.coins
+//        }
+//
+//        let newName = player.fullName.split(separator: " ")
+//
+//        if self.displayName != newName[0] {
+//            self.displayName = String(newName[0])
+//            self.fullName = player.fullName
+//
+//        }
+//
+//    }
     
     
     func setDisplayName() {

@@ -54,8 +54,9 @@ class Game : ObservableObject {
         
         
         players.remove(atOffsets: IndexSet(playesToBeDeleted))
-        playersLock.unlock()
         lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+        playersLock.unlock()
+
         
         self.p.write("Player list has been updated")
     }
@@ -70,9 +71,19 @@ class Game : ObservableObject {
             return }
 
         playersLock.lock()
+        
+        if players.contains(where: {$0.id == player.id}) {
+            playersLock.unlock()
+            return
+        }
+        
+        
         players.append(player)
+        printPlayerList()
         playersLock.unlock()
     }
+    
+    
     
     
     
@@ -123,18 +134,28 @@ class Game : ObservableObject {
     
     
     
-    func addDummyPlayers() {
-        
-        for i in 1...8 {
-            let newPlayer = Player(id: "id\(i)")
-            newPlayer.id = UUID().uuidString
-            newPlayer.displayName = "player" + String(i)
-            if i <= 7 {
-                newPlayer.isNotDummy = true
-            }
-            players.append(newPlayer)
+//    func addDummyPlayers() {
+//
+//        for i in 1...8 {
+//            let newPlayer = Player(id: "id\(i)")
+//            newPlayer.id = UUID().uuidString
+//            newPlayer.displayName = "player" + String(i)
+//            if i <= 7 {
+//                newPlayer.isNotDummy = true
+//            }
+//            players.append(newPlayer)
+//        }
+//
+//
+//    }
+    
+    
+    
+    func printPlayerList() {
+        self.p.write("Printing player list")
+        for p in players {
+            self.p.write("Id: \(p.id), name: \(p.displayName)")
         }
-        
         
     }
 

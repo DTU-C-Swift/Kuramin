@@ -26,6 +26,7 @@ struct Util {
         if dbUser.uid == nil {
             print("Util: dbuser id is nill")
         }
+       player.lock.lock()
         
         player.id = dbUser.uid ?? MY_DUMMY_ID
         player.fullName = dbUser.fullName
@@ -33,6 +34,7 @@ struct Util {
         
         player.setDisplayName()
         
+        player.lock.unlock()
     }
     
     func deleteEmptyIds(lobby: inout Lobby) {

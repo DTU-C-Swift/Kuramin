@@ -191,8 +191,10 @@ class Service {
             }
             else {
                 if let img = UIImage(data: data!) {
+                    player.lock.lock()
                     player.image = img
-                    DataHolder.playerGerbage.append(player)
+                    player.lock.unlock()
+                    //DataHolder.playerGerbage.append(player)
                     //game.setPlayerImg(pid: pid, image: img)
                     return
                 }
@@ -277,8 +279,7 @@ class Service {
         
     }
     
-    
-    
+
     func observeLobby(game: Game) {
         
         var ref = db.collection("matchMaker").document(lobby)
@@ -290,18 +291,18 @@ class Service {
                                         
                     
                     Util().deleteEmptyIds(lobby: &lobby)
+                    
                     game.updatePlayerList(lobby: &lobby)
                     
                     
-                    
                     for uid in lobby.playerIds {
-                        self.printer.write(uid)
-                        //if uid == game.me.id || uid.isEmpty {continue}
-                        self.printer.write("id: \(uid)")
+                        self.printer.write("observeLobby: id: \(uid)")
                         
                         self.fetchUser(uid: uid, game: game)
                         
                     }
+                    
+
                 }
             }
             catch {
@@ -309,6 +310,7 @@ class Service {
                 self.printer.write("Error in observing lobby. \(err)")
             }
             
+
         }
         
     }
@@ -331,7 +333,7 @@ class Service {
                 Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
                 
                 game.addPlayer(player: newPlayer)
-                self.printer.write("User info has been fetched")
+                self.printer.write("User info has been fetched. id: \(newPlayer.id)")
             case .failure(let err):
                 self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
                 
