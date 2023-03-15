@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProgressBar: View {    
+struct ProgressBar: View {
     var body: some View {
         VStack {
             ProgressView()
