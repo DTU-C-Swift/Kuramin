@@ -243,7 +243,6 @@ class GameTest : ObservableObject{
         assert(game.actualPlayerSize == 6)
         assert(game.players.count == 7)
         
-        // => p5 (players[4]) was removed from the previous actions
         
         assert(game.players[0].id == p1.id)
         assert(game.players[1].id == p2.id)
@@ -254,15 +253,54 @@ class GameTest : ObservableObject{
         assert(game.players[6].id == p7.id)
 
 
+        // => p5 (players[4]) was removed by the previous actions
+
+        lobby = Lobby(host: p6.id, playerIds: [p6.id, p4.id, p1.id, p7.id, p3.id])
+        game.updatePlayerList(lobby: &lobby)
+        
+        assert(game.players[1].id == p2.id)
+        assert(game.players[1].isLeft && !game.players[1].leftAt.isEmpty)
+        assert(game.actualPlayerSize == 5)
+        assert(game.players.count == 7)
+        
+        // => p2 (players[1]) was removed by the previous actions
+
+        
+        // The earliest player replaced by player p11
+        let p11 = Player(id: "p11")
+        game.addPlayer(player: p11)
+        
+        assert(!game.players.contains(where: {$0.id == p5.id}))
+        assert(game.players[4].id == p11.id)
+        assert(game.actualPlayerSize == 6)
+        
+        
+        
+        // Adding a new player
+        let p12 = Player(id: "p12")
+        game.addPlayer(player: p12)
+        
+        assert(game.actualPlayerSize == 7 && game.players.count == 7)
+        assert(game.players.contains(where: {$0.id == p12.id}))
+        assert(game.players[1].id == p12.id)
+
+        // Note: player list is now full
+
+        let p13 = Player(id: "p13")
+        game.addPlayer(player: p13)
+        assert(!game.players.contains(where: {$0.id == p13.id}))
+
+        
+        // Note: p1 was removed from the list previously
+
+        assert(!game.players.contains(where: {$0.id == p1.id}))
+        
+        game.addPlayer(player: p1)
+        assert(game.actualPlayerSize == 7)
+        assert(game.players.count == 7)
+        assert(!game.players.contains(where: {$0.id == p1.id}))
 
 
-        
-        
-        
-        
-        lobby = Lobby(host: p6.id, playerIds: [p6.id, p4.id, p1.id, p7.id, p3.id, p2.id])
-
-        
     }
     
     
