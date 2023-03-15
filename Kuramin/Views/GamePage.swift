@@ -38,6 +38,7 @@ struct GamePage: View {
                     
                     HStack{
                         
+                        
                         Button(action: {
                             pm.wrappedValue.dismiss()
                             
@@ -49,6 +50,15 @@ struct GamePage: View {
                                 .padding(.leading, 20)
 
                         }
+                        
+                        Button(action: {
+                            controller.game.isGameStarted = true
+                        }) {
+                            Text("Start Game")
+
+                        }
+                        
+                        
                         Spacer()
                         
                     }
@@ -58,18 +68,18 @@ struct GamePage: View {
                     HStack() {
                         Spacer()
                         if game.players.count > 0 {
-                            CirclePicView(player: controller.game.players[0])
+                            CirclePicView(player: controller.game.players[0], game: game)
                         }
                         
                         if game.players.count > 3 {
                             Spacer()
-                            CirclePicView(player: controller.game.players[3])
+                            CirclePicView(player: controller.game.players[3], game: game)
                         }
                         
                         
                         if game.players.count > 4 {
                             Spacer()
-                            CirclePicView(player: controller.game.players[4])
+                            CirclePicView(player: controller.game.players[4], game: game)
                         }
                         
                         Spacer()
@@ -93,12 +103,12 @@ struct GamePage: View {
                         Spacer()
                         
                         if game.players.count > 5 {
-                            CirclePicView(player: controller.game.players[5])
+                            CirclePicView(player: controller.game.players[5], game: game)
                             Spacer()
                         }
 
                         if game.players.count > 1 {
-                            CirclePicView(player: controller.game.players[1])
+                            CirclePicView(player: controller.game.players[1], game: game)
                         }
                         
                         Spacer()
@@ -110,12 +120,12 @@ struct GamePage: View {
                     VStack {
                         Spacer()
                         if game.players.count > 6 {
-                            CirclePicView(player: controller.game.players[6])
+                            CirclePicView(player: controller.game.players[6], game: game)
                             Spacer()
                         }
                         
                         if game.players.count > 2 {
-                            CirclePicView(player: controller.game.players[2])
+                            CirclePicView(player: controller.game.players[2], game: game)
                         }
                         
                         Spacer()
@@ -129,7 +139,7 @@ struct GamePage: View {
                 HStack {
                     
                     Spacer()
-                    MyPlayerViewInGamePage(me: controller.game.me)
+                    MyPlayerViewInGamePage(me: controller.game.me, game: game)
                         .padding(.bottom, 10)
                     Spacer()
                     

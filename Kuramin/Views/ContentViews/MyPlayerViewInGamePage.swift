@@ -9,11 +9,14 @@ import SwiftUI
 
 struct MyPlayerViewInGamePage: View {
     @ObservedObject var me: Player
+    @ObservedObject var game: Game
     @State var coins: Int
     @State var str = ""
     
-    init(me: Player) {
+    
+    init(me: Player, game: Game) {
         self.me = me
+        self.game = game
         self.coins = me.coins
     }
     
@@ -50,7 +53,7 @@ struct MyPlayerViewInGamePage: View {
                 
                 HStack {
                     Spacer()
-                    CirclePicView(player: me)
+                    CirclePicView(player: me, game: game)
                     Spacer()
 
                 }
@@ -78,6 +81,6 @@ struct MyPlayerViewInGamePage: View {
 
 struct MyPlayerViewInGamePage_Previews: PreviewProvider {
     static var previews: some View {
-        MyPlayerViewInGamePage(me: DataHolder.controller.game.me)
+        MyPlayerViewInGamePage(me: DataHolder.controller.game.me, game: DataHolder.controller.game)
     }
 }

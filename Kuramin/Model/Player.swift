@@ -14,7 +14,7 @@ class Player : ObservableObject, Identifiable{
     var fullName: String = ""
     @Published var displayName = "NotSet"
     @Published var image: UIImage = UIImage(imageLiteralResourceName: "person_100")
-    @Published var isNotDummy: Bool = false
+    @Published var isLeft: Bool = false
     @Published var coins: Int = 0
     let lock = NSLock()
     var p = Printer(tag: "Player", displayPrints: true)

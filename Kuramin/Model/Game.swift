@@ -16,6 +16,7 @@ class Game : ObservableObject {
     var hostId = ""
     private let playersLock = NSLock()
     let p = Printer(tag: "Game", displayPrints: true)
+    var isGameStarted = false
 
     
     init() {
@@ -27,6 +28,12 @@ class Game : ObservableObject {
     
     
     func updatePlayerList(lobby: inout Lobby) {
+        
+        if isGameStarted {
+            self.updatePlayerList2(lobby: &lobby)
+            return
+        }
+        
         
         var playesToBeDeleted: [Int] = []
         var idsToBeDeleted: [Int] = []
@@ -64,8 +71,53 @@ class Game : ObservableObject {
     
     
     
+    // This update method should be called if the game has startet
+    func updatePlayerList2(lobby: inout Lobby) {
+        
+        
+        var idsToBeDeleted: [Int] = []
+        var matchFound = false
+        
+        playersLock.lock()
+        for p in players {
+            matchFound = false
+
+            for (idIndex, id) in lobby.playerIds.enumerated() {
+                
+                if id == p.id {
+                    idsToBeDeleted.append(idIndex)
+                    matchFound = true
+                    break
+                }
+            }
+            
+            if !matchFound {
+                p.isLeft = true
+
+            }
+        }
+        
+        
+        
+        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+        playersLock.unlock()
+
+        
+        self.p.write("Player list has been updated")
+        
+        
+    }
+    
+    
+    
     
     func addPlayer(player: Player) {
+        
+        if players.count >= 7 {
+            self.p.write("Player can't be added (player size already 8)")
+            return
+        }
+        
         if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
             return }
