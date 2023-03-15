@@ -31,15 +31,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct KuraminApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let persistenceController = PersistenceController.shared
-
     
     init() {
-    
+        
         FirebaseApp.configure()
+
     }
     var body: some Scene {
         WindowGroup {
             ContentView()
+            //TestVIew()
+                
                 //.environmentObject(DataHolder.controller)
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 

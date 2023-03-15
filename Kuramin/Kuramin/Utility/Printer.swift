@@ -22,13 +22,31 @@ class Printer {
 
     }
     
-    func writeRed(_ str: Any) {
-        //print(tag,": ", str, modifier: .red )
-        //print("\(tag): \("\u{001B}[31m\(str)\u{001B}[0m")")
-        self.write(str)
-
-
-    }
     
+//
+//    func error(_ str: Any) {
+//        print("📕 \(str)")
+//    }
+//
+//
+//
+//    func success(_ str: Any) {
+//        self.write("\n📗 \(str)")
+//    }
+//
+//
+//    func warning(_ str: Any) {
+//        self.write("\n📙 \(str)")
+//    }
+//
+//
+//    func action(_ str: Any) {
+//        self.write("\n📘 \(str)")
+//    }
+//
+//
+//    func cancelled(_ str: Any) {
+//        self.write("\n📓 \(str)")
+//    }
     
 }

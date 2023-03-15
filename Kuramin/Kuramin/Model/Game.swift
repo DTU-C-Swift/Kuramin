@@ -19,13 +19,9 @@ public class Game : ObservableObject {
     let p = Printer(tag: "Game", displayPrints: true)
     var isGameStarted = false
 
-    
-    init() {
-    }
-    
-    
 
-    
+
+    // TODO if the playe that is leaving is the host?
     
     
     func updatePlayerList(lobby: inout Lobby) {
