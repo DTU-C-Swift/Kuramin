@@ -17,6 +17,9 @@ class Player : ObservableObject, Identifiable{
     @Published var isLeft: Bool = false
     @Published var coins: Int = 0
     let lock = NSLock()
+    var leftAt = ""
+    
+    
     var p = Printer(tag: "Player", displayPrints: true)
     
     

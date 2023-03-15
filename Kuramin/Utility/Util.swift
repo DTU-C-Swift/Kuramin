@@ -54,6 +54,33 @@ struct Util {
         lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
         lobby.removeDuplicates()
     }
+    
+    
+    func isDuplicateLobby(lobby1: Lobby, lobby2: Lobby) -> Bool {
+        
+        if lobby1.playerIds.count != lobby2.playerIds.count ||
+            lobby1.host != lobby2.host {return false}
+
+        
+        if lobby1.playerIds != lobby2.playerIds {
+            return false
+        }
+        
+//        let ids1 = lobby1.playerIds
+//        let ids2 = lobby2.playerIds
+//
+//        if ids1.count != ids2.count {return false}
+//
+//
+//        for id in ids1 {
+//            if !ids2.contains(id) {
+//                return false
+//            }
+//
+//        }
+        
+        return true
+    }
 }
 
 

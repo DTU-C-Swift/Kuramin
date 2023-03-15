@@ -21,10 +21,10 @@ class Service {
     private var db = Firestore.firestore()
     private let storage = Storage.storage()
     private let printer = Printer(tag: "Service", displayPrints: true)
-
+    private let lobbyLock = NSLock()
 
     let lobby = "lobby"
-    
+    var previousLobby: Lobby = Lobby(host: "", playerIds: [""])
     
     
     
@@ -288,7 +288,16 @@ class Service {
             
             do {
                 if var lobby = try snapshot?.data(as: Lobby.self) {
-                                        
+                    
+                    self.lobbyLock.lock()
+                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
+                        self.lobbyLock.unlock()
+                        return
+                    }
+                    
+                    
+                    
+                    
                     
                     Util().deleteEmptyIds(lobby: &lobby)
                     
@@ -302,7 +311,7 @@ class Service {
                         
                     }
                     
-
+                    self.lobbyLock.unlock()
                 }
             }
             catch {

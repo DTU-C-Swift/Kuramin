@@ -80,8 +80,10 @@ class Game : ObservableObject {
         
         playersLock.lock()
         for p in players {
+            
+            if p.isLeft {continue}
+            
             matchFound = false
-
             for (idIndex, id) in lobby.playerIds.enumerated() {
                 
                 if id == p.id {
@@ -92,11 +94,12 @@ class Game : ObservableObject {
             }
             
             if !matchFound {
+                
                 p.isLeft = true
-
+                p.leftAt = MyDate().getTime()
+                self.p.write("Player: \(p.id), leftAt \(p.leftAt)")
             }
         }
-        
         
         
         lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
