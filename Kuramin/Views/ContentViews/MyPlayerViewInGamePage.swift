@@ -63,7 +63,7 @@ struct MyPlayerViewInGamePage: View {
             
         }
         .frame(width: 350, height: 40)
-        .shadow(radius: 200)
+        .shadow(radius: 20)
         
         .onChange(of: me.coins) { newValue in
             if newValue >= 1000000 {
