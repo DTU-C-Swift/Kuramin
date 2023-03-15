@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class Game : ObservableObject {
+public class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
     @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
@@ -73,7 +73,7 @@ class Game : ObservableObject {
     
     
     // This update method should be called if the game has startet
-    func updatePlayerList2(lobby: inout Lobby) {
+    private func updatePlayerList2(lobby: inout Lobby) {
         
         
         var idsToBeDeleted: [Int] = []
