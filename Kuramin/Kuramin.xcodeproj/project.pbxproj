@@ -29,6 +29,8 @@
 		56954C4029C2391E00155181 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3F29C2391E00155181 /* Controller.swift */; };
 		56954C4229C2393F00155181 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C4129C2393F00155181 /* DataHolder.swift */; };
 		56954C4529C2396C00155181 /* FbAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C4429C2396C00155181 /* FbAuth.swift */; };
+		56954C4729C2403E00155181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56954C4629C2403E00155181 /* GoogleService-Info.plist */; };
+		56954C4C29C2413D00155181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56954C4B29C2413D00155181 /* Assets.xcassets */; };
 		569C5CE129C2206C00D1D7FE /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CE029C2206C00D1D7FE /* KuraminApp.swift */; };
 		569C5CE329C2206C00D1D7FE /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CE229C2206C00D1D7FE /* CoreData.swift */; };
 		569C5CE829C2206D00D1D7FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 569C5CE729C2206D00D1D7FE /* Preview Assets.xcassets */; };
@@ -37,13 +39,13 @@
 		569C5CF729C2206E00D1D7FE /* KuraminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CF629C2206E00D1D7FE /* KuraminTests.swift */; };
 		569C5D0129C2206E00D1D7FE /* KuraminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5D0029C2206E00D1D7FE /* KuraminUITests.swift */; };
 		569C5D0329C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5D0229C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift */; };
-		569C5D1C29C2256700D1D7FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 569C5D1B29C2256700D1D7FE /* Assets.xcassets */; };
-		569C5D1E29C2274F00D1D7FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 569C5D1D29C2274F00D1D7FE /* GoogleService-Info.plist */; };
 		569C5D2229C2290B00D1D7FE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2129C2290B00D1D7FE /* FirebaseAuth */; };
 		569C5D2429C2290B00D1D7FE /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2329C2290B00D1D7FE /* FirebaseFirestoreSwift */; };
 		569C5D2629C2290B00D1D7FE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2529C2290B00D1D7FE /* FirebaseStorage */; };
 		569C5D2929C22C7C00D1D7FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2829C22C7C00D1D7FE /* FacebookCore */; };
 		569C5D2B29C22C7D00D1D7FE /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2A29C22C7D00D1D7FE /* FacebookLogin */; };
+		56E2655C29C24E5900738F12 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2655B29C24E5900738F12 /* Test.swift */; };
+		56E2655D29C24E5900738F12 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2655B29C24E5900738F12 /* Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		56954C3F29C2391E00155181 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		56954C4129C2393F00155181 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 		56954C4429C2396C00155181 /* FbAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FbAuth.swift; sourceTree = "<group>"; };
+		56954C4629C2403E00155181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56954C4B29C2413D00155181 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		569C5CDD29C2206C00D1D7FE /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		569C5CE029C2206C00D1D7FE /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
 		569C5CE229C2206C00D1D7FE /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
@@ -97,9 +101,8 @@
 		569C5CFC29C2206E00D1D7FE /* KuraminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuraminUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		569C5D0029C2206E00D1D7FE /* KuraminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITests.swift; sourceTree = "<group>"; };
 		569C5D0229C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		569C5D1B29C2256700D1D7FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Old/Kuramin/Assets.xcassets; sourceTree = "<group>"; };
-		569C5D1D29C2274F00D1D7FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Old/Kuramin/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		569C5D1F29C227E700D1D7FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		56E2655B29C24E5900738F12 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +203,7 @@
 			children = (
 				56954C3F29C2391E00155181 /* Controller.swift */,
 				56954C4129C2393F00155181 /* DataHolder.swift */,
+				56E2655B29C24E5900738F12 /* Test.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -244,10 +248,10 @@
 				569C5CE029C2206C00D1D7FE /* KuraminApp.swift */,
 				569C5CE229C2206C00D1D7FE /* CoreData.swift */,
 				569C5CE929C2206D00D1D7FE /* Persistence.swift */,
-				569C5D1B29C2256700D1D7FE /* Assets.xcassets */,
+				56954C4B29C2413D00155181 /* Assets.xcassets */,
 				569C5D1F29C227E700D1D7FE /* Info.plist */,
 				569C5CEB29C2206D00D1D7FE /* Kuramin.xcdatamodeld */,
-				569C5D1D29C2274F00D1D7FE /* GoogleService-Info.plist */,
+				56954C4629C2403E00155181 /* GoogleService-Info.plist */,
 				569C5CE629C2206D00D1D7FE /* Preview Content */,
 			);
 			path = Kuramin;
@@ -393,9 +397,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				569C5D1E29C2274F00D1D7FE /* GoogleService-Info.plist in Resources */,
 				569C5CE829C2206D00D1D7FE /* Preview Assets.xcassets in Resources */,
-				569C5D1C29C2256700D1D7FE /* Assets.xcassets in Resources */,
+				56954C4C29C2413D00155181 /* Assets.xcassets in Resources */,
+				56954C4729C2403E00155181 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +444,7 @@
 				56954C4229C2393F00155181 /* DataHolder.swift in Sources */,
 				569C5CE129C2206C00D1D7FE /* KuraminApp.swift in Sources */,
 				56954C1729C235AF00155181 /* CardView.swift in Sources */,
+				56E2655C29C24E5900738F12 /* Test.swift in Sources */,
 				56954C3929C238BD00155181 /* DbUser.swift in Sources */,
 				56954C3B29C238D400155181 /* Game.swift in Sources */,
 				56954C2C29C237D400155181 /* Printer.swift in Sources */,
@@ -454,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				569C5CF729C2206E00D1D7FE /* KuraminTests.swift in Sources */,
+				56E2655D29C24E5900738F12 /* Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +673,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = dtu.KuraminTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -687,6 +694,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = dtu.KuraminTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
