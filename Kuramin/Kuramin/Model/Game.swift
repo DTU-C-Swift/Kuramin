@@ -126,6 +126,7 @@ public class Game : ObservableObject {
             
             if actualPlayerSize < 7 {
                 replace_with_quitPlayer(player: player)
+                return
             }
             
             self.p.write("Player can't be added (player size already \(actualPlayerSize)")
@@ -142,7 +143,11 @@ public class Game : ObservableObject {
             if curr.id == player.id {
                 
                 if curr.isLeft {
+                    
+                    player.isLeft = false
+                    player.leftAt = ""
                     players[index] = player
+                    actualPlayerSize += 1
                     
                 }
                 
@@ -153,7 +158,8 @@ public class Game : ObservableObject {
         }
         
         
-        
+        player.isLeft = false
+        player.leftAt = ""
         players.append(player)
         actualPlayerSize += 1
         printPlayerList()
@@ -166,12 +172,21 @@ public class Game : ObservableObject {
     
     private func replace_with_quitPlayer(player: Player) {
         
+        if replaceIfPlayerExist(player: player) {
+            return
+        }
+        
+        
         var earliestPlayerIndex = -1
         var earliestTime = ""
         
         
         playersLock.lock()
         for (index, currP) in players.enumerated() {
+            
+            
+            
+            
             
             if !currP.isLeft {continue}
             
@@ -191,13 +206,36 @@ public class Game : ObservableObject {
         
         
         self.p.write("Replacing \(players[earliestPlayerIndex].displayName) by \(player.displayName)")
-
+        
+        player.isLeft = false
+        player.leftAt = ""
         players[earliestPlayerIndex] = player
+        actualPlayerSize += 1
         playersLock.unlock()
     }
     
     
-    
+    func replaceIfPlayerExist(player: Player) -> Bool {
+        
+        playersLock.lock()
+        
+        for (index, currP) in players.enumerated() {
+            if !currP.isLeft {continue}
+            
+            if currP.id == player.id {
+                actualPlayerSize += 1
+                
+                player.isLeft = false
+                player.leftAt = ""
+                players[index] = player
+                playersLock.unlock()
+                return true
+            }
+        }
+        
+        playersLock.unlock()
+        return false
+    }
     
     
     

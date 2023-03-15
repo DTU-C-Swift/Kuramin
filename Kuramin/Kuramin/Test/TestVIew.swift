@@ -26,7 +26,7 @@ struct TestVIew: View {
         }
         .onAppear {
             
-            gameTest.testAddPlayer()
+            gameTest.tests()
         }
     }
     
