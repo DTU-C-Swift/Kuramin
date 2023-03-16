@@ -391,6 +391,7 @@ class Service {
     
 
     func goToLobby2() {
+        
         let newLobby = "lobby"
         let game = DataHolder.controller.game
         var me = game.me
@@ -430,25 +431,33 @@ class Service {
                 
             } else {
                 
-//                let dbPlayerDict = try! db.Encoder().encode(dbPlayer) as [String: Any]
-//                transaction.updateData(["players": FieldValue.arrayUnion([dbPlayerDict])], forDocument: ref)
+
+                // Checks If the player already exists in the lobby(player list).
+                do {
+                    let dbLobby = try lobbyDocument.data(as: DbLobby.self)
+                    
+                    if let players = dbLobby.players {
+                        for crrId in players {
+                            if crrId.pid == me.id {
+                                self.printer.write("You are already in the lobby")
+                                return
+                            }
+                        }
+                    }
+                } catch {
+                    self.printer.write("Error while mapping data. (*)")
+                }
 
                 
-
+                // If the player does not exists in the lobby(player list) then adds the player to the lobby.
+                
                 do {
                     let encodedDbPlayer = try JSONEncoder().encode(dbPlayer)
-                    
+
                     transaction.updateData(["players": FieldValue.arrayUnion([encodedDbPlayer])], forDocument: ref)
 
-                    
-                    
                 } catch {}
                 
-//
-//                transaction.updateData([
-//                    "players": FieldValue.arrayUnion([dbPlayer])
-//                ] as [DbPlayer: Any], forDocument: ref)
-
             }
 
             return nil

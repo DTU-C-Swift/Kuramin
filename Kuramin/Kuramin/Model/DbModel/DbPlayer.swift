@@ -11,17 +11,17 @@ import FirebaseFirestoreSwift
 
 
 public struct DbLobby: Codable {
-    var gameId: String
-    var host: String
-    var whosTurn: String
-    var players: [DbPlayer]
+    var gameId: String?
+    var host: String?
+    var whosTurn: String?
+    var players: [DbPlayer]?
 }
 
 
 public struct DbPlayer: Codable {
-    var pid: String
-    var randomNum: Int
-    var cardsInHand: Int
+    var pid: String?
+    var randomNum: Int?
+    var cardsInHand: Int?
     
 }
 
