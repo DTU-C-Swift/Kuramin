@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfilePageView: View {
     let statsTitles = ["Matches", "Wins", "Win Rate", "Losses", "Loss Rate"]
     let statsValues = ["100", "60", "60%", "40", "40%"]
+    var dummyCoins = 123
     
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @ObservedObject var controller = DataHolder.controller
@@ -24,7 +25,7 @@ struct ProfilePageView: View {
                 Image("person_34")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 100)
+                    .frame(width: 80, height: 80)
                     .clipShape(Circle())
                     .padding(.top, 50)
                     .shadow(radius: 10)
@@ -33,10 +34,13 @@ struct ProfilePageView: View {
                     Text("Player Name")
                         .font(.title)
                         .bold()
-                    Text("User Bio")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 5)
+                    HStack {
+                        Image("cash")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                        Text("\(dummyCoins)")
+                            .font(.subheadline)
+                    }
                     
                     // Stats grid
                     LazyVGrid(columns: [GridItem(.flexible(), alignment: .leading)], spacing: 5) {
