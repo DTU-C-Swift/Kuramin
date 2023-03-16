@@ -21,15 +21,15 @@ public struct DbUser: Codable {
 }
 
 
-public struct Lobby: Codable {
-    var host: String
-    var playerIds: [String]
-
-
-    mutating func removeDuplicates() {
-        var newIds = Array(Set(self.playerIds))
-        self.playerIds = newIds
-        print("DBuser:\(self.playerIds)")
-    }
-
-}
+//public struct Lobby: Codable {
+//    var host: String
+//    var playerIds: [String]
+//
+//
+//    mutating func removeDuplicates() {
+//        var newIds = Array(Set(self.playerIds))
+//        self.playerIds = newIds
+//        print("DBuser:\(self.playerIds)")
+//    }
+//
+//}

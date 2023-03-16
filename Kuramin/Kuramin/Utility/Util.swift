@@ -67,18 +67,32 @@ struct Util {
             return false
         }
         
-//        let ids1 = lobby1.playerIds
-//        let ids2 = lobby2.playerIds
-//
-//        if ids1.count != ids2.count {return false}
-//
-//
-//        for id in ids1 {
-//            if !ids2.contains(id) {
-//                return false
-//            }
-//
-//        }
+        return true
+    }
+    
+    
+    
+    
+    
+    func converToLobby() {
+        
+    }
+    
+    
+    
+    
+    func isDuplicateLobby(lobby1: DbLobby, lobby2: DbLobby) -> Bool {
+        
+        
+        
+        if lobby1.players.count != lobby2.players.count ||
+            
+            lobby1.host != lobby2.host {return false}
+
+        
+        if lobby1.playerIds != lobby2.playerIds {
+            return false
+        }
         
         return true
     }
