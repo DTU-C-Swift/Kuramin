@@ -20,11 +20,27 @@ struct HowToPlayView: View {
                     """)
                 .padding()
                 .frame(width: 600)
+                
+                Image("person_34")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .shadow(radius: 10)
+                
                 Text("""
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis, metus non lacinia venenatis, purus risus sollicitudin ante, eu mattis mi enim lobortis dolor. Quisque fringilla ut neque et fringilla. Maecenas varius pharetra dui, eu venenatis urna blandit ac. In hac habitasse platea dictumst. Curabitur sed purus pulvinar, pharetra augue ac, lobortis magna. Nam nec arcu et nisl semper mattis. Ut ut odio volutpat, finibus augue sit amet, auctor purus.
                     """)
                 .padding()
                 .frame(width: 600)
+                
+                Image("person_34")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .shadow(radius: 10)
+                
                 Text("""
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis, metus non lacinia venenatis, purus risus sollicitudin ante, eu mattis mi enim lobortis dolor. Quisque fringilla ut neque et fringilla. Maecenas varius pharetra dui, eu venenatis urna blandit ac. In hac habitasse platea dictumst. Curabitur sed purus pulvinar, pharetra augue ac, lobortis magna. Nam nec arcu et nisl semper mattis. Ut ut odio volutpat, finibus augue sit amet, auctor purus.
                     """)
