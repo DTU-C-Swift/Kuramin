@@ -10,6 +10,7 @@
 		563AE91629C31AE300E950DE /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563AE91529C31AE300E950DE /* HowToPlayView.swift */; };
 		563AE91829C31B4900E950DE /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563AE91729C31B4900E950DE /* ProfilePageView.swift */; };
 		563AE91A29C31E5A00E950DE /* iconContributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 563AE91929C31E5A00E950DE /* iconContributions.txt */; };
+		563AE91C29C326B100E950DE /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563AE91B29C326B100E950DE /* LinkedList.swift */; };
 		56954C1529C2358600155181 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1429C2358600155181 /* BackgroundView.swift */; };
 		56954C1729C235AF00155181 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1629C235AF00155181 /* CardView.swift */; };
 		56954C1929C235DF00155181 /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1829C235DF00155181 /* CirclePicView.swift */; };
@@ -73,6 +74,7 @@
 		563AE91529C31AE300E950DE /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		563AE91729C31B4900E950DE /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		563AE91929C31E5A00E950DE /* iconContributions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iconContributions.txt; sourceTree = "<group>"; };
+		563AE91B29C326B100E950DE /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		56954C1429C2358600155181 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		56954C1629C235AF00155181 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		56954C1829C235DF00155181 /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				56954C2929C237AC00155181 /* MyDate.swift */,
 				56954C2B29C237D400155181 /* Printer.swift */,
 				56954C2D29C237F500155181 /* Util.swift */,
+				563AE91B29C326B100E950DE /* LinkedList.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				56954C3B29C238D400155181 /* Game.swift in Sources */,
 				56954C2C29C237D400155181 /* Printer.swift in Sources */,
 				569C5CED29C2206D00D1D7FE /* Kuramin.xcdatamodeld in Sources */,
+				563AE91C29C326B100E950DE /* LinkedList.swift in Sources */,
 				56954C2329C236D000155181 /* MainPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

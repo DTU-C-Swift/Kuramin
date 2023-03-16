@@ -389,56 +389,85 @@ class Service {
     
     
     
+
+    func goToLobby2() {
+        let newLobby = "lobby"
+        let game = DataHolder.controller.game
+        var me = game.me
+        
+        let ref = db.collection("matches").document(newLobby)
+        
+        
+        
+        
+        var dbPlayer = DbPlayer(pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
+
+
+        // Transactional call
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let lobbyDocument: DocumentSnapshot
+            
+            do {
+                lobbyDocument = try transaction.getDocument(ref)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+
+
+            // Checks if document "lobby" exists already in db
+            if !lobbyDocument.exists {
+                
+                let gameId = String(UUID().uuidString.prefix(10))
+                var dbLobby = DbLobby(gameId: gameId, host: Util().NOT_SET, whosTurn: Util().NOT_SET, players: [dbPlayer])
+
+                do {
+                    try transaction.setData(from: dbLobby, forDocument: ref)
+
+                } catch {
+                    self.printer.write("Error while setting dbLobby data")
+                }
+                
+            } else {
+                
+//                let dbPlayerDict = try! db.Encoder().encode(dbPlayer) as [String: Any]
+//                transaction.updateData(["players": FieldValue.arrayUnion([dbPlayerDict])], forDocument: ref)
+
+                
+
+                do {
+                    let encodedDbPlayer = try JSONEncoder().encode(dbPlayer)
+                    
+                    transaction.updateData(["players": FieldValue.arrayUnion([encodedDbPlayer])], forDocument: ref)
+
+                    
+                    
+                } catch {}
+                
 //
-//    func gotoMatch() {
-//
-//        let game = DataHolder.controller.game
-//        var me = game.me
-//        let ref = db.collection("matches").document(lobby)
-//
-//        var myCards: [DbCard] = [DbCard(suit: "dimonds", value: 10), DbCard(suit: "hearts", value: )]
-//
-//        var let DbPlayer = DbPlayer(cards: [], nextPid: <#T##String#>, prevPid: <#T##String#>)
-//
-//
-//
-//        // Transactional call
-//        db.runTransaction({ (transaction, errorPointer) -> Any? in
-//            let lobbyDocument: DocumentSnapshot
-//            do {
-//                lobbyDocument = try transaction.getDocument(ref)
-//            } catch let fetchError as NSError {
-//                errorPointer?.pointee = fetchError
-//                return nil
-//            }
-//
-//
-//            // Checks if document "lobby" exists already in db
-//            if !lobbyDocument.exists {
-//                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
-//            } else {
 //                transaction.updateData([
-//                    "playerIds" : FieldValue.arrayUnion([me.id])
-//                ], forDocument: ref)
-//            }
-//
-//            return nil
-//
-//        }) { (object, error) in
-//            if let error = error {
-//                self.printer.write("Transaction failed: \(error)")
-//            } else {
-//                self.printer.write("Transaction succeeded!")
+//                    "players": FieldValue.arrayUnion([dbPlayer])
+//                ] as [DbPlayer: Any], forDocument: ref)
+
+            }
+
+            return nil
+
+        }) { (object, error) in
+            if let error = error {
+                self.printer.write("Transaction failed: \(error)")
+            } else {
+                self.printer.write("Transaction succeeded!")
 //                self.amIHost(game: game)
 //                self.observeLobby(game: game)
-//            }
-//        }
-//
-//
-//
-//
-//
-//    }
+            }
+        }
+
+
+
+
+
+    }
     
     
     func observeMatch() {
@@ -446,6 +475,8 @@ class Service {
     }
     
     
+    
+
     
     
 }

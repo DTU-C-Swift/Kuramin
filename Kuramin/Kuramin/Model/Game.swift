@@ -239,6 +239,22 @@ public class Game : ObservableObject {
     
     
     
+    func getActualPlayerIds() -> [String] {
+        
+        var playerIds: [String] = []
+        
+        for currP in players {
+            if !currP.isLeft {
+                playerIds.append(currP.id)
+            }
+            
+            
+        }
+        
+        return playerIds
+    }
+    
+    
     
     
     

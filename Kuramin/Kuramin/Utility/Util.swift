@@ -15,6 +15,7 @@ struct Util {
     let SUCCEDED = "succeded"
     let FAILED = "failed"
     let MY_DUMMY_ID = "myId"
+    let NOT_SET = "notSet"
     
     
     

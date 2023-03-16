@@ -9,11 +9,19 @@ import Foundation
 import FirebaseFirestoreSwift
 
 
+
+public struct DbLobby: Codable {
+    var gameId: String
+    var host: String
+    var whosTurn: String
+    var players: [DbPlayer]
+}
+
+
 public struct DbPlayer: Codable {
-    @DocumentID var pid: String?
-    var cards: [DbCard]
-    var nextPid: String
-    var prevPid: String
+    var pid: String
+    var randomNum: Int
+    var cardsInHand: Int
     
 }
 

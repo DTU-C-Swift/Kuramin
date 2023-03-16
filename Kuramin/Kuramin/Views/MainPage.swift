@@ -88,7 +88,7 @@ struct MainPage: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            controller.service.goToLobby()
+            controller.service.goToLobby2()
         }
         .sheet(isPresented: $showMenu) {
             MenuPopup()
