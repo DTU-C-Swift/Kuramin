@@ -1,0 +1,861 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		56954C1529C2358600155181 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1429C2358600155181 /* BackgroundView.swift */; };
+		56954C1729C235AF00155181 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1629C235AF00155181 /* CardView.swift */; };
+		56954C1929C235DF00155181 /* CirclePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1829C235DF00155181 /* CirclePicView.swift */; };
+		56954C1B29C2361300155181 /* MyPlayerViewInGamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1A29C2361300155181 /* MyPlayerViewInGamePage.swift */; };
+		56954C1D29C2364300155181 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1C29C2364300155181 /* ProgressBar.swift */; };
+		56954C1F29C2367C00155181 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1E29C2367C00155181 /* ContentView.swift */; };
+		56954C2129C236A700155181 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2029C236A700155181 /* GamePage.swift */; };
+		56954C2329C236D000155181 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2229C236D000155181 /* MainPage.swift */; };
+		56954C2529C2370100155181 /* MenuPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2429C2370100155181 /* MenuPopup.swift */; };
+		56954C2729C2373400155181 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2629C2373400155181 /* ProfilePageView.swift */; };
+		56954C2A29C237AC00155181 /* MyDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2929C237AC00155181 /* MyDate.swift */; };
+		56954C2C29C237D400155181 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2B29C237D400155181 /* Printer.swift */; };
+		56954C2E29C237F500155181 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2D29C237F500155181 /* Util.swift */; };
+		56954C3129C2384500155181 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3029C2384500155181 /* Service.swift */; };
+		56954C3329C2386E00155181 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3229C2386E00155181 /* ServiceHelper.swift */; };
+		56954C3729C238A500155181 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3629C238A500155181 /* Card.swift */; };
+		56954C3929C238BD00155181 /* DbUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3829C238BD00155181 /* DbUser.swift */; };
+		56954C3B29C238D400155181 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3A29C238D400155181 /* Game.swift */; };
+		56954C3D29C238F300155181 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3C29C238F300155181 /* Player.swift */; };
+		56954C4029C2391E00155181 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3F29C2391E00155181 /* Controller.swift */; };
+		56954C4229C2393F00155181 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C4129C2393F00155181 /* DataHolder.swift */; };
+		56954C4529C2396C00155181 /* FbAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C4429C2396C00155181 /* FbAuth.swift */; };
+		56954C4729C2403E00155181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56954C4629C2403E00155181 /* GoogleService-Info.plist */; };
+		56954C4C29C2413D00155181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56954C4B29C2413D00155181 /* Assets.xcassets */; };
+		569C5CE129C2206C00D1D7FE /* KuraminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CE029C2206C00D1D7FE /* KuraminApp.swift */; };
+		569C5CE329C2206C00D1D7FE /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CE229C2206C00D1D7FE /* CoreData.swift */; };
+		569C5CE829C2206D00D1D7FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 569C5CE729C2206D00D1D7FE /* Preview Assets.xcassets */; };
+		569C5CEA29C2206D00D1D7FE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CE929C2206D00D1D7FE /* Persistence.swift */; };
+		569C5CED29C2206D00D1D7FE /* Kuramin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CEB29C2206D00D1D7FE /* Kuramin.xcdatamodeld */; };
+		569C5CF729C2206E00D1D7FE /* KuraminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5CF629C2206E00D1D7FE /* KuraminTests.swift */; };
+		569C5D0129C2206E00D1D7FE /* KuraminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5D0029C2206E00D1D7FE /* KuraminUITests.swift */; };
+		569C5D0329C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C5D0229C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift */; };
+		569C5D2229C2290B00D1D7FE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2129C2290B00D1D7FE /* FirebaseAuth */; };
+		569C5D2429C2290B00D1D7FE /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2329C2290B00D1D7FE /* FirebaseFirestoreSwift */; };
+		569C5D2629C2290B00D1D7FE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2529C2290B00D1D7FE /* FirebaseStorage */; };
+		569C5D2929C22C7C00D1D7FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2829C22C7C00D1D7FE /* FacebookCore */; };
+		569C5D2B29C22C7D00D1D7FE /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2A29C22C7D00D1D7FE /* FacebookLogin */; };
+		56E2657129C2552A00738F12 /* GameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657029C2552A00738F12 /* GameTest.swift */; };
+		56E2657329C2609E00738F12 /* TestVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657229C2609E00738F12 /* TestVIew.swift */; };
+		56F6642129C2FE9B0047DECA /* DbPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F6642029C2FE9B0047DECA /* DbPlayer.swift */; };
+		56F6642329C301010047DECA /* DbCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F6642229C301010047DECA /* DbCard.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		569C5CF329C2206E00D1D7FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 569C5CD529C2206C00D1D7FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 569C5CDC29C2206C00D1D7FE;
+			remoteInfo = Kuramin;
+		};
+		569C5CFD29C2206E00D1D7FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 569C5CD529C2206C00D1D7FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 569C5CDC29C2206C00D1D7FE;
+			remoteInfo = Kuramin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		56954C1429C2358600155181 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		56954C1629C235AF00155181 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		56954C1829C235DF00155181 /* CirclePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePicView.swift; sourceTree = "<group>"; };
+		56954C1A29C2361300155181 /* MyPlayerViewInGamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayerViewInGamePage.swift; sourceTree = "<group>"; };
+		56954C1C29C2364300155181 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		56954C1E29C2367C00155181 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		56954C2029C236A700155181 /* GamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePage.swift; sourceTree = "<group>"; };
+		56954C2229C236D000155181 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		56954C2429C2370100155181 /* MenuPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopup.swift; sourceTree = "<group>"; };
+		56954C2629C2373400155181 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
+		56954C2929C237AC00155181 /* MyDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDate.swift; sourceTree = "<group>"; };
+		56954C2B29C237D400155181 /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
+		56954C2D29C237F500155181 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		56954C3029C2384500155181 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		56954C3229C2386E00155181 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
+		56954C3629C238A500155181 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		56954C3829C238BD00155181 /* DbUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUser.swift; sourceTree = "<group>"; };
+		56954C3A29C238D400155181 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		56954C3C29C238F300155181 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		56954C3F29C2391E00155181 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		56954C4129C2393F00155181 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
+		56954C4429C2396C00155181 /* FbAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FbAuth.swift; sourceTree = "<group>"; };
+		56954C4629C2403E00155181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56954C4B29C2413D00155181 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		569C5CDD29C2206C00D1D7FE /* Kuramin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuramin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		569C5CE029C2206C00D1D7FE /* KuraminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminApp.swift; sourceTree = "<group>"; };
+		569C5CE229C2206C00D1D7FE /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		569C5CE729C2206D00D1D7FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		569C5CE929C2206D00D1D7FE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		569C5CEC29C2206D00D1D7FE /* Kuramin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kuramin.xcdatamodel; sourceTree = "<group>"; };
+		569C5CF229C2206E00D1D7FE /* KuraminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuraminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		569C5CF629C2206E00D1D7FE /* KuraminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminTests.swift; sourceTree = "<group>"; };
+		569C5CFC29C2206E00D1D7FE /* KuraminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuraminUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		569C5D0029C2206E00D1D7FE /* KuraminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITests.swift; sourceTree = "<group>"; };
+		569C5D0229C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		569C5D1F29C227E700D1D7FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		56E2657029C2552A00738F12 /* GameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest.swift; sourceTree = "<group>"; };
+		56E2657229C2609E00738F12 /* TestVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVIew.swift; sourceTree = "<group>"; };
+		56F6642029C2FE9B0047DECA /* DbPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbPlayer.swift; sourceTree = "<group>"; };
+		56F6642229C301010047DECA /* DbCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbCard.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		569C5CDA29C2206C00D1D7FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569C5D2B29C22C7D00D1D7FE /* FacebookLogin in Frameworks */,
+				569C5D2229C2290B00D1D7FE /* FirebaseAuth in Frameworks */,
+				569C5D2429C2290B00D1D7FE /* FirebaseFirestoreSwift in Frameworks */,
+				569C5D2629C2290B00D1D7FE /* FirebaseStorage in Frameworks */,
+				569C5D2929C22C7C00D1D7FE /* FacebookCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		569C5CEF29C2206E00D1D7FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		569C5CF929C2206E00D1D7FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		56954C1229C234FD00155181 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				56954C1329C2355F00155181 /* ContentViews */,
+				56954C1E29C2367C00155181 /* ContentView.swift */,
+				56954C2029C236A700155181 /* GamePage.swift */,
+				56954C2229C236D000155181 /* MainPage.swift */,
+				56954C2429C2370100155181 /* MenuPopup.swift */,
+				56954C2629C2373400155181 /* ProfilePageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		56954C1329C2355F00155181 /* ContentViews */ = {
+			isa = PBXGroup;
+			children = (
+				56954C1429C2358600155181 /* BackgroundView.swift */,
+				56954C1629C235AF00155181 /* CardView.swift */,
+				56954C1829C235DF00155181 /* CirclePicView.swift */,
+				56954C1A29C2361300155181 /* MyPlayerViewInGamePage.swift */,
+				56954C1C29C2364300155181 /* ProgressBar.swift */,
+			);
+			path = ContentViews;
+			sourceTree = "<group>";
+		};
+		56954C2829C2376A00155181 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				56954C2929C237AC00155181 /* MyDate.swift */,
+				56954C2B29C237D400155181 /* Printer.swift */,
+				56954C2D29C237F500155181 /* Util.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		56954C2F29C2382900155181 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				56954C3029C2384500155181 /* Service.swift */,
+				56954C3229C2386E00155181 /* ServiceHelper.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		56954C3429C2388500155181 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				56954C3529C2388E00155181 /* DbModel */,
+				56954C3A29C238D400155181 /* Game.swift */,
+				56954C3C29C238F300155181 /* Player.swift */,
+				56954C3629C238A500155181 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		56954C3529C2388E00155181 /* DbModel */ = {
+			isa = PBXGroup;
+			children = (
+				56954C3829C238BD00155181 /* DbUser.swift */,
+				56F6642029C2FE9B0047DECA /* DbPlayer.swift */,
+				56F6642229C301010047DECA /* DbCard.swift */,
+			);
+			path = DbModel;
+			sourceTree = "<group>";
+		};
+		56954C3E29C2390600155181 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				56954C3F29C2391E00155181 /* Controller.swift */,
+				56954C4129C2393F00155181 /* DataHolder.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		56954C4329C2395100155181 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				56954C4429C2396C00155181 /* FbAuth.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		569C5CD429C2206C00D1D7FE = {
+			isa = PBXGroup;
+			children = (
+				569C5CDF29C2206C00D1D7FE /* Kuramin */,
+				569C5CF529C2206E00D1D7FE /* KuraminTests */,
+				569C5CFF29C2206E00D1D7FE /* KuraminUITests */,
+				569C5CDE29C2206C00D1D7FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		569C5CDE29C2206C00D1D7FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				569C5CDD29C2206C00D1D7FE /* Kuramin.app */,
+				569C5CF229C2206E00D1D7FE /* KuraminTests.xctest */,
+				569C5CFC29C2206E00D1D7FE /* KuraminUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		569C5CDF29C2206C00D1D7FE /* Kuramin */ = {
+			isa = PBXGroup;
+			children = (
+				56E2656F29C2551400738F12 /* Test */,
+				56954C4329C2395100155181 /* Auth */,
+				56954C3E29C2390600155181 /* Controller */,
+				56954C3429C2388500155181 /* Model */,
+				56954C2F29C2382900155181 /* Service */,
+				56954C2829C2376A00155181 /* Utility */,
+				56954C1229C234FD00155181 /* Views */,
+				569C5CE029C2206C00D1D7FE /* KuraminApp.swift */,
+				569C5CE229C2206C00D1D7FE /* CoreData.swift */,
+				569C5CE929C2206D00D1D7FE /* Persistence.swift */,
+				56954C4B29C2413D00155181 /* Assets.xcassets */,
+				569C5D1F29C227E700D1D7FE /* Info.plist */,
+				569C5CEB29C2206D00D1D7FE /* Kuramin.xcdatamodeld */,
+				56954C4629C2403E00155181 /* GoogleService-Info.plist */,
+				569C5CE629C2206D00D1D7FE /* Preview Content */,
+			);
+			path = Kuramin;
+			sourceTree = "<group>";
+		};
+		569C5CE629C2206D00D1D7FE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				569C5CE729C2206D00D1D7FE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		569C5CF529C2206E00D1D7FE /* KuraminTests */ = {
+			isa = PBXGroup;
+			children = (
+				569C5CF629C2206E00D1D7FE /* KuraminTests.swift */,
+			);
+			path = KuraminTests;
+			sourceTree = "<group>";
+		};
+		569C5CFF29C2206E00D1D7FE /* KuraminUITests */ = {
+			isa = PBXGroup;
+			children = (
+				569C5D0029C2206E00D1D7FE /* KuraminUITests.swift */,
+				569C5D0229C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift */,
+			);
+			path = KuraminUITests;
+			sourceTree = "<group>";
+		};
+		56E2656F29C2551400738F12 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				56E2657029C2552A00738F12 /* GameTest.swift */,
+				56E2657229C2609E00738F12 /* TestVIew.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		569C5CDC29C2206C00D1D7FE /* Kuramin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 569C5D0629C2206E00D1D7FE /* Build configuration list for PBXNativeTarget "Kuramin" */;
+			buildPhases = (
+				569C5CD929C2206C00D1D7FE /* Sources */,
+				569C5CDA29C2206C00D1D7FE /* Frameworks */,
+				569C5CDB29C2206C00D1D7FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kuramin;
+			packageProductDependencies = (
+				569C5D2129C2290B00D1D7FE /* FirebaseAuth */,
+				569C5D2329C2290B00D1D7FE /* FirebaseFirestoreSwift */,
+				569C5D2529C2290B00D1D7FE /* FirebaseStorage */,
+				569C5D2829C22C7C00D1D7FE /* FacebookCore */,
+				569C5D2A29C22C7D00D1D7FE /* FacebookLogin */,
+			);
+			productName = Kuramin;
+			productReference = 569C5CDD29C2206C00D1D7FE /* Kuramin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		569C5CF129C2206E00D1D7FE /* KuraminTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 569C5D0929C2206E00D1D7FE /* Build configuration list for PBXNativeTarget "KuraminTests" */;
+			buildPhases = (
+				569C5CEE29C2206E00D1D7FE /* Sources */,
+				569C5CEF29C2206E00D1D7FE /* Frameworks */,
+				569C5CF029C2206E00D1D7FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				569C5CF429C2206E00D1D7FE /* PBXTargetDependency */,
+			);
+			name = KuraminTests;
+			productName = KuraminTests;
+			productReference = 569C5CF229C2206E00D1D7FE /* KuraminTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		569C5CFB29C2206E00D1D7FE /* KuraminUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 569C5D0C29C2206E00D1D7FE /* Build configuration list for PBXNativeTarget "KuraminUITests" */;
+			buildPhases = (
+				569C5CF829C2206E00D1D7FE /* Sources */,
+				569C5CF929C2206E00D1D7FE /* Frameworks */,
+				569C5CFA29C2206E00D1D7FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				569C5CFE29C2206E00D1D7FE /* PBXTargetDependency */,
+			);
+			name = KuraminUITests;
+			productName = KuraminUITests;
+			productReference = 569C5CFC29C2206E00D1D7FE /* KuraminUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		569C5CD529C2206C00D1D7FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					569C5CDC29C2206C00D1D7FE = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					569C5CF129C2206E00D1D7FE = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 569C5CDC29C2206C00D1D7FE;
+					};
+					569C5CFB29C2206E00D1D7FE = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 569C5CDC29C2206C00D1D7FE;
+					};
+				};
+			};
+			buildConfigurationList = 569C5CD829C2206C00D1D7FE /* Build configuration list for PBXProject "Kuramin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 569C5CD429C2206C00D1D7FE;
+			packageReferences = (
+				569C5D2029C2290B00D1D7FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				569C5D2729C22C7C00D1D7FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
+			productRefGroup = 569C5CDE29C2206C00D1D7FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				569C5CDC29C2206C00D1D7FE /* Kuramin */,
+				569C5CF129C2206E00D1D7FE /* KuraminTests */,
+				569C5CFB29C2206E00D1D7FE /* KuraminUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		569C5CDB29C2206C00D1D7FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569C5CE829C2206D00D1D7FE /* Preview Assets.xcassets in Resources */,
+				56954C4C29C2413D00155181 /* Assets.xcassets in Resources */,
+				56954C4729C2403E00155181 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		569C5CF029C2206E00D1D7FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		569C5CFA29C2206E00D1D7FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		569C5CD929C2206C00D1D7FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56954C1929C235DF00155181 /* CirclePicView.swift in Sources */,
+				56954C2129C236A700155181 /* GamePage.swift in Sources */,
+				56E2657129C2552A00738F12 /* GameTest.swift in Sources */,
+				56954C1529C2358600155181 /* BackgroundView.swift in Sources */,
+				56F6642329C301010047DECA /* DbCard.swift in Sources */,
+				56954C2A29C237AC00155181 /* MyDate.swift in Sources */,
+				56954C3D29C238F300155181 /* Player.swift in Sources */,
+				569C5CEA29C2206D00D1D7FE /* Persistence.swift in Sources */,
+				56954C3129C2384500155181 /* Service.swift in Sources */,
+				56F6642129C2FE9B0047DECA /* DbPlayer.swift in Sources */,
+				56E2657329C2609E00738F12 /* TestVIew.swift in Sources */,
+				56954C1B29C2361300155181 /* MyPlayerViewInGamePage.swift in Sources */,
+				56954C3729C238A500155181 /* Card.swift in Sources */,
+				56954C2E29C237F500155181 /* Util.swift in Sources */,
+				56954C1D29C2364300155181 /* ProgressBar.swift in Sources */,
+				56954C4529C2396C00155181 /* FbAuth.swift in Sources */,
+				56954C3329C2386E00155181 /* ServiceHelper.swift in Sources */,
+				56954C2529C2370100155181 /* MenuPopup.swift in Sources */,
+				569C5CE329C2206C00D1D7FE /* CoreData.swift in Sources */,
+				56954C1F29C2367C00155181 /* ContentView.swift in Sources */,
+				56954C4029C2391E00155181 /* Controller.swift in Sources */,
+				56954C4229C2393F00155181 /* DataHolder.swift in Sources */,
+				569C5CE129C2206C00D1D7FE /* KuraminApp.swift in Sources */,
+				56954C1729C235AF00155181 /* CardView.swift in Sources */,
+				56954C3929C238BD00155181 /* DbUser.swift in Sources */,
+				56954C3B29C238D400155181 /* Game.swift in Sources */,
+				56954C2C29C237D400155181 /* Printer.swift in Sources */,
+				569C5CED29C2206D00D1D7FE /* Kuramin.xcdatamodeld in Sources */,
+				56954C2329C236D000155181 /* MainPage.swift in Sources */,
+				56954C2729C2373400155181 /* ProfilePageView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		569C5CEE29C2206E00D1D7FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569C5CF729C2206E00D1D7FE /* KuraminTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		569C5CF829C2206E00D1D7FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569C5D0329C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift in Sources */,
+				569C5D0129C2206E00D1D7FE /* KuraminUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		569C5CF429C2206E00D1D7FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 569C5CDC29C2206C00D1D7FE /* Kuramin */;
+			targetProxy = 569C5CF329C2206E00D1D7FE /* PBXContainerItemProxy */;
+		};
+		569C5CFE29C2206E00D1D7FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 569C5CDC29C2206C00D1D7FE /* Kuramin */;
+			targetProxy = 569C5CFD29C2206E00D1D7FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		569C5D0429C2206E00D1D7FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		569C5D0529C2206E00D1D7FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		569C5D0729C2206E00D1D7FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Kuramin/Preview Content\"";
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Kuramin/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dtu.Kuramin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		569C5D0829C2206E00D1D7FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Kuramin/Preview Content\"";
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Kuramin/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dtu.Kuramin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		569C5D0A29C2206E00D1D7FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = dtu.KuraminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kuramin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kuramin";
+			};
+			name = Debug;
+		};
+		569C5D0B29C2206E00D1D7FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = dtu.KuraminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kuramin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kuramin";
+			};
+			name = Release;
+		};
+		569C5D0D29C2206E00D1D7FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dtu.KuraminUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kuramin;
+			};
+			name = Debug;
+		};
+		569C5D0E29C2206E00D1D7FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QFJ5HV37XP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dtu.KuraminUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kuramin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		569C5CD829C2206C00D1D7FE /* Build configuration list for PBXProject "Kuramin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569C5D0429C2206E00D1D7FE /* Debug */,
+				569C5D0529C2206E00D1D7FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		569C5D0629C2206E00D1D7FE /* Build configuration list for PBXNativeTarget "Kuramin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569C5D0729C2206E00D1D7FE /* Debug */,
+				569C5D0829C2206E00D1D7FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		569C5D0929C2206E00D1D7FE /* Build configuration list for PBXNativeTarget "KuraminTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569C5D0A29C2206E00D1D7FE /* Debug */,
+				569C5D0B29C2206E00D1D7FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		569C5D0C29C2206E00D1D7FE /* Build configuration list for PBXNativeTarget "KuraminUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569C5D0D29C2206E00D1D7FE /* Debug */,
+				569C5D0E29C2206E00D1D7FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		569C5D2029C2290B00D1D7FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		569C5D2729C22C7C00D1D7FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		569C5D2129C2290B00D1D7FE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 569C5D2029C2290B00D1D7FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		569C5D2329C2290B00D1D7FE /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 569C5D2029C2290B00D1D7FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		569C5D2529C2290B00D1D7FE /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 569C5D2029C2290B00D1D7FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		569C5D2829C22C7C00D1D7FE /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 569C5D2729C22C7C00D1D7FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		569C5D2A29C22C7D00D1D7FE /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 569C5D2729C22C7C00D1D7FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		569C5CEB29C2206D00D1D7FE /* Kuramin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				569C5CEC29C2206D00D1D7FE /* Kuramin.xcdatamodel */,
+			);
+			currentVersion = 569C5CEC29C2206D00D1D7FE /* Kuramin.xcdatamodel */;
+			path = Kuramin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 569C5CD529C2206C00D1D7FE /* Project object */;
+}
