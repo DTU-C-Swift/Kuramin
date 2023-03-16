@@ -24,7 +24,7 @@ public class Game : ObservableObject {
     // TODO if the playe that is leaving is the host?
     
     
-    func updatePlayerList(lobby: inout Lobby) {
+    func updatePlayerList(lobby: inout FirstLobby) {
         
         if isGameStarted {
             self.updatePlayerList2(lobby: &lobby)
@@ -69,7 +69,7 @@ public class Game : ObservableObject {
     
     
     // This update method should be called if the game has startet
-    private func updatePlayerList2(lobby: inout Lobby) {
+    private func updatePlayerList2(lobby: inout FirstLobby) {
         
         
         var idsToBeDeleted: [Int] = []

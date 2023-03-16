@@ -401,7 +401,7 @@ class Service {
         
         
         
-        var dbPlayer = DbPlayer(pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
+        var dbPlayer = DbPlayerNullable(pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
 
 
         // Transactional call
@@ -420,7 +420,7 @@ class Service {
             if !lobbyDocument.exists {
                 
                 let gameId = String(UUID().uuidString.prefix(10))
-                var dbLobby = DbLobby(gameId: gameId, host: Util().NOT_SET, whosTurn: Util().NOT_SET, players: [dbPlayer])
+                var dbLobby = DbLobbyNullable(gameId: gameId, host: Util().NOT_SET, whosTurn: Util().NOT_SET, playersNullable: [dbPlayer])
 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: ref)
@@ -434,9 +434,9 @@ class Service {
 
                 // Checks If the player already exists in the lobby(player list).
                 do {
-                    let dbLobby = try lobbyDocument.data(as: DbLobby.self)
+                    let dbLobby = try lobbyDocument.data(as: DbLobbyNullable.self)
                     
-                    if let players = dbLobby.players {
+                    if let players = dbLobby.playersNullable {
                         for crrId in players {
                             if crrId.pid == me.id {
                                 self.printer.write("You are already in the lobby")
@@ -486,7 +486,7 @@ class Service {
         ref.addSnapshotListener { snapshot, err in
             
             do {
-                if var dbLobby = try snapshot?.data(as: DbLobby.self) {
+                if var dbLobby = try snapshot?.data(as: DbLobbyNullable.self) {
                     
                     self.lobbyLock.lock()
                     

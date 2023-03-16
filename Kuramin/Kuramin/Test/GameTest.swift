@@ -88,7 +88,7 @@ class GameTest : ObservableObject{
         let p10 = Player(id: "p10")
 
 
-        var lobby = Lobby(host: p8.id, playerIds: [p8.id, p9.id, p10.id])
+        var lobby = FirstLobby(host: p8.id, playerIds: [p8.id, p9.id, p10.id])
         
         game.updatePlayerList(lobby: &lobby)
         
@@ -133,7 +133,7 @@ class GameTest : ObservableObject{
 
 
         // Updated the player list and the lobby it self
-        var lobby = Lobby(host: p8.id, playerIds: [p7.id, p8.id, p9.id, p10.id])
+        var lobby = FirstLobby(host: p8.id, playerIds: [p7.id, p8.id, p9.id, p10.id])
         game.updatePlayerList(lobby: &lobby)
         
         assert(game.actualPlayerSize == 1)
@@ -234,7 +234,7 @@ class GameTest : ObservableObject{
         
         assert(game.players[4].id == p5.id)
         // p5 is removed by this call
-        var lobby = Lobby(host: p6.id, playerIds: [p6.id, p4.id, p1.id, p7.id, p3.id, p2.id])
+        var lobby = FirstLobby(host: p6.id, playerIds: [p6.id, p4.id, p1.id, p7.id, p3.id, p2.id])
 
         
         assert(game.players[4].id == p5.id)
@@ -255,7 +255,7 @@ class GameTest : ObservableObject{
 
         // => p5 (players[4]) was removed by the previous actions
 
-        lobby = Lobby(host: p6.id, playerIds: [p6.id, p4.id, p1.id, p7.id, p3.id])
+        lobby = FirstLobby(host: p6.id, playerIds: [p6.id, p4.id, p1.id, p7.id, p3.id])
         game.updatePlayerList(lobby: &lobby)
         
         assert(game.players[1].id == p2.id)

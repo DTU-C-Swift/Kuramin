@@ -38,7 +38,7 @@ struct Util {
         player.lock.unlock()
     }
     
-    func deleteEmptyIds(lobby: inout Lobby) {
+    func deleteEmptyIds(lobby: inout FirstLobby) {
         var idsToBeDeleted: [Int] = []
         
         for (idIndex, id) in lobby.playerIds.enumerated() {
@@ -57,7 +57,7 @@ struct Util {
     }
     
     
-    func isDuplicateLobby(lobby1: Lobby, lobby2: Lobby) -> Bool {
+    func isDuplicateLobby(lobby1: FirstLobby, lobby2: FirstLobby) -> Bool {
         
         if lobby1.playerIds.count != lobby2.playerIds.count ||
             lobby1.host != lobby2.host {return false}
@@ -76,12 +76,14 @@ struct Util {
     
     func converToLobby() {
         
+        
+        
     }
     
     
     
     
-    func isDuplicateLobby(lobby1: DbLobby, lobby2: DbLobby) -> Bool {
+    func isDuplicateLobby(lobby1: DbLobbyNullable, lobby2: DbLobbyNullable) -> Bool {
         
         
         
