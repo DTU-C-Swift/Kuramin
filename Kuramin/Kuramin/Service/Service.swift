@@ -388,4 +388,64 @@ class Service {
     }
     
     
+    
+    
+    func gotoMatch() {
+        
+        let game = DataHolder.controller.game
+        var me = game.me
+        let ref = db.collection("matches").document(lobby)
+
+        var myCards: [DbCard] = [DbCard(suit: "dimonds", value: 10), DbCard(suit: "hearts", value: )]
+        
+        var let DbPlayer = DbPlayer(cards: [], nextPid: <#T##String#>, prevPid: <#T##String#>)
+        
+        
+        
+        // Transactional call
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let lobbyDocument: DocumentSnapshot
+            do {
+                lobbyDocument = try transaction.getDocument(ref)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            
+            
+            // Checks if document "lobby" exists already in db
+            if !lobbyDocument.exists {
+                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
+            } else {
+                transaction.updateData([
+                    "playerIds" : FieldValue.arrayUnion([me.id])
+                ], forDocument: ref)
+            }
+            
+            return nil
+            
+        }) { (object, error) in
+            if let error = error {
+                self.printer.write("Transaction failed: \(error)")
+            } else {
+                self.printer.write("Transaction succeeded!")
+                self.amIHost(game: game)
+                self.observeLobby(game: game)
+            }
+        }
+        
+        
+        
+        
+        
+    }
+    
+    
+    func observeMatch() {
+        
+    }
+    
+    
+    
+    
 }
