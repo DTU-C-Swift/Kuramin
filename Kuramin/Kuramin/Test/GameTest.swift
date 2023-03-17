@@ -205,19 +205,24 @@ class GameTest : ObservableObject{
         let game = Game()
         
         let p1 = Player(id: "p1")
-        p1.displayName = p1.id
         let p2 = Player(id: "p2")
-        p2.displayName = p2.id
         let p3 = Player(id: "p3")
-        p3.displayName = p3.id
         let p4 = Player(id: "p4")
-        p4.displayName = p4.id
         let p5 = Player(id: "p5")
-        p5.displayName = p5.id
         let p6 = Player(id: "p6")
-        p6.displayName = p6.id
         let p7 = Player(id: "p7")
-        p7.displayName = p7.id
+
+//        p1.displayName = p1.id
+//        p2.displayName = p2.id
+//        p3.displayName = p3.id
+//        p4.displayName = p4.id
+//        p5.displayName = p5.id
+//        p6.displayName = p6.id
+//        p7.displayName = p7.id
+
+
+
+
 
         
         game.isGameStarted = true

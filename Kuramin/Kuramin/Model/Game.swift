@@ -11,7 +11,7 @@ import SwiftUI
 public class Game : ObservableObject {
     var id: String = ""
     @Published var players: [Player] = []
-    @Published var me: Player = Player(id: Util().MY_DUMMY_ID)
+    @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
     var actualPlayerSize = 0
 
     var hostId = ""
@@ -251,8 +251,8 @@ public class Game : ObservableObject {
             
             if !matchFound {
                 
-                p.isLeft = true
-                p.leftAt = MyDate().getTime()
+                p.setIsLeft(isLeft: true)
+                
                 actualPlayerSize += -1
                 self.p.write("Player: \(p.id), leftAt \(p.leftAt)")
             }
@@ -302,11 +302,10 @@ public class Game : ObservableObject {
                 
                 if curr.isLeft {
                     
-                    player.isLeft = false
-                    player.leftAt = ""
+                    player.setIsLeft(isLeft: false)
+                    
                     players[index] = player
                     actualPlayerSize += 1
-                    
                 }
                 
 
@@ -316,8 +315,8 @@ public class Game : ObservableObject {
         }
         
         
-        player.isLeft = false
-        player.leftAt = ""
+
+        player.setIsLeft(isLeft: false)
         players.append(player)
         actualPlayerSize += 1
         printPlayerList()
@@ -365,8 +364,8 @@ public class Game : ObservableObject {
         
         self.p.write("Replacing \(players[earliestPlayerIndex].displayName) by \(player.displayName)")
         
-        player.isLeft = false
-        player.leftAt = ""
+
+        player.setIsLeft(isLeft: false)
         players[earliestPlayerIndex] = player
         actualPlayerSize += 1
         playersLock.unlock()
@@ -382,9 +381,8 @@ public class Game : ObservableObject {
             
             if currP.id == player.id {
                 actualPlayerSize += 1
-                
-                player.isLeft = false
-                player.leftAt = ""
+                                
+                player.setIsLeft(isLeft: false)
                 players[index] = player
                 playersLock.unlock()
                 return true

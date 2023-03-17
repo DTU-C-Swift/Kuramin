@@ -20,7 +20,7 @@ class Player : ObservableObject, Identifiable{
     @Published private(set) var randomNumber = -1
 
     private(set) var leftAt = Util().NOT_SET
-    let lock = NSLock()
+    private let lock = NSLock()
     
     
     
@@ -67,7 +67,7 @@ class Player : ObservableObject, Identifiable{
     
     
     
-    
+// This method is for everyone(other players) except "me"
 
     func updateInfo(dbPlayer p: DbPlayer) {
         
@@ -105,23 +105,28 @@ class Player : ObservableObject, Identifiable{
     
     
 
-
+// This method should only be called if it "me".
     
-    func update(_ dbUser: DbUser) {
+    func updateMe(dbUser: DbUser) {
 
+        lock.lock()
+        
         if self.coins != dbUser.coins {
             self.coins = dbUser.coins
         }
 
         let newName = dbUser.fullName.split(separator: " ")
-
-        if self.displayName != newName[0] {
-            self.displayName = String(newName[0])
+        let newDisPlayName = String(newName[0])
+        
+        if displayName != newDisPlayName {
+            self.displayName = newDisPlayName
             self.fullName = dbUser.fullName
 
         }
 
-        self.p.write("Player updated: \(self.displayName), \(self.id)")
+        self.p.write("Updated me: \(self.displayName), \(self.id)")
+        
+        lock.unlock()
 
     }
     
@@ -185,8 +190,10 @@ class Player : ObservableObject, Identifiable{
     func setDisplayName() {
         lock.lock()
         let newName = self.fullName.split(separator: " ")
-        if displayName != newName[0] {
-            self.displayName = String(newName[0])
+        let newDisplayName = String(newName[0])
+        
+        if displayName != newDisplayName {
+            self.displayName = newDisplayName
             
         }
         lock.unlock()
@@ -195,9 +202,9 @@ class Player : ObservableObject, Identifiable{
     
     
     
-    func setStrImg(imgName: String) {
+    func setStrImg(img newImg: UIImage) {
         
-        let newImg = UIImage(imageLiteralResourceName: imgName)
+        //let newImg = UIImage(imageLiteralResourceName: imgName)
 
         
         lock.lock()
@@ -222,6 +229,9 @@ class Player : ObservableObject, Identifiable{
         
         if newIsLeft == false {
             self.leftAt = Util().NOT_SET
+            
+        } else {
+            self.leftAt = MyDate().getTime()
         }
         
         lock.unlock()

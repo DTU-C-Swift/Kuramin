@@ -28,6 +28,11 @@ class Service {
     var previousLobby2: Lobby?
     private let lobbyLock2 = NSLock()
 
+    
+    
+    
+    
+    
     func create_or_update_user(userImage: UIImage?) {
         let game = DataHolder.controller.game
 
@@ -43,7 +48,7 @@ class Service {
         if let user = Auth.auth().currentUser {
             var dbUser = DbUser(uid: user.uid, fullName: user.displayName ?? "", coins: 500)
             
-            game.me.id = user.uid
+            game.me.setId(pid: user.uid)
             
             
             let userRef = db.collection("users").document(user.uid)
@@ -134,7 +139,7 @@ class Service {
         if me.id == Util().MY_DUMMY_ID {
             
             if let user = Auth.auth().currentUser {
-                me.id = user.uid
+                me.setId(pid: user.uid)
             }
         }
         
@@ -161,7 +166,7 @@ class Service {
             do {
                 let dbUser = try document.data(as: DbUser.self)
                 self.printer.write("Retrieved user: \(dbUser.toString())")
-                me.update(dbUser)
+                me.updateMe(dbUser: dbUser)
                 
             }
             catch{
@@ -191,11 +196,11 @@ class Service {
             }
             else {
                 if let img = UIImage(data: data!) {
-                    player.lock.lock()
-                    player.image = img
-                    player.lock.unlock()
+                    
+                    player.setStrImg(img: img)
+                                        
                     //DataHolder.playerGerbage.append(player)
-                    //game.setPlayerImg(pid: pid, image: img)
+
                     return
                 }
                 self.printer.write("Error in converting image")
@@ -226,8 +231,7 @@ class Service {
         
         
         
-        let dbPlayerNullable = DbPlayerNullable(pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
-        
+        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
 
 
         // Transactional call
@@ -313,12 +317,12 @@ class Service {
     
     func observeLobby2(game: Game) {
 
-        var ref = db.collection("matches").document(lobbyStr)
+        let ref = db.collection("matches").document(lobbyStr)
 
          let obsRef = ref.addSnapshotListener { snapshot, err in
              
             do {
-                if var dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
+                if let dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
 
 
                     guard let lobby = dbLobbyNullable.mapToLobby() else {
@@ -350,16 +354,24 @@ class Service {
                         self.printer.write("observeLobby: id: \(crrDbPlayer.pid)")
                         
                         
-                        
                         if var crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
                             
-                            if crrPlayerRef.image == Util().defaultProfileImg {
-                                // get image
+                            if game.me.id == crrDbPlayer.pid {
+                                crrPlayerRef.setRandomNum(randNum: crrDbPlayer.randomNum)
+                                
                             }
                             
                             
-                            crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
+                            else {
+                                if crrPlayerRef.image == Util().defaultProfileImg {
+                                    // get image
+                                }
+                                
+                                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
+                                
+                            }
                             
+                                                        
                         }
                         
 
@@ -380,10 +392,10 @@ class Service {
         }
 
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            obsRef.remove()
-            self.observeLobby2(game: game)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            obsRef.remove()
+//            self.observeLobby2(game: game)
+//        }
         
         
     }
@@ -531,28 +543,28 @@ class Service {
     
     
     
-    func fetchUser(uid: String, game: Game) {
-        
-        let newPlayer = Player(id: uid)
-        
-        self.downloadImg(player: newPlayer)
-        
-    
-        db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
-            
-            switch result {
-            case .success(let dbUser):
-                Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
-                
-                game.addPlayer(player: newPlayer)
-                self.printer.write("User info has been fetched. id: \(newPlayer.id)")
-            case .failure(let err):
-                self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
-                
-            }
-            
-        }
-    }
+//    func fetchUser(uid: String, game: Game) {
+//
+//        let newPlayer = Player(id: uid)
+//
+//        self.downloadImg(player: newPlayer)
+//
+//
+//        db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
+//
+//            switch result {
+//            case .success(let dbUser):
+//                Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
+//
+//                game.addPlayer(player: newPlayer)
+//                self.printer.write("User info has been fetched. id: \(newPlayer.id)")
+//            case .failure(let err):
+//                self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
+//
+//            }
+//
+//        }
+//    }
     
     
     

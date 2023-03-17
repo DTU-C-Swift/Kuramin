@@ -29,15 +29,18 @@ struct Util {
         if dbUser.uid == nil {
             print("Util: dbuser id is nill")
         }
-       player.lock.lock()
+//       player.lock.lock()
+//
+//        player.id = dbUser.uid ?? MY_DUMMY_ID
+//        player.fullName = dbUser.fullName
+//        player.coins = dbUser.coins
+//
+//        player.setDisplayName()
+//
+//        player.lock.unlock()
+//
+//
         
-        player.id = dbUser.uid ?? MY_DUMMY_ID
-        player.fullName = dbUser.fullName
-        player.coins = dbUser.coins
-        
-        player.setDisplayName()
-        
-        player.lock.unlock()
     }
     
     func deleteEmptyIds(lobby: inout FirstLobby) {
