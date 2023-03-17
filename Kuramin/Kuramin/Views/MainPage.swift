@@ -117,9 +117,9 @@ struct MainPage: View {
         }
         .onChange(of: me.fullName) { newValue in
             
-            if me.id != Util().NOT_SET {
-                controller.service.goToLobby2()
-            }
+//            if me.id != Util().NOT_SET {
+//                controller.service.goToLobby2()
+//            }
         }
 
         

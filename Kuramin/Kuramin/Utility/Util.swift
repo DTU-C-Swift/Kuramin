@@ -25,60 +25,43 @@ struct Util {
     
     
     
-    func convertDbuserToPlayer(dbUser: DbUser, player: Player) {
-        if dbUser.uid == nil {
-            print("Util: dbuser id is nill")
-        }
-//       player.lock.lock()
-//
-//        player.id = dbUser.uid ?? MY_DUMMY_ID
-//        player.fullName = dbUser.fullName
-//        player.coins = dbUser.coins
-//
-//        player.setDisplayName()
-//
-//        player.lock.unlock()
-//
-//
-        
-    }
-    
-    func deleteEmptyIds(lobby: inout FirstLobby) {
-        var idsToBeDeleted: [Int] = []
-        
-        for (idIndex, id) in lobby.playerIds.enumerated() {
-            
-            if id == DataHolder.controller.game.me.id ||
-                id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                
-                idsToBeDeleted.append(idIndex)
-            }
-        }
-        
-        
-        
-        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
-        lobby.removeDuplicates()
-    }
     
     
-    func isDuplicateLobby(lobby1: FirstLobby, lobby2: FirstLobby) -> Bool {
-        
-        if lobby1.playerIds.count != lobby2.playerIds.count ||
-            lobby1.host != lobby2.host {return false}
-
-        
-        if lobby1.playerIds != lobby2.playerIds {
-            return false
-        }
-        
-        return true
-    }
+//    func deleteEmptyIds(lobby: inout FirstLobby) {
+//        var idsToBeDeleted: [Int] = []
+//
+//        for (idIndex, id) in lobby.playerIds.enumerated() {
+//
+//            if id == DataHolder.controller.game.me.id ||
+//                id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+//
+//                idsToBeDeleted.append(idIndex)
+//            }
+//        }
+//
+//
+//
+//        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+//        lobby.removeDuplicates()
+//    }
+    
+    
+//    func isDuplicateLobby(lobby1: FirstLobby, lobby2: FirstLobby) -> Bool {
+//
+//        if lobby1.playerIds.count != lobby2.playerIds.count ||
+//            lobby1.host != lobby2.host {return false}
+//
+//
+//        if lobby1.playerIds != lobby2.playerIds {
+//            return false
+//        }
+//
+//        return true
+//    }
     
     
     
 
-    
 
 }
 

@@ -47,8 +47,9 @@ struct GamePage: View {
                         }) {
                             Image(systemName: "chevron.backward")
                                 .foregroundColor(.white)
-                                .scaleEffect(1.8)
-                                .padding(.bottom, 20)
+                                .scaleEffect(1.6)
+                                .padding(.bottom, 0)
+                                .padding(.top, 5)
                                 .padding(.leading, 20)
 
                         }
