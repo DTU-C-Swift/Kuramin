@@ -117,7 +117,6 @@ struct MainPage: View {
         }
         .onChange(of: me.fullName) { newValue in
             
-            print("Helllo \(game.me.id)")
             if me.id != Util().NOT_SET {
                 controller.service.goToLobby2()
             }

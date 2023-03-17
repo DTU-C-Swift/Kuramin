@@ -74,7 +74,7 @@ class Player : ObservableObject, Identifiable{
         lock.lock()
         if p.pid != id {
             assert(false)
-            lock.unlock()
+            //lock.unlock()
         }
 
         

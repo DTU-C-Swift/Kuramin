@@ -182,46 +182,46 @@ public class Game : ObservableObject {
     // TODO if the playe that is leaving is the host?
     
     
-    func updatePlayerList(lobby: inout FirstLobby) {
-        
-        if isGameStarted {
-            self.updatePlayerList2(lobby: &lobby)
-            return
-        }
-        
-        
-        var playesToBeDeleted: [Int] = []
-        var idsToBeDeleted: [Int] = []
-        var matchFound = false
-        
-        playersLock.lock()
-        for (index, p) in players.enumerated() {
-            matchFound = false
-
-            for (idIndex, id) in lobby.playerIds.enumerated() {
-                
-                if id == p.id {
-                    idsToBeDeleted.append(idIndex)
-                    matchFound = true
-                    break
-                }
-            }
-            
-            if !matchFound {
-                playesToBeDeleted.append(index)
-                actualPlayerSize += -1
-            }
-        }
-        
-        
-        
-        players.remove(atOffsets: IndexSet(playesToBeDeleted))
-        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
-        playersLock.unlock()
-
-        
-        self.p.write("Player list has been updated")
-    }
+//    func updatePlayerList(lobby: inout FirstLobby) {
+//
+//        if isGameStarted {
+//            self.updatePlayerList2(lobby: &lobby)
+//            return
+//        }
+//
+//
+//        var playesToBeDeleted: [Int] = []
+//        var idsToBeDeleted: [Int] = []
+//        var matchFound = false
+//
+//        playersLock.lock()
+//        for (index, p) in players.enumerated() {
+//            matchFound = false
+//
+//            for (idIndex, id) in lobby.playerIds.enumerated() {
+//
+//                if id == p.id {
+//                    idsToBeDeleted.append(idIndex)
+//                    matchFound = true
+//                    break
+//                }
+//            }
+//
+//            if !matchFound {
+//                playesToBeDeleted.append(index)
+//                actualPlayerSize += -1
+//            }
+//        }
+//
+//
+//
+//        players.remove(atOffsets: IndexSet(playesToBeDeleted))
+//        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+//        playersLock.unlock()
+//
+//
+//        self.p.write("Player list has been updated")
+//    }
     
     
     
