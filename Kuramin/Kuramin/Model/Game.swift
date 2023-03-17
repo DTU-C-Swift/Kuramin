@@ -103,9 +103,16 @@ public class Game : ObservableObject {
             }
         }
         
+        
+        
+        
+        let newPlayer = Player(id: pid)
+        players.append(newPlayer)
+        
         playersLock.unlock()
         
-        return Player(id: pid)
+        p.write("Player: \(newPlayer.id) added")
+        return newPlayer
         
     }
     

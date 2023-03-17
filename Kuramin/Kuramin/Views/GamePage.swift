@@ -87,16 +87,16 @@ struct GamePage: View {
                             CirclePicView(player: controller.game.players[0], game: game)
                         }
                         
-                        if game.players.count > 3 {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[3], game: game)
-                        }
-                        
-                        
-                        if game.players.count > 4 {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[4], game: game)
-                        }
+//                        if game.players.count > 3 {
+//                            Spacer()
+//                            CirclePicView(player: controller.game.players[3], game: game)
+//                        }
+//
+//
+//                        if game.players.count > 4 {
+//                            Spacer()
+//                            CirclePicView(player: controller.game.players[4], game: game)
+//                        }
                         
                         Spacer()
                         

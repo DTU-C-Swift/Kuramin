@@ -11,7 +11,7 @@ import SwiftUI
 class Player : ObservableObject, Identifiable{
     
     private(set) var id: String
-    private(set) var fullName: String = Util().NOT_SET
+    @Published private(set) var fullName: String = Util().NOT_SET
     @Published private(set) var displayName = Util().NOT_SET
     @Published private(set) var image: UIImage = Util().defaultProfileImg
     @Published private(set) var isLeft: Bool = false
@@ -73,8 +73,9 @@ class Player : ObservableObject, Identifiable{
         
         lock.lock()
         if p.pid != id {
+            //assert(false)
+            lock.unlock()
             assert(false)
-            //lock.unlock()
         }
 
         

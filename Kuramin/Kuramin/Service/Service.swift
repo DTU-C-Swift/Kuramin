@@ -173,23 +173,21 @@ class Service {
                         
                         self.printer.write("observeLobby: id: \(crrDbPlayer.pid)")
                         
+                        if crrDbPlayer.pid == game.me.id {
+                            self.printer.write("It is me")
+                            game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
+                            continue
+                        }
                         
-                        if var crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
+                        
+                        if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
 
-                            if game.me.id == crrDbPlayer.pid {
-                                crrPlayerRef.setRandomNum(randNum: crrDbPlayer.randomNum)
-
+                    
+                            if crrPlayerRef.image == Util().defaultProfileImg {
+                                // get image
                             }
 
-
-                            else {
-                                if crrPlayerRef.image == Util().defaultProfileImg {
-                                    // get image
-                                }
-
-                                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
-
-                            }
+                            crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
 
 
                         }
