@@ -20,10 +20,27 @@ public class Game : ObservableObject {
     var isGameStarted = false
 
     
+    @Published var oneFromRight: Player?
+    @Published var twoFromRight: Player?
+    @Published var threeFromRight: Player?
+    @Published var fourFromRight: Player?
+    @Published var fiveFromRight: Player?
+    @Published var sixFromRight: Player?
+    @Published var sevenFromRight: Player?
+
+    
+    
+    
     init () {
         addDummyPlayers()
+        printPlayerList()
+        sortPlayers()
     }
 
+    
+    
+    
+    
 
     
     
@@ -95,11 +112,91 @@ public class Game : ObservableObject {
     
     
     
+    func sortPlayers() {
+        
+        if players.count < 1 {return}
+        
+        players.append(me)
+        let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
+        
+        let arrSize = sortedPlayers.count
+        
+        var head = sortedPlayers[0]
+        var last = sortedPlayers[arrSize - 1]
+        
+        head.nextPlayer = sortedPlayers[1]
+        head.prevPlayer = last
+        
+        
+        last.nextPlayer = head
+        last.prevPlayer = sortedPlayers[arrSize - 2]
+        
+        
+        for i in 1..<sortedPlayers.count - 1 {
+                        
+            sortedPlayers[i].prevPlayer = sortedPlayers[i - 1]
+            sortedPlayers[i].nextPlayer = sortedPlayers[i + 1]
+            
+        }
+
+        
+        printPlayersNode(head: head)
+        
+        
+        
+//        switch sortedPlayers.count {
+//
+//        case 2:
+//            fiveFromRight =
+//
+//        default:
+//            self.p.write("S")
+//
+//
+//
+//        }
+        
+        
+    }
+    
+    
+    
+    
+    func printPlayersNode(head: Player) {
+        
+
+        var temp = head.nextPlayer
+    
+        p.write("Printing player nodes")
+        
+                
+        while true {
+            
+            let k2 = temp?.id ?? ""
+            
+            if k2 == head.id {
+                break
+            }
+            
+            self.p.write("player: \(temp?.id ?? "id is nil"), randNum: \(temp?.randomNumber)")
+            
+            temp = temp?.nextPlayer
+            
+            
+        }
+        
+    }
+        
+    
+    
+    
+    
     
     func setPlayerPosition() {
         
+        //players.append(me)
         
-        var sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
+        let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
         
         var newPlayers: [Player] = []
         
@@ -485,9 +582,12 @@ public class Game : ObservableObject {
     
     func addDummyPlayers() {
 
-        for i in 0..<2 {
+        for i in 0..<7 {
             let newPlayer = Player(id: "id\(i)")
             newPlayer.setFullName(fullName: "player\(i)")
+            var rand = Int(arc4random_uniform(10000))
+            newPlayer.setRandomNum(randNum: rand)
+
             players.append(newPlayer)
         }
 
@@ -499,7 +599,7 @@ public class Game : ObservableObject {
     func printPlayerList() {
         self.p.write("Printing player list")
         for p in players {
-            self.p.write("Id: \(p.id), name: \(p.displayName)")
+            self.p.write("Id: \(p.id), name: \(p.displayName), randNum: \(p.randomNumber)")
         }
         
     }
