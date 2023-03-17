@@ -18,6 +18,8 @@ public struct DbLobbyNullable: Codable {
     
     
     
+    
+    
     func mapToLobby() -> Lobby? {
         
         var dbPlayers: [DbPlayer] = []
@@ -36,8 +38,6 @@ public struct DbLobbyNullable: Codable {
             }
             
         }
-        
-        
         
         
         
@@ -62,4 +62,27 @@ public struct Lobby {
     var whosTurn: String
     var players: [DbPlayer]
     
+    
+    
+    
+    
+    func isDuplicateLobby(prevLobby: Lobby) -> Bool {
+        
+        if players.count != prevLobby.players.count ||
+            host != prevLobby.host {return false}
+
+        
+        for (index, crrP) in players.enumerated()  {
+            
+            if crrP.pid != prevLobby.players[index].pid {
+                
+                if !prevLobby.players.contains(where: {$0.pid == crrP.pid}) {return false}
+                
+            }
+            
+        }
+        
+        
+        return true
+    }
 }

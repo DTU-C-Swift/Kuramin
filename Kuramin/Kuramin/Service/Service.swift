@@ -23,9 +23,11 @@ class Service {
     private let printer = Printer(tag: "Service", displayPrints: true)
     private let lobbyLock = NSLock()
 
-    let lobby = "lobby"
-    //var previousLobby: Lobby = Lobby(host: "", playerIds: [""])
-    
+    let lobbyStr = "lobby"
+    var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
+    var previousLobby2: Lobby = Lobby(gameId: ".", host: ".", whosTurn: ".", players: [])
+    private let lobbyLock2 = NSLock()
+
     
     
     func create_or_update_user(userImage: UIImage?) {
@@ -206,44 +208,44 @@ class Service {
     }
     
     
-//    func goToLobby() {
-//        let game = DataHolder.controller.game
-//        var me = game.me
-//        let ref = db.collection("matchMaker").document(lobby)
-//        //player.id = "testId"
-//
-//        // Transactional call
-//        db.runTransaction({ (transaction, errorPointer) -> Any? in
-//            let lobbyDocument: DocumentSnapshot
-//            do {
-//                lobbyDocument = try transaction.getDocument(ref)
-//            } catch let fetchError as NSError {
-//                errorPointer?.pointee = fetchError
-//                return nil
-//            }
-//
-//
-//            // Checks if document "lobby" exists already in db
-//            if !lobbyDocument.exists {
-//                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
-//            } else {
-//                transaction.updateData([
-//                    "playerIds" : FieldValue.arrayUnion([me.id])
-//                ], forDocument: ref)
-//            }
-//
-//            return nil
-//
-//        }) { (object, error) in
-//            if let error = error {
-//                self.printer.write("Transaction failed: \(error)")
-//            } else {
-//                self.printer.write("Transaction succeeded!")
-//                self.amIHost(game: game)
-//                self.observeLobby(game: game)
-//            }
-//        }
-//    }
+    func goToLobby() {
+        let game = DataHolder.controller.game
+        var me = game.me
+        let ref = db.collection("matchMaker").document(lobbyStr)
+        //player.id = "testId"
+
+        // Transactional call
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let lobbyDocument: DocumentSnapshot
+            do {
+                lobbyDocument = try transaction.getDocument(ref)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+
+
+            // Checks if document "lobby" exists already in db
+            if !lobbyDocument.exists {
+                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
+            } else {
+                transaction.updateData([
+                    "playerIds" : FieldValue.arrayUnion([me.id])
+                ], forDocument: ref)
+            }
+
+            return nil
+
+        }) { (object, error) in
+            if let error = error {
+                self.printer.write("Transaction failed: \(error)")
+            } else {
+                self.printer.write("Transaction succeeded!")
+                self.amIHost(game: game)
+                self.observeLobby(game: game)
+            }
+        }
+    }
     
     
     
@@ -252,7 +254,7 @@ class Service {
     func amIHost(game: Game) {
         var me = game.me
         
-        var ref = db.collection("matchMaker").document(lobby)
+        var ref = db.collection("matchMaker").document(lobbyStr)
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
@@ -280,49 +282,49 @@ class Service {
     }
     
 
-//    func observeLobby(game: Game) {
-//
-//        var ref = db.collection("matchMaker").document(lobby)
-//
-//        ref.addSnapshotListener { snapshot, err in
-//
-//            do {
-//                if var lobby = try snapshot?.data(as: Lobby.self) {
-//
-//                    self.lobbyLock.lock()
-//                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
-//                        self.lobbyLock.unlock()
-//                        return
-//                    }
-//
-//
-//
-//
-//
-//                    Util().deleteEmptyIds(lobby: &lobby)
-//
-//                    game.updatePlayerList(lobby: &lobby)
-//
-//
-//                    for uid in lobby.playerIds {
-//                        self.printer.write("observeLobby: id: \(uid)")
-//
-//                        self.fetchUser(uid: uid, game: game)
-//
-//                    }
-//
-//                    self.lobbyLock.unlock()
-//                }
-//            }
-//            catch {
-//
-//                self.printer.write("Error in observing lobby. \(err)")
-//            }
-//
-//
-//        }
-//
-//    }
+    func observeLobby(game: Game) {
+
+        var ref = db.collection("matchMaker").document(lobbyStr)
+
+        ref.addSnapshotListener { snapshot, err in
+
+            do {
+                if var lobby = try snapshot?.data(as: FirstLobby.self) {
+
+                    self.lobbyLock.lock()
+                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
+                        self.lobbyLock.unlock()
+                        return
+                    }
+
+
+
+
+
+                    Util().deleteEmptyIds(lobby: &lobby)
+
+                    game.updatePlayerList(lobby: &lobby)
+
+
+                    for uid in lobby.playerIds {
+                        self.printer.write("observeLobby: id: \(uid)")
+
+                        self.fetchUser(uid: uid, game: game)
+
+                    }
+
+                    self.lobbyLock.unlock()
+                }
+            }
+            catch {
+
+                self.printer.write("Error in observing lobby. \(err)")
+            }
+
+
+        }
+
+    }
     
     
     
@@ -420,7 +422,8 @@ class Service {
             if !lobbyDocument.exists {
                 
                 let gameId = String(UUID().uuidString.prefix(10))
-                var dbLobby = DbLobbyNullable(gameId: gameId, host: Util().NOT_SET, whosTurn: Util().NOT_SET, playersNullable: [dbPlayer])
+                
+                let dbLobby = DbLobbyNullable(gameId: gameId, host: Util().NOT_SET, whosTurn: Util().NOT_SET, players: [dbPlayer])
 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: ref)
@@ -433,17 +436,24 @@ class Service {
                 
 
                 // Checks If the player already exists in the lobby(player list).
+                
                 do {
-                    let dbLobby = try lobbyDocument.data(as: DbLobbyNullable.self)
+                    let dbLobbyNullable = try lobbyDocument.data(as: DbLobbyNullable.self)
                     
-                    if let players = dbLobby.playersNullable {
-                        for crrId in players {
+                    
+                    if let dbLobby = dbLobbyNullable.mapToLobby() {
+                        
+                        for crrId in dbLobby.players {
                             if crrId.pid == me.id {
-                                self.printer.write("You are already in the lobby")
+                                self.printer.write("You were already in the lobby")
                                 return
                             }
                         }
                     }
+                    
+                    
+                                    
+                    
                 } catch {
                     self.printer.write("Error while mapping data. (*)")
                 }
@@ -464,9 +474,9 @@ class Service {
 
         }) { (object, error) in
             if let error = error {
-                self.printer.write("Transaction failed: \(error)")
+                self.printer.write("Failed to go to lobby: \(error)")
             } else {
-                self.printer.write("Transaction succeeded!")
+                self.printer.write("You successfully landed in lobby!")
 //                self.amIHost(game: game)
 //                self.observeLobby(game: game)
             }
@@ -479,51 +489,51 @@ class Service {
     }
     
     
-    func observeLobby2(game: Game) {
-        
-        var ref = db.collection("matches").document(lobby)
-        
-        ref.addSnapshotListener { snapshot, err in
-            
-            do {
-                if var dbLobby = try snapshot?.data(as: DbLobbyNullable.self) {
-                    
-                    self.lobbyLock.lock()
-                    
-                    
-                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
-                        self.lobbyLock.unlock()
-                        return
-                    }
-                    
-                    
-                    
-                    
-                    
-                    Util().deleteEmptyIds(lobby: &lobby)
-                    
-                    game.updatePlayerList(lobby: &lobby)
-                    
-                    
-                    for uid in lobby.playerIds {
-                        self.printer.write("observeLobby: id: \(uid)")
-                        
-                        self.fetchUser(uid: uid, game: game)
-                        
-                    }
-                    
-                    self.lobbyLock.unlock()
-                }
-            }
-            catch {
-                
-                self.printer.write("Error in observing lobby. \(err)")
-            }
-            
-
-        }
-        
-    }
+//    func observeLobby2(game: Game) {
+//
+//        var ref = db.collection("matches").document(lobbyStr)
+//
+//        ref.addSnapshotListener { snapshot, err in
+//
+//            do {
+//                if var dbLobby = try snapshot?.data(as: DbLobbyNullable.self) {
+//
+//                    self.lobbyLock2.lock()
+//
+//
+//                    if dbLobby.isDuplicateLobby(prevLobby: previousLobby2) {
+//                        self.lobbyLock2.unlock()
+//                        return
+//                    }
+//
+//
+//
+//
+//
+//                    Util().deleteEmptyIds(lobby: &lobby)
+//
+//                    game.updatePlayerList(lobby: &lobby)
+//
+//
+//                    for uid in lobby.playerIds {
+//                        self.printer.write("observeLobby: id: \(uid)")
+//
+//                        self.fetchUser(uid: uid, game: game)
+//
+//                    }
+//
+//                    self.lobbyLock2.unlock()
+//                }
+//            }
+//            catch {
+//
+//                self.printer.write("Error in observing lobby. \(err)")
+//            }
+//
+//
+//        }
+//
+//    }
 
     
     

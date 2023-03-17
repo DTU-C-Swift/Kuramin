@@ -208,10 +208,10 @@
 		56954C3529C2388E00155181 /* DbModel */ = {
 			isa = PBXGroup;
 			children = (
-				56954C3829C238BD00155181 /* DbUser.swift */,
-				56F6642029C2FE9B0047DECA /* DbPlayerNullable.swift */,
-				56F6642229C301010047DECA /* DbCard.swift */,
 				56BC82B429C3D7410011BDCD /* DbLobbyNullable.swift */,
+				56F6642029C2FE9B0047DECA /* DbPlayerNullable.swift */,
+				56954C3829C238BD00155181 /* DbUser.swift */,
+				56F6642229C301010047DECA /* DbCard.swift */,
 			);
 			path = DbModel;
 			sourceTree = "<group>";

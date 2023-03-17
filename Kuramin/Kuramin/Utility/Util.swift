@@ -72,32 +72,9 @@ struct Util {
     
     
     
-    
-    
-    func converToLobby() {
-        
-        
-        
-    }
-    
-    
-    
-    
-    func isDuplicateLobby(lobby1: DbLobbyNullable, lobby2: DbLobbyNullable) -> Bool {
-        
-        
-        
-        if lobby1.players.count != lobby2.players.count ||
-            
-            lobby1.host != lobby2.host {return false}
 
-        
-        if lobby1.playerIds != lobby2.playerIds {
-            return false
-        }
-        
-        return true
-    }
+    
+
 }
 
 
