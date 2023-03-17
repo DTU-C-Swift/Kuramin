@@ -27,7 +27,6 @@ class Service {
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var previousLobby2: Lobby?
     private let lobbyLock2 = NSLock()
-    private var previousLobbySt2: DocumentSnapshot?
 
     func create_or_update_user(userImage: UIImage?) {
         let game = DataHolder.controller.game
@@ -492,7 +491,7 @@ class Service {
         var ref = db.collection("matches").document(lobbyStr)
 
          let obsRef = ref.addSnapshotListener { snapshot, err in
-             self.lobbyLock2.lock()
+             
             do {
                 if var dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
                     
@@ -500,20 +499,27 @@ class Service {
 
                     self.lobbyLock2.lock()
 
-                    let lobby = dbLobbyNullable.mapToLobby()
-
-
-
-                    if dbLobbyNullable.isDuplicateLobby(prevLobby: previousLobby2) {
+                    guard let lobby = dbLobbyNullable.mapToLobby() else {
+                        self.printer.write("mapToLobby returned nil")
                         self.lobbyLock2.unlock()
                         return
                     }
-
-
-
-
-                    Util().deleteEmptyIds(lobby: &lobby)
-
+                    
+                    
+                    if previousLobby2 == nil {
+                        previousLobby2 = lobby
+                        
+                        
+                    } else {
+                        
+                        if previousLobby2?.isDuplicateLobby(compareWith: lobby) == true {
+                            self.lobbyLock2.unlock()
+                            return
+                        }
+                    }
+                    
+                    
+                    
                     game.updatePlayerList(lobby: &lobby)
 
 
