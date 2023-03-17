@@ -55,10 +55,8 @@ struct GamePage: View {
                         }
                         
                         Button(action: {
-                            controller.game.isGameStarted = true
-                            
-                            
-                            
+                            //controller.game.isGameStarted = true
+                            controller.service.goToLobby(val: true)
 
                             if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
                                 self.printer.write("Earlier")
@@ -70,7 +68,7 @@ struct GamePage: View {
                             
                             
                         }) {
-                            Text("Start Game")
+                            Text("Add player")
 
                         }
                         

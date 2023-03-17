@@ -38,13 +38,21 @@ class Service {
     
     
     //-------------------------------- New implementation of lobby -----------------------------//
+    var counter = 1
     
-    
-    func goToLobby() {
+    func goToLobby(val: Bool) {
         
         let newLobby = "lobby"
         let game = DataHolder.controller.game
-        let me = game.me
+        
+        var me = Player(id: "testId\(counter)")
+        if val {
+            me.setFullName(fullName: "Name\(counter)")
+            counter += 1
+        } else { me = game.me}
+        
+        
+        
         
         let ref = db.collection("matches").document(newLobby)
         
