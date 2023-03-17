@@ -21,33 +21,7 @@ public class Game : ObservableObject {
 
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     func updatePlayerList(lobby: Lobby) {

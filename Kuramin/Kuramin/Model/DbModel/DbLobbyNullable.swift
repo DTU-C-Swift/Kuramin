@@ -49,7 +49,7 @@ public struct DbLobbyNullable: Codable {
             
         } else {
             
-            print("DbLobby: \(self.gameId!) is nil")
+            print("DbLobby: \(self.gameId ?? "" ) is nil")
         }
         
         
@@ -65,43 +65,6 @@ public struct Lobby {
     var players: [DbPlayer]
     
     
-//    init(dbLobbyNullable arg: DbLobbyNullable) {
-//
-//
-//
-//        var dbPlayers: [DbPlayer] = []
-//
-//        if let dbPlayersNullable = arg.players {
-//
-//            for crr in dbPlayersNullable {
-//
-//                let newDbP = crr.mapToDbPlayer()
-//
-//                if let newDbP = newDbP {
-//                    dbPlayers.append(newDbP)
-//
-//                }
-//
-//            }
-//
-//        }
-//
-//
-//
-//        if let gameId = arg.gameId, let host = arg.host, let whosTurn = arg.whoseTurn {
-//
-//            self.init(gameId: gameId, host: host, whosTurn: whosTurn, players: dbPlayers)
-//
-//        } else {
-//
-//
-//            print("DbLobby: \(arg.gameId!) is nil")
-//        }
-//
-//
-//    }
-    
-    
     
     init(gameId: String, host: String, whosTurn: String, players: [DbPlayer]) {
         self.gameId = gameId
@@ -112,9 +75,7 @@ public struct Lobby {
     
     
     
-    
-    
-    
+        
     
     
     func isDuplicateLobby(compareWith: Lobby) -> Bool {
