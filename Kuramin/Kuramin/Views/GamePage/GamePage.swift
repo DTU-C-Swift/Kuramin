@@ -34,9 +34,10 @@ struct GamePage: View {
             
             BackgroundView()
             
+            PlayersView(game: game)
+            
             VStack {
                 
-               
                 HStack{
                     
                     
@@ -78,7 +79,6 @@ struct GamePage: View {
                     
                 }
 
-
                 Spacer()
                 
                 HStack {
@@ -114,7 +114,7 @@ struct GamePage: View {
             //                later = MyDate().getTime()
             //            }
             
-            controller.game.addDummyPlayers()
+            //controller.game.addDummyPlayers()
             
         }
         

@@ -19,7 +19,10 @@ public class Game : ObservableObject {
     let p = Printer(tag: "Game", displayPrints: true)
     var isGameStarted = false
 
-
+    
+    init () {
+        addDummyPlayers()
+    }
 
 
     
@@ -482,7 +485,7 @@ public class Game : ObservableObject {
     
     func addDummyPlayers() {
 
-        for i in 0...6 {
+        for i in 0..<2 {
             let newPlayer = Player(id: "id\(i)")
             newPlayer.setFullName(fullName: "player\(i)")
             players.append(newPlayer)
