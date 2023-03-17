@@ -190,7 +190,7 @@ class Player : ObservableObject, Identifiable{
     }
     
     
-    func setDisplayName() {
+    private func setDisplayName() {
         lock.lock()
         let newName = self.fullName.split(separator: " ")
         let newDisplayName = String(newName[0])

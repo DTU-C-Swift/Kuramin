@@ -15,7 +15,7 @@ struct GamePage: View {
     @Environment(\.scenePhase) private var scenePhase
     let printer = Printer(tag: "GamePage", displayPrints: true)
     @State private var changedTopColumn = false
-
+    
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
     @ObservedObject var game = DataHolder.controller.game
@@ -24,6 +24,7 @@ struct GamePage: View {
     
     
     init() {
+        // controller.game.addDummyPlayers()
     }
     
     
@@ -35,123 +36,51 @@ struct GamePage: View {
             
             VStack {
                 
-                ZStack {
+               
+                HStack{
                     
                     
-                    HStack{
+                    Button(action: {
+                        pm.wrappedValue.dismiss()
                         
-                        
-                        Button(action: {
-                            pm.wrappedValue.dismiss()
-                            
-                        }) {
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.white)
-                                .scaleEffect(1.6)
-                                .padding(.bottom, 0)
-                                .padding(.top, 5)
-                                .padding(.leading, 20)
-
-                        }
-                        
-                        Button(action: {
-                            //controller.game.isGameStarted = true
-                            //controller.service.goToLobby(val: true)
-                            controller.game.setPlayerPosition()
-                            
-
-                            if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
-                                self.printer.write("Earlier")
-                            }
-                            
-                            else {
-                                self.printer.write("Later")
-                            }
-                            
-                            
-                        }) {
-                            Text("Add player")
-
-                        }
-                        
-                        
-                        Spacer()
+                    }) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(.white)
+                            .scaleEffect(1.6)
+                            .padding(.bottom, 0)
+                            .padding(.top, 5)
+                            .padding(.leading, 20)
                         
                     }
                     
-                    
-                   
-                    HStack() {
-                        Spacer()
-                        if game.players.count > 0 {
-                            CirclePicView(player: controller.game.players[0], game: game)
+                    Button(action: {
+                        //controller.game.isGameStarted = true
+                        //controller.service.goToLobby(val: true)
+                        controller.game.setPlayerPosition()
+                        
+                        
+                        if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
+                            self.printer.write("Earlier")
                         }
                         
-                        if game.players.count > 3 {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[3], game: game)
-                        }
-
-
-                        if game.players.count > 4 {
-                            Spacer()
-                            CirclePicView(player: controller.game.players[4], game: game)
+                        else {
+                            self.printer.write("Later")
                         }
                         
-                        Spacer()
                         
-
-                    }
-                    .padding(.top, 4)
-                    
-                }
-                
-
-                
-                
-                
-                
-                Spacer()
-                HStack() {
-                    
-                    VStack{
+                    }) {
+                        Text("Add player")
                         
-                        Spacer()
-                        
-                        if game.players.count > 5 {
-                            CirclePicView(player: controller.game.players[5], game: game)
-                            Spacer()
-                        }
-
-                        if game.players.count > 1 {
-                            CirclePicView(player: controller.game.players[1], game: game)
-                        }
-                        
-                        Spacer()
-
                     }
                     
                     
                     Spacer()
-                    VStack {
-                        Spacer()
-                        if game.players.count > 6 {
-                            CirclePicView(player: controller.game.players[6], game: game)
-                            Spacer()
-                        }
-                        
-                        if game.players.count > 2 {
-                            CirclePicView(player: controller.game.players[2], game: game)
-                        }
-                        
-                        Spacer()
-                    }
                     
                 }
-                
-                
+
+
                 Spacer()
-                    
+                
                 HStack {
                     
                     Spacer()
@@ -162,7 +91,7 @@ struct GamePage: View {
                 }
             }
             
-    
+            
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: scenePhase) { newPhase in
@@ -179,14 +108,16 @@ struct GamePage: View {
         .onAppear() {
             //controller.service.goToLobby()
             
-            earlier = MyDate().getTime()
+            //            earlier = MyDate().getTime()
+            //
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            //                later = MyDate().getTime()
+            //            }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                later = MyDate().getTime()
-            }
-
+            controller.game.addDummyPlayers()
+            
         }
-
+        
     }
     
     

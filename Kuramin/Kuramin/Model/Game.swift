@@ -480,20 +480,16 @@ public class Game : ObservableObject {
     
     
     
-//    func addDummyPlayers() {
-//
-//        for i in 1...8 {
-//            let newPlayer = Player(id: "id\(i)")
-//            newPlayer.id = UUID().uuidString
-//            newPlayer.displayName = "player" + String(i)
-//            if i <= 7 {
-//                newPlayer.isNotDummy = true
-//            }
-//            players.append(newPlayer)
-//        }
-//
-//
-//    }
+    func addDummyPlayers() {
+
+        for i in 0...6 {
+            let newPlayer = Player(id: "id\(i)")
+            newPlayer.setFullName(fullName: "player\(i)")
+            players.append(newPlayer)
+        }
+
+
+    }
     
     
     

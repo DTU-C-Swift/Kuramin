@@ -19,47 +19,68 @@ struct CirclePicView: View {
     
     var body: some View {
         
-        
-        if !game.isGameStarted || (game.isGameStarted && !player.isLeft) {
+        VStack(spacing: 1) {
             
-            VStack(spacing: 1) {
-                
-                Image(uiImage: player.image)
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(0.6)
-                    .clipShape(Circle())
-                    .overlay{
-                        Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-                    }
-                
-                Text(player.displayName)
-                    .font(.footnote)
-                    .foregroundColor(Color.white)
-                
-            }
+            Image(uiImage: player.image)
+                .frame(width: 60, height: 60)
+                .scaleEffect(0.6)
+                .clipShape(Circle())
+                .overlay{
+                    Circle().stroke(Color.white, lineWidth: 4)
+                        .shadow(radius: 7)
+                }
             
-            
-        } else {
-            
-            
-            VStack(spacing: 1) {
-                Image(uiImage: player.image)
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(0.6)
-                    .clipShape(Circle())
-                    .overlay{
-                        Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-                    }
-                
-                Text(player.displayName)
-                    .font(.footnote)
-            }
-            .hidden()
-            
+            Text(player.displayName)
+                .font(.footnote)
+                .foregroundColor(Color.white)
             
         }
+        
+        
+        
+        
+        
+        
+//        if !game.isGameStarted || (game.isGameStarted && !player.isLeft) {
+//
+//            VStack(spacing: 1) {
+//
+//                Image(uiImage: player.image)
+//                    .frame(width: 60, height: 60)
+//                    .scaleEffect(0.6)
+//                    .clipShape(Circle())
+//                    .overlay{
+//                        Circle().stroke(Color.white, lineWidth: 4)
+//                            .shadow(radius: 7)
+//                    }
+//
+//                Text(player.displayName)
+//                    .font(.footnote)
+//                    .foregroundColor(Color.white)
+//
+//            }
+//
+//
+//        } else {
+//
+//
+//            VStack(spacing: 1) {
+//                Image(uiImage: player.image)
+//                    .frame(width: 60, height: 60)
+//                    .scaleEffect(0.6)
+//                    .clipShape(Circle())
+//                    .overlay{
+//                        Circle().stroke(Color.white, lineWidth: 4)
+//                            .shadow(radius: 7)
+//                    }
+//
+//                Text(player.displayName)
+//                    .font(.footnote)
+//            }
+//            .hidden()
+//
+//
+//        }
         
     }
     
