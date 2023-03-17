@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 
 
 public struct DbPlayerNullable: Codable {
+    var pName: String?
     var pid: String?
     var randomNum: Int?
     var cardsInHand: Int?
@@ -18,21 +19,19 @@ public struct DbPlayerNullable: Codable {
     
     func mapToDbPlayer() -> DbPlayer? {
         
-        if let pid = self.pid, let randomNum = self.randomNum, let cardsInHand = self.cardsInHand {
-            return DbPlayer(pid: pid, randomNum: randomNum, cardsInHand: cardsInHand)
+        if let pName = self.pName, let pid = self.pid, let randomNum = self.randomNum, let cardsInHand = self.cardsInHand {
+            return DbPlayer(pName: pName, pid: pid, randomNum: randomNum, cardsInHand: cardsInHand)
             
-        } else {
-            
-            print("DbPlayerNullable: player \(self.pid!) is nil")
         }
         
-        
+        print("DbPlayerNullable: player \(self.pid!) is nil")
         return nil
     }
     
     
     func toDictionary() -> [String: Any] {
         return [
+            "pName": pName ?? Util().NOT_SET,
             "pid": pid ?? Util().NOT_SET,
             "randomNum": randomNum ?? -1,
             "cardsInHand": cardsInHand ?? -1
@@ -42,7 +41,10 @@ public struct DbPlayerNullable: Codable {
 }
 
 
+
+
 public struct DbPlayer {
+    var pName: String
     var pid: String
     var randomNum: Int
     var cardsInHand: Int

@@ -60,32 +60,21 @@ public class Game : ObservableObject {
         
         
         var playesToBeDeleted_FromGame: [Int] = []
-        var playersToBeDeleted_FromLobbyObj: [Int] = []
-        var matchFound = false
         
         playersLock.lock()
-        for (index, p) in players.enumerated() {
-            matchFound = false
+        
+        for (index, crrGP) in players.enumerated() {
 
-            for (idIndex, id) in lobby.playerIds.enumerated() {
-                
-                if id == p.id {
-                    idsToBeDeleted.append(idIndex)
-                    matchFound = true
-                    break
-                }
-            }
-            
-            if !matchFound {
+            if !lobby.players.contains(where: {$0.pid == crrGP.id}){
                 playesToBeDeleted_FromGame.append(index)
-                actualPlayerSize += -1
+                actualPlayerSize -= 1
+                
             }
+
         }
         
         
-        
         players.remove(atOffsets: IndexSet(playesToBeDeleted_FromGame))
-        lobby.playerIds.remove(atOffsets: IndexSet(playersToBeDeleted_FromLobbyObj))
         playersLock.unlock()
 
         
@@ -93,6 +82,83 @@ public class Game : ObservableObject {
     }
 
     
+    
+    
+    func getPlayerRef(pid: String) -> Player {
+        if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            self.p.write("PlayerId is empty. Id: \(pid). (getPlayerRef)")
+            assert(false)
+        }
+        
+        playersLock.lock()
+        
+        for crrP in players {
+            
+            if crrP.id == pid {
+                
+                playersLock.unlock()
+                return crrP
+            }
+        }
+        
+        
+        return Player(id: pid)
+        playersLock.unlock()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    func addPlayer2(player: Player) {
+//
+//
+//        if isGameStarted {
+//            self.p.write("Player can't be added, since game has already started")
+//            return
+//        }
+//
+//        if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+//            self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
+//            return
+//
+//        }
+//
+//        if players.count > 6 {
+//            self.p.write("Player list size is \(players.count). So, no more player is allowed")
+//            return
+//        }
+//
+//
+//        for (index, crrP) in players.enumerated() {
+//
+//            if crrP.id == player.id {
+//
+//                if crrP.isItSame(player: player) {
+//                    return
+//
+//                } else {break}
+//
+//
+//            }
+//
+//        }
+//
+//
+//
+//        playersLock.lock()
+//        players.append(player)
+//        actualPlayerSize += 1
+//        printPlayerList()
+//        playersLock.unlock()
+//    }
+
     
     
     
