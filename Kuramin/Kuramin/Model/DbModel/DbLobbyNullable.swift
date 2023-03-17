@@ -20,6 +20,7 @@ public struct DbLobbyNullable: Codable {
     
     
     
+    
     func mapToLobby() -> Lobby? {
         
         var dbPlayers: [DbPlayer] = []
@@ -61,6 +62,55 @@ public struct Lobby {
     var host: String
     var whosTurn: String
     var players: [DbPlayer]
+    
+    
+//    init(dbLobbyNullable arg: DbLobbyNullable) {
+//
+//
+//
+//        var dbPlayers: [DbPlayer] = []
+//
+//        if let dbPlayersNullable = arg.players {
+//
+//            for crr in dbPlayersNullable {
+//
+//                let newDbP = crr.mapToDbPlayer()
+//
+//                if let newDbP = newDbP {
+//                    dbPlayers.append(newDbP)
+//
+//                }
+//
+//            }
+//
+//        }
+//
+//
+//
+//        if let gameId = arg.gameId, let host = arg.host, let whosTurn = arg.whoseTurn {
+//
+//            self.init(gameId: gameId, host: host, whosTurn: whosTurn, players: dbPlayers)
+//
+//        } else {
+//
+//
+//            print("DbLobby: \(arg.gameId!) is nil")
+//        }
+//
+//
+//    }
+    
+    
+    
+    init(gameId: String, host: String, whosTurn: String, players: [DbPlayer]) {
+        self.gameId = gameId
+        self.host = host
+        self.whosTurn = whosTurn
+        self.players = players
+    }
+    
+    
+    
     
     
     

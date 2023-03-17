@@ -25,11 +25,10 @@ class Service {
 
     let lobbyStr = "lobby"
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
-    var previousLobby2: Lobby = Lobby(gameId: ".", host: ".", whosTurn: ".", players: [])
+    var previousLobby2: Lobby?
     private let lobbyLock2 = NSLock()
+    private var previousLobbySt2: DocumentSnapshot?
 
-    
-    
     func create_or_update_user(userImage: UIImage?) {
         let game = DataHolder.controller.game
 
@@ -477,6 +476,7 @@ class Service {
                 self.printer.write("You successfully landed in lobby!")
 //                self.amIHost(game: game)
 //                self.observeLobby(game: game)
+                self.observeLobby2(game: game)
             }
         }
 
@@ -487,51 +487,64 @@ class Service {
     }
     
     
-//    func observeLobby2(game: Game) {
-//
-//        var ref = db.collection("matches").document(lobbyStr)
-//
-//        ref.addSnapshotListener { snapshot, err in
-//
-//            do {
-//                if var dbLobby = try snapshot?.data(as: DbLobbyNullable.self) {
-//
-//                    self.lobbyLock2.lock()
-//
-//
-//                    if dbLobby.isDuplicateLobby(prevLobby: previousLobby2) {
-//                        self.lobbyLock2.unlock()
-//                        return
-//                    }
-//
-//
-//
-//
-//
-//                    Util().deleteEmptyIds(lobby: &lobby)
-//
-//                    game.updatePlayerList(lobby: &lobby)
-//
-//
-//                    for uid in lobby.playerIds {
-//                        self.printer.write("observeLobby: id: \(uid)")
-//
-//                        self.fetchUser(uid: uid, game: game)
-//
-//                    }
-//
-//                    self.lobbyLock2.unlock()
-//                }
-//            }
-//            catch {
-//
-//                self.printer.write("Error in observing lobby. \(err)")
-//            }
-//
-//
-//        }
-//
-//    }
+    func observeLobby2(game: Game) {
+
+        var ref = db.collection("matches").document(lobbyStr)
+
+         let obsRef = ref.addSnapshotListener { snapshot, err in
+             self.lobbyLock2.lock()
+            do {
+                if var dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
+                    
+                    
+
+                    self.lobbyLock2.lock()
+
+                    let lobby = dbLobbyNullable.mapToLobby()
+
+
+
+                    if dbLobbyNullable.isDuplicateLobby(prevLobby: previousLobby2) {
+                        self.lobbyLock2.unlock()
+                        return
+                    }
+
+
+
+
+                    Util().deleteEmptyIds(lobby: &lobby)
+
+                    game.updatePlayerList(lobby: &lobby)
+
+
+                    for uid in lobby.playerIds {
+                        self.printer.write("observeLobby: id: \(uid)")
+
+                        self.fetchUser(uid: uid, game: game)
+
+                    }
+
+                    self.lobbyLock2.unlock()
+                }
+            }
+             
+            catch {
+
+                self.printer.write("Error in observing lobby. \(err)")
+            }
+             self.lobbyLock2.unlock()
+
+
+        }
+
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            obsRef.remove()
+            self.observeLobby2(game: game)
+        }
+        
+        
+    }
 
     
     
