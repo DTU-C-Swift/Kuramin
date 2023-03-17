@@ -131,7 +131,7 @@ class Service {
     
     func observeMeInDB() {
         let game = DataHolder.controller.game
-        var me = game.me
+        let me = game.me
         
         if me.id == Util().MY_DUMMY_ID {
             
@@ -210,7 +210,7 @@ class Service {
     
     func goToLobby() {
         let game = DataHolder.controller.game
-        var me = game.me
+        let me = game.me
         let ref = db.collection("matchMaker").document(lobbyStr)
         //player.id = "testId"
 
@@ -252,9 +252,9 @@ class Service {
     
     
     func amIHost(game: Game) {
-        var me = game.me
+        let me = game.me
         
-        var ref = db.collection("matchMaker").document(lobbyStr)
+        let ref = db.collection("matchMaker").document(lobbyStr)
         ref.getDocument { document, err in
             
             if let document = document, document.exists {
@@ -284,7 +284,7 @@ class Service {
 
     func observeLobby(game: Game) {
 
-        var ref = db.collection("matchMaker").document(lobbyStr)
+        let ref = db.collection("matchMaker").document(lobbyStr)
 
         ref.addSnapshotListener { snapshot, err in
 
@@ -318,7 +318,7 @@ class Service {
             }
             catch {
 
-                self.printer.write("Error in observing lobby. \(err)")
+                self.printer.write("Error in observing lobby. \(err!)")
             }
 
 
@@ -332,7 +332,7 @@ class Service {
     
     func fetchUser(uid: String, game: Game) {
         
-        var newPlayer = Player(id: uid)
+        let newPlayer = Player(id: uid)
         
         self.downloadImg(player: newPlayer)
         
@@ -396,7 +396,7 @@ class Service {
         
         let newLobby = "lobby"
         let game = DataHolder.controller.game
-        var me = game.me
+        let me = game.me
         
         let ref = db.collection("matches").document(newLobby)
         
@@ -463,23 +463,8 @@ class Service {
                 
                 // If the player does not exists in the lobby(player list) then adds the player to the lobby.
                 
-                //var kk = DbPlayer(pid: "ABC32", randomNum: 10, cardsInHand: 10)
-                
                 transaction.updateData(["players": FieldValue.arrayUnion([dbPlayerNullable.toDictionary()])], forDocument: ref)
 
-                
-//                do {
-//                    //let encodedDbPlayer = try JSONEncoder().encode(dbPlayer)
-//
-//                    transaction.updateData(["players": FieldValue.arrayUnion([dbPlayer])], forDocument: ref)
-//
-//
-//                    transaction.updateData(["players": FieldValue.arrayUnion([dbPlayer])], forDocument: ref)
-//
-//                } catch {
-//
-//                    self.printer.write("Error updating field in lobby")
-//                }
                 
             }
 
