@@ -403,7 +403,8 @@ class Service {
         
         
         
-        var dbPlayer = DbPlayerNullable(pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
+        let dbPlayerNullable = DbPlayerNullable(pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
+        
 
 
         // Transactional call
@@ -420,10 +421,11 @@ class Service {
 
             // Checks if document "lobby" exists already in db
             if !lobbyDocument.exists {
+                self.printer.write("Document in lobby does not exit")
                 
                 let gameId = String(UUID().uuidString.prefix(10))
                 
-                let dbLobby = DbLobbyNullable(gameId: gameId, host: Util().NOT_SET, whosTurn: Util().NOT_SET, players: [dbPlayer])
+                let dbLobby = DbLobbyNullable(gameId: gameId, host: Util().NOT_SET, whoseTurn: Util().NOT_SET, players: [dbPlayerNullable])
 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: ref)
@@ -461,12 +463,23 @@ class Service {
                 
                 // If the player does not exists in the lobby(player list) then adds the player to the lobby.
                 
-                do {
-                    let encodedDbPlayer = try JSONEncoder().encode(dbPlayer)
+                //var kk = DbPlayer(pid: "ABC32", randomNum: 10, cardsInHand: 10)
+                
+                transaction.updateData(["players": FieldValue.arrayUnion([dbPlayerNullable.toDictionary()])], forDocument: ref)
 
-                    transaction.updateData(["players": FieldValue.arrayUnion([encodedDbPlayer])], forDocument: ref)
-
-                } catch {}
+                
+//                do {
+//                    //let encodedDbPlayer = try JSONEncoder().encode(dbPlayer)
+//
+//                    transaction.updateData(["players": FieldValue.arrayUnion([dbPlayer])], forDocument: ref)
+//
+//
+//                    transaction.updateData(["players": FieldValue.arrayUnion([dbPlayer])], forDocument: ref)
+//
+//                } catch {
+//
+//                    self.printer.write("Error updating field in lobby")
+//                }
                 
             }
 

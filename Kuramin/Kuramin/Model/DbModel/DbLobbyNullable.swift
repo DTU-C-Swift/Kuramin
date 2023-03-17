@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 public struct DbLobbyNullable: Codable {
     var gameId: String?
     var host: String?
-    var whosTurn: String?
+    var whoseTurn: String?
     var players: [DbPlayerNullable]?
     
     
@@ -41,7 +41,7 @@ public struct DbLobbyNullable: Codable {
         
         
         
-        if let gameId = self.gameId, let host = self.host, let whosTurn = self.whosTurn {
+        if let gameId = self.gameId, let host = self.host, let whosTurn = self.whoseTurn {
             
             return Lobby(gameId: gameId, host: host, whosTurn: whosTurn, players: dbPlayers)
             
