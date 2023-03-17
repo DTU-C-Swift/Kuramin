@@ -18,6 +18,7 @@ class Player : ObservableObject, Identifiable{
     @Published private(set) var coins: Int = 0
     @Published private(set) var cardsInHand = -1
     @Published private(set) var randomNumber = -1
+    private(set) var isDefaultImg = true
 
     private(set) var leftAt = Util().NOT_SET
     private let lock = NSLock()
@@ -45,6 +46,7 @@ class Player : ObservableObject, Identifiable{
         
         if let image = image {
             self.image = image
+            self.isDefaultImg = false
         }
         
         if let isLeft = isLeft {
@@ -214,6 +216,7 @@ class Player : ObservableObject, Identifiable{
             
             if oldImgData != newImgData {
                 self.image = newImg
+                self.isDefaultImg = false
             }
         }
         

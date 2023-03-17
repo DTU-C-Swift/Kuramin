@@ -176,6 +176,7 @@ class Service {
                         if crrDbPlayer.pid == game.me.id {
                             self.printer.write("It is me")
                             game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
+                            game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
                             continue
                         }
                         
@@ -183,8 +184,10 @@ class Service {
                         if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
 
                     
-                            if crrPlayerRef.image == Util().defaultProfileImg {
-                                // get image
+                            
+                            if crrPlayerRef.isDefaultImg {
+                                self.downloadImg(player: crrPlayerRef)
+                                
                             }
 
                             crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
