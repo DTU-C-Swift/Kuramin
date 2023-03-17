@@ -157,11 +157,70 @@ class Player : ObservableObject, Identifiable{
     ///--------------------------------------------     All the setters    ---------------------------------------------------///
     
     
-    func setIsLeft(val: Bool) {
+    func setId(pid newPid: String) {
         lock.lock()
-        self.isLeft = val
+        if id == newPid || newPid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+            lock.unlock()
+            return
+        }
+        self.id = newPid
+        lock.unlock()
+    }
+    
+    
+    
+    func setFullName(fullName newName: String) {
+        lock.lock()
+        if fullName == newName {
+            lock.lock()
+            return
+        }
+        self.fullName = newName
+        lock.unlock()
+        setDisplayName()
         
-        if val == false {
+    }
+    
+    
+    func setDisplayName() {
+        lock.lock()
+        let newName = self.fullName.split(separator: " ")
+        if displayName != newName[0] {
+            self.displayName = String(newName[0])
+            
+        }
+        lock.unlock()
+    }
+    
+    
+    
+    
+    func setStrImg(imgName: String) {
+        
+        let newImg = UIImage(imageLiteralResourceName: imgName)
+
+        
+        lock.lock()
+
+        if let oldImgData = image.pngData(), let newImgData = newImg.pngData() {
+            
+            if oldImgData != newImgData {
+                self.image = newImg
+            }
+        }
+        
+        
+        lock.unlock()
+    }
+    
+    
+    
+    
+    func setIsLeft(isLeft newIsLeft: Bool) {
+        lock.lock()
+        self.isLeft = newIsLeft
+        
+        if newIsLeft == false {
             self.leftAt = Util().NOT_SET
         }
         
@@ -169,26 +228,49 @@ class Player : ObservableObject, Identifiable{
     }
     
     
-    func setLeftAt(date: String) {
+    func setLeftAt(date newDate: String) {
         lock.lock()
-        self.leftAt = date
+        self.leftAt = newDate
         lock.unlock()
     }
     
     
-    func setDisplayName() {
-        let newName = self.fullName.split(separator: " ")
-        if displayName != newName[0] {
-            self.displayName = String(newName[0])
-            
+
+    func setCoins(coins newCoins: Int) {
+        
+        lock.lock()
+        if coins != newCoins {
+            self.coins = newCoins
         }
+        
+        lock.unlock()
+    }
+    
+    func setCardsInHand(cardInHad newCardInHand: Int) {
+        
+        lock.lock()
+        
+        if cardsInHand != newCardInHand {
+            self.cardsInHand = newCardInHand
+        }
+        
+        lock.unlock()
+        
     }
     
     
-    
-//    func setStrImg(imgName: String) {
-//        self.image = UIImage(imageLiteralResourceName: imgName)
-//    }
+    func setRandomNum(randNum newRandNum: Int) {
+        
+        lock.lock()
+        
+        if randomNumber != newRandNum {
+            self.randomNumber = newRandNum
+        }
+        
+        lock.unlock()
+        
+    }
+
     
     
 }
