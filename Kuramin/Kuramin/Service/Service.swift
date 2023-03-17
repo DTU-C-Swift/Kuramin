@@ -176,20 +176,20 @@ class Service {
                         
                         if var crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
 
-//                            if game.me.id == crrDbPlayer.pid {
-//                                //crrPlayerRef.setRandomNum(randNum: crrDbPlayer.randomNum)
-//
-//                            }
-//
-//
-//                            else {
-////                                if crrPlayerRef.image == Util().defaultProfileImg {
-////                                    // get image
-////                                }
-//
-//                                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
-//
-//                            }
+                            if game.me.id == crrDbPlayer.pid {
+                                crrPlayerRef.setRandomNum(randNum: crrDbPlayer.randomNum)
+
+                            }
+
+
+                            else {
+                                if crrPlayerRef.image == Util().defaultProfileImg {
+                                    // get image
+                                }
+
+                                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
+
+                            }
 
 
                         }
