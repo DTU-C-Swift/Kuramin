@@ -56,7 +56,9 @@ struct GamePage: View {
                         
                         Button(action: {
                             //controller.game.isGameStarted = true
-                            controller.service.goToLobby(val: true)
+                            //controller.service.goToLobby(val: true)
+                            controller.game.setPlayerPosition()
+                            
 
                             if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
                                 self.printer.write("Earlier")
@@ -85,16 +87,16 @@ struct GamePage: View {
                             CirclePicView(player: controller.game.players[0], game: game)
                         }
                         
-//                        if game.players.count > 3 {
-//                            Spacer()
-//                            CirclePicView(player: controller.game.players[3], game: game)
-//                        }
-//
-//
-//                        if game.players.count > 4 {
-//                            Spacer()
-//                            CirclePicView(player: controller.game.players[4], game: game)
-//                        }
+                        if game.players.count > 3 {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[3], game: game)
+                        }
+
+
+                        if game.players.count > 4 {
+                            Spacer()
+                            CirclePicView(player: controller.game.players[4], game: game)
+                        }
                         
                         Spacer()
                         

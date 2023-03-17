@@ -82,7 +82,7 @@ public class Game : ObservableObject {
         
         let newPlayer = Player(id: pid)
         players.append(newPlayer)
-        
+        actualPlayerSize += 1
         playersLock.unlock()
         
         p.write("Player: \(newPlayer.id) added")
@@ -93,6 +93,42 @@ public class Game : ObservableObject {
     
     
     
+    func setPlayerPosition() {
+        
+        
+        var sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
+        
+        var newPlayers: [Player] = []
+        
+        var startedIndex: Int?
+        
+        for (index, crrP) in sortedPlayers.enumerated() {
+            
+            if me.randomNumber <= crrP.randomNumber {
+                newPlayers.append(crrP)
+                startedIndex = index
+                
+            } else {
+                
+                
+            }
+        }
+        
+        
+        if let startedIndex = startedIndex {
+            
+            for i in 0...startedIndex-1 {
+                
+                newPlayers.append(players[i])
+            }
+            
+        }
+        
+        players = newPlayers
+        
+        printPlayerList()
+        
+    }
     
     
     
