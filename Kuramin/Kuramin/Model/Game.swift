@@ -89,7 +89,7 @@ public class Game : ObservableObject {
             self.p.write("PlayerId is empty. Id: \(pid). (getPlayerRef)")
             return nil
             
-            assert(false)
+            //assert(false)
         }
         
         playersLock.lock()
@@ -103,9 +103,9 @@ public class Game : ObservableObject {
             }
         }
         
+        playersLock.unlock()
         
         return Player(id: pid)
-        playersLock.unlock()
         
     }
     

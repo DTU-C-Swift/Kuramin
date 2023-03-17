@@ -21,12 +21,11 @@ class Service {
     private var db = Firestore.firestore()
     private let storage = Storage.storage()
     private let printer = Printer(tag: "Service", displayPrints: true)
-    private let lobbyLock = NSLock()
 
     let lobbyStr = "lobby"
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var previousLobby2: Lobby?
-    private let lobbyLock2 = NSLock()
+    private let lobbyLock = NSLock()
 
     
     
@@ -41,7 +40,7 @@ class Service {
     //-------------------------------- New implementation of lobby -----------------------------//
     
     
-    func goToLobby2() {
+    func goToLobby() {
         
         let newLobby = "lobby"
         let game = DataHolder.controller.game
@@ -125,7 +124,7 @@ class Service {
                 self.printer.write("You successfully landed in lobby!")
 //                self.amIHost(game: game)
 //                self.observeLobby(game: game)
-                self.observeLobby2(game: game)
+                self.observeLobby(game: game)
             }
         }
 
@@ -136,7 +135,7 @@ class Service {
     }
     
     
-    func observeLobby2(game: Game) {
+    func observeLobby(game: Game) {
 
         let ref = db.collection("matches").document(lobbyStr)
 
@@ -151,7 +150,7 @@ class Service {
                         return
                     }
                     
-                    self.lobbyLock2.lock()
+                    self.lobbyLock.lock()
                     
                     if self.previousLobby2 == nil {
                         self.previousLobby2 = lobby
@@ -160,7 +159,7 @@ class Service {
                     } else {
                         
                         if self.previousLobby2?.isDuplicateLobby(compareWith: lobby) == true {
-                            self.lobbyLock2.unlock()
+                            self.lobbyLock.unlock()
                             return
                         }
                     }
@@ -176,38 +175,38 @@ class Service {
                         
                         
                         if var crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
-                            
-                            if game.me.id == crrDbPlayer.pid {
-                                crrPlayerRef.setRandomNum(randNum: crrDbPlayer.randomNum)
-                                
-                            }
-                            
-                            
-                            else {
-                                if crrPlayerRef.image == Util().defaultProfileImg {
-                                    // get image
-                                }
-                                
-                                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
-                                
-                            }
-                            
-                                                        
-                        }
-                        
 
+//                            if game.me.id == crrDbPlayer.pid {
+//                                //crrPlayerRef.setRandomNum(randNum: crrDbPlayer.randomNum)
+//
+//                            }
+//
+//
+//                            else {
+////                                if crrPlayerRef.image == Util().defaultProfileImg {
+////                                    // get image
+////                                }
+//
+//                                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
+//
+//                            }
+
+
+                        }
 
                     }
 
-                    self.lobbyLock2.unlock()
+                    self.lobbyLock.unlock()
                 }
             }
              
             catch {
 
-                self.printer.write("Error in observing lobby. \(err)")
+                self.printer.write("Error in observing lobby. \(err!)")
+                
+                if !self.lobbyLock.try() {self.lobbyLock.unlock()}
             }
-             self.lobbyLock2.unlock()
+             //self.lobbyLock2.unlock()
 
 
         }
