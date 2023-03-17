@@ -32,6 +32,7 @@ public struct DbLobbyNullable: Codable {
                 let newDbP = crr.mapToDbPlayer()
                 
                 if let newDbP = newDbP {
+                    
                     dbPlayers.append(newDbP)
                     
                 }

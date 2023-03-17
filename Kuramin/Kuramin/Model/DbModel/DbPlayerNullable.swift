@@ -19,7 +19,15 @@ public struct DbPlayerNullable: Codable {
     
     func mapToDbPlayer() -> DbPlayer? {
         
+        
+        
         if let pName = self.pName, let pid = self.pid, let randomNum = self.randomNum, let cardsInHand = self.cardsInHand {
+            
+            if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+                return nil
+            }
+            
+    
             return DbPlayer(pName: pName, pid: pid, randomNum: randomNum, cardsInHand: cardsInHand)
             
         }

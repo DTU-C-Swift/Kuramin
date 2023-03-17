@@ -50,7 +50,7 @@ public class Game : ObservableObject {
     
     
     
-    func updatePlayerList(lobby: inout Lobby) {
+    func updatePlayerList(lobby: Lobby) {
         
         if isGameStarted {
             //----TODO---/
@@ -84,9 +84,11 @@ public class Game : ObservableObject {
     
     
     
-    func getPlayerRef(pid: String) -> Player {
+    func getPlayerRef(pid: String) -> Player? {
         if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.p.write("PlayerId is empty. Id: \(pid). (getPlayerRef)")
+            return nil
+            
             assert(false)
         }
         

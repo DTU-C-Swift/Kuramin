@@ -206,190 +206,15 @@ class Service {
     }
     
     
-    func goToLobby() {
-        let game = DataHolder.controller.game
-        let me = game.me
-        let ref = db.collection("matchMaker").document(lobbyStr)
-        //player.id = "testId"
-
-        // Transactional call
-        db.runTransaction({ (transaction, errorPointer) -> Any? in
-            let lobbyDocument: DocumentSnapshot
-            do {
-                lobbyDocument = try transaction.getDocument(ref)
-            } catch let fetchError as NSError {
-                errorPointer?.pointee = fetchError
-                return nil
-            }
-
-
-            // Checks if document "lobby" exists already in db
-            if !lobbyDocument.exists {
-                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
-            } else {
-                transaction.updateData([
-                    "playerIds" : FieldValue.arrayUnion([me.id])
-                ], forDocument: ref)
-            }
-
-            return nil
-
-        }) { (object, error) in
-            if let error = error {
-                self.printer.write("Transaction failed: \(error)")
-            } else {
-                self.printer.write("Transaction succeeded!")
-                self.amIHost(game: game)
-                self.observeLobby(game: game)
-            }
-        }
-    }
     
     
     
     
     
-    func amIHost(game: Game) {
-        let me = game.me
-        
-        let ref = db.collection("matchMaker").document(lobbyStr)
-        ref.getDocument { document, err in
-            
-            if let document = document, document.exists {
-                if let hostId = document.get("host") as? String {
-                    
-                    game.hostId = hostId
-                    
-                    if hostId == me.id {
-                        self.printer.write("You are the host")
-                        
-
-                    } else {
-                        self.printer.write("You aren't the host")
-                    }
-                    
-                }
-            }
-            
-            else {
-                self.printer.write("Document not found in lobby")
-            }
-        }
-        
-        
-    }
     
-
-    func observeLobby(game: Game) {
-
-        let ref = db.collection("matchMaker").document(lobbyStr)
-
-        ref.addSnapshotListener { snapshot, err in
-
-            do {
-                if var lobby = try snapshot?.data(as: FirstLobby.self) {
-
-                    self.lobbyLock.lock()
-                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
-                        self.lobbyLock.unlock()
-                        return
-                    }
-
-
-
-
-
-                    Util().deleteEmptyIds(lobby: &lobby)
-
-                    game.updatePlayerList(lobby: &lobby)
-
-
-                    for uid in lobby.playerIds {
-                        self.printer.write("observeLobby: id: \(uid)")
-
-                        self.fetchUser(uid: uid, game: game)
-
-                    }
-
-                    self.lobbyLock.unlock()
-                }
-            }
-            catch {
-
-                self.printer.write("Error in observing lobby. \(err!)")
-            }
-
-
-        }
-
-    }
+    //-------------------------------- New implementation of lobby -----------------------------//
     
     
-    
-    
-    
-    func fetchUser(uid: String, game: Game) {
-        
-        let newPlayer = Player(id: uid)
-        
-        self.downloadImg(player: newPlayer)
-        
-    
-        db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
-            
-            switch result {
-            case .success(let dbUser):
-                Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
-                
-                game.addPlayer(player: newPlayer)
-                self.printer.write("User info has been fetched. id: \(newPlayer.id)")
-            case .failure(let err):
-                self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
-                
-            }
-            
-        }
-    }
-    
-    
-    
-    
-    func isUserloggedIn_viaFacebook() -> Bool {
-        
-        
-        if let providerData = Auth.auth().currentUser?.providerData {
-            for userInfo in providerData {
-                if userInfo.providerID == "facebook.com" {
-                    self.printer.write("Provider: \(userInfo.providerID)")
-                    return true
-                }
-            }
-        }
-        
-        
-        return false
-    }
-    
-    
-    
-    func logOut() {
-        if self.isUserloggedIn_viaFacebook() {
-            login().logOutFb()
-        }
-        
-        do {
-            try Auth.auth().signOut()
-            
-        } catch {
-            self.printer.write("Error while signing out from firebase")
-        }
-        
-        
-    }
-    
-    
-    
-
     func goToLobby2() {
         
         let newLobby = "lobby"
@@ -494,25 +319,22 @@ class Service {
              
             do {
                 if var dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
-                    
-                    
 
-                    self.lobbyLock2.lock()
 
                     guard let lobby = dbLobbyNullable.mapToLobby() else {
                         self.printer.write("mapToLobby returned nil")
-                        self.lobbyLock2.unlock()
                         return
                     }
                     
+                    self.lobbyLock2.lock()
                     
-                    if previousLobby2 == nil {
-                        previousLobby2 = lobby
+                    if self.previousLobby2 == nil {
+                        self.previousLobby2 = lobby
                         
                         
                     } else {
                         
-                        if previousLobby2?.isDuplicateLobby(compareWith: lobby) == true {
+                        if self.previousLobby2?.isDuplicateLobby(compareWith: lobby) == true {
                             self.lobbyLock2.unlock()
                             return
                         }
@@ -520,13 +342,27 @@ class Service {
                     
                     
                     
-                    game.updatePlayerList(lobby: &lobby)
+                    game.updatePlayerList(lobby: lobby)
 
 
-                    for uid in lobby.playerIds {
-                        self.printer.write("observeLobby: id: \(uid)")
+                    for crrDbPlayer in lobby.players {
+                        
+                        self.printer.write("observeLobby: id: \(crrDbPlayer.pid)")
+                        
+                        
+                        
+                        if var crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
+                            
+                            if crrPlayerRef.image == Util().defaultProfileImg {
+                                // get image
+                            }
+                            
+                            
+                            crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
+                            
+                        }
+                        
 
-                        self.fetchUser(uid: uid, game: game)
 
                     }
 
@@ -551,6 +387,212 @@ class Service {
         
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //------------------------------------------ Old implementation of lobby ---------------------------------//
+    
+//    func goToLobby() {
+//        let game = DataHolder.controller.game
+//        let me = game.me
+//        let ref = db.collection("matchMaker").document(lobbyStr)
+//        //player.id = "testId"
+//
+//        // Transactional call
+//        db.runTransaction({ (transaction, errorPointer) -> Any? in
+//            let lobbyDocument: DocumentSnapshot
+//            do {
+//                lobbyDocument = try transaction.getDocument(ref)
+//            } catch let fetchError as NSError {
+//                errorPointer?.pointee = fetchError
+//                return nil
+//            }
+//
+//
+//            // Checks if document "lobby" exists already in db
+//            if !lobbyDocument.exists {
+//                transaction.setData(["playerIds": [me.id], "host": me.id], forDocument: ref)
+//            } else {
+//                transaction.updateData([
+//                    "playerIds" : FieldValue.arrayUnion([me.id])
+//                ], forDocument: ref)
+//            }
+//
+//            return nil
+//
+//        }) { (object, error) in
+//            if let error = error {
+//                self.printer.write("Transaction failed: \(error)")
+//            } else {
+//                self.printer.write("Transaction succeeded!")
+//                self.amIHost(game: game)
+//                self.observeLobby(game: game)
+//            }
+//        }
+//    }
+//
+//
+//
+//
+//
+//    func amIHost(game: Game) {
+//        let me = game.me
+//
+//        let ref = db.collection("matchMaker").document(lobbyStr)
+//        ref.getDocument { document, err in
+//
+//            if let document = document, document.exists {
+//                if let hostId = document.get("host") as? String {
+//
+//                    game.hostId = hostId
+//
+//                    if hostId == me.id {
+//                        self.printer.write("You are the host")
+//
+//
+//                    } else {
+//                        self.printer.write("You aren't the host")
+//                    }
+//
+//                }
+//            }
+//
+//            else {
+//                self.printer.write("Document not found in lobby")
+//            }
+//        }
+//
+//
+//    }
+//
+//
+//    func observeLobby(game: Game) {
+//
+//        let ref = db.collection("matchMaker").document(lobbyStr)
+//
+//        ref.addSnapshotListener { snapshot, err in
+//
+//            do {
+//                if var lobby = try snapshot?.data(as: FirstLobby.self) {
+//
+//                    self.lobbyLock.lock()
+//                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
+//                        self.lobbyLock.unlock()
+//                        return
+//                    }
+//
+//
+//
+//
+//
+//                    Util().deleteEmptyIds(lobby: &lobby)
+//
+//                    game.updatePlayerList(lobby: &lobby)
+//
+//
+//                    for uid in lobby.playerIds {
+//                        self.printer.write("observeLobby: id: \(uid)")
+//
+//                        self.fetchUser(uid: uid, game: game)
+//
+//                    }
+//
+//                    self.lobbyLock.unlock()
+//                }
+//            }
+//            catch {
+//
+//                self.printer.write("Error in observing lobby. \(err!)")
+//            }
+//
+//
+//        }
+//
+//    }
+    
+    
+    
+    
+    
+    func fetchUser(uid: String, game: Game) {
+        
+        let newPlayer = Player(id: uid)
+        
+        self.downloadImg(player: newPlayer)
+        
+    
+        db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
+            
+            switch result {
+            case .success(let dbUser):
+                Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
+                
+                game.addPlayer(player: newPlayer)
+                self.printer.write("User info has been fetched. id: \(newPlayer.id)")
+            case .failure(let err):
+                self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
+                
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    func isUserloggedIn_viaFacebook() -> Bool {
+        
+        
+        if let providerData = Auth.auth().currentUser?.providerData {
+            for userInfo in providerData {
+                if userInfo.providerID == "facebook.com" {
+                    self.printer.write("Provider: \(userInfo.providerID)")
+                    return true
+                }
+            }
+        }
+        
+        
+        return false
+    }
+    
+    
+    
+    func logOut() {
+        if self.isUserloggedIn_viaFacebook() {
+            login().logOutFb()
+        }
+        
+        do {
+            try Auth.auth().signOut()
+            
+        } catch {
+            self.printer.write("Error while signing out from firebase")
+        }
+        
+        
+    }
+    
+    
+    
+
 
     
     

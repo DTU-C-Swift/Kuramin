@@ -13,7 +13,7 @@ class Player : ObservableObject, Identifiable{
     private(set) var id: String
     private(set) var fullName: String = Util().NOT_SET
     @Published private(set) var displayName = Util().NOT_SET
-    @Published private(set) var image: UIImage = UIImage(imageLiteralResourceName: "person_100")
+    @Published private(set) var image: UIImage = Util().defaultProfileImg
     @Published private(set) var isLeft: Bool = false
     @Published private(set) var coins: Int = 0
     @Published private(set) var cardsInHand = -1
@@ -104,12 +104,7 @@ class Player : ObservableObject, Identifiable{
     
     
     
-    
-    
-    
-    
-    
-    
+
 
     
     func update(_ dbUser: DbUser) {
@@ -133,13 +128,7 @@ class Player : ObservableObject, Identifiable{
     
     
     
-    func setDisplayName() {
-        let newName = self.fullName.split(separator: " ")
-        if displayName != newName[0] {
-            self.displayName = String(newName[0])
-            
-        }
-    }
+
     
     
     func isItSame(player p: Player) -> Bool {
@@ -186,6 +175,14 @@ class Player : ObservableObject, Identifiable{
         lock.unlock()
     }
     
+    
+    func setDisplayName() {
+        let newName = self.fullName.split(separator: " ")
+        if displayName != newName[0] {
+            self.displayName = String(newName[0])
+            
+        }
+    }
     
     
     

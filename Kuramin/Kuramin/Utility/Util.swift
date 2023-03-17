@@ -17,6 +17,8 @@ struct Util {
     let MY_DUMMY_ID = "myId"
     let NOT_SET = "notSet"
     
+    let defaultProfileImg = UIImage(imageLiteralResourceName: "person_100")
+    
     
     
     
