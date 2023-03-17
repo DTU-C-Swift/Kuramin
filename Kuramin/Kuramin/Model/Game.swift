@@ -115,14 +115,15 @@ public class Game : ObservableObject {
     func sortPlayers() {
         
         if players.count < 1 {return}
+        me.setRandomNum(randNum: Int(arc4random_uniform(10000)))
         
         players.append(me)
         let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
         
         let arrSize = sortedPlayers.count
         
-        var head = sortedPlayers[0]
-        var last = sortedPlayers[arrSize - 1]
+        let head = sortedPlayers[0]
+        let last = sortedPlayers[arrSize - 1]
         
         head.nextPlayer = sortedPlayers[1]
         head.prevPlayer = last
@@ -140,7 +141,7 @@ public class Game : ObservableObject {
         }
 
         
-        printPlayersNode(head: head)
+        printPlayersNode(head: me)
         
         
         
@@ -168,6 +169,7 @@ public class Game : ObservableObject {
         var temp = head.nextPlayer
     
         p.write("Printing player nodes")
+        self.p.write("player: \(head.id ?? "id is nil"), randNum: \(head.randomNumber)")
         
                 
         while true {
@@ -178,7 +180,7 @@ public class Game : ObservableObject {
                 break
             }
             
-            self.p.write("player: \(temp?.id ?? "id is nil"), randNum: \(temp?.randomNumber)")
+            self.p.write("player: \(temp?.id ?? "id is nil"), randNum: \(temp?.randomNumber ?? 0)")
             
             temp = temp?.nextPlayer
             
