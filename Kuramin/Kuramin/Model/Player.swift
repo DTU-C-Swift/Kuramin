@@ -143,10 +143,20 @@ class Player : ObservableObject, Identifiable{
     
     
     func isItSame(player p: Player) -> Bool {
-        // TODO
         
-        return false
+        lock.lock()
+        if p.id != id {return false}
         
+        if p.fullName != fullName {return false}
+        if p.isLeft != isLeft {return false}
+        if p.leftAt != leftAt {return false}
+        if p.coins != coins {return false}
+        if p.image != image {return false}
+        if p.cardsInHand != cardsInHand {return false}
+        if p.randomNumber != randomNumber {return false}
+
+        lock.unlock()
+        return true
         
     }
     
