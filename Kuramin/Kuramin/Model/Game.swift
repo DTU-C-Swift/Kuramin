@@ -21,6 +21,96 @@ public class Game : ObservableObject {
 
 
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func updatePlayerList(lobby: inout Lobby) {
+        
+        if isGameStarted {
+            //----TODO---/
+            //self.updatePlayerList2(lobby: &lobby)
+            return
+        }
+        
+        
+        var playesToBeDeleted_FromGame: [Int] = []
+        var playersToBeDeleted_FromLobbyObj: [Int] = []
+        var matchFound = false
+        
+        playersLock.lock()
+        for (index, p) in players.enumerated() {
+            matchFound = false
+
+            for (idIndex, id) in lobby.playerIds.enumerated() {
+                
+                if id == p.id {
+                    idsToBeDeleted.append(idIndex)
+                    matchFound = true
+                    break
+                }
+            }
+            
+            if !matchFound {
+                playesToBeDeleted_FromGame.append(index)
+                actualPlayerSize += -1
+            }
+        }
+        
+        
+        
+        players.remove(atOffsets: IndexSet(playesToBeDeleted_FromGame))
+        lobby.playerIds.remove(atOffsets: IndexSet(playersToBeDeleted_FromLobbyObj))
+        playersLock.unlock()
+
+        
+        self.p.write("Player list has been updated")
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //----------------------------------------------------------------------------------//
+    
+    
+    
     // TODO if the playe that is leaving is the host?
     
     
@@ -331,6 +421,18 @@ public class Game : ObservableObject {
         }
         
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
 
