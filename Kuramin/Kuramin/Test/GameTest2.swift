@@ -161,9 +161,20 @@ class GameTest2 : ObservableObject {
         assert(game.isInList(node: p7))
 
 
-
-
         
+        // -----------------  Delete Node -------------------//
+        
+        // head     =>: 30, 40, 100, 200, 500, 600, 650, 700
+        // Expectation: 40, 100, 200, 500, 600, 650, 700
+
+        game.deleteNode(toBeDeleted: &game.head)
+        
+        game.printPlayersNode(head: game.head!)
+
+        assert(game.playerSize == 7)
+        assert(game.head!.id == p_2.id)
+        
+
         
         testPassed = true
 

@@ -11,7 +11,7 @@ import SwiftUI
 public class Game : ObservableObject {
     var id: String = ""
     @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
-    private (set) var head: Player?
+    var head: Player?
     //private (set) var tail: Player?
     
     
@@ -49,30 +49,34 @@ public class Game : ObservableObject {
     
     
     func deleteNode(toBeDeleted: inout Player?) {
-        guard let nodeToDelete = toBeDeleted else {
+        
+        if toBeDeleted == nil {
+            return
+        }
+        
+        if playerSize == 0 {
+            assert(false)
             return
         }
         
         
-        if let previousNode = nodeToDelete.prevPlayer {
-            previousNode.nextPlayer = nodeToDelete.nextPlayer
-        } else {
-            head = nodeToDelete.nextPlayer
+        if playerSize == 1 {
+            head = nil
+            playerSize = 0
         }
-        
-        
-        if let nextNode = nodeToDelete.nextPlayer {
-            nextNode.prevPlayer = nodeToDelete.prevPlayer
+        else if playerSize > 1 {
+            
+            if toBeDeleted!.id == head!.id {
+                
+            }
+            
+            
+            //var
+            
+            
             
         }
-//        else {
-//
-//            tail = nodeToDelete.prevPlayer
-//        }
         
-        nodeToDelete.prevPlayer = nil
-        nodeToDelete.nextPlayer = nil
-        toBeDeleted = nil
     }
     
     
