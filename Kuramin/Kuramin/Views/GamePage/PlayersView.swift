@@ -23,160 +23,77 @@ struct PlayersView: View {
     
     
     var body: some View {
-        
-        
-        
-        ZStack {
-            switch game.players.count {
 
-            case 1:
-                VStack {
-                    HStack() {
-                        Spacer()
-                        CirclePicView(player: game.players[0], game: game)
-                        Spacer()
 
-                    }
-                    .padding(.top, 4)
-                    .background(Color.red)
-                    
+        VStack {
+
+            HStack() {
+                Spacer()
+                if game.fiveFromRight != nil {
+                    CirclePicView(player: game.fiveFromRight!, game: game)
+                }
+
+                if game.fourFromRight != nil {
                     Spacer()
-
-
-                }
-
-            case 2:
-                VStack {
-                    Text("2")
-
+                    CirclePicView(player: game.fourFromRight!, game: game)
                 }
 
 
-            case 3:
-                ZStack {
-
-                    Text("3")
-
+                if game.threeFromRight != nil {
+                    Spacer()
+                    CirclePicView(player: game.threeFromRight!, game: game)
                 }
 
-            case 4:
-                ZStack {
-                    Text("4")
-
-                }
-
-            case 5:
-                ZStack {
-                    Text("5")
-
-                }
-
-            case 6:
-                ZStack {
-                    Text("6")
-
-
-                }
-
-            case 7:
-                ZStack {
-                    Text("7")
-
-
-                }
-
-
-            default:
-                Text("NOT POSSIBLE")
+                Spacer()
 
 
             }
+            .padding(.top, 4)
+
+
+            Spacer()
+            HStack() {
+
+                VStack{
+
+                    Spacer()
+
+                    if game.sixFromRight != nil {
+                        CirclePicView(player: game.sixFromRight!, game: game)
+                        Spacer()
+                    }
+
+                    if game.sevenFromRight != nil {
+                        CirclePicView(player: game.sevenFromRight!, game: game)
+                    }
+
+                    Spacer()
+
+                }
+
+
+                Spacer()
+                VStack {
+                    Spacer()
+                    if game.twoFromRight != nil {
+                        CirclePicView(player: game.twoFromRight!, game: game)
+                        Spacer()
+                    }
+
+                    if game.oneFromRight != nil {
+                        CirclePicView(player: game.oneFromRight!, game: game)
+                    }
+
+                    Spacer()
+                }
+
+            }
+
+
+            Spacer()
+
 
         }
-        .background(Color.cyan)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        VStack {
-//
-//            HStack() {
-//                Spacer()
-//                if game.players.count > 0 {
-//                    CirclePicView(player: game.players[0], game: game)
-//                }
-//
-//                if game.players.count > 3 {
-//                    Spacer()
-//                    CirclePicView(player: game.players[3], game: game)
-//                }
-//
-//
-//                if game.players.count > 4 {
-//                    Spacer()
-//                    CirclePicView(player: game.players[4], game: game)
-//                }
-//
-//                Spacer()
-//
-//
-//            }
-//            .padding(.top, 4)
-//
-//
-//            Spacer()
-//            HStack() {
-//
-//                VStack{
-//
-//                    Spacer()
-//
-//                    if game.players.count > 5 {
-//                        CirclePicView(player: game.players[5], game: game)
-//                        Spacer()
-//                    }
-//
-//                    if game.players.count > 1 {
-//                        CirclePicView(player: game.players[1], game: game)
-//                    }
-//
-//                    Spacer()
-//
-//                }
-//
-//
-//                Spacer()
-//                VStack {
-//                    Spacer()
-//                    if game.players.count > 6 {
-//                        CirclePicView(player: game.players[6], game: game)
-//                        Spacer()
-//                    }
-//
-//                    if game.players.count > 2 {
-//                        CirclePicView(player: game.players[2], game: game)
-//                    }
-//
-//                    Spacer()
-//                }
-//
-//            }
-//
-//
-//            Spacer()
-//
-//
-//        }
         
         
     }

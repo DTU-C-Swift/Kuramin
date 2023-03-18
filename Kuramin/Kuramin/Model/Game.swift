@@ -34,7 +34,7 @@ public class Game : ObservableObject {
     init () {
         addDummyPlayers()
         printPlayerList()
-        sortPlayers()
+        setPlayerPositions2()
     }
 
     
@@ -112,7 +112,7 @@ public class Game : ObservableObject {
     
     
     
-    func sortPlayers() {
+    func setPlayerPositions2() {
         
         if players.count < 1 {return}
         me.setRandomNum(randNum: Int(arc4random_uniform(10000)))

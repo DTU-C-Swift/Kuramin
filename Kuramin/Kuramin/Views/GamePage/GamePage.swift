@@ -57,8 +57,8 @@ struct GamePage: View {
                     Button(action: {
                         //controller.game.isGameStarted = true
                         //controller.service.goToLobby(val: true)
-                        controller.game.setPlayerPosition()
-                        
+                        //controller.game.setPlayerPosition()
+                        //controller.game.setPlayerPositions2()
                         
                         if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
                             self.printer.write("Earlier")
