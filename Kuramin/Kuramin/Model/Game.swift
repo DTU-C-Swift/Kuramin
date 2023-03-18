@@ -35,7 +35,7 @@ public class Game : ObservableObject {
     
     init () {
         //me.setRandomNum(randNum: 530)
-        addNode(nodeToAdd: me)
+        //addNode(nodeToAdd: me)
 
     }
     
