@@ -87,20 +87,20 @@ public class Game : ObservableObject {
         
         if head == nil {
             head = nodeToAdd
-            head?.nextPlayer = head
-            head?.prevPlayer = head
+            head!.nextPlayer = head
+            head!.prevPlayer = head
             playerSize = 1
         }
         
-        else if head?.id == head?.prevPlayer?.id {   // list size is 1
+        else if head!.id == head!.prevPlayer!.id {   // list size is 1
             assert(playerSize == 1)
             // TODO if node already exist
             
             nodeToAdd.nextPlayer = head
             nodeToAdd.prevPlayer = head
             
-            head?.nextPlayer = nodeToAdd
-            head?.prevPlayer = nodeToAdd
+            head!.nextPlayer = nodeToAdd
+            head!.prevPlayer = nodeToAdd
             playerSize += 1
             
                         
@@ -127,17 +127,17 @@ public class Game : ObservableObject {
                 
                 if nodeToAdd.randomNumber < crrNode!.randomNumber {  // "nodeToAdd" is smaller then current node.
                     
-                    let crrPrev = crrNode?.prevPlayer
+                    let crrPrev = crrNode!.prevPlayer
                     
                     nodeToAdd.nextPlayer = crrNode
-                    crrNode?.prevPlayer = nodeToAdd
+                    crrNode!.prevPlayer = nodeToAdd
                     
-                    crrPrev?.nextPlayer = nodeToAdd
+                    crrPrev!.nextPlayer = nodeToAdd
                     nodeToAdd.prevPlayer = crrPrev
                     
                     
-                    if crrNode?.id == head?.id { // in front of the head
-                        head = head?.prevPlayer
+                    if crrNode!.id == head!.id { // in front of the head
+                        head = head!.prevPlayer
                     }
                     
 
@@ -147,12 +147,12 @@ public class Game : ObservableObject {
                 }
                 
     
-                crrNode = crrNode?.nextPlayer
+                crrNode = crrNode!.nextPlayer
                 
-            } while crrNode?.id != head?.id
+            } while crrNode!.id != head!.id
             
             // nodeToAdd is the larges
-            let headPrev = head?.prevPlayer
+            let headPrev = head!.prevPlayer
             
             nodeToAdd.prevPlayer = headPrev
             headPrev?.nextPlayer = nodeToAdd
