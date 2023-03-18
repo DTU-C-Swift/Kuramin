@@ -173,7 +173,7 @@ class Service {
                     }
                     
                     
-                    
+                    // Removes player from the display
                     game.updatePlayerList(lobby: lobby)
 
 

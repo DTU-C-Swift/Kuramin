@@ -167,38 +167,72 @@ class GameTest2 : ObservableObject {
         // head     =>: 30, 40, 100, 200, 500, 600, 650, 700
         // Expectation: 40, 100, 200, 500, 600, 650, 700
 
-        var head = game.head
         game.removeNode(nodeToRemove: game.head!)
         game.printPlayersNode(head: game.head!)
-
-        game.removeNode(nodeToRemove: game.head!)
+        assert(game.head!.id == p_2.id)
+        assert(game.playerSize == 7)
+        
+        
+        // head     =>: 40, 100, 200, 500, 600, 650, 700
+        // Expectation: 40, 100, 200, 500, 600, 650
+        
+        game.removeNode(nodeToRemove: p7)
         game.printPlayersNode(head: game.head!)
+        assert(game.playerSize == 6)
+        assert(game.head!.prevPlayer!.id == p3.id)
 
-        game.removeNode(nodeToRemove: game.head!)
+
+        
+        
+        
+        // head     =>: 40, 100, 200, 500, 600, 650
+        // Expectation: 40, 100, 200, 500, 650
+        
+        game.removeNode(nodeToRemove: p6)
         game.printPlayersNode(head: game.head!)
-
-        game.removeNode(nodeToRemove: game.head!)
-        game.removeNode(nodeToRemove: game.head!)
-        game.removeNode(nodeToRemove: game.head!)
-        game.removeNode(nodeToRemove: game.head!)
+        assert(game.playerSize == 5)
+        assert(game.head!.prevPlayer!.id == p3.id)
+        assert(game.head!.id == p_2.id)
         
         
+        
+        
+        // head     =>: 40, 100, 200, 500, 650
+        // Expectation: 40, 200, 500, 650
+        
+        game.removeNode(nodeToRemove: p1)
         game.printPlayersNode(head: game.head!)
-
-        assert(game.head!.prevPlayer!.id == game.head!.id)
-        assert(game.head!.nextPlayer!.id == game.head!.id)
+        assert(game.playerSize == 4)
+        assert(game.head!.nextPlayer!.id == p2.id)
+        assert(game.head!.id == p_2.id)
+        assert(game.head!.prevPlayer!.id == p3.id)
+        assert(game.head!.id == p_2.id)
         
-        game.removeNode(nodeToRemove: game.head!)
-        game.printPlayersNode(head: game.head)
+        
+        
+        
+        
+        // head     =>: 40, 200, 500, 650
+        // Expectation: 40
+        game.removeNode(nodeToRemove: p2)
+        game.removeNode(nodeToRemove: p5)
+        game.removeNode(nodeToRemove: p3)
+        
+        assert(game.playerSize == 1)
+        assert(game.head!.id == p_2.id)
+        assert(game.head!.id == game.head!.nextPlayer!.id)
+        assert(game.head!.id == game.head!.prevPlayer!.id)
 
-
-
-
-
-//        assert(game.playerSize == 7)
-//        assert(game.head!.id == p_2.id)
         
 
+
+        // head     =>: 40
+        // Expectation: nil
+        game.removeNode(nodeToRemove: p_2)
+        assert(game.head == nil)
+        assert(game.playerSize == 0)
+
+        
         
         testPassed = true
 
