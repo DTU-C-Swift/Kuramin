@@ -36,13 +36,18 @@ public class Game : ObservableObject {
     
     
     init () {
-        addDummyPlayers(val: 8)
-            printPlayersNode(head: head)
+        me.setRandomNum(randNum: 530)
+        addNode(nodeToAdd: me)
+
         //        setPlayerPositions2()
     }
     
     
-    
+    func dd() {
+        addDummyPlayers(val: 1)
+        printPlayersNode(head: head)
+        setPlayerPositions()
+    }
 
    
     
@@ -209,6 +214,9 @@ public class Game : ObservableObject {
         }
         
         lockNodeList.unlock()
+        
+        printPlayersNode(head: head)
+        setPlayerPositions()
     }
 
     
@@ -297,62 +305,52 @@ public class Game : ObservableObject {
     func setPlayerPositions() {
         
         playersLock.lock()
+                
         
-        if playerSize < 1 {
-            playersLock.unlock()
-            return
+        switch playerSize {
             
-        }
-        
-        
-        players.append(me)
-        let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
-        
-        let arrSize = sortedPlayers.count
-        
-        let head = sortedPlayers[0]
-        let last = sortedPlayers[arrSize - 1]
-        
-        head.nextPlayer = sortedPlayers[1]
-        head.prevPlayer = last
-        
-        
-        last.nextPlayer = head
-        last.prevPlayer = sortedPlayers[arrSize - 2]
-        
-        
-        for i in 1..<sortedPlayers.count - 1 {
-            
-            sortedPlayers[i].prevPlayer = sortedPlayers[i - 1]
-            sortedPlayers[i].nextPlayer = sortedPlayers[i + 1]
-            
-        }
-        
-        playersLock.unlock()
-        printPlayersNode(head: me)
-        playersLock.lock()
-        
-        
-        
-        switch sortedPlayers.count {
+        case 1:
+            p.write("Only me")
             
         case 2:
             fiveFromRight = me.nextPlayer
             
+            oneFromRight = nil
+            twoFromRight = nil
+            threeFromRight = nil
+            fourFromRight = nil
+            sixFromRight = nil
+            sevenFromRight = nil
+            
         case 3:
             fiveFromRight = me.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
+            
+            oneFromRight = nil
+            twoFromRight = nil
+            threeFromRight = nil
+            fourFromRight = nil
+            sevenFromRight = nil
             
         case 4:
             twoFromRight = me.nextPlayer
             fiveFromRight = twoFromRight?.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
             
+            oneFromRight = nil
+            threeFromRight = nil
+            fourFromRight = nil
+            sevenFromRight = nil
+            
         case 5:
             twoFromRight = me.nextPlayer
             fourFromRight = twoFromRight?.nextPlayer
             fiveFromRight = fourFromRight?.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
+            
+            oneFromRight = nil
+            threeFromRight = nil
+            sevenFromRight = nil
             
         case 6:
             twoFromRight = me.nextPlayer
@@ -361,6 +359,8 @@ public class Game : ObservableObject {
             fiveFromRight = fourFromRight?.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
             
+            oneFromRight = nil
+            sevenFromRight = nil
             
             
         case 7:
@@ -371,7 +371,9 @@ public class Game : ObservableObject {
             sixFromRight = fiveFromRight?.nextPlayer
             sevenFromRight = sixFromRight?.nextPlayer
             
-        default:
+            oneFromRight = nil
+            
+        case 8:
             
             oneFromRight = me.nextPlayer
             twoFromRight = oneFromRight?.nextPlayer
@@ -380,6 +382,9 @@ public class Game : ObservableObject {
             fiveFromRight = fourFromRight?.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
             sevenFromRight = sixFromRight?.nextPlayer
+            
+        default:
+            p.write("Player list not set")
             
         }
         

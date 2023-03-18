@@ -42,7 +42,8 @@ struct GamePage: View {
                     
                     
                     Button(action: {
-                        pm.wrappedValue.dismiss()
+                        //pm.wrappedValue.dismiss()
+                        game.removeNode(nodeToRemove: game.head!.nextPlayer!)
                         
                     }) {
                         Image(systemName: "chevron.backward")
@@ -55,12 +56,7 @@ struct GamePage: View {
                     }
                     
                     Button(action: {
-                        //controller.game.isGameStarted = true
-                        controller.service.goToLobby(val: true)
-                        //controller.game.setPlayerPosition()
-                        //controller.game.setPlayerPositions2()
-                        
-                        //controller.service.goToLobby(val: )
+                        game.dd()
                         
                         if MyDate().isEarlier(earlierTime: later, laterTime: earlier) {
                             self.printer.write("Earlier")
@@ -117,7 +113,7 @@ struct GamePage: View {
             //            }
             
             //controller.game.addDummyPlayers()
-            controller.service.goToLobby(val: false)
+            //controller.service.goToLobby(val: false)
             
         }
         
