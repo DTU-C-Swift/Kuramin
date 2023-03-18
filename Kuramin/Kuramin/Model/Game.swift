@@ -32,9 +32,9 @@ public class Game : ObservableObject {
     
     
     init () {
-        addDummyPlayers()
-        printPlayerList()
-        setPlayerPositions2()
+//        addDummyPlayers()
+//        printPlayerList()
+//        setPlayerPositions2()
     }
 
     
@@ -71,7 +71,7 @@ public class Game : ObservableObject {
         players.remove(atOffsets: IndexSet(playesToBeDeleted_FromGame))
         playersLock.unlock()
 
-        
+        setPlayerPositions2()
         self.p.write("Player list has been updated")
     }
 
@@ -105,6 +105,9 @@ public class Game : ObservableObject {
         actualPlayerSize += 1
         playersLock.unlock()
         
+        printPlayerList()
+        setPlayerPositions2()
+        
         p.write("Player: \(newPlayer.id) added")
         return newPlayer
         
@@ -114,8 +117,14 @@ public class Game : ObservableObject {
     
     func setPlayerPositions2() {
         
-        if players.count < 1 {return}
-        me.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        playersLock.lock()
+        
+        if players.count < 1 {
+            playersLock.unlock()
+            return
+            
+        }
+        
         
         players.append(me)
         let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
@@ -140,8 +149,9 @@ public class Game : ObservableObject {
             
         }
 
-        
+        playersLock.unlock()
         printPlayersNode(head: me)
+        playersLock.lock()
         
         
         
@@ -194,6 +204,7 @@ public class Game : ObservableObject {
             
         }
         
+        playersLock.unlock()
         
     }
     
@@ -203,10 +214,11 @@ public class Game : ObservableObject {
     func printPlayersNode(head: Player) {
         
 
+        playersLock.lock()
         var temp = head.nextPlayer
     
-        p.write("Printing player nodes")
-        self.p.write("player: \(head.id ?? "id is nil"), randNum: \(head.randomNumber)")
+        p.write("----------------------- Printing player nodes -----------------------")
+        self.p.write("player: \(head.id ), randNum: \(head.randomNumber)")
         
                 
         while true {
@@ -224,50 +236,54 @@ public class Game : ObservableObject {
             
         }
         
-    }
-        
-    
-    
-    
-    
-    
-    func setPlayerPosition() {
-        
-        //players.append(me)
-        
-        let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
-        
-        var newPlayers: [Player] = []
-        
-        var startedIndex: Int?
-        
-        for (index, crrP) in sortedPlayers.enumerated() {
-            
-            if me.randomNumber <= crrP.randomNumber {
-                newPlayers.append(crrP)
-                startedIndex = index
-                
-            } else {
-                
-                
-            }
-        }
-        
-        
-        if let startedIndex = startedIndex {
-            
-            for i in 0...startedIndex-1 {
-                
-                newPlayers.append(players[i])
-            }
-            
-        }
-        
-        players = newPlayers
-        
-        printPlayerList()
+        playersLock.unlock()
         
     }
+        
+    
+    
+    
+    
+    
+//    func setPlayerPosition() {
+//
+//        //players.append(me)
+//
+//        playersLock.lock()
+//        let sortedPlayers = players.sorted(by: {$0.randomNumber < $1.randomNumber})
+//
+//        var newPlayers: [Player] = []
+//
+//        var startedIndex: Int?
+//
+//        for (index, crrP) in sortedPlayers.enumerated() {
+//
+//            if me.randomNumber <= crrP.randomNumber {
+//                newPlayers.append(crrP)
+//                startedIndex = index
+//
+//            } else {
+//
+//
+//            }
+//        }
+//
+//
+//        if let startedIndex = startedIndex {
+//
+//            for i in 0...startedIndex-1 {
+//
+//                newPlayers.append(players[i])
+//            }
+//
+//        }
+//
+//        players = newPlayers
+//
+//        playersLock.unlock()
+//        printPlayerList()
+//
+//    }
     
     
     
@@ -383,171 +399,171 @@ public class Game : ObservableObject {
     
     
     // This update method should be called if the game has startet
-    private func updatePlayerList2(lobby: inout FirstLobby) {
-        
-        
-        var idsToBeDeleted: [Int] = []
-        var matchFound = false
-        
-        playersLock.lock()
-        
-        for p in players {
-            
-            if p.isLeft {continue}
-            
-            matchFound = false
-            for (idIndex, id) in lobby.playerIds.enumerated() {
-                
-                if id == p.id {
-                    idsToBeDeleted.append(idIndex)
-                    matchFound = true
-                    break
-                }
-            }
-            
-            if !matchFound {
-                
-                p.setIsLeft(isLeft: true)
-                
-                actualPlayerSize += -1
-                self.p.write("Player: \(p.id), leftAt \(p.leftAt)")
-            }
-        }
-        
-        
-        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
-        playersLock.unlock()
-
-        
-        self.p.write("Player list has been updated")
-        
-        
-    }
+//    private func updatePlayerList2(lobby: inout FirstLobby) {
+//
+//
+//        var idsToBeDeleted: [Int] = []
+//        var matchFound = false
+//
+//        playersLock.lock()
+//
+//        for p in players {
+//
+//            if p.isLeft {continue}
+//
+//            matchFound = false
+//            for (idIndex, id) in lobby.playerIds.enumerated() {
+//
+//                if id == p.id {
+//                    idsToBeDeleted.append(idIndex)
+//                    matchFound = true
+//                    break
+//                }
+//            }
+//
+//            if !matchFound {
+//
+//                p.setIsLeft(isLeft: true)
+//
+//                actualPlayerSize += -1
+//                self.p.write("Player: \(p.id), leftAt \(p.leftAt)")
+//            }
+//        }
+//
+//
+//        lobby.playerIds.remove(atOffsets: IndexSet(idsToBeDeleted))
+//        playersLock.unlock()
+//
+//
+//        self.p.write("Player list has been updated")
+//
+//
+//    }
     
     
-    
-    
-    func addPlayer(player: Player) {
-        
-        
-        if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
-            return }
-        
-        
-        
-        if players.count >= 7 {
-            
-            if actualPlayerSize < 7 {
-                replace_with_quitPlayer(player: player)
-                return
-            }
-            
-            self.p.write("Player can't be added (player size already \(actualPlayerSize)")
-            return
-        }
-        
-        
-        
-
-        playersLock.lock()
-        
-        for (index, curr) in players.enumerated() {
-            
-            if curr.id == player.id {
-                
-                if curr.isLeft {
-                    
-                    player.setIsLeft(isLeft: false)
-                    
-                    players[index] = player
-                    actualPlayerSize += 1
-                }
-                
-
-                playersLock.unlock()
-                return
-            }
-        }
-        
-        
-
-        player.setIsLeft(isLeft: false)
-        players.append(player)
-        actualPlayerSize += 1
-        printPlayerList()
-        playersLock.unlock()
-    }
-    
-    
-    
-    
-    
-    private func replace_with_quitPlayer(player: Player) {
-        
-        if replaceIfPlayerExist(player: player) {
-            return
-        }
-        
-        
-        var earliestPlayerIndex = -1
-        var earliestTime = ""
-        
-        
-        playersLock.lock()
-        for (index, currP) in players.enumerated() {
-            
-            
-            
-            
-            
-            if !currP.isLeft {continue}
-            
-            if earliestPlayerIndex == -1 {
-                earliestPlayerIndex = index
-                earliestTime = currP.leftAt
-                continue
-            }
-            
-            
-            if MyDate().isEarlier(earlierTime: currP.leftAt, laterTime: earliestTime) {
-                earliestPlayerIndex = index
-                earliestTime = currP.leftAt
-            }
-            
-        }
-        
-        
-        self.p.write("Replacing \(players[earliestPlayerIndex].displayName) by \(player.displayName)")
-        
-
-        player.setIsLeft(isLeft: false)
-        players[earliestPlayerIndex] = player
-        actualPlayerSize += 1
-        playersLock.unlock()
-    }
-    
-    
-    func replaceIfPlayerExist(player: Player) -> Bool {
-        
-        playersLock.lock()
-        
-        for (index, currP) in players.enumerated() {
-            if !currP.isLeft {continue}
-            
-            if currP.id == player.id {
-                actualPlayerSize += 1
-                                
-                player.setIsLeft(isLeft: false)
-                players[index] = player
-                playersLock.unlock()
-                return true
-            }
-        }
-        
-        playersLock.unlock()
-        return false
-    }
+//
+//
+//    func addPlayer(player: Player) {
+//
+//
+//        if player.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+//            self.p.write("AddPlayer: playerId is empty. Id: \(player.id)")
+//            return }
+//
+//
+//
+//        if players.count >= 7 {
+//
+//            if actualPlayerSize < 7 {
+//                replace_with_quitPlayer(player: player)
+//                return
+//            }
+//
+//            self.p.write("Player can't be added (player size already \(actualPlayerSize)")
+//            return
+//        }
+//
+//
+//
+//
+//        playersLock.lock()
+//
+//        for (index, curr) in players.enumerated() {
+//
+//            if curr.id == player.id {
+//
+//                if curr.isLeft {
+//
+//                    player.setIsLeft(isLeft: false)
+//
+//                    players[index] = player
+//                    actualPlayerSize += 1
+//                }
+//
+//
+//                playersLock.unlock()
+//                return
+//            }
+//        }
+//
+//
+//
+//        player.setIsLeft(isLeft: false)
+//        players.append(player)
+//        actualPlayerSize += 1
+//        printPlayerList()
+//        playersLock.unlock()
+//    }
+//
+//
+//
+//
+//
+//    private func replace_with_quitPlayer(player: Player) {
+//
+//        if replaceIfPlayerExist(player: player) {
+//            return
+//        }
+//
+//
+//        var earliestPlayerIndex = -1
+//        var earliestTime = ""
+//
+//
+//        playersLock.lock()
+//        for (index, currP) in players.enumerated() {
+//
+//
+//
+//
+//
+//            if !currP.isLeft {continue}
+//
+//            if earliestPlayerIndex == -1 {
+//                earliestPlayerIndex = index
+//                earliestTime = currP.leftAt
+//                continue
+//            }
+//
+//
+//            if MyDate().isEarlier(earlierTime: currP.leftAt, laterTime: earliestTime) {
+//                earliestPlayerIndex = index
+//                earliestTime = currP.leftAt
+//            }
+//
+//        }
+//
+//
+//        self.p.write("Replacing \(players[earliestPlayerIndex].displayName) by \(player.displayName)")
+//
+//
+//        player.setIsLeft(isLeft: false)
+//        players[earliestPlayerIndex] = player
+//        actualPlayerSize += 1
+//        playersLock.unlock()
+//    }
+//
+//
+//    func replaceIfPlayerExist(player: Player) -> Bool {
+//
+//        playersLock.lock()
+//
+//        for (index, currP) in players.enumerated() {
+//            if !currP.isLeft {continue}
+//
+//            if currP.id == player.id {
+//                actualPlayerSize += 1
+//
+//                player.setIsLeft(isLeft: false)
+//                players[index] = player
+//                playersLock.unlock()
+//                return true
+//            }
+//        }
+//
+//        playersLock.unlock()
+//        return false
+//    }
     
     
     
@@ -636,11 +652,16 @@ public class Game : ObservableObject {
     
     
     func printPlayerList() {
-        self.p.write("Printing player list")
+        
+        playersLock.lock()
+        self.p.write("/------------------ Printing player list ------------------------/")
         for p in players {
             self.p.write("Id: \(p.id), name: \(p.displayName), randNum: \(p.randomNumber)")
         }
         
+        p.write("Id: \(me.id), name: \(me.displayName), randNum: \(me.randomNumber)")
+
+        playersLock.unlock()
     }
 
     
