@@ -11,7 +11,11 @@ import SwiftUI
 public class Game : ObservableObject {
     var id: String = ""
     @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
-    var actualPlayerSize = 0
+    private (set) var head: Player?
+    private (set) var tail: Player?
+
+    
+    var playerSize = 0
 
     var hostId = ""
     private let playersLock = NSLock()
@@ -42,6 +46,51 @@ public class Game : ObservableObject {
     
     
     
+    func deleteHead_andTail(toBeDeleted:  inout Player?) {
+        
+        if toBeDeleted?.id == head?.id {
+            head =
+        }
+
+        if toBeDeleted?.id == tail?.id {
+            tail = tail?.prevPlayer
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    func deleteNode(toBeDeleted: inout Player?) {
+        guard let nodeToDelete = toBeDeleted else {
+            return
+        }
+        
+
+        if let previousNode = nodeToDelete.prevPlayer {
+            previousNode.nextPlayer = nodeToDelete.nextPlayer
+        } else {
+            head = nodeToDelete.nextPlayer
+        }
+        
+        
+        if let nextNode = nodeToDelete.nextPlayer {
+            nextNode.prevPlayer = nodeToDelete.prevPlayer
+            
+        } else {
+            
+            tail = nodeToDelete.prevPlayer
+        }
+        
+        nodeToDelete.prevPlayer = nil
+        nodeToDelete.nextPlayer = nil
+        toBeDeleted = nil
+    }
+
+    
+    
 
     
     
@@ -62,7 +111,7 @@ public class Game : ObservableObject {
 
             if !lobby.players.contains(where: {$0.pid == crrGP.id}){
                 playesToBeDeleted_FromGame.append(index)
-                actualPlayerSize -= 1
+                playerSize -= 1
                 
             }
 
@@ -103,7 +152,7 @@ public class Game : ObservableObject {
         
         let newPlayer = Player(id: pid)
         players.append(newPlayer)
-        actualPlayerSize += 1
+        playerSize += 1
         playersLock.unlock()
         
         printPlayerList()
