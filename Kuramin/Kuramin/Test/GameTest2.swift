@@ -144,12 +144,26 @@ class GameTest2 : ObservableObject {
         
         // head => head => 30, 100, 200, 500, 600, 700
         game.addNode(nodeToAdd: p3)
+
         // Assuming: head => 30, 40, 100, 200, 500, 600, 650, 700
         
         assert(game.playerSize == 8)
         assert(game.head!.prevPlayer!.prevPlayer!.id == p3.id)
         game.printPlayersNode(head: game.head!)
 
+        
+        //game.addNode(nodeToAdd: p3)
+        assert(game.isInList(node: p3))
+        assert(game.isInList(node: p1))
+        assert(game.isInList(node: p2))
+        assert(game.isInList(node: p5))
+        assert(game.isInList(node: p_3))
+        assert(game.isInList(node: p7))
+
+
+
+
+        
         
         testPassed = true
 

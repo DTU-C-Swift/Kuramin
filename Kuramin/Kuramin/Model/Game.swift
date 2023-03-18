@@ -92,11 +92,6 @@ public class Game : ObservableObject {
             assert(playerSize == 1)
             // TODO if node already exist
             
-            if nodeToAdd.id == head?.id {
-                //head?.updateInfo(dbPlayer: nodeToAdd)
-            }
-            
-            
             nodeToAdd.nextPlayer = head
             nodeToAdd.prevPlayer = head
             
@@ -124,6 +119,7 @@ public class Game : ObservableObject {
             
             repeat {
                 assert(crrNode != nil)
+                
                 
                 if nodeToAdd.randomNumber < crrNode!.randomNumber {  // "nodeToAdd" is smaller then current node.
                     
@@ -172,72 +168,26 @@ public class Game : ObservableObject {
     }
     
     
+
     
-    
-    
-    
-//    func addNodeAfter(nodeToAdd: Player, nodeAfter: Player?) {
-//
-//        if nodeAfter == nil {  // size is 0
-//
-//            if head != nil || tail != nil || playerSize != 0 {assert(false)}
-//
-//            head = nodeToAdd
-//            tail = nodeToAdd
-//        }
-//
-//        else if nodeAfter?.nextPlayer == nil {  // size is 1
-//
-//            if head?.id != tail?.id || playerSize != 1 {
-//                assert(false)
-//            }
-//
-//            nodeToAdd.prevPlayer = nodeAfter
-//            nodeToAdd.nextPlayer = nodeAfter
-//
-//
-//            nodeAfter?.nextPlayer = nodeToAdd
-//            nodeAfter?.prevPlayer = nodeToAdd
-//
-//        }
-//
-//        else {
-//
-//            assert(playerSize > 1)
-//
-//            if nodeAfter?.id == head?.id {
-//
-//            }
-//
-//            else if nodeAfter?.id == tail?.id {
-//
-//
-//
-//            }
-//
-//
-//            var nodeAfterNext = nodeAfter?.nextPlayer
-//            nodeAfterNext?.prevPlayer = nodeToAdd
-//            nodeToAdd.nextPlayer = nodeAfterNext
-//
-//
-//            nodeAfter?.nextPlayer = nodeToAdd
-//            nodeToAdd.prevPlayer = nodeAfter
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//        }
-//
-//
-//    }
-    
-    
+    func isInList(node: Player) -> Bool {
+
+        var crrNode = head
+        
+        repeat {
+            assert(crrNode != nil)
+            
+            if crrNode?.id == node.id {
+                return true
+            }
+            
+            crrNode = crrNode?.nextPlayer
+            
+        } while crrNode?.id != head?.id
+        
+        return false
+        
+    }
     
     
     
