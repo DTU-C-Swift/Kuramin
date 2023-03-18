@@ -442,33 +442,33 @@ public class Game : ObservableObject {
     func printPlayersNode(head: Player?) {
         p.write("----------------------- Printing player nodes -----------------------")
 
-         
-         if head == nil {
-             p.write("head is nil")
-             return
-         }
-         
-         
-         lockNodeList.lock()
-         var crrNode = head!
-         
-         repeat {
-             self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
-
-         
-             if crrNode.nextPlayer != nil {
-                 crrNode = crrNode.nextPlayer!
-             }
-             else {
-                 // only one player in the list
-                 assert(playerSize == 1)
-                 break
-             }
-             
-         } while crrNode.id != head!.id
-         
-         
-         lockNodeList.unlock()
+//         
+//         if head == nil {
+//             p.write("head is nil")
+//             return
+//         }
+//         
+//         
+//         lockNodeList.lock()
+//         var crrNode = head!
+//         
+//         repeat {
+//             self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
+//
+//         
+//             if crrNode.nextPlayer != nil {
+//                 crrNode = crrNode.nextPlayer!
+//             }
+//             else {
+//                 // only one player in the list
+//                 assert(playerSize == 1)
+//                 break
+//             }
+//             
+//         } while crrNode.id != head!.id
+//         
+//         
+//         lockNodeList.unlock()
         
     }
     

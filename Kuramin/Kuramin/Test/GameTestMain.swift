@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameTest2 : ObservableObject {
+class GameTestMain : ObservableObject {
     @Published var testPassed = false
 
     
@@ -18,17 +18,17 @@ class GameTest2 : ObservableObject {
     }
     
     
+    func main() {
+        addAndRemoveMethodsTest()
+        SubGameTest().main()
+        testPassed = true
+    }
     
     
     
     func addAndRemoveMethodsTest() {
         
         let game = Game()
-        
-
-        
-        
-        
         
         let p1 = Player(id: "p1")
         let p2 = Player(id: "p2")
@@ -234,18 +234,11 @@ class GameTest2 : ObservableObject {
 
         
         
-        testPassed = true
 
     }
     
     
     
-    
-    func updateMethodTest() {
-        
-        
-        
-    }
-    
+
     
 }

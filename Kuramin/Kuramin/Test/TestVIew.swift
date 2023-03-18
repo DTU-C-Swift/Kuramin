@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TestVIew: View {
     //@ObservedObject var gameTest = GameTest()
-    @ObservedObject var gameTest = GameTest2()
+    @ObservedObject var gameTest = GameTestMain()
 
     
     
@@ -28,7 +28,7 @@ struct TestVIew: View {
         }
         .onAppear {
             
-            gameTest.addAndRemoveMethodsTest()
+            gameTest.main()
         }
     }
     
