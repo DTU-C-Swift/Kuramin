@@ -11,7 +11,7 @@ class SubGameTest : ObservableObject{
     var controller = Controller()
 
     func main() {
-        
+        updateMethodTest()
         
         
     }
@@ -22,6 +22,8 @@ class SubGameTest : ObservableObject{
     
     func updateMethodTest() {
         var game = controller.game
+        
+        
 
         
         

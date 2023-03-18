@@ -149,6 +149,12 @@ public class Game : ObservableObject {
 //            }
 //            lockNodeList.lock()
             
+//            if getPlayerRef(pid: nodeToAdd.id) != nil {
+//                lockNodeList.unlock()
+//                return
+//            }
+            
+            
             nodeToAdd.nextPlayer = head
             nodeToAdd.prevPlayer = head
             
@@ -442,20 +448,20 @@ public class Game : ObservableObject {
     func printPlayersNode(head: Player?) {
         p.write("----------------------- Printing player nodes -----------------------")
 
-//         
+//
 //         if head == nil {
 //             p.write("head is nil")
 //             return
 //         }
-//         
-//         
+//
+//
 //         lockNodeList.lock()
 //         var crrNode = head!
-//         
+//
 //         repeat {
 //             self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
 //
-//         
+//
 //             if crrNode.nextPlayer != nil {
 //                 crrNode = crrNode.nextPlayer!
 //             }
@@ -464,10 +470,10 @@ public class Game : ObservableObject {
 //                 assert(playerSize == 1)
 //                 break
 //             }
-//             
+//
 //         } while crrNode.id != head!.id
-//         
-//         
+//
+//
 //         lockNodeList.unlock()
         
     }

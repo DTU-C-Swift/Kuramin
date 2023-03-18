@@ -13,11 +13,6 @@ class GameTestMain : ObservableObject {
     
     
     
-    init () {
-        
-    }
-    
-    
     func main() {
         addAndRemoveMethodsTest()
         SubGameTest().main()
