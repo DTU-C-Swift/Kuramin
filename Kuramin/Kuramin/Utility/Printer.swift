@@ -18,7 +18,7 @@ class Printer {
     }
     
     func write(_ str: Any) {
-        print(tag,": ", str)
+        print("MyTag ", tag,": ", str)
 
     }
     

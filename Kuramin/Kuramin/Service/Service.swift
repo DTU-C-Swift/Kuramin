@@ -26,6 +26,7 @@ class Service {
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var previousLobby2: Lobby?
     private let lobbyLock = NSLock()
+    var isLobbyObserving = false
 
     
     
@@ -40,13 +41,13 @@ class Service {
     //-------------------------------- New implementation of lobby -----------------------------//
     var counter = 1
     
-    func goToLobby(val: Bool) {
+    func goToLobby(addDummyPlayer: Bool) {
         
         let newLobby = "lobby"
         let game = DataHolder.controller.game
         
         var me = Player(id: "testId\(counter)")
-        if val {
+        if addDummyPlayer {
             me.setFullName(fullName: "Name\(counter)")
             counter += 1
         } else { me = game.me}
@@ -144,9 +145,12 @@ class Service {
     
     
     func observeLobby(game: Game) {
-
+        if isLobbyObserving {
+            return
+        }
+        
         let ref = db.collection("matches").document(lobbyStr)
-
+        
          let obsRef = ref.addSnapshotListener { snapshot, err in
              
             do {
@@ -189,12 +193,10 @@ class Service {
                         }
                         
                         
-                        if let crrPlayerRef = game.getPlaye(pid: crrDbPlayer.pid) {
-
-                    
+                        if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
                             
                             if crrPlayerRef.isDefaultImg {
-                                self.downloadImg(player: crrPlayerRef)
+                                self.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
                                 
                             }
 
@@ -202,6 +204,19 @@ class Service {
 
 
                         }
+                        else {
+                            let newPlayer =  crrDbPlayer.createPlayer()
+                            self.downloadImg(player: newPlayer, shouldAddPlayerToGame: true, game: game)
+                            
+                        }
+                        
+                        
+
+                        
+                        
+                        
+                        
+                        
 
                     }
 
@@ -371,7 +386,7 @@ class Service {
 
         
         // Gets user image from storage
-        self.downloadImg(player: me)
+        self.downloadImg(player: me, shouldAddPlayerToGame: false, game: game)
         
         
         
@@ -408,7 +423,7 @@ class Service {
     
     // Downloads the profile picture of the given player and sets the fetched picture to the given player.
     
-    func downloadImg(player: Player) {
+    func downloadImg(player: Player, shouldAddPlayerToGame: Bool, game: Game) {
         
         let path = storage.reference().child("images").child(player.id)
         let filename = "\(player.id).jpg"
@@ -423,8 +438,10 @@ class Service {
                     
                     player.setStrImg(img: img)
                                         
-                    //DataHolder.playerGerbage.append(player)
-
+                    if shouldAddPlayerToGame {
+                        game.addNode(nodeToAdd: player)
+                        self.printer.write("Player added \(player.fullName), \(player.id)")
+                    }
                     return
                 }
                 self.printer.write("Error in converting image")

@@ -28,7 +28,7 @@ struct TestVIew: View {
         }
         .onAppear {
             
-            gameTest.test()
+            gameTest.addAndRemoveMethodsTest()
         }
     }
     

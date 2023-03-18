@@ -58,5 +58,12 @@ public struct DbPlayer {
     var cardsInHand: Int
     
 
+    
+    
+    func createPlayer() -> Player {
+        
+        return Player(id: pid, fullName: pName, image: nil, isLeft: false,
+                      coins: nil, cardsInHand: cardsInHand, randomNum: randomNum)
+    }
 }
 

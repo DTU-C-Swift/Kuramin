@@ -34,7 +34,7 @@ public class Game : ObservableObject {
     
     
     init () {
-        me.setRandomNum(randNum: 530)
+        //me.setRandomNum(randNum: 530)
         addNode(nodeToAdd: me)
 
     }
@@ -54,7 +54,7 @@ public class Game : ObservableObject {
     
     func updatePlayerList(lobby: Lobby) {
 
-        if playerSize < 1 {return}
+        if playerSize < 1 || lobby.players.isEmpty {return}
  
         if isGameStarted {
             //----TODO---/
@@ -142,6 +142,13 @@ public class Game : ObservableObject {
             assert(playerSize == 1)
             // TODO if node already exist
             
+//            lockNodeList.unlock()
+//            if getPlayerRef(pid: nodeToAdd.id) != nil {
+//                nodeToAdd.updateInfo(player: nodeToAdd)
+//                return
+//            }
+//            lockNodeList.lock()
+            
             nodeToAdd.nextPlayer = head
             nodeToAdd.prevPlayer = head
             
@@ -188,6 +195,11 @@ public class Game : ObservableObject {
                     playerSize += 1
                     
                     lockNodeList.unlock()
+                    
+                    
+                    //--------------------------------//
+                    setPlayerPositions()
+                    printPlayersNode(head: head)
                     return
                 }
                 
@@ -213,7 +225,9 @@ public class Game : ObservableObject {
         }
         
         lockNodeList.unlock()
-
+        
+        setPlayerPositions()
+        printPlayersNode(head: head)
         
     }
     
@@ -430,29 +444,56 @@ public class Game : ObservableObject {
         p.write("----------------------- Printing player nodes -----------------------")
 
         
-        if head == nil {
-            p.write("head is nil")
-            return
-        }
+//        if head == nil {
+//            p.write("head is nil")
+//            return
+//        }
+//
+//
+//        lockNodeList.lock()
+//        var crrNode = head
+//        var isStarting = true
+//
+//        while true {
+//
+//            if crrNode == nil {
+//                assert(false)
+//            }
+//
+//            if head == nil {
+//                assert(false)
+//            }
+//
+//            if crrNode!.id == head!.id && !isStarting {
+//
+//                break
+//            }
+//
+//            self.p.write("player: \(crrNode!.id ), randNum: \(crrNode!.randomNumber )")
+//
+//            if isStarting {isStarting = false}
+//
+//            crrNode = crrNode!.nextPlayer
+//        }
+//
+//
         
         
-        lockNodeList.lock()
-        var crrNode = head!
         
-        repeat {
-            self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
-
-        
-            if crrNode.nextPlayer != nil {
-                crrNode = crrNode.nextPlayer!
-            }
-            else {
-                // only one player in the list
-                assert(playerSize == 1)
-                break
-            }
-            
-        } while crrNode.id != head!.id
+//        repeat {
+//            self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
+//
+//
+//            if crrNode.nextPlayer != nil {
+//                crrNode = crrNode.nextPlayer!
+//            }
+//            else {
+//                // only one player in the list
+//                assert(playerSize == 1)
+//                break
+//            }
+//
+//        } while crrNode.id != head!.id
         
         
         lockNodeList.unlock()

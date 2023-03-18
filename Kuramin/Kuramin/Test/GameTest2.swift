@@ -21,7 +21,7 @@ class GameTest2 : ObservableObject {
     
     
     
-    func test() {
+    func addAndRemoveMethodsTest() {
         
         let game = Game()
         
@@ -236,6 +236,15 @@ class GameTest2 : ObservableObject {
         
         testPassed = true
 
+    }
+    
+    
+    
+    
+    func updateMethodTest() {
+        
+        
+        
     }
     
     

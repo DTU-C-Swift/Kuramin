@@ -35,16 +35,15 @@ class Player : ObservableObject {
         self.id = id
     }
     
-    init(id: String, fullName: String?, displayName: String?, image: UIImage?, isLeft: Bool?, coins: Int?, cardsInHand: Int?) {
+    init(id: String, fullName: String?, image: UIImage?, isLeft: Bool?, coins: Int?, cardsInHand: Int?, randomNum: Int?) {
         self.id = id
         
         if let fullName = fullName {
             self.fullName = fullName
+            setDisplayName()
+            
         }
         
-        if let displayName = displayName {
-            self.displayName = displayName
-        }
         
         if let image = image {
             self.image = image
@@ -61,6 +60,10 @@ class Player : ObservableObject {
         
         if let cardsInHand = cardsInHand {
             self.cardsInHand = cardsInHand
+        }
+        
+        if let randomNum = randomNum {
+            self.randomNumber = randomNum
         }
     }
     
@@ -101,6 +104,11 @@ class Player : ObservableObject {
         }
         
         // TODO set image
+        
+        if isDefaultImg && !p.isDefaultImg {
+            self.image = p.image
+            anyChanges = true
+        }
         
         
         lock.unlock()
