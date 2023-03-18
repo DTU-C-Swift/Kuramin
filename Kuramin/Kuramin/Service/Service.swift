@@ -189,7 +189,7 @@ class Service {
                         }
                         
                         
-                        if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
+                        if let crrPlayerRef = game.getPlaye(pid: crrDbPlayer.pid) {
 
                     
                             

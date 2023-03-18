@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 
 public class Game : ObservableObject {
-    var id: String = ""
+    private (set) var id: String = ""
     @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
     var head: Player?
     private let lockNodeList = NSLock()
     
-    var playerSize = 0
+    private (set) var playerSize = 0
     
-    var hostId = ""
+    private (set) var hostId = ""
     let p = Printer(tag: "Game", displayPrints: true)
-    var isGameStarted = false
+    private (set) var isGameStarted = false
     
     
     @Published var oneFromRight: Player?
@@ -29,7 +29,6 @@ public class Game : ObservableObject {
     @Published var sixFromRight: Player?
     @Published var sevenFromRight: Player?
     
-    //var players: [Player] = []
     
     
     
@@ -38,7 +37,6 @@ public class Game : ObservableObject {
         me.setRandomNum(randNum: 530)
         addNode(nodeToAdd: me)
 
-        //        setPlayerPositions2()
     }
     
     
@@ -49,6 +47,82 @@ public class Game : ObservableObject {
     }
 
    
+
+    
+    
+    
+    
+    func updatePlayerList(lobby: Lobby) {
+
+        if playerSize < 1 {return}
+ 
+        if isGameStarted {
+            //----TODO---/
+            //self.updatePlayerList2(lobby: &lobby)
+            return
+        }
+        
+        var needPlayerPositionUpdate = false
+        
+        lockNodeList.lock()
+
+        
+        var crrP = head
+        var isStarting = true
+        
+        while true {
+            
+            if crrP == nil {
+                break
+            }
+            
+            if !isStarting && crrP?.id == head?.id {
+                break
+            }
+            
+            
+            if !lobby.players.contains(where: {$0.pid == crrP?.id}) {
+                
+                lockNodeList.unlock()
+                if let nodeToRemove = getPlayerRef(pid: crrP!.id) {
+                    removeNode(nodeToRemove: nodeToRemove)
+                    needPlayerPositionUpdate = true
+                }
+                
+                lockNodeList.lock()
+            }
+            
+            
+            crrP = crrP?.nextPlayer
+            if isStarting {isStarting = false}
+            
+        }
+        
+        
+        lockNodeList.unlock()
+
+        if needPlayerPositionUpdate {
+            setPlayerPositions()
+            self.p.write("Player list has been updated")
+        }
+        
+        p.write("No players to update the list")
+
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -170,7 +244,7 @@ public class Game : ObservableObject {
     }
     
     
-    func isInList(pid: String) -> Player? {
+    func getPlayerRef(pid: String) -> Player? {
 
         lockNodeList.lock()
         var crrNode = head
@@ -246,62 +320,6 @@ public class Game : ObservableObject {
     
 
 
-    
-    
-    
-    func updatePlayerList(lobby: Lobby) {
-
-        if playerSize < 1 {return}
- 
-        if isGameStarted {
-            //----TODO---/
-            //self.updatePlayerList2(lobby: &lobby)
-            return
-        }
-
-        
-        lockNodeList.lock()
-
-        
-        var crrP = head
-        var isStarting = true
-        
-        while true {
-            
-            if crrP == nil {
-                break
-            }
-            
-            if !isStarting && crrP?.id == head?.id {
-                break
-            }
-            
-            if !lobby.players.contains(where: {$0.pid == crrP?.id}) {
-                
-                lockNodeList.unlock()
-                if let nodeToRemove = isInList(pid: crrP!.id) {
-                    removeNode(nodeToRemove: nodeToRemove)
-                }
-                
-                lockNodeList.lock()
-            }
-            
-            
-            crrP = crrP?.nextPlayer
-            if isStarting {isStarting = false}
-            
-        }
-        
-        
-        lockNodeList.unlock()
-
-        setPlayerPositions()
-        self.p.write("Player list has been updated")
-    }
-    
-    
-    
-    
     
     
     
