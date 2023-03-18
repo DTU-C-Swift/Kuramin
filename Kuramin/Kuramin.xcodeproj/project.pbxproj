@@ -50,6 +50,7 @@
 		56E2657129C2552A00738F12 /* GameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657029C2552A00738F12 /* GameTest.swift */; };
 		56E2657329C2609E00738F12 /* TestVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657229C2609E00738F12 /* TestVIew.swift */; };
 		56E75FB129C500A200215C71 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E75FB029C500A200215C71 /* PlayersView.swift */; };
+		56E75FB329C5B58E00215C71 /* Game2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E75FB229C5B58E00215C71 /* Game2.swift */; };
 		56F6642129C2FE9B0047DECA /* DbPlayerNullable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F6642029C2FE9B0047DECA /* DbPlayerNullable.swift */; };
 		56F6642329C301010047DECA /* DbCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F6642229C301010047DECA /* DbCard.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,7 @@
 		56E2657029C2552A00738F12 /* GameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest.swift; sourceTree = "<group>"; };
 		56E2657229C2609E00738F12 /* TestVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVIew.swift; sourceTree = "<group>"; };
 		56E75FB029C500A200215C71 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
+		56E75FB229C5B58E00215C71 /* Game2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game2.swift; sourceTree = "<group>"; };
 		56F6642029C2FE9B0047DECA /* DbPlayerNullable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbPlayerNullable.swift; sourceTree = "<group>"; };
 		56F6642229C301010047DECA /* DbCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 				56954C3A29C238D400155181 /* Game.swift */,
 				56954C3C29C238F300155181 /* Player.swift */,
 				56954C3629C238A500155181 /* Card.swift */,
+				56E75FB229C5B58E00215C71 /* Game2.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				56954C3329C2386E00155181 /* ServiceHelper.swift in Sources */,
 				56E75FB129C500A200215C71 /* PlayersView.swift in Sources */,
 				56954C2529C2370100155181 /* MenuPopup.swift in Sources */,
+				56E75FB329C5B58E00215C71 /* Game2.swift in Sources */,
 				569C5CE329C2206C00D1D7FE /* CoreData.swift in Sources */,
 				56954C1F29C2367C00155181 /* ContentView.swift in Sources */,
 				56954C4029C2391E00155181 /* Controller.swift in Sources */,
