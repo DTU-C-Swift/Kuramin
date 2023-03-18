@@ -32,17 +32,13 @@ class GameTest2 : ObservableObject {
         
         let p1 = Player(id: "p1")
         let p2 = Player(id: "p2")
-        let p3 = Player(id: "p3")
-        let p4 = Player(id: "p4")
+
         let p5 = Player(id: "p5")
         let p6 = Player(id: "p6")
         let p7 = Player(id: "p7")
         
         p1.setRandomNum(randNum: 100)
         p2.setRandomNum(randNum: 200)
-        p3.setRandomNum(randNum: 300)
-        
-        p4.setRandomNum(randNum: 400)
         p5.setRandomNum(randNum: 500)
         p6.setRandomNum(randNum: 600)
         p7.setRandomNum(randNum: 700)
@@ -91,17 +87,69 @@ class GameTest2 : ObservableObject {
         // Assuming: head => 100, 200, 500, 600
         
         assert(game.playerSize == 4)
-        game.printPlayersNode(head: game.head!)
-
-        
         assert(game.head!.prevPlayer!.id == p6.id)
+        assert(game.head!.id == p6.nextPlayer!.id)
+        game.printPlayersNode(head: game.head!)
 
 
         
 
         let p_1 = Player(id: "p-1")
-        let p_2 = Player(id: "p-2")
         let p_3 = Player(id: "p-3")
+        
+        p_3.setRandomNum(randNum: 30)
+        
+        
+        
+        // head => 100, 200, 500, 600
+        game.addNode(nodeToAdd: p_3)
+        // Assuming: head => 30, 100, 200, 500, 600
+        
+        assert(game.playerSize == 5)
+        assert(game.head!.id == p_3.id)
+        assert(game.head!.nextPlayer!.randomNumber == 100)
+        assert(p6.nextPlayer!.id == p_3.id)
+        game.printPlayersNode(head: game.head!)
+        
+        
+        
+        // head => head => 30, 100, 200, 500, 600
+        game.addNode(nodeToAdd: p7)
+        // Assuming: head => 30, 100, 200, 500, 600, 700
+        
+        assert(game.playerSize == 6)
+        assert(game.head!.prevPlayer!.randomNumber == p7.randomNumber)
+        game.printPlayersNode(head: game.head!)
+
+        
+        
+        
+        let p_2 = Player(id: "p-2")
+        p_2.setRandomNum(randNum: 40)
+
+        // head => head => 30, 100, 200, 500, 600, 700
+        game.addNode(nodeToAdd: p_2)
+        // Assuming: head => 30, 40, 100, 200, 500, 600, 700
+        assert(game.playerSize == 7)
+        assert(game.head!.nextPlayer!.id == p_2.id)
+        game.printPlayersNode(head: game.head!)
+
+        
+        
+        
+        
+        let p3 = Player(id: "p3")
+        p3.setRandomNum(randNum: 650)
+        
+        
+        // head => head => 30, 100, 200, 500, 600, 700
+        game.addNode(nodeToAdd: p3)
+        // Assuming: head => 30, 40, 100, 200, 500, 600, 650, 700
+        
+        assert(game.playerSize == 8)
+        assert(game.head!.prevPlayer!.prevPlayer!.id == p3.id)
+        game.printPlayersNode(head: game.head!)
+
         
         testPassed = true
 
