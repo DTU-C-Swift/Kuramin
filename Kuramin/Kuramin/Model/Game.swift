@@ -36,8 +36,8 @@ public class Game : ObservableObject {
     
     
     init () {
-        //        addDummyPlayers()
-        //        printPlayerList()
+        addDummyPlayers(val: 8)
+            printPlayersNode(head: head)
         //        setPlayerPositions2()
     }
     
@@ -278,7 +278,7 @@ public class Game : ObservableObject {
         playerSize += 1
         playersLock.unlock()
         
-        printPlayerList()
+        //printPlayerList()
         setPlayerPositions()
         
         p.write("Player: \(newPlayer.id) added")
@@ -298,7 +298,7 @@ public class Game : ObservableObject {
         
         playersLock.lock()
         
-        if players.count < 1 {
+        if playerSize < 1 {
             playersLock.unlock()
             return
             
@@ -449,15 +449,17 @@ public class Game : ObservableObject {
     
 
     
-    func addDummyPlayers() {
+    func addDummyPlayers(val: Int) {
         
-        for i in 0..<7 {
+        for i in 0..<val {
             let newPlayer = Player(id: "id\(i)")
             newPlayer.setFullName(fullName: "player\(i)")
             var rand = Int(arc4random_uniform(10000))
             newPlayer.setRandomNum(randNum: rand)
             
-            players.append(newPlayer)
+            //players.append(newPlayer)
+            
+            addNode(nodeToAdd: newPlayer)
         }
         
         
@@ -465,19 +467,19 @@ public class Game : ObservableObject {
     
     
     
-    func printPlayerList() {
-        
-        playersLock.lock()
-        self.p.write("/------------------ Printing player list ------------------------/")
-        for p in players {
-            self.p.write("Id: \(p.id), name: \(p.displayName), randNum: \(p.randomNumber)")
-        }
-        
-        p.write("Id: \(me.id), name: \(me.displayName), randNum: \(me.randomNumber)")
-        
-        playersLock.unlock()
-    }
-    
+//    func printPlayerList() {
+//
+//        playersLock.lock()
+//        self.p.write("/------------------ Printing player list ------------------------/")
+//        for p in players {
+//            self.p.write("Id: \(p.id), name: \(p.displayName), randNum: \(p.randomNumber)")
+//        }
+//
+//        p.write("Id: \(me.id), name: \(me.displayName), randNum: \(me.randomNumber)")
+//
+//        playersLock.unlock()
+//    }
+//
     
     
     
