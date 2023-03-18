@@ -12,7 +12,7 @@ public class Game : ObservableObject {
     var id: String = ""
     @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
     private (set) var head: Player?
-    private (set) var tail: Player?
+    //private (set) var tail: Player?
     
     
     var playerSize = 0
@@ -64,10 +64,11 @@ public class Game : ObservableObject {
         if let nextNode = nodeToDelete.nextPlayer {
             nextNode.prevPlayer = nodeToDelete.prevPlayer
             
-        } else {
-            
-            tail = nodeToDelete.prevPlayer
         }
+//        else {
+//
+//            tail = nodeToDelete.prevPlayer
+//        }
         
         nodeToDelete.prevPlayer = nil
         nodeToDelete.nextPlayer = nil
@@ -82,11 +83,12 @@ public class Game : ObservableObject {
         
         if head == nil {
             head = nodeToAdd
-            tail = nodeToAdd
+            head?.nextPlayer = head
+            head?.prevPlayer = head
             playerSize = 1
         }
         
-        else if head?.id == tail?.id {   // list size is 1
+        else if head?.id == head?.prevPlayer?.id {   // list size is 1
             assert(playerSize == 1)
             // TODO if node already exist
             
@@ -107,11 +109,11 @@ public class Game : ObservableObject {
             if head!.randomNumber > nodeToAdd.randomNumber {
                 
                 head = nodeToAdd
-                tail = nodeToAdd.nextPlayer
+                //tail = nodeToAdd.nextPlayer
             }
             else {
                 
-                tail = tail?.nextPlayer
+                //tail = tail?.nextPlayer
             }
             
             
@@ -147,22 +149,36 @@ public class Game : ObservableObject {
                     
                     if crrNode?.id == head?.id { // in front of the head
                         head = head?.prevPlayer
+                        //tail = tail?.prevPlayer
                     }
                     
-                    else if crrNode?.id == tail?.id { // right after tail
-                        tail = tail?.nextPlayer
-                    }
+                    
                     
                     playerSize += 1
                     
+                    return
                 }
                 
-                
+    
                 crrNode = crrNode?.nextPlayer
                 
             } while crrNode?.id != head?.id
             
+            // nodeToAdd is the larges
             
+            var headPrev = head?.prevPlayer
+            
+            nodeToAdd.prevPlayer = headPrev
+            headPrev?.nextPlayer = nodeToAdd
+            
+            
+            nodeToAdd.nextPlayer = head
+            head?.prevPlayer = nodeToAdd
+            
+            playerSize += 1
+            
+            
+            return
         }
         
 

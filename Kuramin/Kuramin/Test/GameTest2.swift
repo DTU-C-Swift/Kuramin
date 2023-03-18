@@ -25,6 +25,10 @@ class GameTest2 : ObservableObject {
         
         let game = Game()
         
+
+        
+        
+        
         
         let p1 = Player(id: "p1")
         let p2 = Player(id: "p2")
@@ -44,28 +48,60 @@ class GameTest2 : ObservableObject {
         p7.setRandomNum(randNum: 700)
 
         
+        // head => nil
         game.addNode(nodeToAdd: p1)
-        
+        // Assuming: head => 100
         assert(game.head != nil)
-        assert(game.tail != nil)
-        assert(game.head?.id == game.tail?.id)
+        assert(game.head!.prevPlayer!.id == game.head!.id)
+        assert(game.head!.nextPlayer!.id == game.head!.id)
+        assert(game.head!.id == p1.id)
+        game.printPlayersNode(head: game.head!)
         assert(game.playerSize == 1)
-        game.printPlayersNode(head: game.head!)
+
         
-        
+        // head => 100
         game.addNode(nodeToAdd: p5)
-        
-        assert(game.head != nil)
-        assert(game.tail != nil)
-        assert(game.head?.id != game.tail?.id)
+        // assuming: head => 100, 500
         assert(game.playerSize == 2)
-        assert(game.head?.id == p1.id)
-        assert(game.tail?.id == p5.id)
+        assert(game.head!.id == p1.id)
+        assert(game.head!.nextPlayer!.id == p5.id)
+        assert(game.head!.prevPlayer!.id == p5.id)
         
         game.printPlayersNode(head: game.head!)
 
 
         
+        
+        // head => 100, 500
+        game.addNode(nodeToAdd: p2)
+        // Assuming: head => 100, 200, 500
+        
+        assert(game.playerSize == 3)
+        let headNext = game.head!.nextPlayer
+        assert(headNext!.id == p2.id)
+        assert(p2.nextPlayer!.id == game.head?.prevPlayer!.id)
+
+        game.printPlayersNode(head: game.head!)
+
+
+        
+        
+        // head => 100, 200, 500
+        game.addNode(nodeToAdd: p6)
+        // Assuming: head => 100, 200, 500, 600
+        
+        assert(game.playerSize == 4)
+        game.printPlayersNode(head: game.head!)
+
+        
+        assert(game.head!.prevPlayer!.id == p6.id)
+
+
+        
+
+        let p_1 = Player(id: "p-1")
+        let p_2 = Player(id: "p-2")
+        let p_3 = Player(id: "p-3")
         
         testPassed = true
 
