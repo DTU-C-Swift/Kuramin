@@ -13,15 +13,15 @@ public class Game : ObservableObject {
     @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
     private (set) var head: Player?
     private (set) var tail: Player?
-
+    
     
     var playerSize = 0
-
+    
     var hostId = ""
     private let playersLock = NSLock()
     let p = Printer(tag: "Game", displayPrints: true)
     var isGameStarted = false
-
+    
     
     @Published var oneFromRight: Player?
     @Published var twoFromRight: Player?
@@ -32,31 +32,16 @@ public class Game : ObservableObject {
     @Published var sevenFromRight: Player?
     
     var players: [Player] = []
-
+    
     
     
     
     init () {
-//        addDummyPlayers()
-//        printPlayerList()
-//        setPlayerPositions2()
+        //        addDummyPlayers()
+        //        printPlayerList()
+        //        setPlayerPositions2()
     }
-
     
-    
-    
-    
-    func deleteHead_andTail(toBeDeleted:  inout Player?) {
-        
-        if toBeDeleted?.id == head?.id {
-            head =
-        }
-
-        if toBeDeleted?.id == tail?.id {
-            tail = tail?.prevPlayer
-        }
-        
-    }
     
     
     
@@ -68,7 +53,7 @@ public class Game : ObservableObject {
             return
         }
         
-
+        
         if let previousNode = nodeToDelete.prevPlayer {
             previousNode.nextPlayer = nodeToDelete.nextPlayer
         } else {
@@ -88,10 +73,166 @@ public class Game : ObservableObject {
         nodeToDelete.nextPlayer = nil
         toBeDeleted = nil
     }
-
     
     
+    
+    // This funciton adds node to its correct position.
+    
+    func addNode(nodeToAdd: Player) {  // list size is 0
+        
+        if head == nil {
+            head = nodeToAdd
+            tail = nodeToAdd
+            playerSize = 1
+        }
+        
+        else if head?.id == tail?.id {   // list size is 1
+            assert(playerSize == 1)
+            // TODO if node already exist
+            
+            if nodeToAdd.id == head?.id {
+                //head?.updateInfo(dbPlayer: nodeToAdd)
+            }
+            
+            
+            nodeToAdd.nextPlayer = head
+            nodeToAdd.prevPlayer = head
+            
+            head?.nextPlayer = nodeToAdd
+            head?.prevPlayer = nodeToAdd
+            playerSize += 1
+            
+                        
+            
+            if head!.randomNumber > nodeToAdd.randomNumber {
+                
+                head = nodeToAdd
+                tail = nodeToAdd.nextPlayer
+            }
+            
+            
+        }
+        
+//        else if head?.nextPlayer?.id == tail?.id { // list size is 2
+//
+//            assert(tail?.nextPlayer?.id == head?.id)
+//            assert(playerSize == 2)
+//
+//        }
+        
+        
+        else {
+            
+            assert(playerSize >= 2)
+            
+            var crrNode = head
+            
+            repeat {
+                assert(crrNode != nil)
+                
+                if nodeToAdd.randomNumber < crrNode!.randomNumber {  // "nodeToAdd" is smaller then current node.
+                    
+                    var crrPrev = crrNode?.prevPlayer
+                    
+                    nodeToAdd.nextPlayer = crrNode
+                    crrNode?.prevPlayer = nodeToAdd
+                    
+                    crrPrev?.nextPlayer = nodeToAdd
+                    nodeToAdd.prevPlayer = crrPrev
+                    
+                    
+                    if crrNode?.id == head?.id { // in front of the head
+                        head = head?.prevPlayer
+                    }
+                    
+                    else if crrNode?.id == tail?.id { // right after tail
+                        tail = tail?.nextPlayer
+                    }
+                    
+                    playerSize += 1
+                    
+                }
+                
+                
+                crrNode = crrNode?.nextPlayer
+                
+            } while crrNode?.id != head?.id
+            
+            
+        }
+        
 
+        
+        
+        
+        
+    }
+    
+    
+    
+//    func addNodeAfter(nodeToAdd: Player, nodeAfter: Player?) {
+//
+//        if nodeAfter == nil {  // size is 0
+//
+//            if head != nil || tail != nil || playerSize != 0 {assert(false)}
+//
+//            head = nodeToAdd
+//            tail = nodeToAdd
+//        }
+//
+//        else if nodeAfter?.nextPlayer == nil {  // size is 1
+//
+//            if head?.id != tail?.id || playerSize != 1 {
+//                assert(false)
+//            }
+//
+//            nodeToAdd.prevPlayer = nodeAfter
+//            nodeToAdd.nextPlayer = nodeAfter
+//
+//
+//            nodeAfter?.nextPlayer = nodeToAdd
+//            nodeAfter?.prevPlayer = nodeToAdd
+//
+//        }
+//
+//        else {
+//
+//            assert(playerSize > 1)
+//
+//            if nodeAfter?.id == head?.id {
+//
+//            }
+//
+//            else if nodeAfter?.id == tail?.id {
+//
+//
+//
+//            }
+//
+//
+//            var nodeAfterNext = nodeAfter?.nextPlayer
+//            nodeAfterNext?.prevPlayer = nodeToAdd
+//            nodeToAdd.nextPlayer = nodeAfterNext
+//
+//
+//            nodeAfter?.nextPlayer = nodeToAdd
+//            nodeToAdd.prevPlayer = nodeAfter
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//        }
+//
+//
+//    }
+    
+    
+    
     
     
     func updatePlayerList(lobby: Lobby) {
@@ -108,23 +249,23 @@ public class Game : ObservableObject {
         playersLock.lock()
         
         for (index, crrGP) in players.enumerated() {
-
+            
             if !lobby.players.contains(where: {$0.pid == crrGP.id}){
                 playesToBeDeleted_FromGame.append(index)
                 playerSize -= 1
                 
             }
-
+            
         }
         
         
         players.remove(atOffsets: IndexSet(playesToBeDeleted_FromGame))
         playersLock.unlock()
-
+        
         setPlayerPositions()
         self.p.write("Player list has been updated")
     }
-
+    
     
     
     
@@ -199,12 +340,12 @@ public class Game : ObservableObject {
         
         
         for i in 1..<sortedPlayers.count - 1 {
-                        
+            
             sortedPlayers[i].prevPlayer = sortedPlayers[i - 1]
             sortedPlayers[i].nextPlayer = sortedPlayers[i + 1]
             
         }
-
+        
         playersLock.unlock()
         printPlayersNode(head: me)
         playersLock.lock()
@@ -212,10 +353,10 @@ public class Game : ObservableObject {
         
         
         switch sortedPlayers.count {
-
+            
         case 2:
             fiveFromRight = me.nextPlayer
-
+            
         case 3:
             fiveFromRight = me.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
@@ -237,8 +378,8 @@ public class Game : ObservableObject {
             fourFromRight = threeFromRight?.nextPlayer
             fiveFromRight = fourFromRight?.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
-
-
+            
+            
             
         case 7:
             twoFromRight = me.nextPlayer
@@ -247,7 +388,7 @@ public class Game : ObservableObject {
             fiveFromRight = fourFromRight?.nextPlayer
             sixFromRight = fiveFromRight?.nextPlayer
             sevenFromRight = sixFromRight?.nextPlayer
-
+            
         default:
             
             oneFromRight = me.nextPlayer
@@ -269,37 +410,35 @@ public class Game : ObservableObject {
     
     func printPlayersNode(head: Player) {
         
-
-        playersLock.lock()
-        var temp = head.nextPlayer
-    
-        p.write("----------------------- Printing player nodes -----------------------")
-        self.p.write("player: \(head.id ), randNum: \(head.randomNumber)")
         
-                
-        while true {
-            
-            let k2 = temp?.id ?? ""
-            
-            if k2 == head.id {
+        playersLock.lock()
+        p.write("----------------------- Printing player nodes -----------------------")
+        var crrNode = head
+        
+        repeat {
+            self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
+
+        
+            if crrNode.nextPlayer != nil {
+                crrNode = crrNode.nextPlayer!
+            }
+            else {
+                // only one player in the list
+                assert(playerSize == 1)
                 break
             }
             
-            self.p.write("player: \(temp?.id ?? "id is nil"), randNum: \(temp?.randomNumber ?? 0)")
-            
-            temp = temp?.nextPlayer
-            
-            
-        }
+        } while crrNode.id != head.id
+        
         
         playersLock.unlock()
         
     }
-        
     
     
     
-   
+    
+    
     
     
     func getActualPlayerIds() -> [String] {
@@ -320,23 +459,23 @@ public class Game : ObservableObject {
     
     
     
-   
+    
     
     
     
     
     func addDummyPlayers() {
-
+        
         for i in 0..<7 {
             let newPlayer = Player(id: "id\(i)")
             newPlayer.setFullName(fullName: "player\(i)")
             var rand = Int(arc4random_uniform(10000))
             newPlayer.setRandomNum(randNum: rand)
-
+            
             players.append(newPlayer)
         }
-
-
+        
+        
     }
     
     
@@ -350,15 +489,15 @@ public class Game : ObservableObject {
         }
         
         p.write("Id: \(me.id), name: \(me.displayName), randNum: \(me.randomNumber)")
-
+        
         playersLock.unlock()
     }
-
     
     
-
     
-
+    
+    
+    
 }
 
 

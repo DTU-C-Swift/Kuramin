@@ -67,6 +67,53 @@ class Player : ObservableObject {
     
     
     
+    func updateInfo(player p: Player) {
+        
+        var anyChanges = false
+        lock.lock()
+        if p.id != id {
+            //assert(false)
+            lock.unlock()
+            assert(false)
+        }
+
+        
+        if fullName != p.fullName  {
+            
+            self.fullName = p.fullName
+            lock.unlock()
+            setDisplayName()
+            lock.lock()
+            anyChanges = true
+        }
+        
+    
+        if cardsInHand != p.cardsInHand  {
+            self.cardsInHand = p.cardsInHand
+            anyChanges = true
+
+        }
+
+        if randomNumber != p.randomNumber {
+            self.randomNumber = p.randomNumber
+            anyChanges = true
+
+        }
+        
+        // TODO set image
+        
+        
+        lock.unlock()
+        
+        if anyChanges {
+            self.p.write("Player updated: \(self.displayName), \(self.id)")
+        }
+
+    }
+
+    
+    
+    
     
     
     

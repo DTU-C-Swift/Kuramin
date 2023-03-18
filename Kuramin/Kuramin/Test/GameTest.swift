@@ -15,15 +15,15 @@ class GameTest : ObservableObject{
     
     
     
-    func tests() {
-//        let game = controller.game
-//        addPlayerTest_beforeGame_starts()
-//        addPlayerTest_AfterGame_starts()
-//
-//
-//        testPassed = true
-        
-    }
+//    func tests() {
+////        let game = controller.game
+////        addPlayerTest_beforeGame_starts()
+////        addPlayerTest_AfterGame_starts()
+////
+////
+////        testPassed = true
+//        
+//    }
     
     
     
