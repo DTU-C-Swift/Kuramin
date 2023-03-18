@@ -109,24 +109,13 @@ public class Game : ObservableObject {
             if head!.randomNumber > nodeToAdd.randomNumber {
                 
                 head = nodeToAdd
-                //tail = nodeToAdd.nextPlayer
             }
-            else {
-                
-                //tail = tail?.nextPlayer
-            }
+
             
             
         }
         
-//        else if head?.nextPlayer?.id == tail?.id { // list size is 2
-//
-//            assert(tail?.nextPlayer?.id == head?.id)
-//            assert(playerSize == 2)
-//
-//        }
-        
-        
+
         else {
             
             assert(playerSize >= 2)
@@ -138,7 +127,7 @@ public class Game : ObservableObject {
                 
                 if nodeToAdd.randomNumber < crrNode!.randomNumber {  // "nodeToAdd" is smaller then current node.
                     
-                    var crrPrev = crrNode?.prevPlayer
+                    let crrPrev = crrNode?.prevPlayer
                     
                     nodeToAdd.nextPlayer = crrNode
                     crrNode?.prevPlayer = nodeToAdd
@@ -149,11 +138,9 @@ public class Game : ObservableObject {
                     
                     if crrNode?.id == head?.id { // in front of the head
                         head = head?.prevPlayer
-                        //tail = tail?.prevPlayer
                     }
                     
-                    
-                    
+
                     playerSize += 1
                     
                     return
@@ -165,8 +152,7 @@ public class Game : ObservableObject {
             } while crrNode?.id != head?.id
             
             // nodeToAdd is the larges
-            
-            var headPrev = head?.prevPlayer
+            let headPrev = head?.prevPlayer
             
             nodeToAdd.prevPlayer = headPrev
             headPrev?.nextPlayer = nodeToAdd
@@ -181,12 +167,12 @@ public class Game : ObservableObject {
             return
         }
         
-
-        
-        
         
         
     }
+    
+    
+    
     
     
     
