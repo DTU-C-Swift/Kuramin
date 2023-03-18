@@ -145,17 +145,54 @@ public class Game : ObservableObject {
         
         
         
-//        switch sortedPlayers.count {
-//
-//        case 2:
-//            fiveFromRight =
-//
-//        default:
-//            self.p.write("S")
-//
-//
-//
-//        }
+        switch sortedPlayers.count {
+
+        case 2:
+            fiveFromRight = me.nextPlayer
+
+        case 3:
+            fiveFromRight = me.nextPlayer
+            sixFromRight = fiveFromRight?.nextPlayer
+            
+        case 4:
+            twoFromRight = me.nextPlayer
+            fiveFromRight = twoFromRight?.nextPlayer
+            sixFromRight = fiveFromRight?.nextPlayer
+            
+        case 5:
+            twoFromRight = me.nextPlayer
+            fourFromRight = twoFromRight?.nextPlayer
+            fiveFromRight = fourFromRight?.nextPlayer
+            sixFromRight = fiveFromRight?.nextPlayer
+            
+        case 6:
+            twoFromRight = me.nextPlayer
+            threeFromRight = twoFromRight?.nextPlayer
+            fourFromRight = threeFromRight?.nextPlayer
+            fiveFromRight = fourFromRight?.nextPlayer
+            sixFromRight = fiveFromRight?.nextPlayer
+
+
+            
+        case 7:
+            twoFromRight = me.nextPlayer
+            threeFromRight = twoFromRight?.nextPlayer
+            fourFromRight = threeFromRight?.nextPlayer
+            fiveFromRight = fourFromRight?.nextPlayer
+            sixFromRight = fiveFromRight?.nextPlayer
+            sevenFromRight = sixFromRight?.nextPlayer
+
+        default:
+            
+            oneFromRight = me.nextPlayer
+            twoFromRight = oneFromRight?.nextPlayer
+            threeFromRight = twoFromRight?.nextPlayer
+            fourFromRight = threeFromRight?.nextPlayer
+            fiveFromRight = fourFromRight?.nextPlayer
+            sixFromRight = fiveFromRight?.nextPlayer
+            sevenFromRight = sixFromRight?.nextPlayer
+            
+        }
         
         
     }
