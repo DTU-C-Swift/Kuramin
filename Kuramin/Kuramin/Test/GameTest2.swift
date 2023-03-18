@@ -38,6 +38,11 @@ class GameTest2 : ObservableObject {
         p2.setRandomNum(randNum: 200)
         p3.setRandomNum(randNum: 300)
         
+        p4.setRandomNum(randNum: 400)
+        p5.setRandomNum(randNum: 500)
+        p6.setRandomNum(randNum: 600)
+        p7.setRandomNum(randNum: 700)
+
         
         game.addNode(nodeToAdd: p1)
         
@@ -45,6 +50,18 @@ class GameTest2 : ObservableObject {
         assert(game.tail != nil)
         assert(game.head?.id == game.tail?.id)
         assert(game.playerSize == 1)
+        game.printPlayersNode(head: game.head!)
+        
+        
+        game.addNode(nodeToAdd: p5)
+        
+        assert(game.head != nil)
+        assert(game.tail != nil)
+        assert(game.head?.id != game.tail?.id)
+        assert(game.playerSize == 2)
+        assert(game.head?.id == p1.id)
+        assert(game.tail?.id == p5.id)
+        
         game.printPlayersNode(head: game.head!)
 
 

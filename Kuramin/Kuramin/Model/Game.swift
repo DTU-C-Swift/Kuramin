@@ -109,6 +109,10 @@ public class Game : ObservableObject {
                 head = nodeToAdd
                 tail = nodeToAdd.nextPlayer
             }
+            else {
+                
+                tail = tail?.nextPlayer
+            }
             
             
         }
