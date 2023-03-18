@@ -44,98 +44,7 @@ public class Game : ObservableObject {
     
     
 
-    
-    func removeNode(nodeToRemove: Player) {
-        lockNodeList.lock()
-        
-        // If the list is empty, there's nothing to remove.
-        guard let head = head else {
-            lockNodeList.unlock()
-            return
-        }
-        
-        if head === nodeToRemove {
-            // Removing the head node.
-            if head.nextPlayer === head {
-                // Removing the only node in the list.
-                self.head = nil
-                playerSize = 0
-            } else {
-                // Removing the head node of a list with more than one node.
-                self.head = head.nextPlayer
-                self.head!.prevPlayer = head.prevPlayer
-                head.prevPlayer!.nextPlayer = self.head
-                playerSize -= 1
-            }
-        } else {
-            // Search for the node to remove.
-            var current = head.nextPlayer
-            while current !== head && current !== nodeToRemove {
-                current = current?.nextPlayer
-            }
-            
-            if current === nodeToRemove {
-                // Remove the node by updating the next and previous pointers.
-                current!.prevPlayer!.nextPlayer = current?.nextPlayer
-                current!.nextPlayer?.prevPlayer = current?.prevPlayer
-                
-                playerSize -= 1
-            }
-        }
-        
-        lockNodeList.unlock()
-    }
-
-    
-    
-    
-//    func deleteNode(nodeToDelete: inout Player?) {
-//
-//        if nodeToDelete == nil {
-//            return
-//        }
-//
-//        if playerSize == 0 {
-//            assert(false)
-//            return
-//        }
-//
-//        lockNodeList.lock()
-//
-//        if playerSize == 1 {
-//            head = nil
-//            playerSize = 0
-//        }
-//        else if playerSize > 1 {
-//
-//            let headId = head?.id
-//
-//            if nodeToDelete!.id == headId {
-//                self.head = self.head?.nextPlayer
-//            }
-//
-//
-//
-//            let nodeToDeleteNext = nodeToDelete!.nextPlayer
-//            let nodeToDeletePrev = nodeToDelete!.prevPlayer
-//
-//            nodeToDeleteNext?.prevPlayer = nodeToDeletePrev
-//            nodeToDeletePrev?.prevPlayer = nodeToDeleteNext
-//
-//            self.playerSize -= 1
-//
-//            nodeToDelete?.nextPlayer = nil
-//            nodeToDelete?.prevPlayer = nil
-//
-//            self.printPlayersNode(head: self.head!)
-//
-//
-//
-//        }
-//
-//        lockNodeList.unlock()
-//
-//    }
+   
     
     
     
@@ -168,8 +77,6 @@ public class Game : ObservableObject {
                 
                 head = nodeToAdd
             }
-
-            
             
         }
         
@@ -227,7 +134,6 @@ public class Game : ObservableObject {
 
         }
         
-        
         lockNodeList.unlock()
 
         
@@ -261,6 +167,53 @@ public class Game : ObservableObject {
     
     
     
+    
+    
+    
+    func removeNode(nodeToRemove: Player) {
+        lockNodeList.lock()
+        
+        // If the list is empty, there's nothing to remove.
+        guard let head = head else {
+            lockNodeList.unlock()
+            return
+        }
+        
+        if head === nodeToRemove {
+            // Removing the head node.
+            if head.nextPlayer === head {
+                // Removing the only node in the list.
+                self.head = nil
+                playerSize = 0
+            } else {
+                // Removing the head node of a list with more than one node.
+                self.head = head.nextPlayer
+                self.head!.prevPlayer = head.prevPlayer
+                head.prevPlayer!.nextPlayer = self.head
+                playerSize -= 1
+            }
+        } else {
+            // Search for the node to remove.
+            var current = head.nextPlayer
+            while current !== head && current !== nodeToRemove {
+                current = current?.nextPlayer
+            }
+            
+            if current === nodeToRemove {
+                // Remove the node by updating the next and previous pointers.
+                current!.prevPlayer!.nextPlayer = current?.nextPlayer
+                current!.nextPlayer?.prevPlayer = current?.prevPlayer
+                
+                playerSize -= 1
+            }
+        }
+        
+        lockNodeList.unlock()
+    }
+
+    
+    
+    
     func updatePlayerList(lobby: Lobby) {
         
         if isGameStarted {
@@ -291,6 +244,9 @@ public class Game : ObservableObject {
         setPlayerPositions()
         self.p.write("Player list has been updated")
     }
+    
+    
+    
     
     
     
@@ -491,11 +447,7 @@ public class Game : ObservableObject {
     
     
     
-    
-    
-    
-    
-    
+
     
     func addDummyPlayers() {
         
