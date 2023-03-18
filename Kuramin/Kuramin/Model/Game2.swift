@@ -12,6 +12,81 @@ class Game2 {
     
     
     
+//    func getPlayerRef(pid: String) -> Player? {
+//        if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+//            self.p.write("PlayerId is empty. Id: \(pid). (getPlayerRef)")
+//            return nil
+//            
+//            //assert(false)
+//        }
+//        
+//        playersLock.lock()
+//        
+//        for crrP in players {
+//            
+//            if crrP.id == pid {
+//                
+//                playersLock.unlock()
+//                return crrP
+//            }
+//        }
+//        
+//        
+//        
+//        
+//        let newPlayer = Player(id: pid)
+//        players.append(newPlayer)
+//        playerSize += 1
+//        playersLock.unlock()
+//        
+//        //printPlayerList()
+//        setPlayerPositions()
+//        
+//        p.write("Player: \(newPlayer.id) added")
+//        return newPlayer
+//        
+//    }
+
+    
+    
+    
+    
+    
+    
+//    func printPlayerList() {
+//
+//        playersLock.lock()
+//        self.p.write("/------------------ Printing player list ------------------------/")
+//        for p in players {
+//            self.p.write("Id: \(p.id), name: \(p.displayName), randNum: \(p.randomNumber)")
+//        }
+//
+//        p.write("Id: \(me.id), name: \(me.displayName), randNum: \(me.randomNumber)")
+//
+//        playersLock.unlock()
+//    }
+//
+    
+    
+    
+    
+    
+    
+//    func getActualPlayerIds() -> [String] {
+//        
+//        var playerIds: [String] = []
+//        
+//        for currP in players {
+//            if !currP.isLeft {
+//                playerIds.append(currP.id)
+//            }
+//            
+//            
+//        }
+//        
+//        return playerIds
+//    }
+    
     
 //    func updatePlayerList(lobby: Lobby) {
 //        
