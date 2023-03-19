@@ -126,9 +126,16 @@ public class Game : ObservableObject {
     
     
     
-    // This funciton adds node to its correct position.
-    
+    /// This funciton adds node to its correct position.
+    /// Note: Unlock "lockNodeList"
+
     func addNode(nodeToAdd: Player) {  // list size is 0
+        
+        if updateIfExist(player:  nodeToAdd) {
+            return
+        }
+        
+        
         
         lockNodeList.lock()
         if head == nil {
@@ -140,15 +147,6 @@ public class Game : ObservableObject {
         
         else if head!.id == head!.prevPlayer!.id {   // list size is 1
             assert(playerSize == 1)
-            // TODO if node already exist
-            
-            lockNodeList.unlock()
-            if getPlayerRef(pid: nodeToAdd.id) != nil {
-                nodeToAdd.updateInfo(player: nodeToAdd)
-                return
-            }
-            lockNodeList.lock()
-
             
             
             nodeToAdd.nextPlayer = head
@@ -233,7 +231,7 @@ public class Game : ObservableObject {
     
     
 
-    
+    /// Note: Unlock "lockNodeList"
     func isInList(node: Player) -> Bool {
 
         lockNodeList.lock()
@@ -258,9 +256,40 @@ public class Game : ObservableObject {
     }
     
     
+    
+    
+    
+    /// Note: Unlock "lockNodeList"
+    func updateIfExist(player: Player) -> Bool {
+        
+        
+        if let pRef =  getPlayerRef(pid: player.id) {
+            
+            pRef.updateInfo(player: player)
+            return true
+        }
+        
+        return false
+    }
+    
+    
+    
+    /// Provides reference of the desired player if it exists
+    ///
+    /// Note: Unlock "lockNodeList"
+    
+    
     func getPlayerRef(pid: String) -> Player? {
 
         lockNodeList.lock()
+        
+        if playerSize <= 0 {
+            lockNodeList.unlock()
+            return nil
+        }
+        
+        
+        
         var crrNode = head
         
         repeat {
@@ -288,6 +317,7 @@ public class Game : ObservableObject {
     
     
     func removeNode(nodeToRemove: Player) {
+                
         lockNodeList.lock()
         
         // If the list is empty, there's nothing to remove.

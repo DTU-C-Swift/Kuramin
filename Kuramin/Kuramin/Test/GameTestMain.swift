@@ -228,6 +228,46 @@ class GameTestMain : ObservableObject {
         assert(game.playerSize == 0)
         
         
+        
+        let p9 = Player(id: "p9")
+        let p10 = Player(id: "p10")
+        
+        p9.setRandomNum(randNum: 900)
+        p10.setRandomNum(randNum: 1000)
+        
+        
+        // head     =>: nil
+        // Expectation: p9/900, p10/1000
+        
+        game.addNode(nodeToAdd: p10)
+        game.addNode(nodeToAdd: p9)
+        
+        assert(game.head!.id == p9.id)
+        assert(game.head!.nextPlayer!.id == p10.id)
+        assert(game.playerSize == 2)
+        
+        
+        
+        // head     =>: 900 (cardsInHand: -1), 1000
+        // Expectation: 900 (cardsInHand: 10), 1000
+        
+//        assert(game.head!.cardsInHand == Util().NOTSET)
+//        let p9Dup = Player(id: "p9")
+//        p9.setCardsInHand(cardInHad: 10)
+
+        //game.addNode(nodeToAdd: p9)
+        
+        //assert(game.head!.cardsInHand == 10)
+        
+        
+        
+        
+
+
+
+
+        
+        
 
     }
     

@@ -16,6 +16,7 @@ struct Util {
     let FAILED = "failed"
     let MY_DUMMY_ID = "myId"
     let NOT_SET = "notSet"
+    let NOTSET = -1
     
     let defaultProfileImg = UIImage(imageLiteralResourceName: "person_100")
     
