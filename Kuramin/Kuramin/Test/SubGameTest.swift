@@ -21,7 +21,7 @@ class SubGameTest : ObservableObject{
     
     
     func updateMethodTest() {
-        var game = controller.game
+        let game = controller.game
         
         var dbPlayers: [DbPlayer] = []
         
@@ -49,8 +49,8 @@ class SubGameTest : ObservableObject{
         
         // head     =>:
         // Expectation: p1, p2
-        game.addNode(nodeToAdd: p2)
-        game.addNode(nodeToAdd: p1)
+        assert(game.addNode(nodeToAdd: p2))
+        assert(game.addNode(nodeToAdd: p1))
         
         
         assert(game.playerSize == 2)
@@ -98,8 +98,11 @@ class SubGameTest : ObservableObject{
         // dbPlayers: p3, p4, p5, p6, p7, me
         var lobby = Lobby(gameId: "12345", host: dbPlayers[1].pid, whosTurn: Util().NOT_SET, players: dbPlayers)
 
-//        game.updatePlayerList(lobby: lobby)
-//        assert(game.playerSize == 2)
+        game.updatePlayerList(lobby: lobby)
+        assert(game.playerSize == 2)
+        assert(game.head !== game.head!.nextPlayer)
+        
+        
         
         
 

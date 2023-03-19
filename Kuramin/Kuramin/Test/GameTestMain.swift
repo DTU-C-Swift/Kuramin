@@ -14,9 +14,20 @@ class GameTestMain : ObservableObject {
     
     
     func main() {
+
+        
+//        for i in 0...10 {
+//            addAndRemoveMethodsTest()
+//            addAndRemoveWithIdMethodsTest()
+//            SubGameTest().main()
+//        }
+        
+        
+        
         addAndRemoveMethodsTest()
         addAndRemoveWithIdMethodsTest()
         SubGameTest().main()
+        
         testPassed = true
     }
     

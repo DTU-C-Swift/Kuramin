@@ -50,7 +50,10 @@ class Service {
         if addDummyPlayer {
             me.setFullName(fullName: "Name\(counter)")
             counter += 1
-        } else { me = game.me}
+        } else {
+            me = game.me
+            me.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        }
         
         
         
@@ -60,7 +63,7 @@ class Service {
         
         
         
-        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: Int(arc4random_uniform(10000)), cardsInHand: 0)
+        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: 0)
 
 
         // Transactional call
