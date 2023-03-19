@@ -40,11 +40,11 @@ public class Game : ObservableObject {
     }
     
     
-    func dd() {
-        addDummyPlayers(val: 1)
-        printPlayersNode(head: head)
-        setPlayerPositions()
-    }
+//    func dd() {
+//        addDummyPlayers(val: 1)
+//        printPlayersNode(head: head)
+//        setPlayerPositions()
+//    }
 
    
 
@@ -205,7 +205,6 @@ public class Game : ObservableObject {
                     
                     //--------------------------------//
                     setPlayerPositions()
-                    printPlayersNode(head: head)
                     return
                 }
                 
@@ -233,7 +232,6 @@ public class Game : ObservableObject {
         lockNodeList.unlock()
         
         setPlayerPositions()
-        printPlayersNode(head: head)
         
     }
     
@@ -333,7 +331,6 @@ public class Game : ObservableObject {
         
         lockNodeList.unlock()
         
-        printPlayersNode(head: head)
         setPlayerPositions()
     }
     
@@ -439,7 +436,8 @@ public class Game : ObservableObject {
         }
         
         lockNodeList.unlock()
-        
+        printPlayersNode(head: head)
+
     }
     
     
@@ -448,6 +446,25 @@ public class Game : ObservableObject {
     func printPlayersNode(head: Player?) {
         p.write("----------------------- Printing player nodes -----------------------")
 
+        lockNodeList.lock()
+        
+        if playerSize <= 0 {
+            lockNodeList.unlock()
+            return
+        }
+         var crrNode = head!
+
+        for  _ in 0..<playerSize  {
+            
+            self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
+            
+            crrNode = crrNode.nextPlayer!
+        }
+        
+        lockNodeList.unlock()
+        
+        
+        
 //
 //         if head == nil {
 //             p.write("head is nil")

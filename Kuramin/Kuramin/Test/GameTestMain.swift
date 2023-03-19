@@ -46,7 +46,7 @@ class GameTestMain : ObservableObject {
         assert(game.head!.prevPlayer!.id == game.head!.id)
         assert(game.head!.nextPlayer!.id == game.head!.id)
         assert(game.head!.id == p1.id)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
         assert(game.playerSize == 1)
 
         
@@ -58,7 +58,7 @@ class GameTestMain : ObservableObject {
         assert(game.head!.nextPlayer!.id == p5.id)
         assert(game.head!.prevPlayer!.id == p5.id)
         
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
 
 
         
@@ -72,7 +72,7 @@ class GameTestMain : ObservableObject {
         assert(headNext!.id == p2.id)
         assert(p2.nextPlayer!.id == game.head?.prevPlayer!.id)
 
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
 
 
         
@@ -84,7 +84,7 @@ class GameTestMain : ObservableObject {
         assert(game.playerSize == 4)
         assert(game.head!.prevPlayer!.id == p6.id)
         assert(game.head!.id == p6.nextPlayer!.id)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
 
 
         
@@ -104,7 +104,7 @@ class GameTestMain : ObservableObject {
         assert(game.head!.id == p_3.id)
         assert(game.head!.nextPlayer!.randomNumber == 100)
         assert(p6.nextPlayer!.id == p_3.id)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
         
         
         
@@ -114,7 +114,7 @@ class GameTestMain : ObservableObject {
         
         assert(game.playerSize == 6)
         assert(game.head!.prevPlayer!.randomNumber == p7.randomNumber)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
 
         
         
@@ -127,7 +127,7 @@ class GameTestMain : ObservableObject {
         // Assuming: head => 30, 40, 100, 200, 500, 600, 700
         assert(game.playerSize == 7)
         assert(game.head!.nextPlayer!.id == p_2.id)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
 
         
         
@@ -144,7 +144,7 @@ class GameTestMain : ObservableObject {
         
         assert(game.playerSize == 8)
         assert(game.head!.prevPlayer!.prevPlayer!.id == p3.id)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
 
         
         //game.addNode(nodeToAdd: p3)
@@ -163,7 +163,7 @@ class GameTestMain : ObservableObject {
         // Expectation: 40, 100, 200, 500, 600, 650, 700
 
         game.removeNode(nodeToRemove: game.head!)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
         assert(game.head!.id == p_2.id)
         assert(game.playerSize == 7)
         
@@ -172,7 +172,7 @@ class GameTestMain : ObservableObject {
         // Expectation: 40, 100, 200, 500, 600, 650
         
         game.removeNode(nodeToRemove: p7)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
         assert(game.playerSize == 6)
         assert(game.head!.prevPlayer!.id == p3.id)
 
@@ -196,7 +196,7 @@ class GameTestMain : ObservableObject {
         // Expectation: 40, 200, 500, 650
         
         game.removeNode(nodeToRemove: p1)
-        game.printPlayersNode(head: game.head!)
+        //game.printPlayersNode(head: game.head!)
         assert(game.playerSize == 4)
         assert(game.head!.nextPlayer!.id == p2.id)
         assert(game.head!.id == p_2.id)
@@ -226,7 +226,6 @@ class GameTestMain : ObservableObject {
         game.removeNode(nodeToRemove: p_2)
         assert(game.head == nil)
         assert(game.playerSize == 0)
-
         
         
 
