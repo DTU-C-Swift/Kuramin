@@ -58,8 +58,10 @@ struct ContentView: View {
                     .padding(.vertical, 2)
                     .padding(.horizontal, 200)
                     
-                    Button(action: pass) {
-                        Text("Sign In")
+                    Text("Forgot your password?")
+                    
+                    Button("Sign In") {
+                        signIn()
                     }
                     
                     HStack {
@@ -139,6 +141,17 @@ struct ContentView: View {
         
   
     }
+    
+    func signIn() {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Signed in as \(result?.user.email ?? "")")
+            }
+        }
+    }
+    
 }
 
 
