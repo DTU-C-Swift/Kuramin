@@ -16,6 +16,9 @@ struct ContentView: View {
     @State var showAlert = false
     @ObservedObject var navSate: NavState = NavState()
     
+    @State var email: String = ""
+    @State var password: String = ""
+    
     init() {
         controller = DataHolder.controller
         //controller.listenForLogout()
@@ -27,50 +30,72 @@ struct ContentView: View {
             
             ZStack {
                 VStack {
-                    NavigationLink(destination: MainPage()) {
-                        HStack {
-                            Image(systemName: "applelogo")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                            Text("Login with Apple")
-                                .font(.system(size: 24, weight: .semibold))
-                                .foregroundColor(.white)
-                        }
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, 24)
-                        .background(Color.black)
-                        .cornerRadius(16)
-                        .shadow(radius: 4, x: 0, y: 4)
+                    HStack {
+                        Image(systemName: "mail")
+                        TextField("Email", text: $email)
+                        Spacer()
+                    }
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.black)
+                    )
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 200)
+                    
+                    HStack {
+                        Image(systemName: "lock")
+                        TextField("Password", text: $password)
+                        Spacer()
+                    }
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.black)
+                    )
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 200)
+                    
+                    Button(action: pass) {
+                        Text("Sign In")
                     }
                     
-                    FbAuth(width: 257, height: 50)
-                        .cornerRadius(16)
-                        .shadow(radius: 4, x: 0, y: 4)
-                        
-                        
-                    
-                        
-                    NavigationLink(destination: MainPage()) {
-                        HStack {
-                            Image(systemName: "tree")
-                                .font(.system(size: 24))
-                                .foregroundColor(.black)
-                            Text("Login with Google")
-                                .font(.system(size: 24, weight:
-                                        .semibold))
-                                        .foregroundColor(.black)
+                    HStack {
+                        NavigationLink(destination: MainPage()) {
+                            HStack {
+                                Image(systemName: "applelogo")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 24)
+                            .background(Color.black)
+                            .cornerRadius(16)
+                            .shadow(radius: 4, x: 0, y: 4)
                         }
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, 24)
-                        .background(Color.white)
-                        .cornerRadius(16)
-                        .shadow(radius: 4, x: 0, y: 4)
+                        FbAuth(width: 210, height: 50)
+                            .cornerRadius(16)
+                            .shadow(radius: 4, x: 0, y: 4)
+                        
+                        NavigationLink(destination: MainPage()) {
+                            HStack {
+                                Image(systemName: "tree")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 24)
+                            .background(Color.white)
+                            .cornerRadius(16)
+                            .shadow(radius: 4, x: 0, y: 4)
+                        }
+                        
                     }
                     
                     
                     NavigationLink(destination: MainPage(), tag: "MainPageView", selection: $navSate.state){}
-                    
-                    
                     
                 }
                 .padding()
