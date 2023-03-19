@@ -10,7 +10,6 @@ import Foundation
 class GameTestMain : ObservableObject {
     @Published var testPassed: Bool = false
 
-    let subTest = SubGameTest()
     
     
     func main() {
@@ -26,7 +25,6 @@ class GameTestMain : ObservableObject {
         
         addAndRemoveMethodsTest()
         addAndRemoveWithIdMethodsTest()
-        subTest.main()
         
         testPassed = true
     }

@@ -90,7 +90,7 @@ class Service {
                             if crrP.pid == me.id {
                                 me.setCardsInHand(cardInHad: crrP.cardsInHand)
                                 me.setRandomNum(randNum: crrP.randomNum)
-                                self.printer.write("You were already in the lobby. cardInHand: \(me.cardsInHand)")
+                                self.printer.write("You were already in the lobby. cardInHand: \(me.cardsInHand), gameId: \(controller.game.id)")
                                 return
                             }
                         }
@@ -121,6 +121,7 @@ class Service {
 //                self.amIHost(game: game)
                 
                 if shouldCall_lobbyObserver {
+                    self.printer.write("ObserveLobby called")
                     self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
                 }
             }
@@ -158,7 +159,7 @@ class Service {
             
             catch {
                 
-                self.printer.write("Error in observing lobby. \(err)")
+                self.printer.write("Error in observing lobby. \(String(describing: err))")
                 
             }
             

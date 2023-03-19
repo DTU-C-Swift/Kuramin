@@ -103,6 +103,7 @@ public class Game : ObservableObject {
     /// - Note: Updates if there exists a player with the same id
     /// - Note: Unlock "lockNodeList"
     /// - Note: setPlayerPosition method must be called after this method
+    /// - Note: returns true if item is added,  else false if it is updated
 
     func addNode(nodeToAdd: Player) -> Bool {  // list size is 0
         
@@ -561,6 +562,11 @@ public class Game : ObservableObject {
     }
     
     
+    func setGameId(gid: String) {
+        if id != gid && gid != Util().NOT_SET {
+            self.id = gid
+        }
+    }
 
     
     

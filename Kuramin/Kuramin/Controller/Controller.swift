@@ -104,8 +104,9 @@ class Controller : ObservableObject {
                 game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
                 game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
                 if game.addNode(nodeToAdd: game.me) {
-                    p.write("Something wrong")
+                    p.write("Me being added to player list")
                 }
+                else {p.write("Me being updated")}
                 continue
             }
             
