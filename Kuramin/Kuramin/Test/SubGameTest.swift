@@ -112,26 +112,37 @@ class SubGameTest : ObservableObject{
     
     
     func goToLobby_usecase_test(onSuccess: @escaping (Game) -> Void) {
-        var controller = Controller()
+        let controller = Controller()
         let game = controller.game
 
         controller.service.observeMeInDB()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             controller.goToLobby(addDummyPlayer: false)
+            
+            // lets player to be fected from db
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 assert(game.me.cardsInHand == 20)
-            }
-            
+                
+                
+                // Adds some dummy players in db
+                controller.goToLobby(addDummyPlayer: true)
+                controller.goToLobby(addDummyPlayer: true)
+                controller.goToLobby(addDummyPlayer: true)
 
-            onSuccess(game)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    
+                    
+                }
+            }
+        
         }
 
     }
     
     
     func goToLobby_usecase_test_onSuccess(game: Game) {
-        
+
         
         
         

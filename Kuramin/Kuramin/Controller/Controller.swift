@@ -57,8 +57,15 @@ class Controller : ObservableObject {
             player.setCardsInHand(cardInHad: 20)
         }
         
+
+        if addDummyPlayer {
+            service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
+        } else {
+            service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
+
+        }
         
-        service.goToLobby(me: player, controller:  self)
+
 
     }
     

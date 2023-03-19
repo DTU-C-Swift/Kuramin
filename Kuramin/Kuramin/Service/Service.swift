@@ -38,7 +38,7 @@ class Service {
     
     //-------------------------------- New implementation of lobby -----------------------------//
     
-    func goToLobby(me: Player, controller: Controller) {
+    func goToLobby(me: Player, controller: Controller, shouldCall_lobbyObserver: Bool) {
         let game = controller.game
         let ref = db.collection("matches").document(lobbyStr)
         
@@ -83,8 +83,10 @@ class Service {
                     
                     if let dbLobby = dbLobbyNullable.mapToLobby() {
                         
-                        for crrId in dbLobby.players {
-                            if crrId.pid == me.id {
+                        for crrP in dbLobby.players {
+                            if crrP.pid == me.id {
+                                me.setCardsInHand(cardInHad: crrP.cardsInHand)
+                                me.setRandomNum(randNum: crrP.randomNum)
                                 self.printer.write("You were already in the lobby")
                                 return
                             }
@@ -114,7 +116,10 @@ class Service {
             } else {
                 self.printer.write("You successfully landed in lobby!")
 //                self.amIHost(game: game)
-                self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
+                
+                if shouldCall_lobbyObserver {
+                    self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
+                }
             }
         }
 
