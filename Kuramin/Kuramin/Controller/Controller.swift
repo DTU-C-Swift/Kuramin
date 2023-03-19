@@ -20,6 +20,7 @@ class Controller : ObservableObject {
     let p = Printer(tag: "Controller", displayPrints: true)
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
+    let notSet = Util().NOT_SET
     
     
     
@@ -45,8 +46,8 @@ class Controller : ObservableObject {
             dummyPlayerCounter += 1
         } else {
             
-            if game.me.id == Util().NOT_SET {
-                p.write("Can't go to lobby. Caus: pid is \(game.me.id)")
+            if game.me.id == notSet || game.me.fullName == notSet  {
+                p.write("Can't go to lobby. Caus: pid: \(game.me.id), fullName: \(game.me.fullName)")
                 return
             }
             

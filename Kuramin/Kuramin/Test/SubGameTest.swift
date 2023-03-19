@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseAuth
+
 
 class SubGameTest : ObservableObject{
     var controller = Controller()
@@ -111,7 +113,13 @@ class SubGameTest : ObservableObject{
     
     func goToLobby_usecase_test() {
         
-        controller.goToLobby(addDummyPlayer: false)
+        controller.service.observeMeInDB()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.controller.goToLobby(addDummyPlayer: false)
+        }
+        
+        
         
         
         
