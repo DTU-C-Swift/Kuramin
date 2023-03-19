@@ -24,8 +24,6 @@ class Service {
 
     let lobbyStr = "lobby"
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
-    var previousLobby2: Lobby?
-    private let lobbyLock = NSLock()
     var isLobbyObserving = false
 
     
@@ -39,31 +37,12 @@ class Service {
     
     
     //-------------------------------- New implementation of lobby -----------------------------//
-    var counter = 1
     
-    func goToLobby(addDummyPlayer: Bool) {
+    func goToLobby(me: Player, game: Game) {
         
-        let newLobby = "lobby"
-        let game = DataHolder.controller.game
+        let ref = db.collection("matches").document(lobbyStr)
         
-        var me = Player(id: "testId\(counter)")
-        if addDummyPlayer {
-            me.setFullName(fullName: "Name\(counter)")
-            counter += 1
-        } else {
-            me = game.me
-            me.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-        }
-        
-        
-        
-        
-        let ref = db.collection("matches").document(newLobby)
-        
-        
-        
-        
-        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: 0)
+        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
 
 
         // Transactional call
@@ -136,7 +115,7 @@ class Service {
                 self.printer.write("You successfully landed in lobby!")
 //                self.amIHost(game: game)
 //                self.observeLobby(game: game)
-                self.observeLobby(game: game)
+                //self.observeLobby(game: game)
             }
         }
 
@@ -147,97 +126,38 @@ class Service {
     }
     
     
-    func observeLobby(game: Game) {
+    func observeLobby(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
         if isLobbyObserving {
             return
         }
         
         let ref = db.collection("matches").document(lobbyStr)
         
-         let obsRef = ref.addSnapshotListener { snapshot, err in
-             
+        let obsRef = ref.addSnapshotListener { snapshot, err in
+            
             do {
                 if let dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
-
-
+                    
                     guard let lobby = dbLobbyNullable.mapToLobby() else {
                         self.printer.write("mapToLobby returned nil")
                         return
                     }
                     
-                    self.lobbyLock.lock()
-                    
-                    if self.previousLobby2 == nil {
-                        self.previousLobby2 = lobby
-                        
-                        
-                    } else {
-                        
-                        if self.previousLobby2?.isDuplicateLobby(compareWith: lobby) == true {
-                            self.lobbyLock.unlock()
-                            return
-                        }
-                    }
+                    onSuccess(lobby)
                     
                     
-                    // Removes player from the display
-                    game.updatePlayerList(lobby: lobby)
-
-
-                    for crrDbPlayer in lobby.players {
-                        
-                        self.printer.write("observeLobby: id: \(crrDbPlayer.pid)")
-                        
-                        if crrDbPlayer.pid == game.me.id {
-                            self.printer.write("It is me")
-                            game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
-                            game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
-                            continue
-                        }
-                        
-                        
-                        if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
-                            
-                            if crrPlayerRef.isDefaultImg {
-                                self.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
-                                
-                            }
-                            
-                            crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
-                            
-                            
-                        }
-                        
-                        else {
-                            let newPlayer =  crrDbPlayer.createPlayer()
-                            self.downloadImg(player: newPlayer, shouldAddPlayerToGame: true, game: game)
-                            
-                        }
-                        
-                        
-                        
-                    }
-
-                    self.lobbyLock.unlock()
                 }
             }
-             
+            
             catch {
-
+                
                 self.printer.write("Error in observing lobby. \(err!)")
                 
-                if !self.lobbyLock.try() {self.lobbyLock.unlock()}
             }
-             //self.lobbyLock2.unlock()
-
-
+            
+            
         }
-
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//            obsRef.remove()
-//            self.observeLobby2(game: game)
-//        }
         
         
     }
