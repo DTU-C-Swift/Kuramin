@@ -22,7 +22,9 @@ class Service {
     private let storage = Storage.storage()
     private let printer = Printer(tag: "Service", displayPrints: true)
 
-    let lobbyStr = "lobby"
+    let LOBBY = "lobby"
+    var MATCHES = "lobby"
+
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var isLobbyObserving = false
 
@@ -40,7 +42,7 @@ class Service {
     
     func goToLobby(me: Player, controller: Controller, shouldCall_lobbyObserver: Bool) {
         let game = controller.game
-        let ref = db.collection("matches").document(lobbyStr)
+        let ref = db.collection(MATCHES).document(LOBBY)
         
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
 
@@ -139,7 +141,7 @@ class Service {
             return
         }
         
-        let ref = db.collection("matches").document(lobbyStr)
+        let ref = db.collection(MATCHES).document(LOBBY)
         
         let obsRef = ref.addSnapshotListener { snapshot, err in
             
