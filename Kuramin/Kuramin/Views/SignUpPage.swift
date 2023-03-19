@@ -82,14 +82,22 @@ struct SignUpPage: View {
     
     func signUp() {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                if let error = error {
-                    // Handle sign-up error
-                    print(error.localizedDescription)
-                } else if let result = result {
-                    // Sign-up successful
-                    print("Signed up as \(result.user.email ?? "")")
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let result = result {
+                print("Signed up as \(result.user.email ?? "")")
+                let changeRequest = result.user.createProfileChangeRequest()
+                changeRequest.displayName = "\(firstName) \(secondName)"
+                changeRequest.commitChanges { error in
+                    if let error = error {
+                        // Handle error
+                        print(error.localizedDescription)
+                    } else {
+                        print("User profile updated with name: \(result.user.displayName ?? "")")
+                    }
                 }
             }
+        }
     }
     
 }
