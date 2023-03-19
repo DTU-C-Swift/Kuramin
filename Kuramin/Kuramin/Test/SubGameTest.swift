@@ -10,11 +10,11 @@ import FirebaseAuth
 
 
 class SubGameTest : ObservableObject{
-    var controller = Controller()
+    let p = Printer(tag: "SubGameTest", displayPrints: true)
 
     func main() {
         updateMethodTest()
-        goToLobby_usecase_test()
+        goToLobby_usecase_test(onSuccess: goToLobby_usecase_test_onSuccess)
         
         
     }
@@ -24,8 +24,8 @@ class SubGameTest : ObservableObject{
     
     
     func updateMethodTest() {
+        var controller = Controller()
         let game = controller.game
-        
         var dbPlayers: [DbPlayer] = []
         
         
@@ -111,21 +111,29 @@ class SubGameTest : ObservableObject{
     
     
     
-    func goToLobby_usecase_test() {
-        
+    func goToLobby_usecase_test(onSuccess: @escaping (Game) -> Void) {
+        var controller = Controller()
+        let game = controller.game
+
         controller.service.observeMeInDB()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.controller.goToLobby(addDummyPlayer: false)
+            controller.goToLobby(addDummyPlayer: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                assert(game.me.cardsInHand == 20)
+            }
+            
+
+            onSuccess(game)
         }
+
+    }
+    
+    
+    func goToLobby_usecase_test_onSuccess(game: Game) {
         
         
         
-        
-        
-//        for _ in 0...5 {
-//
-//        }
         
     }
     

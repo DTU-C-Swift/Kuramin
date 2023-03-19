@@ -53,6 +53,8 @@ class Controller : ObservableObject {
             
             player = game.me
             player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+            // TODO Needs to find out card size. 20 is just for now
+            player.setCardsInHand(cardInHad: 20)
         }
         
         
