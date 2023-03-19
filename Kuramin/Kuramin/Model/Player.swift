@@ -15,9 +15,9 @@ class Player : ObservableObject {
     @Published private(set) var displayName = Util().NOT_SET
     @Published private(set) var image: UIImage = Util().defaultProfileImg
     @Published private(set) var isLeft: Bool = false
-    @Published private(set) var coins: Int = Util().NOTSET
-    @Published private(set) var cardsInHand = Util().NOTSET
-    @Published private(set) var randomNumber = Util().NOTSET
+    @Published private(set) var coins: Int = Util().NOTSET_INT
+    @Published private(set) var cardsInHand = Util().NOTSET_INT
+    @Published private(set) var randomNumber = Util().NOTSET_INT
     private(set) var isDefaultImg = true
 
     private(set) var leftAt = Util().NOT_SET

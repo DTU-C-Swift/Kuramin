@@ -58,7 +58,7 @@ struct GamePage: View {
                     Button(action: {
                         //game.dd()
                         
-                        controller.service.goToLobby(addDummyPlayer: true)
+                     //   controller.service.goToLobby(addDummyPlayer: true)
                         
                         
                     }) {
@@ -98,7 +98,7 @@ struct GamePage: View {
         }
         .persistentSystemOverlays(.hidden)
         .onAppear() {
-            controller.service.goToLobby(addDummyPlayer: false)
+            //controller.service.goToLobby(addDummyPlayer: false)
 
             //            earlier = MyDate().getTime()
             //

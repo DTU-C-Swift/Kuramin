@@ -37,20 +37,26 @@ class Controller : ObservableObject {
         
         let game = DataHolder.controller.game
         
-        var me = Player(id: "testId\(dummyPlayerCounter)")
+        var player = Player(id: "testId\(dummyPlayerCounter)")
         
         
         if addDummyPlayer {
-            me.setFullName(fullName: "Name\(dummyPlayerCounter)")
+            player.setFullName(fullName: "Name\(dummyPlayerCounter)")
             dummyPlayerCounter += 1
         } else {
-            me = game.me
-            me.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+            
+            if game.me.id == Util().NOT_SET {
+                p.write("Can't go to lobby. Caus: pid is \(game.me.id)")
+                return
+            }
+            
+            player = game.me
+            player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
         }
         
         
-        service.goToLobby(me: me, game: game)
-        service.observeLobby(game: game, onSuccessLobbySnapshot(lobby:))
+        service.goToLobby(me: player, game: game)
+        //service.observeLobby(game: game, onSuccessLobbySnapshot(lobby:))
         
         
     }

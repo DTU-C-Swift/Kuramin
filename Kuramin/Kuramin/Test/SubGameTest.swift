@@ -12,6 +12,7 @@ class SubGameTest : ObservableObject{
 
     func main() {
         updateMethodTest()
+        goToLobby_usecase_test()
         
         
     }
@@ -102,11 +103,21 @@ class SubGameTest : ObservableObject{
         assert(game.playerSize == 2)
         assert(game.head !== game.head!.nextPlayer)
         
+    
+        
+    }
+    
+    
+    
+    func goToLobby_usecase_test() {
+        
+        controller.goToLobby(addDummyPlayer: false)
         
         
         
-
-        
+//        for _ in 0...5 {
+//
+//        }
         
     }
     

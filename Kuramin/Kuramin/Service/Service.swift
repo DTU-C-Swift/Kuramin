@@ -151,7 +151,7 @@ class Service {
             
             catch {
                 
-                self.printer.write("Error in observing lobby. \(err!)")
+                self.printer.write("Error in observing lobby. \(err)")
                 
             }
             
@@ -293,7 +293,7 @@ class Service {
         let game = DataHolder.controller.game
         let me = game.me
         
-        if me.id == Util().MY_DUMMY_ID {
+        if me.id == Util().NOT_SET {
             
             if let user = Auth.auth().currentUser {
                 me.setId(pid: user.uid)

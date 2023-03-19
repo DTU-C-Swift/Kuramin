@@ -10,7 +10,7 @@ import SwiftUI
 
 public class Game : ObservableObject {
     private (set) var id: String = ""
-    @Published private (set) var me: Player = Player(id: Util().MY_DUMMY_ID)
+    @Published private (set) var me: Player = Player(id: Util().NOT_SET)
     var head: Player?
     private let lockNodeList = NSLock()
     
