@@ -115,7 +115,7 @@ struct login : UIViewRepresentable {
 //                                        DataHolder.controller.game.me.image = image
 //                                    }
                                     self.p.write("Facebook login fully done, and create_or_update_user has been called")
-                                    DataHolder.controller.service.create_or_update_user(userImage: image)
+                                    DataHolder.controller.create_or_update_user(userImage: image)
                                 }
                                 
                                 else {

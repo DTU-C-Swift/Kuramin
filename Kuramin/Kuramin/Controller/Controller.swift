@@ -36,7 +36,6 @@ class Controller : ObservableObject {
     func goToLobby(addDummyPlayer: Bool) {
         
         
-        let game = DataHolder.controller.game
         
         var player = Player(id: "testId\(dummyPlayerCounter)")
         
@@ -98,14 +97,20 @@ class Controller : ObservableObject {
             
             self.p.write("observeLobby: id: \(crrDbPlayer.pid)")
             
+            
+            // It is me
             if crrDbPlayer.pid == game.me.id {
                 self.p.write("It is me")
                 game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
                 game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
+                if game.addNode(nodeToAdd: game.me) {
+                    p.write("Something wrong")
+                }
                 continue
             }
             
             
+            // Other players in lobby
             if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
                 
                 if crrPlayerRef.isDefaultImg {
@@ -137,6 +142,10 @@ class Controller : ObservableObject {
     
     
     
+    func create_or_update_user(userImage: UIImage?) {
+        service.create_or_update_user(userImage: userImage, game: self.game)
+    }
+    
     
     
     func listenForLogout() {
@@ -154,4 +163,9 @@ class Controller : ObservableObject {
         }
     }
     
+    
+    
+    func observeMeInDB() {
+        service.observeMeInDB(game: self.game)
+    }
 }

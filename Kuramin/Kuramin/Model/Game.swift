@@ -99,9 +99,10 @@ public class Game : ObservableObject {
     
     
     
-    /// This funciton adds node to its correct position.
-    /// Note: Unlock "lockNodeList"
-    /// Note: setPlayerPosition method must be called after this method
+    /// This funciton adds node to its correspondin position decided by 'randomNum'.
+    /// - Note: Updates if there exists a player with the same id
+    /// - Note: Unlock "lockNodeList"
+    /// - Note: setPlayerPosition method must be called after this method
 
     func addNode(nodeToAdd: Player) -> Bool {  // list size is 0
         

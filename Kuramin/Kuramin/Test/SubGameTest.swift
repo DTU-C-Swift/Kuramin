@@ -120,13 +120,13 @@ class SubGameTest : ObservableObject{
         let controller = Controller()
         let game = controller.game
 
-        controller.service.observeMeInDB()
+        controller.observeMeInDB()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             controller.goToLobby(addDummyPlayer: false)
             
             // lets player to be fected from db
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 assert(game.me.cardsInHand == 20)
                 assert(game.playerSize == 1)
                 
@@ -138,7 +138,7 @@ class SubGameTest : ObservableObject{
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     assert(game.playerSize == 4)
-                    testPassed = true
+                    self.testPassed = true
 
                     
                 }

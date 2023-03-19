@@ -72,7 +72,10 @@ class Service {
                     self.printer.write("Error while setting dbLobby data")
                 }
                 
-            } else {
+            }
+            
+            // <---------  Player is in the lobby already -------------->
+            else {
                 
 
                 // Checks If the player already exists in the lobby(player list).
@@ -87,7 +90,7 @@ class Service {
                             if crrP.pid == me.id {
                                 me.setCardsInHand(cardInHad: crrP.cardsInHand)
                                 me.setRandomNum(randNum: crrP.randomNum)
-                                self.printer.write("You were already in the lobby")
+                                self.printer.write("You were already in the lobby. cardInHand: \(me.cardsInHand)")
                                 return
                             }
                         }
@@ -194,8 +197,7 @@ class Service {
     
     
     
-    func create_or_update_user(userImage: UIImage?) {
-        let game = DataHolder.controller.game
+    func create_or_update_user(userImage: UIImage?, game: Game) {
 
         if userImage == nil {
             self.printer.write("Image is nil")
@@ -236,7 +238,7 @@ class Service {
     
     
     
-    func createUser(_ dbUser: DbUser, _ userImage: UIImage) {
+    private func createUser(_ dbUser: DbUser, _ userImage: UIImage) {
         
         if let uid = dbUser.uid {
             
@@ -293,8 +295,7 @@ class Service {
     
     
     
-    func observeMeInDB() {
-        let game = DataHolder.controller.game
+    func observeMeInDB(game: Game) {
         let me = game.me
         
         if me.id == Util().NOT_SET {
