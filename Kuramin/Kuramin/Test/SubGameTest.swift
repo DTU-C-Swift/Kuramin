@@ -24,6 +24,60 @@ class SubGameTest : ObservableObject{
         
     }
     
+    
+    
+    
+    func goToLobby_usecase_test(onSuccess: @escaping (Game) -> Void) {
+        let controller = Controller()
+        controller.service.MATCHES = "test"
+
+        let game = controller.game
+        game.setGameId(gid: "goToLobby_usecase_test")
+
+        controller.observeMeInDB()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+            assert(game.me.cardsInHand != 20)
+            assert(game.playerSize == 0)
+
+            controller.goToLobby(addDummyPlayer: false)
+            
+            // lets player to be fected from db
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                assert(game.me.cardsInHand == 20)
+                assert(game.playerSize == 1)
+                
+                onSuccess(game)
+                
+                // Adds some dummy players in db
+//                controller.goToLobby(addDummyPlayer: true)
+//                controller.goToLobby(addDummyPlayer: true)
+//                controller.goToLobby(addDummyPlayer: true)
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                    assert(game.playerSize == 4)
+//                    self.testPassed = true
+//
+//
+//                }
+            }
+        
+        }
+
+    }
+    
+    
+    func goToLobby_usecase_test_onSuccess(game: Game) {
+
+        self.testPassed = true
+
+        
+        
+    }
+    
+    
+    
   
     
     
@@ -116,54 +170,7 @@ class SubGameTest : ObservableObject{
     
     
     
-    func goToLobby_usecase_test(onSuccess: @escaping (Game) -> Void) {
-        let controller = Controller()
-        let game = controller.game
-        game.setGameId(gid: "goToLobby_usecase_test")
 
-        controller.observeMeInDB()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            
-            assert(game.me.cardsInHand != 20)
-            assert(game.playerSize == 0)
-
-            controller.goToLobby(addDummyPlayer: false)
-            
-            // lets player to be fected from db
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                assert(game.me.cardsInHand == 20)
-                assert(game.playerSize == 1)
-                
-                onSuccess(game)
-                
-                // Adds some dummy players in db
-//                controller.goToLobby(addDummyPlayer: true)
-//                controller.goToLobby(addDummyPlayer: true)
-//                controller.goToLobby(addDummyPlayer: true)
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    assert(game.playerSize == 4)
-//                    self.testPassed = true
-//
-//
-//                }
-            }
-        
-        }
-
-    }
-    
-    
-    func goToLobby_usecase_test_onSuccess(game: Game) {
-
-        self.testPassed = true
-
-        
-        
-    }
-    
-    
     
     
     

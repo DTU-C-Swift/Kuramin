@@ -23,7 +23,7 @@ class Service {
     private let printer = Printer(tag: "Service", displayPrints: true)
 
     let LOBBY = "lobby"
-    var MATCHES = "lobby"
+    var MATCHES = "matches"
 
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var isLobbyObserving = false
