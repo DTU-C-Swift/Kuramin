@@ -54,7 +54,7 @@ public class Game : ObservableObject {
     
     func updatePlayerList(lobby: Lobby) {
 
-        if playerSize < 1 || lobby.players.isEmpty {return}
+        if playerSize <= 0 || lobby.players.isEmpty {return}
  
         if isGameStarted {
             //----TODO---/
@@ -64,58 +64,18 @@ public class Game : ObservableObject {
         
         var needPlayerPositionUpdate = false
         
-        lockNodeList.lock()
 
-        
-        var crrP = head
-        var isStarting = true
-        
-        
+    
         
         
         
         for crrLobbyP in lobby.players {
             
-            //if let ref
-            
-            
+            removeNode(pid: crrLobbyP.pid)
         }
         
         
-        
-        
-        while true {
-            
-//            if crrP == nil {
-//                break
-//            }
-            
-            if !isStarting && crrP?.id == head?.id {
-                break
-            }
-            
-            
-            if !lobby.players.contains(where: {$0.pid == crrP?.id}) {
-                
-                lockNodeList.unlock()
-                if let nodeToRemove = getPlayerRef(pid: crrP!.id) {
-                    removeNode(nodeToRemove: nodeToRemove)
-                    needPlayerPositionUpdate = true
-                }
-                
-                lockNodeList.lock()
-            }
-            
-            
-            crrP = crrP?.nextPlayer
-            if isStarting {isStarting = false}
-            
-        }
-        
-        
-        
-        
-        lockNodeList.unlock()
+    
 
         if needPlayerPositionUpdate {
             setPlayerPositions()
@@ -333,9 +293,10 @@ public class Game : ObservableObject {
     
     
     func removeNode(nodeToRemove: Player) {
-                
+        var isPlayerRemoved = false
+
         lockNodeList.lock()
-        
+
         // If the list is empty, there's nothing to remove.
         guard let head = head else {
             lockNodeList.unlock()
@@ -348,12 +309,14 @@ public class Game : ObservableObject {
                 // Removing the only node in the list.
                 self.head = nil
                 playerSize = 0
+                isPlayerRemoved = true
             } else {
                 // Removing the head node of a list with more than one node.
                 self.head = head.nextPlayer
                 self.head!.prevPlayer = head.prevPlayer
                 head.prevPlayer!.nextPlayer = self.head
                 playerSize -= 1
+                isPlayerRemoved = true
             }
         } else {
             // Search for the node to remove.
@@ -368,12 +331,20 @@ public class Game : ObservableObject {
                 current!.nextPlayer?.prevPlayer = current?.prevPlayer
                 
                 playerSize -= 1
+                isPlayerRemoved = true
             }
         }
         
         lockNodeList.unlock()
         
-        setPlayerPositions()
+        
+        if isPlayerRemoved {
+            p.write("Player id \(nodeToRemove.id) has been removed")
+            setPlayerPositions()
+        } else {
+            p.write("Player id \(nodeToRemove.id) not found to remove")
+        }
+        
     }
     
     
@@ -383,6 +354,7 @@ public class Game : ObservableObject {
     
     func removeNode(pid: String) {
                 
+        var isPlayerRemoved = false
         lockNodeList.lock()
         
         // If the list is empty, there's nothing to remove.
@@ -397,12 +369,14 @@ public class Game : ObservableObject {
                 // Removing the only node in the list.
                 self.head = nil
                 playerSize = 0
+                isPlayerRemoved = true
             } else {
                 // Removing the head node of a list with more than one node.
                 self.head = head.nextPlayer
                 self.head!.prevPlayer = head.prevPlayer
                 head.prevPlayer!.nextPlayer = self.head
                 playerSize -= 1
+                isPlayerRemoved = true
             }
         } else {
             // Search for the node to remove.
@@ -417,12 +391,20 @@ public class Game : ObservableObject {
                 current!.nextPlayer?.prevPlayer = current?.prevPlayer
                 
                 playerSize -= 1
+                isPlayerRemoved = true
             }
         }
         
+        
         lockNodeList.unlock()
         
-        setPlayerPositions()
+        if isPlayerRemoved {
+            p.write("Player id \(pid) has been removed")
+            setPlayerPositions()
+        } else {
+            p.write("Player id \(pid) not found to remove")
+        }
+        
     }
     
     
