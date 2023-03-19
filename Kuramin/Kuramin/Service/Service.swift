@@ -199,18 +199,19 @@ class Service {
                                 self.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
                                 
                             }
-
+                            
                             crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
-
-
+                            
+                            
                         }
+                        
                         else {
                             let newPlayer =  crrDbPlayer.createPlayer()
                             self.downloadImg(player: newPlayer, shouldAddPlayerToGame: true, game: game)
                             
                         }
-                                                
-
+                        
+                        
                         
                     }
 
