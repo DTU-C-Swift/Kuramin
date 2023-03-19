@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SignUpPage: View {
     
@@ -78,6 +79,19 @@ struct SignUpPage: View {
             
         }
     }
+    
+    func signUp() {
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                if let error = error {
+                    // Handle sign-up error
+                    print(error.localizedDescription)
+                } else if let result = result {
+                    // Sign-up successful
+                    print("Signed up as \(result.user.email ?? "")")
+                }
+            }
+    }
+    
 }
 
 struct SignUpPage_Previews: PreviewProvider {
