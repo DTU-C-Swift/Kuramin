@@ -55,10 +55,8 @@ class Controller : ObservableObject {
         }
         
         
-        service.goToLobby(me: player, game: game)
-        //service.observeLobby(game: game, onSuccessLobbySnapshot(lobby:))
-        
-        
+        service.goToLobby(me: player, controller:  self)
+
     }
     
     

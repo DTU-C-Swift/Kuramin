@@ -38,8 +38,8 @@ class Service {
     
     //-------------------------------- New implementation of lobby -----------------------------//
     
-    func goToLobby(me: Player, game: Game) {
-        
+    func goToLobby(me: Player, controller: Controller) {
+        let game = controller.game
         let ref = db.collection("matches").document(lobbyStr)
         
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
@@ -114,8 +114,7 @@ class Service {
             } else {
                 self.printer.write("You successfully landed in lobby!")
 //                self.amIHost(game: game)
-//                self.observeLobby(game: game)
-                //self.observeLobby(game: game)
+                self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
             }
         }
 
