@@ -96,6 +96,13 @@ struct ContentView: View {
                         
                     }
                     
+                    NavigationLink(destination: SignUpPage()) {
+                        Text("Or Sign Up Here")
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 24)
+                            .cornerRadius(16)
+                    }
+                    
                     
                     NavigationLink(destination: MainPage(), tag: "MainPageView", selection: $navSate.state){}
                     
