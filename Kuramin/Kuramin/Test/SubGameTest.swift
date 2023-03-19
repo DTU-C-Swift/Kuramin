@@ -7,10 +7,15 @@
 
 import Foundation
 import FirebaseAuth
+import SwiftUI
 
 
 class SubGameTest : ObservableObject{
     let p = Printer(tag: "SubGameTest", displayPrints: true)
+    @Published var testPassed: Bool = false
+
+
+    
 
     func main() {
         updateMethodTest()
@@ -117,12 +122,13 @@ class SubGameTest : ObservableObject{
 
         controller.service.observeMeInDB()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             controller.goToLobby(addDummyPlayer: false)
             
             // lets player to be fected from db
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 assert(game.me.cardsInHand == 20)
+                assert(game.playerSize == 1)
                 
                 
                 // Adds some dummy players in db
@@ -130,8 +136,10 @@ class SubGameTest : ObservableObject{
                 controller.goToLobby(addDummyPlayer: true)
                 controller.goToLobby(addDummyPlayer: true)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                    
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    assert(game.playerSize == 4)
+                    testPassed = true
+
                     
                 }
             }

@@ -8,9 +8,9 @@
 import Foundation
 
 class GameTestMain : ObservableObject {
-    @Published var testPassed = false
+    @Published var testPassed: Bool = false
 
-    
+    let subTest = SubGameTest()
     
     
     func main() {
@@ -26,7 +26,7 @@ class GameTestMain : ObservableObject {
         
         addAndRemoveMethodsTest()
         addAndRemoveWithIdMethodsTest()
-        SubGameTest().main()
+        subTest.main()
         
         testPassed = true
     }
