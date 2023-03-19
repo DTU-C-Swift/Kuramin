@@ -165,7 +165,7 @@ class Player : ObservableObject {
     
     
 
-// This method should only be called if it "me".
+/// This method should only be called if it "me".
     
     func updateMe(dbUser: DbUser) {
 
@@ -317,6 +317,8 @@ class Player : ObservableObject {
         lock.unlock()
     }
     
+    
+    
     func setCardsInHand(cardInHad newCardInHand: Int) {
         
         lock.lock()
@@ -328,6 +330,8 @@ class Player : ObservableObject {
         lock.unlock()
         
     }
+    
+    
     
     
     func setRandomNum(randNum newRandNum: Int) {
@@ -346,26 +350,3 @@ class Player : ObservableObject {
     
 }
 
-
-
-
-
-
-//class Player : ObservableObject {
-//
-//    private(set) var id: String
-//    @Published private(set) var fullName: String = Util().NOT_SET
-//    @Published private(set) var displayName = Util().NOT_SET
-//    @Published private(set) var image: UIImage = Util().defaultProfileImg
-//    @Published private(set) var isLeft: Bool = false
-//    @Published private(set) var coins: Int = 0
-//    @Published private(set) var cardsInHand = -1
-//    @Published private(set) var randomNumber = -1
-//    private(set) var isDefaultImg = true
-//
-//    private(set) var leftAt = Util().NOT_SET
-//    private let lock = NSLock()
-//
-//    var nextPlayer: Player?
-//    var prevPlayer: Player?
-//}

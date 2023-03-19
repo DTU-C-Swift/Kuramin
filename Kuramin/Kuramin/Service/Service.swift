@@ -209,15 +209,9 @@ class Service {
                             self.downloadImg(player: newPlayer, shouldAddPlayerToGame: true, game: game)
                             
                         }
-                        
-                        
+                                                
 
                         
-                        
-                        
-                        
-                        
-
                     }
 
                     self.lobbyLock.unlock()
