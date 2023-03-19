@@ -527,6 +527,10 @@ class GameTestMain : ObservableObject {
         
         
         
+        
+        let ref = game.getPlayerRef(pid: p9Dup.id)
+        assert(ref!.id == p9Dup.id)
+        
 
         
 

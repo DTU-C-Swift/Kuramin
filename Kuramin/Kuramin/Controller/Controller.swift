@@ -21,6 +21,7 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let notSet = Util().NOT_SET
+    //private var lastLobbyIds: [String] = []
     
     
     
@@ -74,7 +75,8 @@ class Controller : ObservableObject {
     
     
     func onSuccessLobbySnapshot(lobby: Lobby) {
-
+        
+        
         self.onSuccessLobbyLock.lock()
         
         if self.previousLobby == nil {
@@ -100,6 +102,7 @@ class Controller : ObservableObject {
             
             // It is me
             if crrDbPlayer.pid == game.me.id {
+                
                 self.p.write("It is me")
                 game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
                 game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
@@ -112,21 +115,29 @@ class Controller : ObservableObject {
             
             
             // Other players in lobby
-            if let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
+            
+            let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid)
+            
+            if crrPlayerRef != nil  {
                 
-                if crrPlayerRef.isDefaultImg {
-                    service.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
-                    
-                }
+                self.p.write("Player found \(crrDbPlayer.pid)")
                 
-                crrPlayerRef.updateInfo(dbPlayer: crrDbPlayer)
+//                if crrPlayerRef.isDefaultImg {
+//                    service.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
+//                }
+                
+                crrPlayerRef!.updateInfo(dbPlayer: crrDbPlayer)
                 
                 
             }
             
             else {
+                
+                self.p.write("Player does not exist in the list \(crrDbPlayer.pid)")
+                
                 let newPlayer =  crrDbPlayer.createPlayer()
-                service.downloadImg(player: newPlayer, shouldAddPlayerToGame: true, game: game)
+                game.addNode(nodeToAdd: newPlayer)
+                service.downloadImg(player: newPlayer)
                 
             }
             

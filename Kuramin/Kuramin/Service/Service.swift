@@ -119,11 +119,10 @@ class Service {
             if let error = error {
                 self.printer.write("Failed to go to lobby: \(error)")
             } else {
-                self.printer.write("You successfully landed in lobby!")
+                self.printer.write("You successfully landed in lobby. Id: \(me.id)")
 //                self.amIHost(game: game)
                 
                 if shouldCall_lobbyObserver {
-                    self.printer.write("ObserveLobby called")
                     self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
                 }
             }
@@ -140,6 +139,8 @@ class Service {
         if isLobbyObserving {
             return
         }
+        self.printer.write("Observing lobby")
+        isLobbyObserving = true
         
         let ref = db.collection(MATCHES).document(LOBBY)
         
@@ -162,7 +163,6 @@ class Service {
             catch {
                 
                 self.printer.write("Error in observing lobby. \(String(describing: err))")
-                
             }
             
             
@@ -268,7 +268,6 @@ class Service {
     
     
     private func uploadImg(userId: String, img: UIImage) {
-        
         guard let imageData = img.jpegData(compressionQuality: 0.8) else {
             //self.logOut()
             self.printer.write("Error converting image")
@@ -312,7 +311,7 @@ class Service {
 
         
         // Gets user image from storage
-        self.downloadImg(player: me, shouldAddPlayerToGame: false, game: game)
+        self.downloadImg(player: me)
         
         
         
@@ -349,8 +348,8 @@ class Service {
     
     // Downloads the profile picture of the given player and sets the fetched picture to the given player.
     
-    func downloadImg(player: Player, shouldAddPlayerToGame: Bool, game: Game) {
-        
+    func downloadImg(player: Player) {
+        printer.write("DownloadImg being called. \(player.id)")
         let path = storage.reference().child("images").child(player.id)
         let filename = "\(player.id).jpg"
         let imageRef = path.child(filename)
@@ -364,10 +363,10 @@ class Service {
                     
                     player.setStrImg(img: img)
                                         
-                    if shouldAddPlayerToGame {
-                        game.addNode(nodeToAdd: player)
-                        self.printer.write("Player added \(player.fullName), \(player.id)")
-                    }
+//                    if shouldAddPlayerToGame {
+//                        game.addNode(nodeToAdd: player)
+//                        self.printer.write("Player added \(player.fullName), \(player.id)")
+//                    }
                     return
                 }
                 self.printer.write("Error in converting image")

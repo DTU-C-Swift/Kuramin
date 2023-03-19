@@ -12,12 +12,14 @@ public class Game : ObservableObject {
     private (set) var id: String = ""
     @Published private (set) var me: Player = Player(id: Util().NOT_SET)
     var head: Player?
-    private let lockNodeList = NSLock()
-    
+    //private let lockNodeList = NSLock()
+    private let semephore = DispatchSemaphore(value: 1)
     private (set) var playerSize = 0
     
     private (set) var hostId = ""
     let p = Printer(tag: "Game", displayPrints: true)
+    var lockCount = 0
+    
     private (set) var isGameStarted = false
     
     
@@ -36,7 +38,7 @@ public class Game : ObservableObject {
     init () {
         //me.setRandomNum(randNum: 530)
         //addNode(nodeToAdd: me)
-
+        
     }
     
     
@@ -48,8 +50,18 @@ public class Game : ObservableObject {
 
    
 
+    func lock() {
+        lockCount += 1
+        p.write("locked \(lockCount)")
+        semephore.wait()
+    }
     
-    
+    func unlock() {
+        semephore.signal()
+        lockCount += -1
+        p.write("unlocked \(lockCount)")
+
+    }
     
     
     func updatePlayerList(lobby: Lobby) {
@@ -111,9 +123,7 @@ public class Game : ObservableObject {
             return false
         }
         
-        
-        
-        lockNodeList.lock()
+        lock()
         if head == nil {
             head = nodeToAdd
             head!.nextPlayer = head
@@ -170,8 +180,7 @@ public class Game : ObservableObject {
 
                     playerSize += 1
                     
-                    lockNodeList.unlock()
-                    
+                    unlock()
                     
                     //--------------------------------//
                     //setPlayerPositions()
@@ -199,7 +208,7 @@ public class Game : ObservableObject {
 
         }
         
-        lockNodeList.unlock()
+       unlock()
         
         return true
         //setPlayerPositions()
@@ -211,14 +220,14 @@ public class Game : ObservableObject {
     /// Note: Unlock "lockNodeList"
     func isInList(node: Player) -> Bool {
 
-        lockNodeList.lock()
+        lock()
         var crrNode = head
         
         repeat {
             assert(crrNode != nil)
             
             if crrNode?.id == node.id {
-                lockNodeList.unlock()
+                unlock()
                 return true
             }
             
@@ -226,8 +235,8 @@ public class Game : ObservableObject {
             
         } while crrNode?.id != head?.id
         
-        lockNodeList.unlock()
-        
+       unlock()
+
         return false
         
     }
@@ -257,10 +266,10 @@ public class Game : ObservableObject {
     
     func getPlayerRef(pid: String) -> Player? {
 
-        lockNodeList.lock()
+        lock()
         
         if playerSize <= 0 {
-            lockNodeList.unlock()
+            unlock()
             return nil
         }
         
@@ -268,19 +277,22 @@ public class Game : ObservableObject {
         
         var crrNode = head
         
-        repeat {
+        
+        for _ in 0..<playerSize {
             assert(crrNode != nil)
-            
+
             if crrNode?.id == pid {
-                lockNodeList.unlock()
+                
+                unlock()
+
                 return crrNode
             }
             
             crrNode = crrNode?.nextPlayer
-            
-        } while crrNode?.id != head?.id
+        }
         
-        lockNodeList.unlock()
+        
+        unlock()
         
         return nil
         
@@ -295,11 +307,11 @@ public class Game : ObservableObject {
     func removeNode(nodeToRemove: Player) -> Bool {
         var isPlayerRemoved = false
 
-        lockNodeList.lock()
+        lock()
 
         // If the list is empty, there's nothing to remove.
         guard let head = head else {
-            lockNodeList.unlock()
+            unlock()
             return false
         }
         
@@ -335,7 +347,7 @@ public class Game : ObservableObject {
             }
         }
         
-        lockNodeList.unlock()
+        unlock()
         
         
         if isPlayerRemoved {
@@ -357,11 +369,11 @@ public class Game : ObservableObject {
     func removeNode(pid: String) -> Bool {
                 
         var isPlayerRemoved = false
-        lockNodeList.lock()
+        lock()
         
         // If the list is empty, there's nothing to remove.
         guard let head = head else {
-            lockNodeList.unlock()
+            unlock()
             return false
         }
         
@@ -398,7 +410,7 @@ public class Game : ObservableObject {
         }
         
         
-        lockNodeList.unlock()
+        unlock()
         
         if isPlayerRemoved {
             p.write("Player id \(pid) has been removed")
@@ -423,7 +435,7 @@ public class Game : ObservableObject {
     
     func setPlayerPositions() {
         
-        lockNodeList.lock()
+        lock()
                 
         
         switch playerSize {
@@ -507,7 +519,7 @@ public class Game : ObservableObject {
             
         }
         
-        lockNodeList.unlock()
+        unlock()
         printPlayersNode(head: head)
 
     }
@@ -518,10 +530,10 @@ public class Game : ObservableObject {
     func printPlayersNode(head: Player?) {
         p.write("----------------------- Printing player nodes -----------------------")
 
-        lockNodeList.lock()
+        lock()
         
         if playerSize <= 0 {
-            lockNodeList.unlock()
+            unlock()
             return
         }
          var crrNode = head!
@@ -533,7 +545,7 @@ public class Game : ObservableObject {
             crrNode = crrNode.nextPlayer!
         }
         
-        lockNodeList.unlock()
+        unlock()
 
         
     }
