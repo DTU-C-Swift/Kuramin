@@ -142,17 +142,13 @@ public class Game : ObservableObject {
             assert(playerSize == 1)
             // TODO if node already exist
             
-//            lockNodeList.unlock()
-//            if getPlayerRef(pid: nodeToAdd.id) != nil {
-//                nodeToAdd.updateInfo(player: nodeToAdd)
-//                return
-//            }
-//            lockNodeList.lock()
-            
-//            if getPlayerRef(pid: nodeToAdd.id) != nil {
-//                lockNodeList.unlock()
-//                return
-//            }
+            lockNodeList.unlock()
+            if getPlayerRef(pid: nodeToAdd.id) != nil {
+                nodeToAdd.updateInfo(player: nodeToAdd)
+                return
+            }
+            lockNodeList.lock()
+
             
             
             nodeToAdd.nextPlayer = head
@@ -462,36 +458,7 @@ public class Game : ObservableObject {
         }
         
         lockNodeList.unlock()
-        
-        
-        
-//
-//         if head == nil {
-//             p.write("head is nil")
-//             return
-//         }
-//
-//
-//         lockNodeList.lock()
-//         var crrNode = head!
-//
-//         repeat {
-//             self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
-//
-//
-//             if crrNode.nextPlayer != nil {
-//                 crrNode = crrNode.nextPlayer!
-//             }
-//             else {
-//                 // only one player in the list
-//                 assert(playerSize == 1)
-//                 break
-//             }
-//
-//         } while crrNode.id != head!.id
-//
-//
-//         lockNodeList.unlock()
+
         
     }
     
