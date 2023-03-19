@@ -70,11 +70,25 @@ public class Game : ObservableObject {
         var crrP = head
         var isStarting = true
         
+        
+        
+        
+        
+        for crrLobbyP in lobby.players {
+            
+            //if let ref
+            
+            
+        }
+        
+        
+        
+        
         while true {
             
-            if crrP == nil {
-                break
-            }
+//            if crrP == nil {
+//                break
+//            }
             
             if !isStarting && crrP?.id == head?.id {
                 break
@@ -97,6 +111,8 @@ public class Game : ObservableObject {
             if isStarting {isStarting = false}
             
         }
+        
+        
         
         
         lockNodeList.unlock()
@@ -363,6 +379,51 @@ public class Game : ObservableObject {
     
 
 
+    
+    
+    func removeNode(pid: String) {
+                
+        lockNodeList.lock()
+        
+        // If the list is empty, there's nothing to remove.
+        guard let head = head else {
+            lockNodeList.unlock()
+            return
+        }
+        
+        if head.id == pid {
+            // Removing the head node.
+            if head.nextPlayer === head {
+                // Removing the only node in the list.
+                self.head = nil
+                playerSize = 0
+            } else {
+                // Removing the head node of a list with more than one node.
+                self.head = head.nextPlayer
+                self.head!.prevPlayer = head.prevPlayer
+                head.prevPlayer!.nextPlayer = self.head
+                playerSize -= 1
+            }
+        } else {
+            // Search for the node to remove.
+            var current = head.nextPlayer
+            while current !== head && current?.id != pid {
+                current = current?.nextPlayer
+            }
+            
+            if current?.id == pid {
+                // Remove the node by updating the next and previous pointers.
+                current!.prevPlayer!.nextPlayer = current?.nextPlayer
+                current!.nextPlayer?.prevPlayer = current?.prevPlayer
+                
+                playerSize -= 1
+            }
+        }
+        
+        lockNodeList.unlock()
+        
+        setPlayerPositions()
+    }
     
     
     
