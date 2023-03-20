@@ -402,7 +402,19 @@ public class Game : ObservableObject {
     
     
     
-
+    /// Removes all element from 'head' and set 'me.next' and 'me.prev' to itself. PlayerSize will 0
+    func remove_all_players() {
+        
+        lock("remove_all_players")
+        
+        me.nextPlayer = me
+        me.prevPlayer = me
+        playerSize = 0
+        
+        head = nil
+        setPlayerPositions(shouldLock: false)
+        unlock("remove_all_players")
+    }
     
     
     
@@ -421,14 +433,14 @@ public class Game : ObservableObject {
         
         switch playerSize {
             
-        case 1:
-            oneFromRight = nil
-            twoFromRight = nil
-            threeFromRight = nil
-            fourFromRight = nil
-            fiveFromRight = nil
-            sixFromRight = nil
-            sevenFromRight = nil
+//        case 1:
+//            oneFromRight = nil
+//            twoFromRight = nil
+//            threeFromRight = nil
+//            fourFromRight = nil
+//            fiveFromRight = nil
+//            sixFromRight = nil
+//            sevenFromRight = nil
             
         case 2:
             fiveFromRight = me.nextPlayer
@@ -502,7 +514,13 @@ public class Game : ObservableObject {
             sevenFromRight = sixFromRight?.nextPlayer
             
         default:
-            p.write("Player list not set")
+            oneFromRight = nil
+            twoFromRight = nil
+            threeFromRight = nil
+            fourFromRight = nil
+            fiveFromRight = nil
+            sixFromRight = nil
+            sevenFromRight = nil
             
         }
         

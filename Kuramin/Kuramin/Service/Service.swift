@@ -144,18 +144,21 @@ class Service {
         if isLobbyObserving {
             return
         }
-        self.printer.write("Observing lobby")
+        self.printer.write("Observing \(LOBBY) ...")
         isLobbyObserving = true
         
         let ref = db.collection(MATCHES).document(LOBBY)
         
-        let obsRef = ref.addSnapshotListener { snapshot, err in
+        
+        var obsRef: ListenerRegistration? = nil
+        obsRef = ref.addSnapshotListener { snapshot, err in
             
             do {
                 if let dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
                     
                     guard let lobby = dbLobbyNullable.mapToLobby() else {
                         self.printer.write("mapToLobby returned nil")
+                        game.remove_all_players()
                         return
                     }
                     
@@ -168,7 +171,16 @@ class Service {
             
             catch {
                 
-                self.printer.write("Error in observing lobby. \(String(describing: err))")
+                self.printer.write("Error in mapping to DbLobbyNullable. \(String(describing: err))")
+
+                if let obsRef = obsRef {
+                    game.remove_all_players()
+                    obsRef.remove()
+                    self.isLobbyObserving = false
+
+                }
+
+                
             }
             
             
