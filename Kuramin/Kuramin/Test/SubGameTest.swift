@@ -27,7 +27,7 @@ class SubGameTest : ObservableObject{
     
     
     
-    func goToLobby_usecase_test(onSuccess: @escaping (Game) -> Void) {
+    func goToLobby_usecase_test(onSuccess: @escaping (Controller) -> Void) {
         
         
         let controller = Controller()
@@ -65,12 +65,11 @@ class SubGameTest : ObservableObject{
                 controller.goToLobby(addDummyPlayer: true)
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    // Assuming: 
-
-                    
-                    
+                    // Assuming: playerSize 4
                     assert(game.playerSize == 4)
-                    onSuccess(game)
+                    
+                    onSuccess(controller)
+                    
 
 
 
@@ -82,11 +81,17 @@ class SubGameTest : ObservableObject{
     }
     
     
-    func goToLobby_usecase_test_onSuccess(game: Game) {
+    func goToLobby_usecase_test_onSuccess(controller: Controller) {
 
-        self.testPassed = true
+        //controller.service.deleteLobby()
 
         
+        
+        
+        self.testPassed = true
+
+        //service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
+
         
     }
     
