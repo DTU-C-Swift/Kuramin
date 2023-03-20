@@ -430,6 +430,10 @@ public class Game : ObservableObject {
             lock("setPlayerPositions")
         }
                 
+        if playerSize > 1 {
+            assert(me.nextPlayer != nil)
+            assert(me.nextPlayer !== me)
+        }
         
         switch playerSize {
 
@@ -465,9 +469,9 @@ public class Game : ObservableObject {
             
         case 5:
             twoFromRight = me.nextPlayer
-            fourFromRight = twoFromRight?.nextPlayer
-            fiveFromRight = fourFromRight?.nextPlayer
-            sixFromRight = fiveFromRight?.nextPlayer
+            fourFromRight = twoFromRight!.nextPlayer
+            fiveFromRight = fourFromRight!.nextPlayer
+            sixFromRight = fiveFromRight!.nextPlayer
             
             oneFromRight = nil
             threeFromRight = nil
@@ -475,10 +479,10 @@ public class Game : ObservableObject {
             
         case 6:
             twoFromRight = me.nextPlayer
-            threeFromRight = twoFromRight?.nextPlayer
-            fourFromRight = threeFromRight?.nextPlayer
-            fiveFromRight = fourFromRight?.nextPlayer
-            sixFromRight = fiveFromRight?.nextPlayer
+            threeFromRight = twoFromRight!.nextPlayer
+            fourFromRight = threeFromRight!.nextPlayer
+            fiveFromRight = fourFromRight!.nextPlayer
+            sixFromRight = fiveFromRight!.nextPlayer
             
             oneFromRight = nil
             sevenFromRight = nil
@@ -486,23 +490,23 @@ public class Game : ObservableObject {
             
         case 7:
             twoFromRight = me.nextPlayer
-            threeFromRight = twoFromRight?.nextPlayer
-            fourFromRight = threeFromRight?.nextPlayer
-            fiveFromRight = fourFromRight?.nextPlayer
-            sixFromRight = fiveFromRight?.nextPlayer
-            sevenFromRight = sixFromRight?.nextPlayer
+            threeFromRight = twoFromRight!.nextPlayer
+            fourFromRight = threeFromRight!.nextPlayer
+            fiveFromRight = fourFromRight!.nextPlayer
+            sixFromRight = fiveFromRight!.nextPlayer
+            sevenFromRight = sixFromRight!.nextPlayer
             
             oneFromRight = nil
             
         case 8:
             
             oneFromRight = me.nextPlayer
-            twoFromRight = oneFromRight?.nextPlayer
-            threeFromRight = twoFromRight?.nextPlayer
-            fourFromRight = threeFromRight?.nextPlayer
-            fiveFromRight = fourFromRight?.nextPlayer
-            sixFromRight = fiveFromRight?.nextPlayer
-            sevenFromRight = sixFromRight?.nextPlayer
+            twoFromRight = oneFromRight!.nextPlayer
+            threeFromRight = twoFromRight!.nextPlayer
+            fourFromRight = threeFromRight!.nextPlayer
+            fiveFromRight = fourFromRight!.nextPlayer
+            sixFromRight = fiveFromRight!.nextPlayer
+            sevenFromRight = sixFromRight!.nextPlayer
             
         default:
             oneFromRight = nil
@@ -561,6 +565,7 @@ public class Game : ObservableObject {
 
     
     func addDummyPlayers(val: Int) {
+        addNode(nodeToAdd: me)
         
         for i in 0..<val {
             let newPlayer = Player(id: "id\(i)")
@@ -572,8 +577,7 @@ public class Game : ObservableObject {
             
             addNode(nodeToAdd: newPlayer)
         }
-        
-        
+        setPlayerPositions(shouldLock: true)
     }
     
     

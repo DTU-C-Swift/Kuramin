@@ -33,11 +33,7 @@ struct PlayersView: View {
                 Spacer()
                 
                 if game.fiveFromRight != nil {
-                    
-                    if game.fiveFromRight?.id != defaulId {
-                        CirclePicView(player: game.fiveFromRight!, game: game)
-
-                    }
+                    CirclePicView(player: game.fiveFromRight!, game: game)
                 }
 
                 
@@ -45,20 +41,15 @@ struct PlayersView: View {
                 
                 if game.fourFromRight != nil {
                                         
-                    if game.fourFromRight?.id != defaulId {
-                        Spacer()
-                        CirclePicView(player: game.fourFromRight!, game: game)
-                    }
+                    Spacer()
+                    CirclePicView(player: game.fourFromRight!, game: game)
 
                 }
 
 
                 if game.threeFromRight != nil {
-                    
-                    if game.threeFromRight?.id != defaulId {
-                        Spacer()
-                        CirclePicView(player: game.threeFromRight!, game: game)
-                    }
+                    Spacer()
+                    CirclePicView(player: game.threeFromRight!, game: game)
                 }
 
                 Spacer()
@@ -76,18 +67,13 @@ struct PlayersView: View {
                     Spacer()
 
                     if game.sixFromRight != nil {
-                        if game.sixFromRight?.id != defaulId {
-                            CirclePicView(player: game.sixFromRight!, game: game)
-                            Spacer()
-                        }
-
+                        CirclePicView(player: game.sixFromRight!, game: game)
+                        Spacer()
                     }
 
                     if game.sevenFromRight != nil {
-                        if game.sevenFromRight?.id != nil {
-                            CirclePicView(player: game.sevenFromRight!, game: game)
-                        }
-                        
+
+                        CirclePicView(player: game.sevenFromRight!, game: game)
                     }
 
                     Spacer()
@@ -100,20 +86,15 @@ struct PlayersView: View {
                     Spacer()
                     if game.twoFromRight != nil {
                         
-                        if game.twoFromRight?.id != defaulId {
-                            CirclePicView(player: game.twoFromRight!, game: game)
-                            Spacer()
-                        }
-                        
+                        CirclePicView(player: game.twoFromRight!, game: game)
+                            .frame(width: 60, height: 80)
 
+                        Spacer()
                     }
 
                     if game.oneFromRight != nil {
+                        CirclePicView(player: game.oneFromRight!, game: game)
                         
-                        if game.oneFromRight?.id != defaulId {
-                            CirclePicView(player: game.oneFromRight!, game: game)
-
-                        }
                     }
 
                     Spacer()

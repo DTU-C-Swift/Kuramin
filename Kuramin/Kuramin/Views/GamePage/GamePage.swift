@@ -126,9 +126,9 @@ struct GamePage: View {
             //                later = MyDate().getTime()
             //            }
             
-            //controller.game.addDummyPlayers()
+            controller.game.addDummyPlayers(val: 7)
             //controller.service.goToLobby(val: false)
-            controller.goToLobby(addDummyPlayer: false)
+            //controller.goToLobby(addDummyPlayer: false)
             
             
         }
