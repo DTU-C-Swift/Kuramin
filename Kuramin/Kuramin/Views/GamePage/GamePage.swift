@@ -45,11 +45,10 @@ struct GamePage: View {
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.white)
                             .scaleEffect(1.6)
-                            .padding(.bottom, 0)
-                            .padding(.top, 5)
                             .padding(.leading, 20)
                         
                     }
+                    .padding(.top, 10)
                     
                     Spacer()
                     Button(action: {
@@ -112,19 +111,8 @@ struct GamePage: View {
         }
         .persistentSystemOverlays(.hidden)
         .onAppear() {
-            //controller.service.goToLobby(addDummyPlayer: false)
-            
-            //            earlier = MyDate().getTime()
-            //
-            //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            //                later = MyDate().getTime()
-            //            }
-            
-            controller.game.addDummyPlayers(val: 7)
-            //controller.service.goToLobby(val: false)
-            //controller.goToLobby(addDummyPlayer: false)
-            
-            
+            //controller.game.addDummyPlayers(val: 7)
+
         }
         
     }

@@ -116,10 +116,8 @@ struct MainPage: View {
             HowToPlayView()
         }
         .onChange(of: me.fullName) { newValue in
-            
-            if me.id != Util().NOT_SET {
-                //controller.service.goToLobby(val: false)
-            }
+            // ------- Player goes to lobby --------- //
+            controller.goToLobby(addDummyPlayer: false)
         }
 
         

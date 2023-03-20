@@ -12,7 +12,6 @@ public class Game : ObservableObject {
     private (set) var id: String = ""
     @Published private (set) var me: Player = Player(id: Util().NOT_SET)
     var head: Player?
-    //private let lockNodeList = NSLock()
     private let semephore = DispatchSemaphore(value: 1)
     private (set) var playerSize = 0
     
@@ -421,19 +420,26 @@ public class Game : ObservableObject {
     
     
     
-    
-    
+    ///- Note: If 'me' or me.next is nil, then this function will have effects.
     
     func setPlayerPositions(shouldLock: Bool) {
         
         if shouldLock {
             lock("setPlayerPositions")
         }
-                
+         
+        
         if playerSize > 1 {
-            assert(me.nextPlayer != nil)
-            assert(me.nextPlayer !== me)
+            if me.nextPlayer == nil || me.nextPlayer === me {
+                unlock("setPlayerPositions")
+                p.write("'me' is nil, so setting player position is not possible.")
+                return
+
+            }
+            
         }
+        
+
         
         switch playerSize {
 
