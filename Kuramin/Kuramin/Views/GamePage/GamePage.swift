@@ -79,6 +79,14 @@ struct GamePage: View {
                         .padding(.bottom, 10)
                     Spacer()
                     
+                    
+                    Button(action: {
+                        
+                        controller.service.deleteLobby()
+                        
+                    }) {
+                        Text("delete lobby")
+                    }
                 }
             }
             

@@ -158,6 +158,7 @@ class Service {
                         return
                     }
                     
+                    self.printer.write("Snapshot from lobby recieved")
                     onSuccess(lobby)
                     
                     
@@ -187,7 +188,7 @@ class Service {
     
     
     
-    
+
     
     
     
