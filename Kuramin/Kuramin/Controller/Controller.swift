@@ -21,7 +21,6 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let notSet = Util().NOT_SET
-    private var lastLobbyIds: [String] = []
     
     
     
@@ -90,9 +89,9 @@ class Controller : ObservableObject {
             }
         }
         
-        
         // Removes player from the display
         game.updatePlayerList(lobby: lobby)
+        
         
         
         for crrDbPlayer in lobby.players {
@@ -117,10 +116,9 @@ class Controller : ObservableObject {
                 continue
                 
                 
-            } else if lastLobbyIds.contains(crrDbPlayer.pid) {
+            } else if let pRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
                 
-                let pRef = game.getPlayerRef(pid: crrDbPlayer.pid)
-                pRef?.updateInfo(dbPlayer: crrDbPlayer)
+                pRef.updateInfo(dbPlayer: crrDbPlayer)
                 p.write("Player \(crrDbPlayer.pid) updated")
                 
                 

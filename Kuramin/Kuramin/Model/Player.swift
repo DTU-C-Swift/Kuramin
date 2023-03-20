@@ -21,10 +21,10 @@ class Player : ObservableObject {
     private(set) var isDefaultImg = true
 
     private(set) var leftAt = Util().NOT_SET
-    private let lock = NSLock()
+    private let playerLock = DispatchSemaphore(value: 1)
     
-    var nextPlayer: Player?
-    var prevPlayer: Player?
+    private (set) var nextPlayer: Player?
+    private (set) var prevPlayer: Player?
     
     
     var p = Printer(tag: "Player", displayPrints: true)
@@ -69,14 +69,21 @@ class Player : ObservableObject {
     
     
     
+    func lock() {
+        playerLock.wait()
+    }
+    
+    func unlock() {
+        playerLock.signal()
+    }
     
     func updateInfo(player p: Player) {
         
         var anyChanges = false
-        lock.lock()
+        lock()
         if p.id != id {
             //assert(false)
-            lock.unlock()
+            unlock()
             assert(false)
         }
 
@@ -84,9 +91,9 @@ class Player : ObservableObject {
         if fullName != p.fullName  {
             
             self.fullName = p.fullName
-            lock.unlock()
+            unlock()
             setDisplayName()
-            lock.lock()
+            lock()
             anyChanges = true
         }
         
@@ -111,7 +118,7 @@ class Player : ObservableObject {
         }
         
         
-        lock.unlock()
+        unlock()
         
         if anyChanges {
             self.p.write("Player updated: \(self.displayName), \(self.id)")
@@ -130,10 +137,10 @@ class Player : ObservableObject {
 
     func updateInfo(dbPlayer p: DbPlayer) {
         
-        lock.lock()
+        lock()
         if p.pid != id {
             //assert(false)
-            lock.unlock()
+            unlock()
             assert(false)
         }
 
@@ -141,9 +148,9 @@ class Player : ObservableObject {
         if fullName != p.pName  {
             
             self.fullName = p.pName
-            lock.unlock()
+            unlock()
             setDisplayName()
-            lock.lock()
+            lock()
         }
         
     
@@ -156,7 +163,7 @@ class Player : ObservableObject {
         }
         
         
-        lock.unlock()
+        unlock()
         self.p.write("Player updated: \(self.displayName), \(self.id)")
 
     }
@@ -169,7 +176,7 @@ class Player : ObservableObject {
     
     func updateMe(dbUser: DbUser) {
 
-        lock.lock()
+        lock()
         
         if self.coins != dbUser.coins {
             self.coins = dbUser.coins
@@ -186,7 +193,7 @@ class Player : ObservableObject {
 
         self.p.write("Updated me: \(self.displayName), \(self.id)")
         
-        lock.unlock()
+        unlock()
 
     }
     
@@ -198,7 +205,7 @@ class Player : ObservableObject {
     
     func isItSame(player p: Player) -> Bool {
         
-        lock.lock()
+        lock()
         if p.id != id {return false}
         
         if p.fullName != fullName {return false}
@@ -209,7 +216,7 @@ class Player : ObservableObject {
         if p.cardsInHand != cardsInHand {return false}
         if p.randomNumber != randomNumber {return false}
 
-        lock.unlock()
+        unlock()
         return true
         
     }
@@ -223,32 +230,32 @@ class Player : ObservableObject {
     
     
     func setId(pid newPid: String) {
-        lock.lock()
+        lock()
         if id == newPid || newPid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
-            lock.unlock()
+            unlock()
             return
         }
         self.id = newPid
-        lock.unlock()
+        unlock()
     }
     
     
     
     func setFullName(fullName newName: String) {
-        lock.lock()
+        lock()
         if fullName == newName {
-            lock.lock()
+            lock()
             return
         }
         self.fullName = newName
-        lock.unlock()
+        unlock()
         setDisplayName()
         
     }
     
     
     private func setDisplayName() {
-        lock.lock()
+        lock()
         let newName = self.fullName.split(separator: " ")
         let newDisplayName = String(newName[0])
         
@@ -256,7 +263,7 @@ class Player : ObservableObject {
             self.displayName = newDisplayName
             
         }
-        lock.unlock()
+        unlock()
     }
     
     
@@ -267,7 +274,7 @@ class Player : ObservableObject {
         //let newImg = UIImage(imageLiteralResourceName: imgName)
 
         
-        lock.lock()
+        lock()
 
         if let oldImgData = image.pngData(), let newImgData = newImg.pngData() {
             
@@ -278,14 +285,14 @@ class Player : ObservableObject {
         }
         
         
-        lock.unlock()
+        unlock()
     }
     
     
     
     
     func setIsLeft(isLeft newIsLeft: Bool) {
-        lock.lock()
+        lock()
         self.isLeft = newIsLeft
         
         if newIsLeft == false {
@@ -295,39 +302,39 @@ class Player : ObservableObject {
             self.leftAt = MyDate().getTime()
         }
         
-        lock.unlock()
+        unlock()
     }
     
     
     func setLeftAt(date newDate: String) {
-        lock.lock()
+        lock()
         self.leftAt = newDate
-        lock.unlock()
+        unlock()
     }
     
     
 
     func setCoins(coins newCoins: Int) {
         
-        lock.lock()
+        lock()
         if coins != newCoins {
             self.coins = newCoins
         }
         
-        lock.unlock()
+        unlock()
     }
     
     
     
     func setCardsInHand(cardInHad newCardInHand: Int) {
         
-        lock.lock()
+        lock()
         
         if cardsInHand != newCardInHand {
             self.cardsInHand = newCardInHand
         }
         
-        lock.unlock()
+        unlock()
         
     }
     
@@ -336,13 +343,13 @@ class Player : ObservableObject {
     
     func setRandomNum(randNum newRandNum: Int) {
         
-        lock.lock()
+        lock()
         
         if randomNumber != newRandNum {
             self.randomNumber = newRandNum
         }
         
-        lock.unlock()
+        unlock()
         
     }
 

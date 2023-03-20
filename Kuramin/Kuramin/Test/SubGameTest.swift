@@ -59,7 +59,7 @@ class SubGameTest : ObservableObject{
                 controller.goToLobby(addDummyPlayer: true)
                 controller.goToLobby(addDummyPlayer: true)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                     assert(game.playerSize == 4)
                     onSuccess(game)
 

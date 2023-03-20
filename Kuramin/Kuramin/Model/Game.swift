@@ -18,18 +18,18 @@ public class Game : ObservableObject {
     
     private (set) var hostId = ""
     let p = Printer(tag: "Game", displayPrints: true)
-    var lockCount = 0
+    private var lockCount = 0
     
     private (set) var isGameStarted = false
     
     
-    @Published var oneFromRight: Player?
-    @Published var twoFromRight: Player?
-    @Published var threeFromRight: Player?
-    @Published var fourFromRight: Player?
-    @Published var fiveFromRight: Player?
-    @Published var sixFromRight: Player?
-    @Published var sevenFromRight: Player?
+    @Published private (set) var oneFromRight: Player?
+    @Published private (set) var twoFromRight: Player?
+    @Published private (set) var threeFromRight: Player?
+    @Published private (set) var fourFromRight: Player?
+    @Published private (set) var fiveFromRight: Player?
+    @Published private (set) var sixFromRight: Player?
+    @Published private (set) var sevenFromRight: Player?
     
     
     
@@ -65,16 +65,65 @@ public class Game : ObservableObject {
     
     
     func updatePlayerList(lobby: Lobby) {
-
-        if playerSize <= 0 || lobby.players.isEmpty {return}
+        lock()
+        
+        if playerSize <= 0 || lobby.players.isEmpty {
+            unlock()
+            return
+        }
  
         if isGameStarted {
             //----TODO---/
+            unlock()
             return
         }
         
         var needPlayerPositionUpdate = false
 
+        
+        
+        if playerSize == 1 {
+            
+            if !lobby.players.contains(where: {$0.pid == head!.id}) {
+                removeNode(pid: head!.id)
+                
+            }
+
+            
+        } else {
+            
+    
+            var crrP = head
+            
+            for _ in 0..<playerSize-1 {
+                
+                assert(crrP!.nextPlayer != nil)
+                
+                if !lobby.players.contains(where: {$0.pid == crrP!.nextPlayer!.id}) {
+                    removeNode(pid: crrP!.nextPlayer!.id)
+                    
+                }
+                
+                crrP = crrP?.nextPlayer
+            }
+            
+            
+            
+        }
+        
+        
+
+        
+        
+        
+        
+        unlock()
+        
+        
+        
+        
+        
+        
         for crrLobbyP in lobby.players {
             
             if removeNode(pid: crrLobbyP.pid) && !needPlayerPositionUpdate {
@@ -102,7 +151,11 @@ public class Game : ObservableObject {
     
     
     
-    
+    func getCurrentPlayerIds() -> [String] {
+        
+        
+        
+    }
     
     
     
