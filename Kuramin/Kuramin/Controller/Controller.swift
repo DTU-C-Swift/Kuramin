@@ -220,6 +220,6 @@ class Controller : ObservableObject {
     
     
     func changeLobbyName() {
-        service.changedLobbyName(newName: "newName")
+        service.changedLobbyName(controller: self, newName: "newName")
     }
 }
