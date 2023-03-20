@@ -56,17 +56,16 @@ struct GamePage: View {
                     }
                     
                     Button(action: {
-                        //game.dd()
                         
-                     //   controller.service.goToLobby(addDummyPlayer: true)
-                        
+                        controller.goToLobby(addDummyPlayer: true)
                         
                     }) {
-                        Text("Add player")
-                        
+                        Text("Add")
                     }
                     
                     
+                    
+
                     Spacer()
                     
                 }
@@ -108,6 +107,8 @@ struct GamePage: View {
             
             //controller.game.addDummyPlayers()
             //controller.service.goToLobby(val: false)
+            controller.goToLobby(addDummyPlayer: false)
+
             
         }
         

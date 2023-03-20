@@ -50,16 +50,16 @@ public class Game : ObservableObject {
 
    
 
-    func lock() {
+    private func lock(_ str: String) {
         lockCount += 1
-        p.write("locked \(lockCount)")
+        p.write("locked: \(str) \(lockCount)")
         semephore.wait()
     }
     
-    func unlock() {
+    private func unlock(_ str: String) {
         semephore.signal()
         lockCount += -1
-        p.write("unlocked \(lockCount)")
+        p.write("Unlocked: \(str) \(lockCount)")
 
     }
     
@@ -67,16 +67,16 @@ public class Game : ObservableObject {
     
     
     func updatePlayerList(lobby: Lobby) {
-        lock()
+        lock("updatePlayerList")
         
         if playerSize <= 0 || lobby.players.isEmpty {
-            unlock()
+            unlock("updatePlayerList")
             return
         }
  
         if isGameStarted {
             //----TODO---/
-            unlock()
+            unlock("updatePlayerList")
             return
         }
         
@@ -88,6 +88,7 @@ public class Game : ObservableObject {
             
             if !lobby.players.contains(where: {$0.pid == head!.id}) {
                 removeNode(pid: head!.id, shouldLock: false)
+                needPlayerPositionUpdate = true
                 
             }
 
@@ -103,6 +104,7 @@ public class Game : ObservableObject {
                 
                 if !lobby.players.contains(where: {$0.pid == crrP!.nextPlayer!.id}) {
                     removeNode(pid: crrP!.nextPlayer!.id, shouldLock: false)
+                    needPlayerPositionUpdate = true
                     
                 }
                 
@@ -114,11 +116,11 @@ public class Game : ObservableObject {
         }
         
         
-        unlock()
+        unlock("updatePlayerList")
         
 
         if needPlayerPositionUpdate {
-            setPlayerPositions()
+            setPlayerPositions(shouldLock: true)
             self.p.write("Player list has been updated")
         }
         
@@ -134,7 +136,7 @@ public class Game : ObservableObject {
     /// This funciton adds node to its correspondin position decided by 'randomNum'.
     /// - Note: Updates if there exists a player with the same id
     /// - Note: Unlock "lockNodeList"
-    /// - Note: setPlayerPosition method must be called after this method
+    /// - NOT FOR NOW setPlayerPosition method must be called after this method
     /// - Note: returns true if item is added,  else false if it is updated
 
     func addNode(nodeToAdd: Player) -> Bool {  // list size is 0
@@ -143,7 +145,7 @@ public class Game : ObservableObject {
             return false
         }
         
-        lock()
+        lock("addNode")
         if head == nil {
             head = nodeToAdd
             head!.nextPlayer = head
@@ -200,10 +202,10 @@ public class Game : ObservableObject {
 
                     playerSize += 1
                     
-                    unlock()
+                    unlock("addNode")
                     
                     //--------------------------------//
-                    //setPlayerPositions()
+                    setPlayerPositions(shouldLock: true)
                     return true
                 }
                 
@@ -228,10 +230,10 @@ public class Game : ObservableObject {
 
         }
         
-       unlock()
+       unlock("addNode")
         
         return true
-        //setPlayerPositions()
+        setPlayerPositions(shouldLock: true)
         
     }
     
@@ -240,14 +242,14 @@ public class Game : ObservableObject {
     /// Note: Unlock "lockNodeList"
     func isInList(node: Player) -> Bool {
 
-        lock()
+        lock("isInList")
         var crrNode = head
         
         repeat {
             assert(crrNode != nil)
             
             if crrNode?.id == node.id {
-                unlock()
+                unlock("isInList")
                 return true
             }
             
@@ -255,7 +257,7 @@ public class Game : ObservableObject {
             
         } while crrNode?.id != head?.id
         
-       unlock()
+       unlock("isInList")
 
         return false
         
@@ -268,7 +270,7 @@ public class Game : ObservableObject {
     func updateIfExist(player: Player) -> Bool {
         
         
-        if let pRef =  getPlayerRef(pid: player.id) {
+        if let pRef =  getPlayerRef(pid: player.id, shouldLock: true) {
             
             pRef.updateInfo(player: player)
             return true
@@ -284,12 +286,17 @@ public class Game : ObservableObject {
     /// Note: Unlock "lockNodeList"
     
     
-    func getPlayerRef(pid: String) -> Player? {
+    func getPlayerRef(pid: String, shouldLock: Bool) -> Player? {
 
-        lock()
+        if shouldLock {
+            lock("getPlayerRef")
+        }
         
         if playerSize <= 0 {
-            unlock()
+            
+            if shouldLock {
+                unlock("getPlayerRef")
+            }
             return nil
         }
         
@@ -303,8 +310,9 @@ public class Game : ObservableObject {
 
             if crrNode?.id == pid {
                 
-                unlock()
-
+                if shouldLock {
+                    unlock("getPlayerRef")
+                }
                 return crrNode
             }
             
@@ -312,7 +320,9 @@ public class Game : ObservableObject {
         }
         
         
-        unlock()
+        if shouldLock {
+            unlock("getPlayerRef")
+        }
         
         return nil
         
@@ -324,73 +334,73 @@ public class Game : ObservableObject {
     
     /// setPlayerPosition method must be called after this method
     
-    func removeNode(nodeToRemove: Player) -> Bool {
-        var isPlayerRemoved = false
-
-        lock()
-
-        // If the list is empty, there's nothing to remove.
-        guard let head = head else {
-            unlock()
-            return false
-        }
-        
-        if head === nodeToRemove {
-            // Removing the head node.
-            if head.nextPlayer === head {
-                // Removing the only node in the list.
-                self.head = nil
-                playerSize = 0
-                isPlayerRemoved = true
-            } else {
-                // Removing the head node of a list with more than one node.
-                self.head = head.nextPlayer
-                self.head!.prevPlayer = head.prevPlayer
-                head.prevPlayer!.nextPlayer = self.head
-                playerSize -= 1
-                isPlayerRemoved = true
-            }
-        } else {
-            // Search for the node to remove.
-            var current = head.nextPlayer
-            while current !== head && current !== nodeToRemove {
-                current = current?.nextPlayer
-            }
-            
-            if current === nodeToRemove {
-                // Remove the node by updating the next and previous pointers.
-                current!.prevPlayer!.nextPlayer = current?.nextPlayer
-                current!.nextPlayer?.prevPlayer = current?.prevPlayer
-                
-                playerSize -= 1
-                isPlayerRemoved = true
-            }
-        }
-        
-        unlock()
-        
-        
-        if isPlayerRemoved {
-            p.write("Player id \(nodeToRemove.id) has been removed")
-            //setPlayerPositions()
-            return true
-        }
-        
-        p.write("Player id \(nodeToRemove.id) not found to remove")
-
-        return false
-    }
+//    func removeNode(nodeToRemove: Player) -> Bool {
+//        var isPlayerRemoved = false
+//
+//        lock()
+//
+//        // If the list is empty, there's nothing to remove.
+//        guard let head = head else {
+//            unlock()
+//            return false
+//        }
+//
+//        if head === nodeToRemove {
+//            // Removing the head node.
+//            if head.nextPlayer === head {
+//                // Removing the only node in the list.
+//                self.head = nil
+//                playerSize = 0
+//                isPlayerRemoved = true
+//            } else {
+//                // Removing the head node of a list with more than one node.
+//                self.head = head.nextPlayer
+//                self.head!.prevPlayer = head.prevPlayer
+//                head.prevPlayer!.nextPlayer = self.head
+//                playerSize -= 1
+//                isPlayerRemoved = true
+//            }
+//        } else {
+//            // Search for the node to remove.
+//            var current = head.nextPlayer
+//            while current !== head && current !== nodeToRemove {
+//                current = current?.nextPlayer
+//            }
+//
+//            if current === nodeToRemove {
+//                // Remove the node by updating the next and previous pointers.
+//                current!.prevPlayer!.nextPlayer = current?.nextPlayer
+//                current!.nextPlayer?.prevPlayer = current?.prevPlayer
+//
+//                playerSize -= 1
+//                isPlayerRemoved = true
+//            }
+//        }
+//
+//        unlock()
+//
+//
+//        if isPlayerRemoved {
+//            p.write("Player id \(nodeToRemove.id) has been removed")
+//            setPlayerPositions()
+//            return true
+//        }
+//
+//        p.write("Player id \(nodeToRemove.id) not found to remove")
+//
+//        return false
+//    }
     
     
 
 
-    /// setPlayerPosition method must be called after this method
+    /// NOT FOR NOW setPlayerPosition method must be called after this method
     
     func removeNode(pid: String, shouldLock: Bool) -> Bool {
                 
         var isPlayerRemoved = false
         if shouldLock {
-            lock()
+            lock("removeNode")
         }
         
         
@@ -398,7 +408,7 @@ public class Game : ObservableObject {
         guard let head = head else {
             
             if shouldLock {
-                unlock()
+                unlock("removeNode")
             }
             return false
         }
@@ -436,13 +446,13 @@ public class Game : ObservableObject {
         }
         
         if shouldLock {
-            unlock()
+            unlock("removeNode")
         }
         
         
         if isPlayerRemoved {
             p.write("Player id \(pid) has been removed")
-            //setPlayerPositions()
+            setPlayerPositions(shouldLock: shouldLock)
             return true
         }
         
@@ -463,9 +473,11 @@ public class Game : ObservableObject {
     
     
     
-    func setPlayerPositions() {
+    func setPlayerPositions(shouldLock: Bool) {
         
-        lock()
+        if shouldLock {
+            lock("setPlayerPositions")
+        }
                 
         
         switch playerSize {
@@ -549,35 +561,42 @@ public class Game : ObservableObject {
             
         }
         
-        unlock()
-        printPlayersNode(head: head)
+        if shouldLock {
+            unlock("setPlayerPositions")
+        }
+        printPlayersNode(head: head, shouldLock: shouldLock)
 
     }
     
     
     
     
-    func printPlayersNode(head: Player?) {
+    func printPlayersNode(head: Player?, shouldLock: Bool) {
         p.write("----------------------- Printing player nodes -----------------------")
 
-        lock()
-        
+        if shouldLock {
+            lock("printPlayersNode")
+        }
+
         if playerSize <= 0 {
-            unlock()
+            if shouldLock {
+                unlock("printPlayersNode")
+            }
             return
         }
          var crrNode = head!
 
         for  _ in 0..<playerSize  {
-            
+
             self.p.write("player: \(crrNode.id ), randNum: \(crrNode.randomNumber )")
-            
+
             crrNode = crrNode.nextPlayer!
         }
-        
-        unlock()
 
-        
+        if shouldLock {
+            unlock("printPlayersNode")
+        }
+
     }
     
     
@@ -605,9 +624,11 @@ public class Game : ObservableObject {
     
     
     func setGameId(gid: String) {
+        lock("setGameId")
         if id != gid && gid != Util().NOT_SET {
             self.id = gid
         }
+        unlock("setGameId")
     }
 
     

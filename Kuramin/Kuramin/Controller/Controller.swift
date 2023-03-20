@@ -106,8 +106,8 @@ class Controller : ObservableObject {
             if crrDbPlayer.pid == game.me.id {
                 
                 self.p.write("It is me")
-//                game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
-//                game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
+                //                game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
+                //                game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
                 game.me.updateInfo(dbPlayer: crrDbPlayer)
                 
                 if game.addNode(nodeToAdd: game.me) {
@@ -117,7 +117,7 @@ class Controller : ObservableObject {
                 continue
                 
                 
-            } else if let pRef = game.getPlayerRef(pid: crrDbPlayer.pid) {
+            } else if let pRef = game.getPlayerRef(pid: crrDbPlayer.pid, shouldLock: true) {
                 
                 pRef.updateInfo(dbPlayer: crrDbPlayer)
                 p.write("Player \(crrDbPlayer.pid) updated")

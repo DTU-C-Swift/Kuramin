@@ -172,7 +172,7 @@ class GameTestMain : ObservableObject {
         // head     =>: 30, 40, 100, 200, 500, 600, 650, 700
         // Expectation: 40, 100, 200, 500, 600, 650, 700
 
-        game.removeNode(nodeToRemove: game.head!)
+        game.removeNode(pid: game.head!.id, shouldLock: true)
         //game.printPlayersNode(head: game.head!)
         assert(game.head!.id == p_2.id)
         assert(game.playerSize == 7)
@@ -181,7 +181,7 @@ class GameTestMain : ObservableObject {
         // head     =>: 40, 100, 200, 500, 600, 650, 700
         // Expectation: 40, 100, 200, 500, 600, 650
         
-        game.removeNode(nodeToRemove: p7)
+        game.removeNode(pid: p7.id, shouldLock: true)
         //game.printPlayersNode(head: game.head!)
         assert(game.playerSize == 6)
         assert(game.head!.prevPlayer!.id == p3.id)
@@ -193,8 +193,8 @@ class GameTestMain : ObservableObject {
         // head     =>: 40, 100, 200, 500, 600, 650
         // Expectation: 40, 100, 200, 500, 650
         
-        game.removeNode(nodeToRemove: p6)
-        game.printPlayersNode(head: game.head!)
+        game.removeNode(pid: p6.id, shouldLock: true)
+        game.printPlayersNode(head: game.head!, shouldLock: true)
         assert(game.playerSize == 5)
         assert(game.head!.prevPlayer!.id == p3.id)
         assert(game.head!.id == p_2.id)
@@ -205,7 +205,7 @@ class GameTestMain : ObservableObject {
         // head     =>: 40, 100, 200, 500, 650
         // Expectation: 40, 200, 500, 650
         
-        game.removeNode(nodeToRemove: p1)
+        game.removeNode(pid: p1.id, shouldLock: true)
         //game.printPlayersNode(head: game.head!)
         assert(game.playerSize == 4)
         assert(game.head!.nextPlayer!.id == p2.id)
@@ -219,9 +219,9 @@ class GameTestMain : ObservableObject {
         
         // head     =>: 40, 200, 500, 650
         // Expectation: 40
-        game.removeNode(nodeToRemove: p2)
-        game.removeNode(nodeToRemove: p5)
-        game.removeNode(nodeToRemove: p3)
+        game.removeNode(pid: p2.id, shouldLock: true)
+        game.removeNode(pid: p5.id, shouldLock: true)
+        game.removeNode(pid: p3.id, shouldLock: true)
         
         assert(game.playerSize == 1)
         assert(game.head!.id == p_2.id)
@@ -233,7 +233,7 @@ class GameTestMain : ObservableObject {
 
         // head     =>: 40
         // Expectation: nil
-        game.removeNode(nodeToRemove: p_2)
+        game.removeNode(pid: p_2.id, shouldLock: true)
         assert(game.head == nil)
         assert(game.playerSize == 0)
         
@@ -446,7 +446,7 @@ class GameTestMain : ObservableObject {
         // Expectation: 40, 100, 200, 500, 650
         
         game.removeNode(pid: p6.id, shouldLock: false)
-        game.printPlayersNode(head: game.head!)
+        game.printPlayersNode(head: game.head!, shouldLock: true)
         assert(game.playerSize == 5)
         assert(game.head!.prevPlayer!.id == p3.id)
         assert(game.head!.id == p_2.id)
@@ -528,7 +528,7 @@ class GameTestMain : ObservableObject {
         
         
         
-        let ref = game.getPlayerRef(pid: p9Dup.id)
+        let ref = game.getPlayerRef(pid: p9Dup.id, shouldLock: true)
         assert(ref!.id == p9Dup.id)
         
 
