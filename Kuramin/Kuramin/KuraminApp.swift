@@ -41,6 +41,7 @@ struct KuraminApp: App {
         WindowGroup {
             ContentView()
             //TestVIew()
+            
                 
                 //.environmentObject(DataHolder.controller)
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)

@@ -14,8 +14,16 @@ class Controller : ObservableObject {
     var service: Service = Service()
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
-    @Published var image: UIImage? = nil
-
+    
+    //@Published var image: UIImage? = nil
+    var dummyPlayerCounter = 1
+    let p = Printer(tag: "Controller", displayPrints: true)
+    let onSuccessLobbyLock = NSLock()
+    var previousLobby: Lobby?
+    let NOTSET = Util().NOT_SET
+    
+    
+    
     
     init() {
         self.listenForLogout()
@@ -24,12 +32,126 @@ class Controller : ObservableObject {
     
     
     
+    
+    func goToLobby(addDummyPlayer: Bool) {
+
+        
+        var player = Player(id: "testId\(dummyPlayerCounter)")
+
+        
+        
+        if addDummyPlayer {
+            player.setFullName(fullName: "Name\(dummyPlayerCounter)")
+            player.setRandomNum(randNum: dummyPlayerCounter)
+            dummyPlayerCounter += 1
+        } else {
+            
+            if game.me.id == NOTSET || game.me.fullName == NOTSET  {
+                p.write("Can't go to lobby. Caus: pid: \(game.me.id), fullName: \(game.me.fullName)")
+                return
+            }
+            
+            player = game.me
+            player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+
+        }
+        
+        
+        // TODO Needs to find out card size. 20 is just for now
+        player.setCardsInHand(cardInHad: Int(arc4random_uniform(15)))
+
+        if addDummyPlayer {
+            service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
+        } else {
+            service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
+
+        }
+        
+
+
+    }
+    
+    
+    
+    
+    
+    
+    func onSuccessLobbySnapshot(lobby: Lobby) {
+        
+        
+        self.onSuccessLobbyLock.lock()
+        
+        // TODO compare with previousLobby(not just ids, all the values)
+        
+        
+        // Removes player from the display
+        game.updatePlayerList(lobby: lobby)
+        
+        
+        
+        for crrDbPlayer in lobby.players {
+            
+            
+            
+            self.p.write("observeLobby: id: \(crrDbPlayer.pid)")
+            
+            
+            // It is me
+            if crrDbPlayer.pid == game.me.id {
+                
+                self.p.write("It is me")
+                game.me.updateInfo(dbPlayer: crrDbPlayer)
+                
+                if game.addNode(nodeToAdd: game.me) {
+                    p.write("Me being added to player list")
+                }
+                else {p.write("Me being updated")}
+                continue
+                
+                
+            } else if let pRef = game.getPlayerRef(pid: crrDbPlayer.pid, shouldLock: true) {
+                
+                pRef.updateInfo(dbPlayer: crrDbPlayer)
+                p.write("Player \(crrDbPlayer.pid) updated")
+                
+                
+            } else {
+                
+                let newPlayer =  crrDbPlayer.createPlayer()
+                game.addNode(nodeToAdd: newPlayer)
+                service.downloadImg(player: newPlayer)
+            }
+            
+            
+            
+        }
+        
+        if game.id == NOTSET {
+            game.setGameId(gid: lobby.gameId)
+        }
+        
+        game.setHostId(hostId: lobby.host)
+        self.onSuccessLobbyLock.unlock()
+        
+        
+        
+    }
+    
+    
+    
+    
+    func create_or_update_user(userImage: UIImage?) {
+        service.create_or_update_user(userImage: userImage, game: self.game)
+    }
+    
+    
+    
     func listenForLogout() {
         Auth.auth().addStateDidChangeListener { auth, user in
             if user == nil {
                 self.isLoggedIn = false
                 print("login false")
-
+                
             }
             else {
                 print("login true")
@@ -38,5 +160,17 @@ class Controller : ObservableObject {
             
         }
     }
-
+    
+    
+    
+    func observeMeInDB() {
+        service.observeMeInDB(game: self.game)
+    }
+    
+    
+    
+    
+    func changeLobbyName() {
+        service.changedLobbyName(controller: self, newName: "newName")
+    }
 }

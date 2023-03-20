@@ -95,7 +95,7 @@ struct ContentView: View {
                 print("Navigate to main page")
                 navigateToMainPage = true
                 //selection = "MainPageView"
-                controller.service.observeMeInDB()
+                controller.observeMeInDB()
                 navSate.state = "MainPageView"
             }
             else{
