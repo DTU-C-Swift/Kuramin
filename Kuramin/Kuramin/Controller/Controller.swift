@@ -21,7 +21,7 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let notSet = Util().NOT_SET
-    //private var lastLobbyIds: [String] = []
+    private var lastLobbyIds: [String] = []
     
     
     
@@ -97,6 +97,8 @@ class Controller : ObservableObject {
         
         for crrDbPlayer in lobby.players {
             
+            
+            
             self.p.write("observeLobby: id: \(crrDbPlayer.pid)")
             
             
@@ -104,42 +106,67 @@ class Controller : ObservableObject {
             if crrDbPlayer.pid == game.me.id {
                 
                 self.p.write("It is me")
-                game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
-                game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
+//                game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
+//                game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
+                game.me.updateInfo(dbPlayer: crrDbPlayer)
+                
                 if game.addNode(nodeToAdd: game.me) {
                     p.write("Me being added to player list")
                 }
                 else {p.write("Me being updated")}
                 continue
+                
+                
+            } else if lastLobbyIds.contains(crrDbPlayer.pid) {
+                
+                let pRef = game.getPlayerRef(pid: crrDbPlayer.pid)
+                pRef?.updateInfo(dbPlayer: crrDbPlayer)
+                p.write("Player \(crrDbPlayer.pid) updated")
+                
+                
+            } else {
+                
+                lastLobbyIds.append(crrDbPlayer.pid)
+                let newPlayer =  crrDbPlayer.createPlayer()
+                game.addNode(nodeToAdd: newPlayer)
+                service.downloadImg(player: newPlayer)
             }
+            
+            
+
+            
+            
+            
+            
             
             
             // Other players in lobby
             
-            let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid)
-            
-            if crrPlayerRef != nil  {
-                
-                self.p.write("Player found \(crrDbPlayer.pid)")
-                
-//                if crrPlayerRef.isDefaultImg {
-//                    service.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
-//                }
-                
-                crrPlayerRef!.updateInfo(dbPlayer: crrDbPlayer)
-                
-                
-            }
-            
-            else {
-                
-                self.p.write("Player does not exist in the list \(crrDbPlayer.pid)")
-                
-                let newPlayer =  crrDbPlayer.createPlayer()
-                game.addNode(nodeToAdd: newPlayer)
-                service.downloadImg(player: newPlayer)
-                
-            }
+//            let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid)
+//
+//            if crrPlayerRef != nil  {
+//
+//                self.p.write("Player found \(crrDbPlayer.pid)")
+//
+////                if crrPlayerRef.isDefaultImg {
+////                    service.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
+////                }
+//
+//                crrPlayerRef!.updateInfo(dbPlayer: crrDbPlayer)
+//
+//
+//            }
+//
+//            else {
+//
+//                self.p.write("Player does not exist in the list \(crrDbPlayer.pid)")
+//
+//                lastLobbyIds.append(crrDbPlayer.pid)
+//                let newPlayer =  crrDbPlayer.createPlayer()
+//                game.addNode(nodeToAdd: newPlayer)
+//                service.downloadImg(player: newPlayer)
+//
+//            }
             
             
             

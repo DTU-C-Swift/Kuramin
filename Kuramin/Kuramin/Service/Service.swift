@@ -122,9 +122,13 @@ class Service {
                 self.printer.write("You successfully landed in lobby. Id: \(me.id)")
 //                self.amIHost(game: game)
                 
-                if shouldCall_lobbyObserver {
-                    self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
-                }
+//                if shouldCall_lobbyObserver {
+//                    self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
+//                }
+                
+                
+                self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
+
             }
         }
 
@@ -547,6 +551,19 @@ class Service {
     
     
 
+    func deleteLobby() {
+        db.collection(MATCHES).document(LOBBY).delete() { err in
+            
+            if let err = err {
+                self.printer.write("Error deleting lobby.")
+
+            } else {
+                self.printer.write("Lobby successfully deleted")
+
+            }
+            
+        }
+    }
 
     
     
