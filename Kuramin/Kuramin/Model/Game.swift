@@ -577,6 +577,17 @@ public class Game : ObservableObject {
     }
 
     
+    func setHostId(hostId: String) {
+        
+        lock("setHostId")
+        
+        if self.hostId != hostId {
+            self.hostId = hostId
+        }
+        
+        unlock("setHostId")
+
+    }
     
     
 }

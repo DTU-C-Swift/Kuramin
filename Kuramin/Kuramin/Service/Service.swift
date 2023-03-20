@@ -182,14 +182,25 @@ class Service {
     
     
     
-    
+    func changedLobbyName()  {
+        
+        let ref = db.collection(MATCHES).document(LOBBY)
+        
+        let newDocumentName = 
+    }
     
     
     
     
     
 
-    
+    func exitLobby() {
+        
+        
+        
+        
+        
+    }
     
     
     
