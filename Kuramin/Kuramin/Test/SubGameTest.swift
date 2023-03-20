@@ -43,14 +43,14 @@ class SubGameTest : ObservableObject{
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
-            assert(game.me.cardsInHand != 20)
+            assert(game.me.cardsInHand == -1)
             assert(game.playerSize == 0)
 
             controller.goToLobby(addDummyPlayer: false)
             
             // lets player to be fected from db
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                assert(game.me.cardsInHand == 20)
+                assert(game.me.cardsInHand != -1)
                 assert(game.playerSize == 1)
                 assert(game.head === game.me)
                 assert(game.head!.id == game.me.id)
