@@ -66,30 +66,42 @@ struct GamePage: View {
                     
                     
                     
-
+                    
                     
                 }
-
+                
                 Spacer()
                 
-                HStack {
+                ZStack {
                     
-                    Spacer()
-                    MyPlayerViewInGamePage(me: controller.game.me, game: game)
-                        .padding(.bottom, 10)
-                    Spacer()
-                    
-                    
-                    Button(action: {
+                    HStack {
                         
-                        //controller.service.deleteLobby()
-                        controller.changeLobbyName()
+                        Spacer()
+                        MyPlayerViewInGamePage(me: controller.game.me, game: game)
+                            .padding(.bottom, 10)
+                        Spacer()
                         
-                    }) {
-                        Text("delete lobby")
                     }
+                    
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            
+                            controller.changeLobbyName()
+                            
+                        }) {
+                            Text("Rename lobby")
+                        }
+
+                    }
+                    
+                    
                 }
+                
+                
             }
+            
             
             
         }
@@ -107,7 +119,7 @@ struct GamePage: View {
         .persistentSystemOverlays(.hidden)
         .onAppear() {
             //controller.service.goToLobby(addDummyPlayer: false)
-
+            
             //            earlier = MyDate().getTime()
             //
             //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -117,7 +129,7 @@ struct GamePage: View {
             //controller.game.addDummyPlayers()
             //controller.service.goToLobby(val: false)
             controller.goToLobby(addDummyPlayer: false)
-
+            
             
         }
         
