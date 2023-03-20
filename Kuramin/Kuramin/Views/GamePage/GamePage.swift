@@ -82,7 +82,8 @@ struct GamePage: View {
                     
                     Button(action: {
                         
-                        controller.service.deleteLobby()
+                        //controller.service.deleteLobby()
+                        controller.changeLobbyName()
                         
                     }) {
                         Text("delete lobby")

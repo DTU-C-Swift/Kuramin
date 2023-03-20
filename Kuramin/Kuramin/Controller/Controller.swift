@@ -215,4 +215,11 @@ class Controller : ObservableObject {
     func observeMeInDB() {
         service.observeMeInDB(game: self.game)
     }
+    
+    
+    
+    
+    func changeLobbyName() {
+        service.changedLobbyName(newName: "newName")
+    }
 }

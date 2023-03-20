@@ -24,6 +24,7 @@ class Service {
 
     let LOBBY = "lobby"
     var MATCHES = "matches"
+    let NOTSET = Util().NOT_SET
 
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var isLobbyObserving = false
@@ -182,12 +183,71 @@ class Service {
     
     
     
-    func changedLobbyName()  {
+    func changedLobbyName(newName: String)  {
+        
+        
+        if newName == NOTSET {
+            printer.write("Lobby name can't be changed. Cause: gameId is \(NOTSET)")
+            return
+        }
+        
         
         let ref = db.collection(MATCHES).document(LOBBY)
         
-        let newDocumentName = 
+        ref.getDocument(as: DbLobbyNullable.self) { result in
+            
+            switch result {
+            case .success(let dbLobbyNullable):
+                
+                self.printer.write("Lobby has been fetch")
+                
+                self.delete_and_create_lobby(docRef: ref, dbLobbyNullabe: dbLobbyNullable, newName: newName)
+                
+            case .failure(let err):
+                self.printer.write("Error while fetching lobby. Cause: \(err)")
+                
+            }
+            
+        }
+        
+        
     }
+    
+    
+    
+    func delete_and_create_lobby(docRef: DocumentReference, dbLobbyNullabe: DbLobbyNullable, newName: String) {
+            
+        docRef.delete() { err in
+            
+            if err != nil {
+                self.printer.write("Error deleting lobby. Cause: \(err.debugDescription)")
+
+            } else {
+                self.printer.write("Lobby successfully deleted")
+                self.createLobby(collRef: docRef.parent, newName: newName, dbLobbyNullabe: dbLobbyNullabe)
+
+
+            }
+            
+        }
+    }
+
+    
+    
+    
+    
+    func createLobby(collRef: CollectionReference, newName: String, dbLobbyNullabe: DbLobbyNullable) {
+        
+        printer.write("createLobby being called. ColRef: \(collRef), newName: \(newName)")
+        do {
+            try collRef.document(newName).setData(from: dbLobbyNullabe)
+            printer.write("Lobby created.")
+        } catch let err {
+            printer.write("Error creating lobby. Cause: \(err.localizedDescription)")
+        }
+        
+    }
+    
     
     
     
@@ -562,12 +622,13 @@ class Service {
     
     
     
-
     func deleteLobby() {
-        db.collection(MATCHES).document(LOBBY).delete() { err in
+        let docRef = db.collection(MATCHES).document(LOBBY)
+        
+        docRef.delete() { err in
             
-            if let err = err {
-                self.printer.write("Error deleting lobby.")
+            if err != nil {
+                self.printer.write("Error deleting lobby. Cause: \(err.debugDescription)")
 
             } else {
                 self.printer.write("Lobby successfully deleted")
@@ -576,6 +637,7 @@ class Service {
             
         }
     }
+
 
     
     
