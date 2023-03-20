@@ -295,12 +295,6 @@ class Service {
     
     
     
-    
-    
-    
-    
-    
-    
     func create_or_update_user(userImage: UIImage?, game: Game) {
         
         if userImage == nil {
@@ -478,139 +472,7 @@ class Service {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //------------------------------------------ Old implementation of lobby ---------------------------------//
-    
-    
-    
-    //    func amIHost(game: Game) {
-    //        let me = game.me
-    //
-    //        let ref = db.collection("matchMaker").document(lobbyStr)
-    //        ref.getDocument { document, err in
-    //
-    //            if let document = document, document.exists {
-    //                if let hostId = document.get("host") as? String {
-    //
-    //                    game.hostId = hostId
-    //
-    //                    if hostId == me.id {
-    //                        self.printer.write("You are the host")
-    //
-    //
-    //                    } else {
-    //                        self.printer.write("You aren't the host")
-    //                    }
-    //
-    //                }
-    //            }
-    //
-    //            else {
-    //                self.printer.write("Document not found in lobby")
-    //            }
-    //        }
-    //
-    //
-    //    }
-    //
-    //
-    //    func observeLobby(game: Game) {
-    //
-    //        let ref = db.collection("matchMaker").document(lobbyStr)
-    //
-    //        ref.addSnapshotListener { snapshot, err in
-    //
-    //            do {
-    //                if var lobby = try snapshot?.data(as: FirstLobby.self) {
-    //
-    //                    self.lobbyLock.lock()
-    //                    if Util().isDuplicateLobby(lobby1: self.previousLobby, lobby2: lobby) {
-    //                        self.lobbyLock.unlock()
-    //                        return
-    //                    }
-    //
-    //
-    //
-    //
-    //
-    //                    Util().deleteEmptyIds(lobby: &lobby)
-    //
-    //                    game.updatePlayerList(lobby: &lobby)
-    //
-    //
-    //                    for uid in lobby.playerIds {
-    //                        self.printer.write("observeLobby: id: \(uid)")
-    //
-    //                        self.fetchUser(uid: uid, game: game)
-    //
-    //                    }
-    //
-    //                    self.lobbyLock.unlock()
-    //                }
-    //            }
-    //            catch {
-    //
-    //                self.printer.write("Error in observing lobby. \(err!)")
-    //            }
-    //
-    //
-    //        }
-    //
-    //    }
-    
-    
-    
-    
-    
-    //    func fetchUser(uid: String, game: Game) {
-    //
-    //        let newPlayer = Player(id: uid)
-    //
-    //        self.downloadImg(player: newPlayer)
-    //
-    //
-    //        db.collection("users").document(uid).getDocument(as: DbUser.self) { result in
-    //
-    //            switch result {
-    //            case .success(let dbUser):
-    //                Util().convertDbuserToPlayer(dbUser: dbUser, player: newPlayer)
-    //
-    //                game.addPlayer(player: newPlayer)
-    //                self.printer.write("User info has been fetched. id: \(newPlayer.id)")
-    //            case .failure(let err):
-    //                self.printer.write("Error while fetching user info of id: \(uid).\n Error type: \(err)")
-    //
-    //            }
-    //
-    //        }
-    //    }
-    
-    
-    
+
     
     func isUserloggedIn_viaFacebook() -> Bool {
         
@@ -676,9 +538,6 @@ class Service {
         
         self.printer.write("lobby document reference changed")
     }
-    
-    
-    
     
     
 }

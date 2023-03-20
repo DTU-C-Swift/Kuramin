@@ -34,10 +34,10 @@ class Controller : ObservableObject {
     
     
     func goToLobby(addDummyPlayer: Bool) {
-        
-        
+
         
         var player = Player(id: "testId\(dummyPlayerCounter)")
+
         
         
         if addDummyPlayer {
@@ -53,10 +53,12 @@ class Controller : ObservableObject {
             
             player = game.me
             player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-            // TODO Needs to find out card size. 20 is just for now
-            player.setCardsInHand(cardInHad: 20)
+
         }
         
+        
+        // TODO Needs to find out card size. 20 is just for now
+        player.setCardsInHand(cardInHad: Int(arc4random_uniform(15)))
 
         if addDummyPlayer {
             service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
@@ -82,19 +84,6 @@ class Controller : ObservableObject {
         // TODO compare with previousLobby(not just ids, all the values)
         
         
-//        if self.previousLobby == nil {
-//            self.previousLobby = lobby
-//
-//        } else {
-//
-//            if self.previousLobby?.isDuplicateLobby(compareWith: lobby) == true {
-//                self.onSuccessLobbyLock.unlock()
-//                return
-//            }
-//        }
-//
-//        self.previousLobby = lobby
-        
         // Removes player from the display
         game.updatePlayerList(lobby: lobby)
         
@@ -111,8 +100,6 @@ class Controller : ObservableObject {
             if crrDbPlayer.pid == game.me.id {
                 
                 self.p.write("It is me")
-                //                game.me.setRandomNum(randNum: crrDbPlayer.randomNum)
-                //                game.me.setCardsInHand(cardInHad: crrDbPlayer.cardsInHand)
                 game.me.updateInfo(dbPlayer: crrDbPlayer)
                 
                 if game.addNode(nodeToAdd: game.me) {
@@ -134,42 +121,6 @@ class Controller : ObservableObject {
                 game.addNode(nodeToAdd: newPlayer)
                 service.downloadImg(player: newPlayer)
             }
-            
-            
-
-            
-            
-            
-            
-            
-            
-            // Other players in lobby
-            
-//            let crrPlayerRef = game.getPlayerRef(pid: crrDbPlayer.pid)
-//
-//            if crrPlayerRef != nil  {
-//
-//                self.p.write("Player found \(crrDbPlayer.pid)")
-//
-////                if crrPlayerRef.isDefaultImg {
-////                    service.downloadImg(player: crrPlayerRef, shouldAddPlayerToGame: false, game: game)
-////                }
-//
-//                crrPlayerRef!.updateInfo(dbPlayer: crrDbPlayer)
-//
-//
-//            }
-//
-//            else {
-//
-//                self.p.write("Player does not exist in the list \(crrDbPlayer.pid)")
-//
-//                lastLobbyIds.append(crrDbPlayer.pid)
-//                let newPlayer =  crrDbPlayer.createPlayer()
-//                game.addNode(nodeToAdd: newPlayer)
-//                service.downloadImg(player: newPlayer)
-//
-//            }
             
             
             

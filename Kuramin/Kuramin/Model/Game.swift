@@ -432,16 +432,7 @@ public class Game : ObservableObject {
                 
         
         switch playerSize {
-            
-//        case 1:
-//            oneFromRight = nil
-//            twoFromRight = nil
-//            threeFromRight = nil
-//            fourFromRight = nil
-//            fiveFromRight = nil
-//            sixFromRight = nil
-//            sevenFromRight = nil
-            
+
         case 2:
             fiveFromRight = me.nextPlayer
             
