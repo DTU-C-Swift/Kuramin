@@ -23,37 +23,45 @@ struct CirclePicView: View {
 
         ZStack(alignment: .top) {
             
-            VStack(spacing: 1) {
-                
-                Image(uiImage: player.image)
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(0.6)
-                    .clipShape(Circle())
-                    .overlay{
-                        Circle().stroke(Color.white, lineWidth: 4)
-                            .shadow(radius: 7)
-                    }
-                
+            Image(uiImage: player.image)
+                .frame(width: 60, height: 60)
+                .scaleEffect(0.6)
+                .clipShape(Circle())
+                .overlay{
+                    Circle().stroke(Color.white, lineWidth: 4)
+                        .shadow(radius: 7)
+                }
+            
+            
+            VStack {
+                Spacer()
+                Spacer()
+                Spacer()
                 Text(player.displayName)
-                    .font(.footnote)
-                    .foregroundColor(Color.white)
-                
-                
+                    .font(.system(size: 12, weight: .bold))
+                    .frame(width: 80, height: 20)
+                    .cornerRadius(2)
+                    .background(Color.red)
+                    .foregroundColor(.black)
+                Spacer()
             }
+
+
+
             
             
             Spacer()
             HStack {
                 Spacer()
                 Text("\(player.cardsInHand)")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: 18, weight: .bold))
                     .font(.footnote)
                     .padding(0)
                     .background(Color.white)
                     .cornerRadius(5)
                     .foregroundColor(.black)
             }
-        
+            
             
             
         }
