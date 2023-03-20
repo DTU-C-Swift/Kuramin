@@ -340,17 +340,26 @@ class Player : ObservableObject {
     
     
     
+//    func setRandomNum(randNum newRandNum: Int) {
+//        DispatchQueue.main.async {
+//            if self.randomNumber != newRandNum {
+//                self.randomNumber = newRandNum
+//            }
+//        }
+//    }
+
+    
     
     func setRandomNum(randNum newRandNum: Int) {
-        
+
         lock()
-        
+
         if randomNumber != newRandNum {
             self.randomNumber = newRandNum
         }
-        
+
         unlock()
-        
+
     }
 
     

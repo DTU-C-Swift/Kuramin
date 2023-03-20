@@ -55,6 +55,7 @@ struct GamePage: View {
                         
                     }
                     
+                    Spacer()
                     Button(action: {
                         
                         controller.goToLobby(addDummyPlayer: true)
@@ -66,7 +67,6 @@ struct GamePage: View {
                     
                     
 
-                    Spacer()
                     
                 }
 
