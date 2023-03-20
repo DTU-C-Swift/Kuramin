@@ -107,6 +107,7 @@ struct PlayersView: View {
 
 
         }
+        .padding(.horizontal, 5)
         
         
     }

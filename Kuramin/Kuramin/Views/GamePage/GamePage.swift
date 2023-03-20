@@ -23,10 +23,6 @@ struct GamePage: View {
     @State var later: String = ""
     
     
-    init() {
-        // controller.game.addDummyPlayers()
-    }
-    
     
     var body: some View {
         
@@ -63,8 +59,6 @@ struct GamePage: View {
                     }) {
                         Text("Add")
                     }
-                    
-                    
                     
                     
                     

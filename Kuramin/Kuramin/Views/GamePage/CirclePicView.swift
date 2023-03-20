@@ -37,11 +37,12 @@ struct CirclePicView: View {
                 Spacer()
                 Spacer()
                 Spacer()
+                Spacer()
                 Text(player.displayName)
                     .font(.system(size: 12, weight: .bold))
                     .frame(width: 80, height: 20)
-                    .cornerRadius(2)
-                    .background(Color.red)
+                    .cornerRadius(10)
+                    .background(.white)
                     .foregroundColor(.black)
                 Spacer()
             }
@@ -57,7 +58,7 @@ struct CirclePicView: View {
                     .font(.system(size: 18, weight: .bold))
                     .font(.footnote)
                     .padding(0)
-                    .background(Color.white)
+                    .background(.white)
                     .cornerRadius(5)
                     .foregroundColor(.black)
             }
