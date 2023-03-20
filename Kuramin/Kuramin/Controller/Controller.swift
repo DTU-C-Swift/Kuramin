@@ -42,6 +42,7 @@ class Controller : ObservableObject {
         
         if addDummyPlayer {
             player.setFullName(fullName: "Name\(dummyPlayerCounter)")
+            player.setRandomNum(randNum: dummyPlayerCounter)
             dummyPlayerCounter += 1
         } else {
             

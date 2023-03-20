@@ -49,17 +49,26 @@ class SubGameTest : ObservableObject{
             controller.goToLobby(addDummyPlayer: false)
             
             // lets player to be fected from db
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 assert(game.me.cardsInHand == 20)
                 assert(game.playerSize == 1)
+                assert(game.head === game.me)
+                assert(game.head!.id == game.me.id)
                 
                 
+                
+                
+                // head: me
                 // Adds some dummy players in db
                 controller.goToLobby(addDummyPlayer: true)
                 controller.goToLobby(addDummyPlayer: true)
                 controller.goToLobby(addDummyPlayer: true)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    // Assuming: 
+
+                    
+                    
                     assert(game.playerSize == 4)
                     onSuccess(game)
 
