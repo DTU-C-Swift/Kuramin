@@ -64,6 +64,8 @@ public class Game : ObservableObject {
     }
     
     
+    
+    
     func updatePlayerList(lobby: Lobby) {
         lock()
         
@@ -85,7 +87,7 @@ public class Game : ObservableObject {
         if playerSize == 1 {
             
             if !lobby.players.contains(where: {$0.pid == head!.id}) {
-                removeNode(pid: head!.id)
+                removeNode(pid: head!.id, shouldLock: false)
                 
             }
 
@@ -100,7 +102,7 @@ public class Game : ObservableObject {
                 assert(crrP!.nextPlayer != nil)
                 
                 if !lobby.players.contains(where: {$0.pid == crrP!.nextPlayer!.id}) {
-                    removeNode(pid: crrP!.nextPlayer!.id)
+                    removeNode(pid: crrP!.nextPlayer!.id, shouldLock: false)
                     
                 }
                 
@@ -112,28 +114,8 @@ public class Game : ObservableObject {
         }
         
         
-
-        
-        
-        
-        
         unlock()
         
-        
-        
-        
-        
-        
-        for crrLobbyP in lobby.players {
-            
-            if removeNode(pid: crrLobbyP.pid) && !needPlayerPositionUpdate {
-                needPlayerPositionUpdate = true
-            }
-            
-        }
-        
-        
-    
 
         if needPlayerPositionUpdate {
             setPlayerPositions()
@@ -144,21 +126,6 @@ public class Game : ObservableObject {
 
     }
 
-    
-    
-    
-    
-    
-    
-    
-    func getCurrentPlayerIds() -> [String] {
-        
-        
-        
-    }
-    
-    
-    
     
     
     
@@ -419,14 +386,20 @@ public class Game : ObservableObject {
 
     /// setPlayerPosition method must be called after this method
     
-    func removeNode(pid: String) -> Bool {
+    func removeNode(pid: String, shouldLock: Bool) -> Bool {
                 
         var isPlayerRemoved = false
-        lock()
+        if shouldLock {
+            lock()
+        }
+        
         
         // If the list is empty, there's nothing to remove.
         guard let head = head else {
-            unlock()
+            
+            if shouldLock {
+                unlock()
+            }
             return false
         }
         
@@ -462,8 +435,10 @@ public class Game : ObservableObject {
             }
         }
         
+        if shouldLock {
+            unlock()
+        }
         
-        unlock()
         
         if isPlayerRemoved {
             p.write("Player id \(pid) has been removed")
@@ -477,6 +452,8 @@ public class Game : ObservableObject {
     
     
     
+    
+
     
     
     

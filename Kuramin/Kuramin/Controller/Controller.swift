@@ -124,7 +124,6 @@ class Controller : ObservableObject {
                 
             } else {
                 
-                lastLobbyIds.append(crrDbPlayer.pid)
                 let newPlayer =  crrDbPlayer.createPlayer()
                 game.addNode(nodeToAdd: newPlayer)
                 service.downloadImg(player: newPlayer)

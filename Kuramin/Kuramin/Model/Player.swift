@@ -23,8 +23,8 @@ class Player : ObservableObject {
     private(set) var leftAt = Util().NOT_SET
     private let playerLock = DispatchSemaphore(value: 1)
     
-    private (set) var nextPlayer: Player?
-    private (set) var prevPlayer: Player?
+    var nextPlayer: Player?
+    var prevPlayer: Player?
     
     
     var p = Printer(tag: "Player", displayPrints: true)
