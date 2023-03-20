@@ -79,16 +79,21 @@ class Controller : ObservableObject {
         
         self.onSuccessLobbyLock.lock()
         
-        if self.previousLobby == nil {
-            self.previousLobby = lobby
-            
-        } else {
-            
-            if self.previousLobby?.isDuplicateLobby(compareWith: lobby) == true {
-                self.onSuccessLobbyLock.unlock()
-                return
-            }
-        }
+        // TODO compare with previousLobby(not just ids, all the values)
+        
+        
+//        if self.previousLobby == nil {
+//            self.previousLobby = lobby
+//
+//        } else {
+//
+//            if self.previousLobby?.isDuplicateLobby(compareWith: lobby) == true {
+//                self.onSuccessLobbyLock.unlock()
+//                return
+//            }
+//        }
+//
+//        self.previousLobby = lobby
         
         // Removes player from the display
         game.updatePlayerList(lobby: lobby)

@@ -12,6 +12,82 @@ class Game2 {
     
     
     
+    
+    
+    /// setPlayerPosition method must be called after this method
+    
+//    func removeNode(nodeToRemove: Player) -> Bool {
+//        var isPlayerRemoved = false
+//
+//        lock()
+//
+//        // If the list is empty, there's nothing to remove.
+//        guard let head = head else {
+//            unlock()
+//            return false
+//        }
+//
+//        if head === nodeToRemove {
+//            // Removing the head node.
+//            if head.nextPlayer === head {
+//                // Removing the only node in the list.
+//                self.head = nil
+//                playerSize = 0
+//                isPlayerRemoved = true
+//            } else {
+//                // Removing the head node of a list with more than one node.
+//                self.head = head.nextPlayer
+//                self.head!.prevPlayer = head.prevPlayer
+//                head.prevPlayer!.nextPlayer = self.head
+//                playerSize -= 1
+//                isPlayerRemoved = true
+//            }
+//        } else {
+//            // Search for the node to remove.
+//            var current = head.nextPlayer
+//            while current !== head && current !== nodeToRemove {
+//                current = current?.nextPlayer
+//            }
+//
+//            if current === nodeToRemove {
+//                // Remove the node by updating the next and previous pointers.
+//                current!.prevPlayer!.nextPlayer = current?.nextPlayer
+//                current!.nextPlayer?.prevPlayer = current?.prevPlayer
+//
+//                playerSize -= 1
+//                isPlayerRemoved = true
+//            }
+//        }
+//
+//        unlock()
+//
+//
+//        if isPlayerRemoved {
+//            p.write("Player id \(nodeToRemove.id) has been removed")
+//            setPlayerPositions()
+//            return true
+//        }
+//
+//        p.write("Player id \(nodeToRemove.id) not found to remove")
+//
+//        return false
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //    func getPlayerRef(pid: String) -> Player? {
 //        if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
 //            self.p.write("PlayerId is empty. Id: \(pid). (getPlayerRef)")
