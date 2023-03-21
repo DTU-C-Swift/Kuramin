@@ -58,13 +58,16 @@ struct CirclePicView: View {
             Spacer()
             HStack {
                 Spacer()
-                Text("\(player.cardsInHand)")
-                    .font(.system(size: 18, weight: .bold))
-                    .font(.footnote)
-                    .padding(0)
-                    .background(.white)
-                    .cornerRadius(5)
-                    .foregroundColor(.black)
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                    Text("\(player.cardsInHand)")
+                        .font(.system(size: 12, weight: .bold))
+                        .font(.footnote)
+                        .foregroundColor(.black)
+                }
+                .frame(width: 25, height: 20)
             }
             
             
