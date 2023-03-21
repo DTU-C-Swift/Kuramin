@@ -38,12 +38,16 @@ struct CirclePicView: View {
                 Spacer()
                 Spacer()
                 Spacer()
-                Text(player.displayName)
-                    .font(.system(size: 12, weight: .bold))
-                    .frame(width: 80, height: 20)
-                    .cornerRadius(10)
-                    .background(.white)
-                    .foregroundColor(.black)
+                
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                    Text(player.displayName)
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.black)
+                }
+                .frame(width: 90, height: 20)
                 Spacer()
             }
 
@@ -67,7 +71,7 @@ struct CirclePicView: View {
             
         }
         
-        .frame(width: 80, height: 80)
+        .frame(width: 90, height: 80)
 
     }
     
