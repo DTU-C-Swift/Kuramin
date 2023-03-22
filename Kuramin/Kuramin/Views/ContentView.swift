@@ -62,37 +62,14 @@ struct ContentView: View {
                     
                     Button("Sign In") {
                         signIn()
+                        //MainPage()
                     }
                     
+                    
                     HStack {
-                        NavigationLink(destination: MainPage()) {
-                            HStack {
-                                Image(systemName: "applelogo")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 24)
-                            .background(Color.black)
-                            .cornerRadius(16)
-                            .shadow(radius: 4, x: 0, y: 4)
-                        }
                         FbAuth(width: 210, height: 50)
                             .cornerRadius(16)
                             .shadow(radius: 4, x: 0, y: 4)
-                        
-                        NavigationLink(destination: MainPage()) {
-                            HStack {
-                                Image(systemName: "tree")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.black)
-                            }
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 24)
-                            .background(Color.white)
-                            .cornerRadius(16)
-                            .shadow(radius: 4, x: 0, y: 4)
-                        }
                         
                     }
                     

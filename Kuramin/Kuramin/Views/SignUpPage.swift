@@ -47,21 +47,7 @@ struct SignUpPage: View {
             
             HStack {
                 Image(systemName: "person")
-                TextField("First Name", text: $firstName)
-                Spacer()
-            }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 2)
-                    .foregroundColor(.black)
-            )
-            .padding(.vertical, 2)
-            .padding(.horizontal, 200)
-            
-            HStack {
-                Image(systemName: "person")
-                TextField("Second Name", text: $secondName)
+                TextField("Full Name", text: $firstName)
                 Spacer()
             }
             .padding()
@@ -74,7 +60,7 @@ struct SignUpPage: View {
             .padding(.horizontal, 200)
             
             Button("Sign Up") {
-                
+                signUp()
             }
             
         }
