@@ -94,3 +94,4 @@ struct SignUpPage_Previews: PreviewProvider {
         SignUpPage()
     }
 }
+
