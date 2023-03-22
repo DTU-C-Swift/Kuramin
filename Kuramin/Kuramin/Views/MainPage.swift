@@ -117,7 +117,7 @@ struct MainPage: View {
         }
         .onChange(of: me.fullName) { newValue in
             // ------- Player goes to lobby --------- //
-            controller.goToLobby(addDummyPlayer: false)
+            //controller.goToLobby(addDummyPlayer: false)
         }
 
         
