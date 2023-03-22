@@ -86,7 +86,7 @@ public class Game : ObservableObject {
         if playerSize == 1 {
             
             if !lobby.players.contains(where: {$0.pid == head!.id}) {
-                removeNode(pid: head!.id, shouldLock: false)
+                if removeNode(pid: head!.id, shouldLock: false) {}
                 needPlayerPositionUpdate = true
 
             }
@@ -102,7 +102,7 @@ public class Game : ObservableObject {
                 assert(crrP!.nextPlayer != nil)
                 
                 if !lobby.players.contains(where: {$0.pid == crrP!.nextPlayer!.id}) {
-                    removeNode(pid: crrP!.nextPlayer!.id, shouldLock: false)
+                    if removeNode(pid: crrP!.nextPlayer!.id, shouldLock: false) {}
                     needPlayerPositionUpdate = true
                     
                 }
@@ -576,7 +576,7 @@ public class Game : ObservableObject {
 
     
     func addDummyPlayers(val: Int) {
-        addNode(nodeToAdd: me)
+        if addNode(nodeToAdd: me) {}
         
         for i in 0..<val {
             let newPlayer = Player(id: "id\(i)")
@@ -586,7 +586,7 @@ public class Game : ObservableObject {
             
             //players.append(newPlayer)
             
-            addNode(nodeToAdd: newPlayer)
+            if addNode(nodeToAdd: newPlayer) {}
         }
         setPlayerPositions(shouldLock: true)
     }

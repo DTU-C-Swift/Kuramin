@@ -102,7 +102,7 @@ class SubGameTest : ObservableObject{
     
     
     func updateMethodTest() {
-        var controller = Controller()
+        let controller = Controller()
         let game = controller.game
         var dbPlayers: [DbPlayer] = []
         
@@ -146,8 +146,8 @@ class SubGameTest : ObservableObject{
         // head: p1, p2
         // Expectation: p1, p2, p3, p4
         
-        game.addNode(nodeToAdd: dbPlayers[3].createPlayer())
-        game.addNode(nodeToAdd: dbPlayers[2].createPlayer())
+        if game.addNode(nodeToAdd: dbPlayers[3].createPlayer()) {}
+        if game.addNode(nodeToAdd: dbPlayers[2].createPlayer()) {}
         
         assert(game.playerSize == 4)
         
@@ -177,7 +177,7 @@ class SubGameTest : ObservableObject{
         dbPlayers.remove(at: 0)
         dbPlayers.remove(at: 0)
         // dbPlayers: p3, p4, p5, p6, p7, me
-        var lobby = Lobby(gameId: "12345", host: dbPlayers[1].pid, whosTurn: Util.NOT_SET, players: dbPlayers)
+        let lobby = Lobby(gameId: "12345", host: dbPlayers[1].pid, whosTurn: Util.NOT_SET, players: dbPlayers)
 
         game.updatePlayerList(lobby: lobby)
         assert(game.playerSize == 2)

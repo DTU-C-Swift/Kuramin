@@ -380,7 +380,7 @@ class Service {
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
-        let uploadTask = imageRef.putData(imageData, metadata: metadata) { metadata, error in
+        _ = imageRef.putData(imageData, metadata: metadata) { metadata, error in
             if let error = error {
                 self.printer.write("Error uploading image: \(error.localizedDescription)")
                 return
