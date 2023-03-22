@@ -63,7 +63,7 @@ struct login : UIViewRepresentable {
     
     func somethingWentWrong() {
         self.logOutFb()
-        DataHolder.controller.bufferState = Util().FAILED
+        DataHolder.controller.bufferState = Util.FAILED
 
     }
     
@@ -86,7 +86,7 @@ struct login : UIViewRepresentable {
             
             if AccessToken.current != nil {
                 let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                DataHolder.controller.bufferState = Util().PROGRESSING
+                DataHolder.controller.bufferState = Util.PROGRESSING
                 
                 Auth.auth().signIn(with: credential) { (res, er) in
                     if er != nil {
@@ -135,7 +135,7 @@ struct login : UIViewRepresentable {
                         
                     }
                     
-                    DataHolder.controller.bufferState = Util().SUCCEDED
+                    DataHolder.controller.bufferState = Util.SUCCEDED
                 }
             }
             else {

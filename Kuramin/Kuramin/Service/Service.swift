@@ -27,7 +27,7 @@ class Service {
     
     // var lobbyDocRef = Firestore.firestore().collection("matches").document("lobby")
     
-    let NOTSET = Util().NOT_SET
+    let NOTSET = Util.NOT_SET
     
     var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
     var isLobbyObserving = false
@@ -69,7 +69,7 @@ class Service {
                 
                 let gameId = String(UUID().uuidString.prefix(10))
                 
-                let dbLobby = DbLobbyNullable(gameId: gameId, host: Util().NOT_SET, whoseTurn: Util().NOT_SET, players: [dbPlayerNullable])
+                let dbLobby = DbLobbyNullable(gameId: gameId, host: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
                 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: docRef)
@@ -395,7 +395,7 @@ class Service {
     func observeMeInDB(game: Game) {
         let me = game.me
         
-        if me.id == Util().NOT_SET {
+        if me.id == Util.NOT_SET {
             
             if let user = Auth.auth().currentUser {
                 me.setId(pid: user.uid)

@@ -11,13 +11,13 @@ import SwiftUI
 
 
 struct Util {
-    let PROGRESSING = "display"
-    let SUCCEDED = "succeded"
-    let FAILED = "failed"
-    let NOT_SET = "notSet"
-    let NOTSET_INT = -1
+    static let PROGRESSING = "display"
+    static let SUCCEDED = "succeded"
+    static let FAILED = "failed"
+    static let NOT_SET = "notSet"
+    static let NOTSET_INT = -1
     
-    let defaultProfileImg = UIImage(imageLiteralResourceName: "person_100")
+    static let defaultProfileImg = UIImage(imageLiteralResourceName: "person_100")
     
     
     

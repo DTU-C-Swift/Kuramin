@@ -20,7 +20,7 @@ class Controller : ObservableObject {
     let p = Printer(tag: "Controller", displayPrints: true)
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
-    let NOTSET = Util().NOT_SET
+    let NOTSET = Util.NOT_SET
     
     
     
@@ -171,6 +171,10 @@ class Controller : ObservableObject {
     
     
     func changeLobbyName() {
-        service.changedLobbyName(controller: self, newName: "newName")
+        
+        
+        
+        
+        service.changedLobbyName(controller: self, newName: game.id)
     }
 }

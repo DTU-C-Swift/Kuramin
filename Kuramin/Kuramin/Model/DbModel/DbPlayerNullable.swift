@@ -39,8 +39,8 @@ public struct DbPlayerNullable: Codable {
     
     func toDictionary() -> [String: Any] {
         return [
-            "pName": pName ?? Util().NOT_SET,
-            "pid": pid ?? Util().NOT_SET,
+            "pName": pName ?? Util.NOT_SET,
+            "pid": pid ?? Util.NOT_SET,
             "randomNum": randomNum ?? -1,
             "cardsInHand": cardsInHand ?? -1
         ]

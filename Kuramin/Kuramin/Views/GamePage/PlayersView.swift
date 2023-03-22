@@ -13,7 +13,7 @@ struct PlayersView: View {
     
     @ObservedObject var game: Game
     
-    let defaulId = Util().NOT_SET
+    let defaulId = Util.NOT_SET
     
     init(game: Game) {
         self.game = game

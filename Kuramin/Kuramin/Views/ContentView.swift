@@ -90,7 +90,7 @@ struct ContentView: View {
                         }
                 
                 
-                if controller.bufferState == Util().PROGRESSING {
+                if controller.bufferState == Util.PROGRESSING {
                     ProgressBar()
 
                 }
@@ -115,7 +115,7 @@ struct ContentView: View {
         }
 
         .onChange(of: controller.bufferState) { newValue in
-            if newValue == Util().FAILED {
+            if newValue == Util.FAILED {
                 showAlert = true
 
             }

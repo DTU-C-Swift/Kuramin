@@ -11,16 +11,16 @@ import SwiftUI
 class Player : ObservableObject {
     
     private(set) var id: String
-    @Published private(set) var fullName: String = Util().NOT_SET
-    @Published private(set) var displayName = Util().NOT_SET
-    @Published private(set) var image: UIImage = Util().defaultProfileImg
+    @Published private(set) var fullName: String = Util.NOT_SET
+    @Published private(set) var displayName = Util.NOT_SET
+    @Published private(set) var image: UIImage = Util.defaultProfileImg
     @Published private(set) var isLeft: Bool = false
-    @Published private(set) var coins: Int = Util().NOTSET_INT
-    @Published private(set) var cardsInHand = Util().NOTSET_INT
-    @Published private(set) var randomNumber = Util().NOTSET_INT
+    @Published private(set) var coins: Int = Util.NOTSET_INT
+    @Published private(set) var cardsInHand = Util.NOTSET_INT
+    @Published private(set) var randomNumber = Util.NOTSET_INT
     private(set) var isDefaultImg = true
 
-    private(set) var leftAt = Util().NOT_SET
+    private(set) var leftAt = Util.NOT_SET
     private let playerLock = DispatchSemaphore(value: 1)
     
     var nextPlayer: Player?
@@ -296,7 +296,7 @@ class Player : ObservableObject {
         self.isLeft = newIsLeft
         
         if newIsLeft == false {
-            self.leftAt = Util().NOT_SET
+            self.leftAt = Util.NOT_SET
             
         } else {
             self.leftAt = MyDate().getTime()
