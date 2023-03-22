@@ -12,7 +12,7 @@ struct BackgroundView: View {
         ZStack {
             
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.cyan, Color.blue, Color.black]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: .trailing)
-                .ignoresSafeArea(.all)
+                .ignoresSafeArea(.container)
 
             RoundedRectangle(cornerRadius: 100)
                 .strokeBorder(Color.cyan, lineWidth: 30)

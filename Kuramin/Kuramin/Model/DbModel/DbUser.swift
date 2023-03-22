@@ -21,7 +21,7 @@ public struct DbUser: Codable {
 }
 
 
-public struct Lobby: Codable {
+public struct FirstLobby: Codable {
     var host: String
     var playerIds: [String]
 

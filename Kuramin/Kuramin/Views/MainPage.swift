@@ -17,6 +17,9 @@ struct MainPage: View {
 
 
     @ObservedObject var controller: Controller = DataHolder.controller
+    @ObservedObject var game = DataHolder.controller.game
+    @ObservedObject var me = DataHolder.controller.game.me
+
     @EnvironmentObject var navState: NavState
     
     var body: some View {
@@ -88,7 +91,6 @@ struct MainPage: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            controller.service.goToLobby()
         }
         .sheet(isPresented: $showMenu) {
             MenuPopup()
@@ -112,6 +114,10 @@ struct MainPage: View {
         }
         .sheet(isPresented: $showHowTo) {
             HowToPlayView()
+        }
+        .onChange(of: me.fullName) { newValue in
+            // ------- Player goes to lobby --------- //
+            controller.goToLobby(addDummyPlayer: false)
         }
 
         
