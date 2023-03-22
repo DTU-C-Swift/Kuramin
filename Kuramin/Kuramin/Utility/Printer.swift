@@ -18,7 +18,7 @@ class Printer {
     }
     
     func write(_ str: Any) {
-        print("MyTag ", tag,": ", str)
+        print("MyTag=>\(tag): \(str)")
 
     }
     

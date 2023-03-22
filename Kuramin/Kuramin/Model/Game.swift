@@ -140,6 +140,11 @@ public class Game : ObservableObject {
 
     func addNode(nodeToAdd: Player) -> Bool {  // list size is 0
         
+        if playerSize >= 8 {
+            p.write("Not allow to add more player to game. Already 8 players.")
+            return false
+        }
+        
         if updateIfExist(player:  nodeToAdd) {
             return false
         }

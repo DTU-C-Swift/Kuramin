@@ -35,18 +35,11 @@ class Service {
     
     
     
-    
-    
-    
-    
-    
-    
-    
     //-------------------------------- New implementation of lobby -----------------------------//
     
     func goToLobby(me: Player, controller: Controller, shouldCall_lobbyObserver: Bool) {
+        var isSucceded = true
         let game = controller.game
-        
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
         
         let docRef = db.collection(MATCHES).document(MATCH_ID)
@@ -84,14 +77,12 @@ class Service {
             else {
                 
                 
-                // Checks If the player already exists in the lobby(player list).
-                
                 do {
                     let dbLobbyNullable = try lobbyDocument.data(as: DbLobbyNullable.self)
                     
-                    
                     if let dbLobby = dbLobbyNullable.mapToLobby() {
                         
+                        // Checks If the player already exists in the lobby(player list).
                         for crrP in dbLobby.players {
                             if crrP.pid == me.id {
                                 me.setCardsInHand(cardInHad: crrP.cardsInHand)
@@ -100,20 +91,26 @@ class Service {
                                 return
                             }
                         }
+                        
+                        // Checks If there are already 8 players.
+                        if dbLobby.players.count >= 8 {
+                            self.printer.write("You need to wait, there are 8 players in lobby")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                                self.goToLobby(me: me, controller: controller, shouldCall_lobbyObserver: shouldCall_lobbyObserver)
+                            }
+                            
+                            isSucceded = false
+                            return
+                        }
                     }
-                    
-                    
                     
                     
                 } catch {
                     self.printer.write("Error while mapping data. (*)")
                 }
                 
-                
                 // If the player does not exists in the lobby(player list) then adds the player to the lobby.
-                
                 transaction.updateData(["players": FieldValue.arrayUnion([dbPlayerNullable.toDictionary()])], forDocument: docRef)
-                
                 
             }
             
@@ -123,15 +120,14 @@ class Service {
             if let error = error {
                 self.printer.write("Failed to go to lobby: \(error)")
             } else {
-                self.printer.write("You successfully landed in lobby. Id: \(me.id)")
-                //                self.amIHost(game: game)
+                self.printer.write("Transitional call successfully done")
                 
-                if shouldCall_lobbyObserver {
-                    self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
+                if isSucceded {
+                    self.printer.write("You successfully landed in lobby. Id: \(me.id)")
+                    if shouldCall_lobbyObserver {
+                        self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
+                    }
                 }
-                
-                
-                //self.observeLobby(game: game, controller.onSuccessLobbySnapshot(lobby:))
                 
             }
         }
