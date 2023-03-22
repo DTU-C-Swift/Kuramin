@@ -12,10 +12,9 @@ struct GamePage: View {
     @State private var isAnimating = false
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
     @EnvironmentObject var navState: NavState
-    @Environment(\.scenePhase) private var scenePhase
     let printer = Printer(tag: "GamePage", displayPrints: true)
     @State private var changedTopColumn = false
-    
+
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
     @ObservedObject var game = DataHolder.controller.game
@@ -99,21 +98,33 @@ struct GamePage: View {
             
             
         }
+
         .navigationBarBackButtonHidden(true)
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .background {
-                // App is about to be closed
-                self.printer.write("app is closing")
-                
-            }
-            else {
-                self.printer.write("app is oppening")
-            }
-        }
+//        .onChange(of: scenePhase) { newPhase in
+//
+//            self.printer.write("on change")
+//
+//
+//            if newPhase == .background {
+//                // App is about to be closed
+//                self.printer.write("app is closing")
+//
+//            }
+//            else {
+//                self.printer.write("app is oppening")
+//            }
+//        }
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+//            // App is about to be closed
+//            self.printer.write("app is closing")
+//        }
+
+        
         .persistentSystemOverlays(.hidden)
         .onAppear() {
             //controller.game.addDummyPlayers(val: 7)
         }
+
         
     }
     

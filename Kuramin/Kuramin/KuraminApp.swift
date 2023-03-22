@@ -39,8 +39,8 @@ struct KuraminApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            TestVIew()
+            ContentView()
+            //TestVIew()
             
                 
                 //.environmentObject(DataHolder.controller)
@@ -50,3 +50,9 @@ struct KuraminApp: App {
     }
 }
 
+
+
+func applicationDidEnterBackground(_ application: UIApplication) {
+    print("Appdelicat")
+ // Save here
+}

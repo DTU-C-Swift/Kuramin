@@ -14,6 +14,7 @@ struct MainPage: View {
     @State private var showHowTo = false
     @State private var showGamePage = false
     @State private var isGamePageLoading = true
+    @Environment(\.scenePhase) private var scenePhase
 
 
 
@@ -142,7 +143,14 @@ struct MainPage: View {
             // ------- Player goes to lobby --------- //
             //controller.goToLobby(addDummyPlayer: false)
         }
-
+        
+        // App states
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                // App is about to be closed
+                controller.exitLobby()
+            }
+        }
         
     }
 }
