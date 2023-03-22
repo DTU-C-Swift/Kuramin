@@ -132,6 +132,10 @@ class Controller : ObservableObject {
         }
         
         game.setHostId(hostId: lobby.host)
+        
+        if !game.isLandingInLobbySucceded {
+            game.setIsLandingInLobbySucceded(val: true)
+        }
         self.onSuccessLobbyLock.unlock()
         
         

@@ -28,9 +28,9 @@ public class Game : ObservableObject {
     @Published private (set) var fiveFromRight: Player?
     @Published private (set) var sixFromRight: Player?
     @Published private (set) var sevenFromRight: Player?
-    @Published var isLandingInLobbySucceded = false
+    @Published private (set) var isLandingInLobbySucceded = false
     @Published var isWaitingToLandInLobby = false
-    
+
     
     
     
@@ -614,6 +614,28 @@ public class Game : ObservableObject {
     }
     
     
+    func setIsWaitingToLandInLobby(val: Bool) {
+        if isWaitingToLandInLobby == val {return}
+        
+        Task {
+            await MainActor.run(body: {
+                p.write("setIsWaitingToLandInLobby")
+                isWaitingToLandInLobby = val
+            })
+        }
+    }
+    
+    
+    func setIsLandingInLobbySucceded(val: Bool) {
+        if isLandingInLobbySucceded == val {return}
+        
+        Task {
+            await MainActor.run(body: {
+                isLandingInLobbySucceded = val
+                p.write("setIsLandingInLobbySucceded")
+            })
+        }
+    }
 }
 
 

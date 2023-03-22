@@ -113,7 +113,6 @@ struct GamePage: View {
         .persistentSystemOverlays(.hidden)
         .onAppear() {
             //controller.game.addDummyPlayers(val: 7)
-            controller.goToLobby(addDummyPlayer: false)
         }
         
     }

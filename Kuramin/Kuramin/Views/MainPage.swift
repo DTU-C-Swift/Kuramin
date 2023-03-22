@@ -13,7 +13,9 @@ struct MainPage: View {
     @State private var showProfile = false
     @State private var showHowTo = false
     @State private var showGamePage = false
-    @State private var isLoading = true
+    @State private var isGamePageLoading = true
+
+
 
 
     @ObservedObject var controller: Controller = DataHolder.controller
@@ -47,8 +49,9 @@ struct MainPage: View {
             Spacer()
             
             Button(action: {
-                isLoading = true
-                showGamePage = true
+                controller.goToLobby(addDummyPlayer: false)
+                isGamePageLoading = true
+//                showGamePage = true
             }, label: {
                 Text("Start New Game")
                     .font(.system(size: 24, weight: .semibold))
@@ -98,20 +101,40 @@ struct MainPage: View {
         .sheet(isPresented: $showProfile) {
             ProfilePageView()
         }
-        .sheet(isPresented: $showGamePage) {
+//        .sheet(isPresented: $showGamePage) {
+//            Group {
+//                if isLoading {
+//                    ProgressBar()
+//                } else {
+//                    GamePage()
+//                }
+//            }
+//            .onAppear {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                    isLoading = false
+//                }
+//            }
+//        }
+        
+        .sheet(isPresented: $game.isWaitingToLandInLobby) {
+            
+            
             Group {
-                if isLoading {
+                if !game.isLandingInLobbySucceded || isGamePageLoading {
                     ProgressBar()
+
                 } else {
                     GamePage()
+
                 }
             }
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    isLoading = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    isGamePageLoading = false
                 }
             }
         }
+        
         .sheet(isPresented: $showHowTo) {
             HowToPlayView()
         }

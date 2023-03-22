@@ -40,6 +40,7 @@ class Service {
     func goToLobby(me: Player, controller: Controller, shouldCall_lobbyObserver: Bool) {
         var isSucceded = true
         let game = controller.game
+        game.setIsWaitingToLandInLobby(val: true)
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
         
         let docRef = db.collection(MATCHES).document(MATCH_ID)
@@ -95,10 +96,10 @@ class Service {
                         // Checks If there are already 8 players.
                         if dbLobby.players.count >= 8 {
                             self.printer.write("You need to wait, there are 8 players in lobby")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                                self.goToLobby(me: me, controller: controller, shouldCall_lobbyObserver: shouldCall_lobbyObserver)
-                            }
-                            
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//                                self.goToLobby(me: me, controller: controller, shouldCall_lobbyObserver: shouldCall_lobbyObserver)
+//                            }
+                            game.setIsWaitingToLandInLobby(val: false)
                             isSucceded = false
                             return
                         }
