@@ -31,12 +31,12 @@ class Service {
     func create_or_update_user(userImage: UIImage?) {
         let game = DataHolder.controller.game
 
-        if userImage == nil {
-            self.printer.write("Image is nil")
-            self.logOut()
-            return
-            
-        }
+//        if userImage == nil {
+//            self.printer.write("Image is nil")
+//            self.logOut()
+//            return
+//
+//        }
         // TODO check if the user is already exist in the db
                 
         

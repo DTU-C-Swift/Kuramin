@@ -12,8 +12,9 @@ struct SignUpPage: View {
     
     @State var email: String = ""
     @State var password: String = ""
-    @State var firstName: String = ""
-    @State var secondName: String = ""
+    @State var fullName: String = ""
+    
+    var controller = DataHolder.controller
     
     var body: some View {
         VStack {
@@ -47,7 +48,7 @@ struct SignUpPage: View {
             
             HStack {
                 Image(systemName: "person")
-                TextField("Full Name", text: $firstName)
+                TextField("Full Name", text: $fullName)
                 Spacer()
             }
             .padding()
@@ -73,7 +74,7 @@ struct SignUpPage: View {
             } else if let result = result {
                 print("Signed up as \(result.user.email ?? "")")
                 let changeRequest = result.user.createProfileChangeRequest()
-                changeRequest.displayName = "\(firstName) \(secondName)"
+                changeRequest.displayName = "\(fullName)"
                 changeRequest.commitChanges { error in
                     if let error = error {
                         // Handle error
