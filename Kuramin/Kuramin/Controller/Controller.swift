@@ -21,6 +21,7 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let NOTSET = Util.NOT_SET
+    private let waitTimeSec = 30
     
     
     
@@ -176,5 +177,12 @@ class Controller : ObservableObject {
         
         
         service.changedLobbyName(controller: self, newName: game.id)
+    }
+    
+    
+    
+    func exitLobby() {
+        service.exitLobby(game: game, player: game.me)
+        
     }
 }

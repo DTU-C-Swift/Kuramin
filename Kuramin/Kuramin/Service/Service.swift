@@ -22,7 +22,7 @@ class Service {
     private let storage = Storage.storage()
     private let printer = Printer(tag: "Service", displayPrints: true)
     
-    var LOBBY = "lobby"
+    var MATCH_ID = "lobby"
     var MATCHES = "matches"
     
     // var lobbyDocRef = Firestore.firestore().collection("matches").document("lobby")
@@ -49,7 +49,7 @@ class Service {
         
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
         
-        let docRef = db.collection(MATCHES).document(LOBBY)
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         
         // Transactional call
         db.runTransaction({ (transaction, errorPointer) -> Any? in
@@ -67,9 +67,9 @@ class Service {
             if !lobbyDocument.exists {
                 self.printer.write("Document in lobby does not exit")
                 
-                let gameId = String(UUID().uuidString.prefix(10))
+                //let gameId = String(UUID().uuidString.prefix(10))
                 
-                let dbLobby = DbLobbyNullable(gameId: gameId, host: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
+                let dbLobby = DbLobbyNullable(gameId: Util.NOT_SET, host: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
                 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: docRef)
@@ -150,7 +150,7 @@ class Service {
             printer.write("Lobby observer removed.")
         }
         
-        let docRef = db.collection(MATCHES).document(LOBBY)
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         self.printer.write("Observing \(docRef.path) ...")
         isLobbyObserving = true
         
@@ -208,7 +208,7 @@ class Service {
             return
         }
         
-        let docRef = db.collection(MATCHES).document(LOBBY)
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         
         docRef.getDocument(as: DbLobbyNullable.self) { result in
             
@@ -233,7 +233,7 @@ class Service {
     
     func delete_and_create_lobby(controller: Controller, dbLobbyNullabe: DbLobbyNullable, newName: String) {
         
-        let docRef = db.collection(MATCHES).document(LOBBY)
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         docRef.delete() { err in
             
             if err != nil {
@@ -257,7 +257,7 @@ class Service {
     
     func createLobby(controller: Controller, dbLobbyNullabe: DbLobbyNullable) {
 
-        let docRef = db.collection(MATCHES).document(LOBBY)
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         printer.write("createLobby being called. ColRef: \(docRef.path)")
         do {
             try docRef.setData(from: dbLobbyNullabe)
@@ -276,16 +276,22 @@ class Service {
     
     
     
-    
-    
-    
-    func exitLobby() {
+    func exitLobby(game: Game, player: Player) {
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         
+        let playerToRemove = DbPlayerNullable(pName: player.fullName, pid: player.id, randomNum: player.randomNumber, cardsInHand: player.cardsInHand).toDictionary()
         
-        
-        
-        
+        let updateData = ["players": FieldValue.arrayRemove([playerToRemove])]
+        docRef.updateData(updateData) { error in
+            if let error = error {
+                print("Error removing player from array: \(error.localizedDescription)")
+            } else {
+                print("Player removed from array successfully.")
+            }
+        }
     }
+
+    
     
     
     
@@ -510,7 +516,7 @@ class Service {
     
     
     func deleteLobby() {
-        let docRef = db.collection(MATCHES).document(LOBBY)
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
         
         docRef.delete() { err in
             
@@ -534,7 +540,7 @@ class Service {
         }
         
         self.MATCHES = collStr
-        self.LOBBY = path
+        self.MATCH_ID = path
         
         self.printer.write("lobby document reference changed")
     }
