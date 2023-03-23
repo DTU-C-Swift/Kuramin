@@ -9,8 +9,8 @@ import Foundation
 
 
 class Printer {
-    var tag: String
-    var displayPrints: Bool
+    private var tag: String
+    private var displayPrints: Bool
     
     init(tag: String, displayPrints: Bool) {
         self.tag = tag

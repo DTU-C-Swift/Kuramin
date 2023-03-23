@@ -133,20 +133,25 @@ class Controller : ObservableObject {
     
     
     func initializeGame() {
-        p.write("setHostId is being called")
+        p.write("initializeGame is being called")
         DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
             
             if self.game.playerSize < 2 {
-                self.has_host_id_setterMethod_been_called = false
-                return}
+                self.isGameInitialized = false
+                return
+            }
             
             
             
             if self.game.head!.prevPlayer!.id == self.game.me.id {
+                // I am the host
+                self.p.write("You are the host")
                 self.changeLobbyName()
                 
             } else {
-                
+                // I am not the host
+                self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     self.lobbyService.setLobbyDocumentRef(collStr: self.lobbyService.MATCHES, path: self.game.id)
                     self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
@@ -206,7 +211,7 @@ class Controller : ObservableObject {
             } else {
                 
                 let newPlayer =  crrDbPlayer.createPlayer()
-                game.addNode(nodeToAdd: newPlayer)
+                if game.addNode(nodeToAdd: newPlayer) {}
                 userService.downloadImg(player: newPlayer)
             }
             
@@ -218,38 +223,24 @@ class Controller : ObservableObject {
             game.setGameId(gid: lobby.gameId)
         }
         
-        game.setHostId(hostId: lobby.hostId)
+        //game.setHostId(hostId: lobby.hostId)
         
         if !game.isLandingInLobbySucceded {
             game.setIsLandingInLobbySucceded(val: true)
         }
         
         
-        if !isGameInitialized {
-            
-            if lobby.players.count > 1 && !has_host_id_setterMethod_been_called {
-                lobbyService.setHostId_ifIamHost(controller: self)
-            }
-            
-            
-            
-            if lobby.hostId != Util.NOT_SET {
-                
-                if lobby.hostId == game.me.id {
-                    p.write("You are the host")
-                } else {
-                    p.write("You are not the host")
-                    
-                    lobbyService.changedLobbyName(controller: self, newName: game.id)
-                    
-                    
-                }
-            }
-                        
-        }
-
-        
         self.onSuccessLobbyLock.unlock()
+        
+        
+        
+        
+        if !isGameInitialized {
+            if lobby.players.count >= 2 {
+                self.initializeGame()
+                self.isGameInitialized = true
+            }
+        }
         
     }
 
