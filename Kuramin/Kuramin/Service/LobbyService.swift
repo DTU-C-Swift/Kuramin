@@ -262,6 +262,17 @@ class LobbyService : UserService {
         
         let playerToRemove = DbPlayerNullable(pName: player.fullName, pid: player.id, randomNum: player.randomNumber, cardsInHand: player.cardsInHand).toDictionary()
         
+        if game.hostId != NOTSET && game.hostId == game.me.id {
+            let updateHostId = ["hostId": NOTSET]
+            docRef.updateData(updateHostId) { err in
+                if let err = err {
+                    print("Error setting hostId: \(err.localizedDescription)")
+                }
+            }
+ 
+            
+        }
+        
         let updateData = ["players": FieldValue.arrayRemove([playerToRemove])]
         docRef.updateData(updateData) { error in
             if let error = error {
