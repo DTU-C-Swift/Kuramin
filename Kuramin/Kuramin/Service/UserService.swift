@@ -30,11 +30,6 @@ class UserService {
     
     
     
-    // ------------------------------------------------------------------------------------- //
-    
-    
-    
-    
     func create_or_update_user(userImage: UIImage?, game: Game) {
         
         if userImage == nil {

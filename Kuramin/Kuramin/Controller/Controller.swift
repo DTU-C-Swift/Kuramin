@@ -210,6 +210,10 @@ class Controller : ObservableObject {
                     p.write("You are the host")
                 } else {
                     p.write("You are not the host")
+                    
+                    lobbyService.changedLobbyName(controller: self, newName: game.id)
+                    
+                    
                 }
             }
                         
