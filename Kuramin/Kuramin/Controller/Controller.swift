@@ -14,6 +14,7 @@ class Controller : ObservableObject {
     var service: Service = Service()
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
+    @Published var profile = Player(id: Util().NOT_SET)
     
     //@Published var image: UIImage? = nil
     var dummyPlayerCounter = 1
@@ -21,6 +22,7 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let NOTSET = Util().NOT_SET
+    
     
     
     

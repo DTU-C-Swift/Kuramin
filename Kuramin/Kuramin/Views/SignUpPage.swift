@@ -91,13 +91,12 @@ struct SignUpPage: View {
                         print("User profile updated with name: \(result.user.displayName ?? "")")
                         let db = Firestore.firestore()
                         let userDocRef = db.collection("users").document(result.user.uid)
-                        userDocRef.setData(["fullName": fullName, "coins": coins]) {
-                            error in
-                            if let error = error {
-                                print("Error adding document: \(error.localizedDescription)")
-                            } else {
-                                print("Document added with ID: \(userDocRef.documentID)")
-                            }
+                        var dbUser = DbUser(uid: result.user.uid, fullName: result.user.displayName!, coins: 500)
+                        do {
+                            try db.collection("users").document(result.user.uid).setData(from: dbUser)
+                            
+                        } catch let error {
+                            print("Error creating user in db: (error)")
                         }
                     }
                 }

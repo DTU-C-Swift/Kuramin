@@ -110,6 +110,7 @@ struct MainPage: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     isLoading = false
                 }
+                
             }
         }
         .sheet(isPresented: $showHowTo) {
