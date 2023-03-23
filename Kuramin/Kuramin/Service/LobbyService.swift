@@ -15,7 +15,7 @@ class LobbyService : UserService {
     
     private let db = Firestore.firestore()
     private let printer = Printer(tag: "Service", displayPrints: true)
-    private let waitTimeSec = 10.0
+    let waitTimeSec = 10.0
 
     
     
@@ -45,9 +45,9 @@ class LobbyService : UserService {
             if !lobbyDocument.exists {
                 self.printer.write("Document in lobby does not exit")
                 
-                //let gameId = String(UUID().uuidString.prefix(10))
+                let gameId = String(UUID().uuidString.prefix(10))
                 
-                let dbLobby = DbLobbyNullable(gameId: Util.NOT_SET, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
+                let dbLobby = DbLobbyNullable(gameId: gameId, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
                 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: docRef)
@@ -305,7 +305,7 @@ class LobbyService : UserService {
                 
                 
                 let docRef = self.db.collection(self.MATCHES).document(self.MATCH_ID)
-                                
+                
                 docRef.updateData([
                     "hostId": game.me.id
                 ]) { err in

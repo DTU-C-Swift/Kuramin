@@ -113,7 +113,6 @@ class Controller : ObservableObject {
     
     
     func changeLobbyName() {
-        
         lobbyService.changedLobbyName(controller: self, newName: game.id)
     }
     
@@ -128,6 +127,36 @@ class Controller : ObservableObject {
     func logOut() {
         userService.logOut()
     }
+    
+    
+    
+    
+    
+    func initializeGame() {
+        p.write("setHostId is being called")
+        DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
+            
+            if self.game.playerSize < 2 {
+                self.has_host_id_setterMethod_been_called = false
+                return}
+            
+            
+            
+            if self.game.head!.prevPlayer!.id == self.game.me.id {
+                self.changeLobbyName()
+                
+            } else {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.lobbyService.setLobbyDocumentRef(collStr: self.lobbyService.MATCHES, path: self.game.id)
+                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
+                }
+            }
+        }
+    }
+    
+    
+    
     
     
 
