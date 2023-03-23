@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 struct SignUpPage: View {
     
@@ -87,6 +88,16 @@ struct SignUpPage: View {
                         print(error.localizedDescription)
                     } else {
                         print("User profile updated with name: \(result.user.displayName ?? "")")
+                        let db = Firestore.firestore()
+                        let userDocRef = db.collection("users").document(result.user.uid)
+                        userDocRef.setData(["fullName": fullName, "email": email, "password": password]) {
+                            error in
+                            if let error = error {
+                                print("Error adding document: \(error.localizedDescription)")
+                            } else {
+                                print("Document added with ID: \(userDocRef.documentID)")
+                            }
+                        }
                     }
                 }
             }
