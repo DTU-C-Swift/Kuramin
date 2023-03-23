@@ -23,7 +23,7 @@
 		56954C2A29C237AC00155181 /* MyDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2929C237AC00155181 /* MyDate.swift */; };
 		56954C2C29C237D400155181 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2B29C237D400155181 /* Printer.swift */; };
 		56954C2E29C237F500155181 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C2D29C237F500155181 /* Util.swift */; };
-		56954C3129C2384500155181 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3029C2384500155181 /* Service.swift */; };
+		56954C3129C2384500155181 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3029C2384500155181 /* UserService.swift */; };
 		56954C3329C2386E00155181 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3229C2386E00155181 /* ServiceHelper.swift */; };
 		56954C3729C238A500155181 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3629C238A500155181 /* Card.swift */; };
 		56954C3929C238BD00155181 /* DbUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C3829C238BD00155181 /* DbUser.swift */; };
@@ -48,6 +48,7 @@
 		569C5D2929C22C7C00D1D7FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2829C22C7C00D1D7FE /* FacebookCore */; };
 		569C5D2B29C22C7D00D1D7FE /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 569C5D2A29C22C7D00D1D7FE /* FacebookLogin */; };
 		56BC82B529C3D7410011BDCD /* DbLobbyNullable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BC82B429C3D7410011BDCD /* DbLobbyNullable.swift */; };
+		56C6DCB029CC47440024AE17 /* LobbyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6DCAF29CC47430024AE17 /* LobbyService.swift */; };
 		56E2657129C2552A00738F12 /* SubGameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657029C2552A00738F12 /* SubGameTest.swift */; };
 		56E2657329C2609E00738F12 /* TestVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657229C2609E00738F12 /* TestVIew.swift */; };
 		56E75FB129C500A200215C71 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E75FB029C500A200215C71 /* PlayersView.swift */; };
@@ -90,7 +91,7 @@
 		56954C2929C237AC00155181 /* MyDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDate.swift; sourceTree = "<group>"; };
 		56954C2B29C237D400155181 /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
 		56954C2D29C237F500155181 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		56954C3029C2384500155181 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		56954C3029C2384500155181 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		56954C3229C2386E00155181 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		56954C3629C238A500155181 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		56954C3829C238BD00155181 /* DbUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUser.swift; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 		569C5D0229C2206E00D1D7FE /* KuraminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuraminUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		569C5D1F29C227E700D1D7FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56BC82B429C3D7410011BDCD /* DbLobbyNullable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbLobbyNullable.swift; sourceTree = "<group>"; };
+		56C6DCAF29CC47430024AE17 /* LobbyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyService.swift; sourceTree = "<group>"; };
 		56E2657029C2552A00738F12 /* SubGameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGameTest.swift; sourceTree = "<group>"; };
 		56E2657229C2609E00738F12 /* TestVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVIew.swift; sourceTree = "<group>"; };
 		56E75FB029C500A200215C71 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
@@ -188,8 +190,9 @@
 		56954C2F29C2382900155181 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				56954C3029C2384500155181 /* Service.swift */,
+				56954C3029C2384500155181 /* UserService.swift */,
 				56954C3229C2386E00155181 /* ServiceHelper.swift */,
+				56C6DCAF29CC47430024AE17 /* LobbyService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -485,7 +488,8 @@
 				56954C2A29C237AC00155181 /* MyDate.swift in Sources */,
 				56954C3D29C238F300155181 /* Player.swift in Sources */,
 				569C5CEA29C2206D00D1D7FE /* Persistence.swift in Sources */,
-				56954C3129C2384500155181 /* Service.swift in Sources */,
+				56C6DCB029CC47440024AE17 /* LobbyService.swift in Sources */,
+				56954C3129C2384500155181 /* UserService.swift in Sources */,
 				56F6642129C2FE9B0047DECA /* DbPlayerNullable.swift in Sources */,
 				56E2657329C2609E00738F12 /* TestVIew.swift in Sources */,
 				56954C1B29C2361300155181 /* MyPlayerViewInGamePage.swift in Sources */,

@@ -11,7 +11,7 @@ import Firebase
 
 class Controller : ObservableObject {
     @Published var game: Game = Game()
-    var service: Service = Service()
+    var service: UserService = UserService()
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
     
@@ -21,7 +21,8 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let NOTSET = Util.NOT_SET
-    private let waitTimeSec = 30
+    var isGameInitialized = false
+    var has_host_id_setterMethod_been_called = false
     
     
     
@@ -131,14 +132,34 @@ class Controller : ObservableObject {
             game.setGameId(gid: lobby.gameId)
         }
         
-        game.setHostId(hostId: lobby.host)
+        game.setHostId(hostId: lobby.hostId)
         
         if !game.isLandingInLobbySucceded {
             game.setIsLandingInLobbySucceded(val: true)
         }
+        
+        
+        if !isGameInitialized {
+            
+            if lobby.players.count > 1 && !has_host_id_setterMethod_been_called {
+                service.setHostId_ifIamHost(controller: self)
+            }
+            
+            
+            
+            if lobby.hostId != Util.NOT_SET {
+                
+                if lobby.hostId == game.me.id {
+                    p.write("You are the host")
+                } else {
+                    p.write("You are not the host")
+                }
+            }
+                        
+        }
+
+        
         self.onSuccessLobbyLock.unlock()
-        
-        
         
     }
     
@@ -189,4 +210,9 @@ class Controller : ObservableObject {
         service.exitLobby(game: game, player: game.me)
         
     }
+    
+    
+    
+
+    
 }

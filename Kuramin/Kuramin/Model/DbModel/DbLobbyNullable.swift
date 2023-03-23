@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 
 public struct DbLobbyNullable: Codable {
     var gameId: String?
-    var host: String?
+    var hostId: String?
     var whoseTurn: String?
     var players: [DbPlayerNullable]?
     
@@ -43,7 +43,7 @@ public struct DbLobbyNullable: Codable {
         
         
         
-        if let gameId = self.gameId, let host = self.host, let whosTurn = self.whoseTurn {
+        if let gameId = self.gameId, let host = self.hostId, let whosTurn = self.whoseTurn {
             
             return Lobby(gameId: gameId, host: host, whosTurn: whosTurn, players: dbPlayers)
             
@@ -60,7 +60,7 @@ public struct DbLobbyNullable: Codable {
 
 public struct Lobby {
     var gameId: String
-    var host: String
+    var hostId: String
     var whosTurn: String
     var players: [DbPlayer]
     
@@ -68,7 +68,7 @@ public struct Lobby {
     
     init(gameId: String, host: String, whosTurn: String, players: [DbPlayer]) {
         self.gameId = gameId
-        self.host = host
+        self.hostId = host
         self.whosTurn = whosTurn
         self.players = players
     }
@@ -81,7 +81,7 @@ public struct Lobby {
     func isDuplicateLobby(compareWith: Lobby) -> Bool {
         
         if players.count != compareWith.players.count ||
-            host != compareWith.host {return false}
+            hostId != compareWith.hostId {return false}
 
         
         for (index, crrP) in players.enumerated()  {
