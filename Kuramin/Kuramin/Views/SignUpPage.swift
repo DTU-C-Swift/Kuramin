@@ -21,6 +21,8 @@ struct SignUpPage: View {
             HStack {
                 Image(systemName: "mail")
                 TextField("Email", text: $email)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                 Spacer()
             }
             .padding()
@@ -35,6 +37,8 @@ struct SignUpPage: View {
             HStack {
                 Image(systemName: "lock")
                 TextField("Password", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                 Spacer()
             }
             .padding()
@@ -49,6 +53,8 @@ struct SignUpPage: View {
             HStack {
                 Image(systemName: "person")
                 TextField("Full Name", text: $fullName)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                 Spacer()
             }
             .padding()
