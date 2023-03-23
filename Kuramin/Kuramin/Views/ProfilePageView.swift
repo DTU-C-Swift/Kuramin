@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
 
 struct ProfilePageView: View {
     let statsTitles = ["Matches", "Wins", "Win Rate", "Losses", "Loss Rate"]
@@ -13,10 +15,15 @@ struct ProfilePageView: View {
     var dummyCoins = 123
     
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
-    @ObservedObject var controller = DataHolder.controller
+    //@ObservedObject var controller = DataHolder.controller
+    var controller = DataHolder.controller
     @EnvironmentObject var navState: NavState
+    @State private var userName = ""
+    @State private var userCoins = 0
     
     var body: some View {
+        
+        
         
         ZStack(alignment: .topTrailing) {
             
@@ -31,7 +38,7 @@ struct ProfilePageView: View {
                     .shadow(radius: 10)
                 
                 VStack {
-                    Text("Player Name")
+                    Text("Name: \(userName)")
                         .font(.title)
                         .bold()
                     HStack {
@@ -99,6 +106,21 @@ struct ProfilePageView: View {
         
         
     }
+    
+    func getNameData() {
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("e0gZRIlon1M2wLMZxhNTqfqd2mX2")
+        
+        docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    self.userName = data?["fullName"] as? String ?? ""
+                } else {
+                    print("Document does not exist")
+                }
+            }
+    }
+    
 }
 
 struct ProfilePageView_Previews: PreviewProvider {
