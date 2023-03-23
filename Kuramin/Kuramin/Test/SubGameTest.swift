@@ -31,14 +31,14 @@ class SubGameTest : ObservableObject{
         
         
         let controller = Controller()
-        controller.service.MATCHES = "test"
+        controller.lobbyService.MATCHES = "test"
 
         let game = controller.game
         game.setGameId(gid: "goToLobby_usecase_test")
 
         controller.observeMeInDB()
         
-        controller.service.deleteLobby()
+        controller.lobbyService.deleteLobby()
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

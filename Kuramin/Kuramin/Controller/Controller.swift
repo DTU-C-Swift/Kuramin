@@ -11,7 +11,8 @@ import Firebase
 
 class Controller : ObservableObject {
     @Published var game: Game = Game()
-    var service: UserService = UserService()
+    let userService = UserService()
+    let lobbyService = LobbyService()
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
     
@@ -63,9 +64,9 @@ class Controller : ObservableObject {
         player.setCardsInHand(cardInHad: Int(arc4random_uniform(15)))
 
         if addDummyPlayer {
-            service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
+            lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
         } else {
-            service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
+            lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
 
         }
         
@@ -77,6 +78,62 @@ class Controller : ObservableObject {
     
     
     
+
+    
+    
+    
+    func create_or_update_user(userImage: UIImage?) {
+        userService.create_or_update_user(userImage: userImage, game: self.game)
+    }
+    
+    
+    
+    func listenForLogout() {
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if user == nil {
+                self.isLoggedIn = false
+                print("login false")
+                
+            }
+            else {
+                print("login true")
+                self.isLoggedIn = true
+            }
+            
+        }
+    }
+    
+    
+    
+    func observeMeInDB() {
+        userService.observeMeInDB(game: self.game)
+    }
+    
+    
+    
+    
+    func changeLobbyName() {
+        
+        lobbyService.changedLobbyName(controller: self, newName: game.id)
+    }
+    
+    
+    
+    func exitLobby() {
+        lobbyService.exitLobby(game: game, player: game.me)
+        
+    }
+    
+    
+    func logOut() {
+        userService.logOut()
+    }
+    
+    
+
+    
+    
+    // --------------- This method will be called when a snapshot of observLobby is recieved --------------//
     
     func onSuccessLobbySnapshot(lobby: Lobby) {
         
@@ -121,7 +178,7 @@ class Controller : ObservableObject {
                 
                 let newPlayer =  crrDbPlayer.createPlayer()
                 game.addNode(nodeToAdd: newPlayer)
-                service.downloadImg(player: newPlayer)
+                userService.downloadImg(player: newPlayer)
             }
             
             
@@ -142,7 +199,7 @@ class Controller : ObservableObject {
         if !isGameInitialized {
             
             if lobby.players.count > 1 && !has_host_id_setterMethod_been_called {
-                service.setHostId_ifIamHost(controller: self)
+                lobbyService.setHostId_ifIamHost(controller: self)
             }
             
             
@@ -162,57 +219,6 @@ class Controller : ObservableObject {
         self.onSuccessLobbyLock.unlock()
         
     }
-    
-    
-    
-    
-    func create_or_update_user(userImage: UIImage?) {
-        service.create_or_update_user(userImage: userImage, game: self.game)
-    }
-    
-    
-    
-    func listenForLogout() {
-        Auth.auth().addStateDidChangeListener { auth, user in
-            if user == nil {
-                self.isLoggedIn = false
-                print("login false")
-                
-            }
-            else {
-                print("login true")
-                self.isLoggedIn = true
-            }
-            
-        }
-    }
-    
-    
-    
-    func observeMeInDB() {
-        service.observeMeInDB(game: self.game)
-    }
-    
-    
-    
-    
-    func changeLobbyName() {
-        
-        
-        
-        
-        service.changedLobbyName(controller: self, newName: game.id)
-    }
-    
-    
-    
-    func exitLobby() {
-        service.exitLobby(game: game, player: game.me)
-        
-    }
-    
-    
-    
 
     
 }

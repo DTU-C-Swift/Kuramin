@@ -59,10 +59,11 @@ struct MenuPopup: View {
                         .background(.blue)
                         .cornerRadius(15)
                         .shadow(radius: 1, x: 0, y: 1)
+                    
                 }.confirmationDialog("Are you sure?", isPresented: $isPresentingConfirmation) {
                     
                     Button("Confirm", role: .destructive) {
-                        controller.service.logOut()
+                        controller.logOut()
                         
                     }
                     
