@@ -84,7 +84,7 @@ struct MyPlayerViewInGamePage: View {
             
             
         }
-        .background(.red)
+        //.background(.red)
 
         
         //
