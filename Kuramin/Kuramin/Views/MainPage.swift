@@ -133,6 +133,7 @@ struct MainPage: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     isGamePageLoading = false
                 }
+                
             }
         }
         

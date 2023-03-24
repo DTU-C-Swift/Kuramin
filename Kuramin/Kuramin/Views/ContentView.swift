@@ -132,6 +132,8 @@ struct ContentView: View {
                 print(error.localizedDescription)
             } else {
                 print("Signed in as \(result?.user.email ?? "")")
+                
+                
             }
         }
     }

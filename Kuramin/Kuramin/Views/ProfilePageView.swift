@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 struct ProfilePageView: View {
     let statsTitles = ["Matches", "Wins", "Win Rate", "Losses", "Loss Rate"]
@@ -13,10 +16,16 @@ struct ProfilePageView: View {
     var dummyCoins = 123
     
     @Environment(\.presentationMode) var pm: Binding<PresentationMode>
+    //@ObservedObject var controller = DataHolder.controller
     @ObservedObject var controller = DataHolder.controller
+    @ObservedObject var profile = DataHolder.controller.profile
     @EnvironmentObject var navState: NavState
+    @State private var fullName = ""
+    @State private var userCoins = 0
     
     var body: some View {
+        
+        
         
         ZStack(alignment: .topTrailing) {
             
@@ -31,14 +40,17 @@ struct ProfilePageView: View {
                     .shadow(radius: 10)
                 
                 VStack {
-                    Text("Player Name")
-                        .font(.title)
-                        .bold()
+                    if profile.fullName != Util().NOT_SET {
+                        Text(profile.fullName)
+                            .font(.title)
+                            .bold()
+                    }
+                        
                     HStack {
                         Image("cash")
                             .resizable()
                             .frame(width: 40, height: 40)
-                        Text("\(dummyCoins)")
+                        Text("\(profile.coins)")
                             .font(.subheadline)
                     }
                     
@@ -94,11 +106,47 @@ struct ProfilePageView: View {
                 pm.wrappedValue.dismiss()
             }
         }
-        
+        .onAppear {
+            if let id = Auth.auth().currentUser?.uid {
+                controller.profile.setId(pid: id)
+            }
+            
+            getNameData()
+            
+        }
         
         
         
     }
+    
+    func getNameData() {
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(controller.profile.id)
+            .addSnapshotListener { documentSnapshot, error in
+              guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
+              }
+              guard let data = document.data() else {
+                print("Document data was empty.")
+                return
+              }
+                print("Current data: \(data)")
+                
+                do {
+                    let dbUser = try document.data(as: DbUser.self)
+                    print(dbUser)
+                    controller.profile.updateMe(dbUser: dbUser)
+                    
+                }
+                catch {
+                    print("getUser failed: \(data)")
+                    
+                }
+            }
+    }
+    
 }
 
 struct ProfilePageView_Previews: PreviewProvider {
