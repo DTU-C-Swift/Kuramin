@@ -151,11 +151,8 @@ class Controller : ObservableObject {
             } else {
                 // I am not the host
                 self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self.lobbyService.setLobbyDocumentRef(collStr: self.lobbyService.MATCHES, path: self.game.id)
-                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
-                }
+                self.lobbyService.setLobbyDocumentRef(collStr: self.lobbyService.MATCHES, path: self.game.id)
+                self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
             }
         }
     }
