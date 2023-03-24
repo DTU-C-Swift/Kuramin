@@ -56,19 +56,20 @@ class Deck {
             
             
             var str = ""
+            var counter = 0
             
             for i in 0...3 {
                 
                 str += "\(cards.popLast()!.toString())"
-                
                 if i < 3 {str += " "}
+                counter += 1
                 
             }
             
             dbLobby.players![index].cards = str
+            dbLobby.players![index].cardsInHand = counter
         }
         
-        print(dbLobby.players![0].cards)
     }
     
 }
