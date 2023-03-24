@@ -17,6 +17,7 @@ public class Game : ObservableObject {
     private (set) var hostId = ""
     let p = Printer(tag: "Game", displayPrints: true)
     private var lockCount = 0
+    let deck = Deck()
     
     private (set) var isGameStarted = false
     

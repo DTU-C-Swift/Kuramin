@@ -168,6 +168,7 @@ class Player : ObservableObject {
         
         
         
+        
         unlock()
         self.p.write("Player updated: \(self.displayName), \(self.id)")
 

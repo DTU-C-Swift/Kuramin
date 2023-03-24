@@ -26,7 +26,7 @@ class LobbyService : UserService {
         let game = controller.game
         game.setIsWaitingToLandInLobby(val: true)
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber,
-                                                cards: "H10 D11", cardsInHand: me.cardsInHand)
+                                                cards: "", cardsInHand: me.cardsInHand)
         
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         
@@ -225,7 +225,7 @@ class LobbyService : UserService {
                 self.printer.write("Lobby successfully deleted")
                 self.setLobbyDocumentRef(collStr: self.MATCHES, path: newName)
 
-                self.createLobby(controller: controller, dbLobbyNullabe: dbLobbyNullabe)
+                self.createLobby(controller: controller, dbLobbyNullable: dbLobbyNullabe)
                 
                 
             }
@@ -237,12 +237,16 @@ class LobbyService : UserService {
     
     
     
-    func createLobby(controller: Controller, dbLobbyNullabe: DbLobbyNullable) {
+    func createLobby(controller: Controller, dbLobbyNullable dl: DbLobbyNullable) {
 
+        var dbLobbyNullabeDup = dl
+        controller.game.deck.setIntialCardToLobby(dbLobby: &dbLobbyNullabeDup)
+        dbLobbyNullabeDup.whoseTurn = controller.game.me.nextPlayer!.id
+                
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         printer.write("createLobby being called. ColRef: \(docRef.path)")
         do {
-            try docRef.setData(from: dbLobbyNullabe)
+            try docRef.setData(from: dbLobbyNullabeDup)
             printer.write("Lobby created.")
             
             

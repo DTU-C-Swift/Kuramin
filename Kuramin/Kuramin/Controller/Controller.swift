@@ -23,6 +23,7 @@ class Controller : ObservableObject {
     var previousLobby: Lobby?
     let NOTSET = Util.NOT_SET
     var isGameInitialized = false
+    let gameLogic = GameLogic()
     
     
     

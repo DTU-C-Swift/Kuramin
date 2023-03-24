@@ -16,6 +16,10 @@ struct Card {
         self.suit = suit
         self.value = value
     }
+    
+    func toString() -> String {
+        return "\(suit)\(value)"
+    }
 }
 
 
