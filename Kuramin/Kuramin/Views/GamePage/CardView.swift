@@ -10,6 +10,8 @@ import SwiftUI
 struct CardView: View {
     
     var card: Card
+    let width = 60.0
+    let height = 130.0
     
     init(card: Card) {
         self.card = card
@@ -18,19 +20,28 @@ struct CardView: View {
     
     var body: some View {
         HStack {
-            Image("C1")
+            Image(card.toString())
                 .resizable()
-                .frame(width: 50, height: 73)
-                .padding(2)
-            
-            Image("C2")
-                .resizable()
-                .frame(width: 50, height: 73)
-                .padding(2)
-
+                .scaledToFit()
+                .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
         }
-
+        .background(.red)
+        .frame(width: width, height: height)
     }
+
+    
+    
+    
+//    var body: some View {
+//        HStack {
+//            Image(card.toString())
+//                .resizable()
+//                .scaledToFit()
+//                .scaleEffect(0.3)
+//                .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
+//        }
+//
+//    }
 }
 
 struct CardView_Previews: PreviewProvider {

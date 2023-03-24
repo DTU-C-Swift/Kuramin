@@ -12,7 +12,8 @@ struct MyPlayerViewInGamePage: View {
     @ObservedObject var game: Game
     @State var coins: Int
     @State var str = ""
-    
+    var fameWidth = UIScreen.main.bounds.maxX * 0.6
+
     
     init(me: Player, game: Game) {
         self.me = me
@@ -22,47 +23,72 @@ struct MyPlayerViewInGamePage: View {
     
     
     var body: some View {
+        
         ZStack {
             
-            
-            Rectangle()
-                .fill(Color.cyan)
-                .frame(width: 350, height: 40)
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.black, lineWidth: 0.5)
-                )
-            
-                .shadow(radius: 20)
-                .frame(width: 300, height: 40)
-            
-            
-            
-            
-            ZStack {
-                
-
-                HStack {
-                    Image("coins_30")
-                    Text("\(coins)\(str)")
-                    Spacer()
-                    
-                }
-
-                
-                HStack {
-                    Spacer()
-                    CirclePicView(player: me, game: game)
-                    Spacer()
-
-                }
+            VStack {
+                Spacer()
+                CardsView(me: me)
+                Spacer()
             }
             
             
             
+            VStack {
+                
+                Spacer()
+                ZStack {
+                    
+                    
+                    Rectangle()
+                        .fill(Color.cyan)
+                        .frame(width: fameWidth, height: 40)
+                        .cornerRadius(20)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.black, lineWidth: 0.5)
+                        )
+                    
+                        .shadow(radius: 20)
+                        .frame(width: fameWidth, height: 40)
+                    
+                    
+                    
+                    
+                    ZStack {
+                        
+                        
+                        HStack {
+                            Image("coins_30")
+                            Text("\(coins)\(str)")
+                            Spacer()
+                            
+                        }
+                        
+                        
+                        HStack {
+                            Spacer()
+                            CirclePicView(player: me, game: game)
+                            Spacer()
+                            
+                        }
+                    }
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            
+            
         }
-        .frame(width: 350, height: 40)
+        .background(.red)
+
+        
+        //
+        .frame(width: fameWidth, height: 180)
         .shadow(radius: 20)
         
         .onChange(of: me.coins) { newValue in
