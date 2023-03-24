@@ -113,7 +113,7 @@ class Player : ObservableObject {
         
         //
         if !p.cards.isEmpty {
-            cards = p.cards
+            self.cards = p.cards
         }
         
         
@@ -361,14 +361,19 @@ class Player : ObservableObject {
     
     func addCard(card: Card) {
         
+        lock()
+        // TODO This is temporary
+        self.cards.append(card)
+
+        unlock()
         
-        Task {
-            await MainActor.run(body: {
-                self.cards.append(card)
-                //self.cardsInHand += 1
-            })
-            
-        }
+//        Task {
+//            await MainActor.run(body: {
+//                self.cards.append(card)
+//                //self.cardsInHand += 1
+//            })
+//
+//        }
         
     }
     

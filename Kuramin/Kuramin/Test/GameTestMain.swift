@@ -114,7 +114,6 @@ class GameTestMain : ObservableObject {
         assert(game.head!.id == p_3.id)
         assert(game.head!.nextPlayer!.randomNumber == 100)
         assert(p6.nextPlayer!.id == p_3.id)
-        //game.printPlayersNode(head: game.head!)
         
         
         
@@ -124,7 +123,6 @@ class GameTestMain : ObservableObject {
         
         assert(game.playerSize == 6)
         assert(game.head!.prevPlayer!.randomNumber == p7.randomNumber)
-        //game.printPlayersNode(head: game.head!)
 
         
         
@@ -137,7 +135,6 @@ class GameTestMain : ObservableObject {
         // Assuming: head => 30, 40, 100, 200, 500, 600, 700
         assert(game.playerSize == 7)
         assert(game.head!.nextPlayer!.id == p_2.id)
-        //game.printPlayersNode(head: game.head!)
 
         
         
@@ -261,13 +258,14 @@ class GameTestMain : ObservableObject {
         // head     =>: p9/900 (cardInHad: -1), p10/1000
         // Expectation: p9/900, p10/1000
         
-        //assert(game.head!.cardsInHand == Util.NOTSET_INT)
+        assert(game.head!.cards.count == 0)
         let p9Dup = Player(id: "p9")
-        //p9Dup.setCardsInHand(cardInHad: 10)
+        let card1 = Card(suit: "H", value: 12)
+        p9Dup.addCard(card: card1)
 
         if game.addNode(nodeToAdd: p9Dup) {}
         
-        //assert(game.head!.cardsInHand == 10)
+        assert(game.head!.cards.count == 1)
         assert(game.playerSize == 2)
         
         assert(game.head!.id == p9.id)
@@ -409,7 +407,6 @@ class GameTestMain : ObservableObject {
         //game.printPlayersNode(head: game.head!)
 
         
-        //game.addNode(nodeToAdd: p3)
         assert(game.isInList(node: p3))
         assert(game.isInList(node: p1))
         assert(game.isInList(node: p2))
@@ -513,13 +510,13 @@ class GameTestMain : ObservableObject {
         // head     =>: p9/900 (cardInHad: -1), p10/1000
         // Expectation: p9/900, p10/1000
         
-        //assert(game.head!.cardsInHand == Util.NOTSET_INT)
+        assert(game.head!.cards.count == 0)
         let p9Dup = Player(id: "p9")
-        //p9Dup.setCardsInHand(cardInHad: 10)
+        p9Dup.addCard(card: Card(suit: "D", value: 10))
 
         if game.addNode(nodeToAdd: p9Dup) {}
         
-        //assert(game.head!.cardsInHand == 10)
+        assert(game.head!.cards.count == 1)
         assert(game.playerSize == 2)
         
         assert(game.head!.id == p9.id)
@@ -530,8 +527,6 @@ class GameTestMain : ObservableObject {
         
         let ref = game.getPlayerRef(pid: p9Dup.id, shouldLock: true)
         assert(ref!.id == p9Dup.id)
-        
-
         
 
     }

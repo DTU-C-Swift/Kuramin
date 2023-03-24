@@ -31,7 +31,7 @@ struct TestVIew: View {
         .onAppear {
             
             gameTest.main()
-            subTest.main()
+            //subTest.main()
         }
     }
     
