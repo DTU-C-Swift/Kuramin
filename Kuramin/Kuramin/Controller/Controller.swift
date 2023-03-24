@@ -61,7 +61,6 @@ class Controller : ObservableObject {
         
         
         // TODO Needs to find out card size. 20 is just for now
-        player.setCardsInHand(cardInHad: 0)
 
         if addDummyPlayer {
             lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)

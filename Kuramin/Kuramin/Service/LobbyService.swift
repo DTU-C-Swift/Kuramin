@@ -26,7 +26,7 @@ class LobbyService : UserService {
         let game = controller.game
         game.setIsWaitingToLandInLobby(val: true)
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber,
-                                                cards: "", cardsInHand: me.cardsInHand)
+                                                cards: "")
         
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         
@@ -71,9 +71,9 @@ class LobbyService : UserService {
                         // Checks If the player already exists in the lobby(player list).
                         for crrP in dbLobby.players {
                             if crrP.pid == me.id {
-                                me.setCardsInHand(cardInHad: crrP.cardsInHand)
+                                
                                 me.setRandomNum(randNum: crrP.randomNum)
-                                self.printer.write("You were already in the lobby. cardInHand: \(me.cardsInHand), gameId: \(controller.game.id)")
+                                self.printer.write("You were already in the lobby. gameId: \(controller.game.id)")
                                 return
                             }
                         }
@@ -265,7 +265,7 @@ class LobbyService : UserService {
     func exitLobby(game: Game, player: Player) {
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         
-        let playerToRemove = DbPlayerNullable(pName: player.fullName, pid: player.id, randomNum: player.randomNumber, cardsInHand: player.cardsInHand).toDictionary()
+        let playerToRemove = DbPlayerNullable(pName: player.fullName, pid: player.id, randomNum: player.randomNumber, cards: player.getCardsInStr()).toDictionary()
         
         if game.hostId != NOTSET && game.hostId == game.me.id {
             let updateHostId = ["hostId": NOTSET]

@@ -261,13 +261,13 @@ class GameTestMain : ObservableObject {
         // head     =>: p9/900 (cardInHad: -1), p10/1000
         // Expectation: p9/900, p10/1000
         
-        assert(game.head!.cardsInHand == Util.NOTSET_INT)
+        //assert(game.head!.cardsInHand == Util.NOTSET_INT)
         let p9Dup = Player(id: "p9")
-        p9Dup.setCardsInHand(cardInHad: 10)
+        //p9Dup.setCardsInHand(cardInHad: 10)
 
         if game.addNode(nodeToAdd: p9Dup) {}
         
-        assert(game.head!.cardsInHand == 10)
+        //assert(game.head!.cardsInHand == 10)
         assert(game.playerSize == 2)
         
         assert(game.head!.id == p9.id)
@@ -513,13 +513,13 @@ class GameTestMain : ObservableObject {
         // head     =>: p9/900 (cardInHad: -1), p10/1000
         // Expectation: p9/900, p10/1000
         
-        assert(game.head!.cardsInHand == Util.NOTSET_INT)
+        //assert(game.head!.cardsInHand == Util.NOTSET_INT)
         let p9Dup = Player(id: "p9")
-        p9Dup.setCardsInHand(cardInHad: 10)
+        //p9Dup.setCardsInHand(cardInHad: 10)
 
         if game.addNode(nodeToAdd: p9Dup) {}
         
-        assert(game.head!.cardsInHand == 10)
+        //assert(game.head!.cardsInHand == 10)
         assert(game.playerSize == 2)
         
         assert(game.head!.id == p9.id)

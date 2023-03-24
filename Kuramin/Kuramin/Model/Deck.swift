@@ -67,7 +67,6 @@ class Deck {
             }
             
             dbLobby.players![index].cards = str
-            dbLobby.players![index].cardsInHand = counter
         }
         
     }

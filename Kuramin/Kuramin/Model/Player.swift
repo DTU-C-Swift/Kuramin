@@ -17,7 +17,7 @@ class Player : ObservableObject {
     @Published private(set) var isLeft: Bool = false
     @Published private(set) var coins: Int = Util.NOTSET_INT
     @Published private(set) var cards: [Card] = []
-    @Published private(set) var cardsInHand = Util.NOTSET_INT
+    //@Published private(set) var cardsInHand = Util.NOTSET_INT
     @Published private(set) var randomNumber = Util.NOTSET_INT
     private(set) var isDefaultImg = true
 
@@ -36,7 +36,7 @@ class Player : ObservableObject {
         self.id = id
     }
     
-    init(id: String, fullName: String?, image: UIImage?, isLeft: Bool?, coins: Int?, cardsInHand: Int?, randomNum: Int?) {
+    init(id: String, fullName: String?, image: UIImage?, isLeft: Bool?, coins: Int?, randomNum: Int?, cards: [Card]?) {
         self.id = id
         
         if let fullName = fullName {
@@ -59,8 +59,9 @@ class Player : ObservableObject {
 
         }
         
-        if let cardsInHand = cardsInHand {
-            self.cardsInHand = cardsInHand
+
+        if let cards = cards {
+            self.cards = cards
         }
         
         if let randomNum = randomNum {
@@ -77,6 +78,9 @@ class Player : ObservableObject {
     func unlock() {
         playerLock.signal()
     }
+    
+    
+    
     
     func updateInfo(player p: Player) {
         
@@ -98,12 +102,7 @@ class Player : ObservableObject {
             anyChanges = true
         }
         
-    
-        if cardsInHand != p.cardsInHand  {
-            self.cardsInHand = p.cardsInHand
-            anyChanges = true
-
-        }
+        
 
         if randomNumber != p.randomNumber {
             self.randomNumber = p.randomNumber
@@ -111,7 +110,14 @@ class Player : ObservableObject {
 
         }
         
-        // TODO set image
+        
+        //
+        if !p.cards.isEmpty {
+            cards = p.cards
+        }
+        
+        
+        
         
         if isDefaultImg && !p.isDefaultImg {
             self.image = p.image
@@ -154,10 +160,7 @@ class Player : ObservableObject {
             lock()
         }
         
-    
-        if cardsInHand != p.cardsInHand  {
-            self.cardsInHand = p.cardsInHand
-        }
+        
 
         if randomNumber != p.randomNum {
             self.randomNumber = p.randomNum
@@ -219,7 +222,6 @@ class Player : ObservableObject {
         if p.leftAt != leftAt {return false}
         if p.coins != coins {return false}
         if p.image != image {return false}
-        if p.cardsInHand != cardsInHand {return false}
         if p.randomNumber != randomNumber {return false}
 
         unlock()
@@ -332,18 +334,6 @@ class Player : ObservableObject {
     
     
     
-    func setCardsInHand(cardInHad newCardInHand: Int) {
-
-        lock()
-
-        if cardsInHand != newCardInHand {
-            self.cardsInHand = newCardInHand
-        }
-
-        unlock()
-
-    }
-    
     
     
 //    func setRandomNum(randNum newRandNum: Int) {
@@ -371,16 +361,34 @@ class Player : ObservableObject {
     
     func addCard(card: Card) {
         
+        
         Task {
             await MainActor.run(body: {
                 self.cards.append(card)
-                self.cardsInHand += 1
+                //self.cardsInHand += 1
             })
             
         }
         
     }
     
+    
+    func getCardsInStr() -> String {
+        
+        var str = ""
+        
+        for crr in cards {
+            
+            if str != "" {
+                str += " "
+            }
+            
+            str += crr.toString()
+            
+        }
+        
+        return str
+    }
     
 }
 

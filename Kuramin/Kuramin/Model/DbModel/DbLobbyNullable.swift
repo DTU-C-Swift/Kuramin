@@ -78,23 +78,23 @@ public struct Lobby {
         
     
     
-    func isDuplicateLobby(compareWith: Lobby) -> Bool {
-        
-        if players.count != compareWith.players.count ||
-            hostId != compareWith.hostId {return false}
-
-        
-        for (index, crrP) in players.enumerated()  {
-            
-            if crrP.pid != compareWith.players[index].pid {
-                
-                if !compareWith.players.contains(where: {$0.pid == crrP.pid}) {return false}
-                
-            }
-            
-        }
-        
-        
-        return true
-    }
+//    func isDuplicateLobby(compareWith: Lobby) -> Bool {
+//
+//        if players.count != compareWith.players.count ||
+//            hostId != compareWith.hostId {return false}
+//
+//
+//        for (index, crrP) in players.enumerated()  {
+//
+//            if crrP.pid != compareWith.players[index].pid {
+//
+//                if !compareWith.players.contains(where: {$0.pid == crrP.pid}) {return false}
+//
+//            }
+//
+//        }
+//
+//
+//        return true
+//    }
 }

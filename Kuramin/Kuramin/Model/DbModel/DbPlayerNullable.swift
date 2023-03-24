@@ -14,21 +14,20 @@ public struct DbPlayerNullable: Codable {
     var pid: String?
     var randomNum: Int?
     var cards: String?
-    var cardsInHand: Int?
     
     
     
     func mapToDbPlayer() -> DbPlayer? {
-                
+        
         if let pName = self.pName, let pid = self.pid, let randomNum = self.randomNum,
-           let cards = self.cards, let cardsInHand = self.cardsInHand {
+           let cards = self.cards {
             
             if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
                 return nil
             }
             
-    
-            return DbPlayer(pName: pName, pid: pid, randomNum: randomNum, cards: cards, cardsInHand: cardsInHand)
+            
+            return DbPlayer(pName: pName, pid: pid, randomNum: randomNum, cards: cards)
             
         }
         
@@ -42,9 +41,7 @@ public struct DbPlayerNullable: Codable {
             "pName": pName ?? Util.NOT_SET,
             "pid": pid ?? Util.NOT_SET,
             "randomNum": randomNum ?? Util.NOTSET_INT,
-            "cards": cards ?? "",
-            "cardsInHand": cardsInHand ?? Util.NOTSET_INT
-
+            "cards": cards ?? ""
         ]
     }
     
@@ -58,21 +55,17 @@ public struct DbPlayer {
     var pid: String
     var randomNum: Int
     var cards: String
-    var cardsInHand: Int
     
 
     
     
     func createPlayer() -> Player {
         let cards = mapToCards()
-        let player = Player(id: pid, fullName: pName, image: nil, isLeft: false,
-                      coins: nil, cardsInHand: cardsInHand, randomNum: randomNum)
         
-        for crrCard in cards {
-            player.addCard(card: crrCard)
-        }
+        return Player(id: pid, fullName: pName, image: nil, isLeft: false,
+                            coins: nil, randomNum: randomNum, cards: cards)
 
-        return player
+        //return player
     }
     
     

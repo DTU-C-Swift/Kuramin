@@ -62,7 +62,7 @@ struct CirclePicView: View {
                     Rectangle()
                         .foregroundColor(.white)
                         .cornerRadius(5)
-                    Text("\(player.cardsInHand)")
+                    Text("\(player.cards.count)")
                         .font(.system(size: 12, weight: .bold))
                         .font(.footnote)
                         .foregroundColor(.black)

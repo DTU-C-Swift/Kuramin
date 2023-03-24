@@ -43,14 +43,14 @@ class SubGameTest : ObservableObject{
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
-            assert(game.me.cardsInHand == -1)
+            //assert(game.me.cardsInHand == -1)
             assert(game.playerSize == 0)
 
             controller.goToLobby(addDummyPlayer: false)
             
             // lets player to be fected from db
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                assert(game.me.cardsInHand != -1)
+                //assert(game.me.cardsInHand != -1)
                 assert(game.playerSize == 1)
                 assert(game.head === game.me)
                 assert(game.head!.id == game.me.id)
@@ -112,12 +112,12 @@ class SubGameTest : ObservableObject{
         for i in 1...7 {
             
             let newPlayer = DbPlayer(pName: "Player\(i) lastname", pid: "playerId\(i)",
-                                     randomNum: i, cards: "", cardsInHand: Int(arc4random_uniform(10)))
+                                     randomNum: i, cards: "")
             
             dbPlayers.append(newPlayer)
         }
         
-        let dbMe = DbPlayer(pName: game.me.fullName, pid: game.me.id, randomNum: 8, cards: "", cardsInHand: 10)
+        let dbMe = DbPlayer(pName: game.me.fullName, pid: game.me.id, randomNum: 8, cards: "")
         dbPlayers.append(dbMe)
         
         // dbPlayers: p1, p2, p3, p4, p5, p6, p7, me
