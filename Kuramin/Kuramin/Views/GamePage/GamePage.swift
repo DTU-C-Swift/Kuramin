@@ -81,7 +81,7 @@ struct GamePage: View {
                         Button(action: {
                             
                             //controller.changeLobbyName()
-                            controller.exitLobby()
+                            //controller.exitLobby()
                             
                         }) {
                             Text("Rename lobby")

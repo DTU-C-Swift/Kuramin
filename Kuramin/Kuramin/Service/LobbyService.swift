@@ -25,7 +25,8 @@ class LobbyService : UserService {
         var isSucceded = true
         let game = controller.game
         game.setIsWaitingToLandInLobby(val: true)
-        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber, cardsInHand: me.cardsInHand)
+        let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber,
+                                                cards: "H10 D11", cardsInHand: me.cardsInHand)
         
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         
@@ -296,7 +297,7 @@ class LobbyService : UserService {
         DispatchQueue.main.asyncAfter(deadline: .now() + waitTimeSec) {
             
             if game.playerSize < 2 {
-                controller.has_host_id_setterMethod_been_called = false
+                //controller.has_host_id_setterMethod_been_called = false
                 return}
             
             
@@ -313,7 +314,7 @@ class LobbyService : UserService {
                         print("Error updating host Id: \(err)")
                     } else {
                         print("Host ID successfully updated")
-                        controller.has_host_id_setterMethod_been_called = true
+                        //controller.has_host_id_setterMethod_been_called = true
                         
                     }
                 }

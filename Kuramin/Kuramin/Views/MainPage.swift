@@ -148,7 +148,7 @@ struct MainPage: View {
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .background {
                 // App is about to be closed
-                controller.exitLobby()
+                //controller.exitLobby()
             }
         }
         

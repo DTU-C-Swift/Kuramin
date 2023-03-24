@@ -13,22 +13,22 @@ public struct DbPlayerNullable: Codable {
     var pName: String?
     var pid: String?
     var randomNum: Int?
+    var cards: String?
     var cardsInHand: Int?
     
     
     
     func mapToDbPlayer() -> DbPlayer? {
-        
-        
-        
-        if let pName = self.pName, let pid = self.pid, let randomNum = self.randomNum, let cardsInHand = self.cardsInHand {
+                
+        if let pName = self.pName, let pid = self.pid, let randomNum = self.randomNum,
+           let cards = self.cards, let cardsInHand = self.cardsInHand {
             
             if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
                 return nil
             }
             
     
-            return DbPlayer(pName: pName, pid: pid, randomNum: randomNum, cardsInHand: cardsInHand)
+            return DbPlayer(pName: pName, pid: pid, randomNum: randomNum, cards: cards, cardsInHand: cardsInHand)
             
         }
         
@@ -41,8 +41,10 @@ public struct DbPlayerNullable: Codable {
         return [
             "pName": pName ?? Util.NOT_SET,
             "pid": pid ?? Util.NOT_SET,
-            "randomNum": randomNum ?? -1,
-            "cardsInHand": cardsInHand ?? -1
+            "randomNum": randomNum ?? Util.NOTSET_INT,
+            "cards": "H10 D3",
+            "cardsInHand": cardsInHand ?? Util.NOTSET_INT
+
         ]
     }
     
@@ -55,15 +57,67 @@ public struct DbPlayer {
     var pName: String
     var pid: String
     var randomNum: Int
+    var cards: String
     var cardsInHand: Int
     
 
     
     
     func createPlayer() -> Player {
-        
-        return Player(id: pid, fullName: pName, image: nil, isLeft: false,
+        let cards = mapToCards()
+        let player = Player(id: pid, fullName: pName, image: nil, isLeft: false,
                       coins: nil, cardsInHand: cardsInHand, randomNum: randomNum)
+        
+        for crrCard in cards {
+            player.addCard(card: crrCard)
+        }
+
+        return player
+    }
+    
+    
+    
+    
+    func mapToCards() -> [Card] {
+        
+        let val = cards.split(separator: " ")
+
+        var cards: [Card] = []
+        
+        for crrVal in val {
+            
+            
+            var str = crrVal
+            // get the index of the 7th character ("w")
+            let index = str.index(str.startIndex, offsetBy: 0)
+            let suit = str.remove(at: index)
+            
+            //let suit = getElement(str: String(crrVal), index: 0)
+            //let valueStr = getElement(str: String(crrVal), index: 1)
+            
+            let valueInt = Int(str)
+            
+            if valueInt != nil {
+                let newCard = Card(suit: suit, value: valueInt!)
+                cards.append(newCard)
+                
+            }
+
+        }
+        
+        return cards
+        
+        
+    }
+    
+    
+    func getElement(str: String, index: Int) -> String? {
+        if let secondCharIndex = str.index(str.startIndex, offsetBy: index, limitedBy: str.endIndex) {
+            return String(str[secondCharIndex])
+        } else {
+            print("Invalid input")
+            return nil
+        }
     }
 }
 

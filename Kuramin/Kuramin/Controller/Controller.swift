@@ -23,7 +23,6 @@ class Controller : ObservableObject {
     var previousLobby: Lobby?
     let NOTSET = Util.NOT_SET
     var isGameInitialized = false
-    var has_host_id_setterMethod_been_called = false
     
     
     

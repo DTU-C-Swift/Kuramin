@@ -112,12 +112,12 @@ class SubGameTest : ObservableObject{
         for i in 1...7 {
             
             let newPlayer = DbPlayer(pName: "Player\(i) lastname", pid: "playerId\(i)",
-                                     randomNum: i, cardsInHand: Int(arc4random_uniform(10)))
+                                     randomNum: i, cards: "", cardsInHand: Int(arc4random_uniform(10)))
             
             dbPlayers.append(newPlayer)
         }
         
-        let dbMe = DbPlayer(pName: game.me.fullName, pid: game.me.id, randomNum: 8, cardsInHand: 10)
+        let dbMe = DbPlayer(pName: game.me.fullName, pid: game.me.id, randomNum: 8, cards: "", cardsInHand: 10)
         dbPlayers.append(dbMe)
         
         // dbPlayers: p1, p2, p3, p4, p5, p6, p7, me

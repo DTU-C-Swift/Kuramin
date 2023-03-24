@@ -19,6 +19,7 @@ class Player : ObservableObject {
     @Published private(set) var cardsInHand = Util.NOTSET_INT
     @Published private(set) var randomNumber = Util.NOTSET_INT
     private(set) var isDefaultImg = true
+    private(set) var cards: [Card] = []
 
     private(set) var leftAt = Util.NOT_SET
     private let playerLock = DispatchSemaphore(value: 1)
@@ -161,6 +162,10 @@ class Player : ObservableObject {
         if randomNumber != p.randomNum {
             self.randomNumber = p.randomNum
         }
+        
+        
+        self.cards = p.mapToCards()
+        
         
         
         unlock()
@@ -362,6 +367,10 @@ class Player : ObservableObject {
 
     }
 
+    
+    func addCard(card: Card) {
+        self.cards.append(card)
+    }
     
     
 }
