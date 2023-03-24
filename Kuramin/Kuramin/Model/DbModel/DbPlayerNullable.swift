@@ -42,7 +42,7 @@ public struct DbPlayerNullable: Codable {
             "pName": pName ?? Util.NOT_SET,
             "pid": pid ?? Util.NOT_SET,
             "randomNum": randomNum ?? Util.NOTSET_INT,
-            "cards": "H10 D3",
+            "cards": cards ?? "",
             "cardsInHand": cardsInHand ?? Util.NOTSET_INT
 
         ]
