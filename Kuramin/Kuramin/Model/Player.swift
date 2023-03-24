@@ -16,10 +16,10 @@ class Player : ObservableObject {
     @Published private(set) var image: UIImage = Util.defaultProfileImg
     @Published private(set) var isLeft: Bool = false
     @Published private(set) var coins: Int = Util.NOTSET_INT
+    @Published private(set) var cards: [Card] = []
     @Published private(set) var cardsInHand = Util.NOTSET_INT
     @Published private(set) var randomNumber = Util.NOTSET_INT
     private(set) var isDefaultImg = true
-    private(set) var cards: [Card] = []
 
     private(set) var leftAt = Util.NOT_SET
     private let playerLock = DispatchSemaphore(value: 1)
@@ -333,15 +333,15 @@ class Player : ObservableObject {
     
     
     func setCardsInHand(cardInHad newCardInHand: Int) {
-        
+
         lock()
-        
+
         if cardsInHand != newCardInHand {
             self.cardsInHand = newCardInHand
         }
-        
+
         unlock()
-        
+
     }
     
     
@@ -370,7 +370,15 @@ class Player : ObservableObject {
 
     
     func addCard(card: Card) {
-        self.cards.append(card)
+        
+        Task {
+            await MainActor.run(body: {
+                self.cards.append(card)
+                self.cardsInHand += 1
+            })
+            
+        }
+        
     }
     
     

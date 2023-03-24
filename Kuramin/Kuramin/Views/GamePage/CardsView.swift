@@ -14,15 +14,15 @@ struct CardsView: View {
     
     init(me: Player) {
         self.me = me
-        me.addCard(card: Card(suit: "H", value: 10))
-        me.addCard(card: Card(suit: "D", value: 10))
-        me.addCard(card: Card(suit: "S", value: 10))
-        me.addCard(card: Card(suit: "C", value: 10))
-        
-        me.addCard(card: Card(suit: "H", value: 10))
-        me.addCard(card: Card(suit: "D", value: 10))
-        me.addCard(card: Card(suit: "S", value: 10))
-        me.addCard(card: Card(suit: "C", value: 10))
+//        me.addCard(card: Card(suit: "H", value: 10))
+//        me.addCard(card: Card(suit: "D", value: 10))
+//        me.addCard(card: Card(suit: "S", value: 10))
+//        me.addCard(card: Card(suit: "C", value: 10))
+//
+//        me.addCard(card: Card(suit: "H", value: 10))
+//        me.addCard(card: Card(suit: "D", value: 10))
+//        me.addCard(card: Card(suit: "S", value: 10))
+//        me.addCard(card: Card(suit: "C", value: 10))
         
         
     }
