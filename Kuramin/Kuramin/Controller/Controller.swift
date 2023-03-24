@@ -240,6 +240,16 @@ class Controller : ObservableObject {
                 self.initializeGame()
                 self.isGameInitialized = true
             }
+            
+        } else {
+            
+            if lobby.whosTurn == game.me.id {
+                // my turn..
+                
+                game.setIsMyturn(true)
+                
+            }
+            
         }
         
     }

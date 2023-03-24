@@ -31,6 +31,8 @@ public class Game : ObservableObject {
     @Published private (set) var sevenFromRight: Player?
     @Published private (set) var isLandingInLobbySucceded = false
     @Published var isWaitingToLandInLobby = false
+    
+    @Published private (set) var isMyTurn = false
 
     
     
@@ -634,6 +636,18 @@ public class Game : ObservableObject {
             await MainActor.run(body: {
                 isLandingInLobbySucceded = val
                 p.write("setIsLandingInLobbySucceded")
+            })
+        }
+    }
+    
+    
+    func setIsMyturn(_ val: Bool) {
+        if isMyTurn == val {return}
+        
+        Task {
+            
+            await MainActor.run(body: {
+                isMyTurn = val
             })
         }
     }
