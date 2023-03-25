@@ -10,7 +10,7 @@ import SwiftUI
 struct TestVIew: View {
     @ObservedObject var gameTest1 = GameTest1()
     @ObservedObject var gameTest2 = GameTest2()
-    @ObservedObject var gameTest3 = GameTest2()
+    @ObservedObject var gameTest3 = GameTest3()
 
 
 
@@ -60,8 +60,8 @@ struct TestVIew: View {
         }
         .onAppear {
             
-            gameTest1.run()
-            gameTest2.run()
+//            gameTest1.run()
+//            gameTest2.run()
             gameTest3.run()
         }
     }

@@ -17,7 +17,7 @@ import FirebaseStorage
 class UserService {
     private var db = Firestore.firestore()
     private let storage = Storage.storage()
-    private let printer = Printer(tag: "Service", displayPrints: true)
+    private let printer = Printer(tag: "UserService", displayPrints: true)
     
 
 
