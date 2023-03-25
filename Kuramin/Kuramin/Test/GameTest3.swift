@@ -40,7 +40,7 @@ class GameTest3 : ObservableObject {
         let controller = Controller()
         let game = controller.game
         let lobbyService = controller.lobbyService
-        controller.lobbyService.setMatchPath(collStr: "test")
+        controller.lobbyService.setMatchPath(collStr: "test3")
 
         assert(game.me.id == Util.NOT_SET)
 

@@ -62,7 +62,7 @@ struct TestVIew: View {
             
             gameTest1.run()
             gameTest2.run()
-            //gameTest3.run()
+            gameTest3.run()
         }
     }
     
