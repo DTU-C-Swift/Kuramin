@@ -13,6 +13,7 @@ class GameTest3 : ObservableObject {
     let p = Printer(tag: "GameTest3", displayPrints: true)
     @Published var testPassed: Bool = false
     var thread: ThreadOtherPlayer?
+    let threadPid = "test1"
     
     
 
@@ -24,9 +25,9 @@ class GameTest3 : ObservableObject {
         
         
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
-//            self.thread_me()
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+            self.thread_me()
+        }
         
     }
     
@@ -44,7 +45,6 @@ class GameTest3 : ObservableObject {
         assert(game.me.id == Util.NOT_SET)
 
         controller.observeMeInDB()
-        lobbyService.deleteLobby()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             assert(game.me.id != Util.NOT_SET)
@@ -69,7 +69,6 @@ class GameTest3 : ObservableObject {
             }
 
         }
-        
         
     }
     

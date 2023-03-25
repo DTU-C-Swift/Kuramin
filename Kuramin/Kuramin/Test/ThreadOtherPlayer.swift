@@ -44,7 +44,8 @@ class ThreadOtherPlayer : Thread {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + waitTime1) {
             
-            self.controller.goToLobby()
+            //self.controller.goToLobby()
+            self.controller.lobbyService.goToLobby(me: game.me, controller: self.controller, shouldCall_lobbyObserver: true)
                                     
             DispatchQueue.main.asyncAfter(deadline:  .now() + self.waitTime1) {
                 
