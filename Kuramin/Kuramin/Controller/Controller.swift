@@ -17,7 +17,6 @@ class Controller : ObservableObject {
     @Published var bufferState: String = ""
     @Published var profile = Player(id: Util.NOT_SET)
     
-    //@Published var image: UIImage? = nil
     var dummyPlayerCounter = 1
     let p = Printer(tag: "Controller", displayPrints: true)
     let onSuccessLobbyLock = NSLock()
@@ -38,43 +37,29 @@ class Controller : ObservableObject {
     
     
     
-    func goToLobby(addDummyPlayer: Bool) {
+    func goToLobby() {
 
-        
-        var player: Player?
-
-        
-        
-        if addDummyPlayer {
-            player = Player(id: "testId\(dummyPlayerCounter)")
-            player!.setFullName(fullName: "Name\(dummyPlayerCounter)")
-            player!.setRandomNum(randNum: dummyPlayerCounter)
-            dummyPlayerCounter += 1
-        } else {
-            
-            if game.me.id == NOTSET || game.me.fullName == NOTSET  {
-                p.write("Can't go to lobby. Caus: pid: \(game.me.id), fullName: \(game.me.fullName)")
-                return
-            }
-            
-            player = game.me
-            player!.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-
+        if game.me.id == NOTSET || game.me.fullName == NOTSET  {
+            p.write("Can't go to lobby. Caus: pid: \(game.me.id), fullName: \(game.me.fullName)")
+            return
         }
         
-        
-        // TODO Needs to find out card size. 20 is just for now
-
-        if addDummyPlayer {
-            lobbyService.goToLobby(me: player!, controller:  self, shouldCall_lobbyObserver: false)
-        } else {
-            lobbyService.goToLobby(me: player!, controller:  self, shouldCall_lobbyObserver: true)
-        }
-        
+        let player = game.me
+        player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
 
     }
     
     
+    func addDummyPlayerInLobby() {
+        let player = Player(id: "testId\(dummyPlayerCounter)")
+        player.setFullName(fullName: "Name\(dummyPlayerCounter)")
+        player.setRandomNum(randNum: dummyPlayerCounter)
+        dummyPlayerCounter += 1
+        
+        lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
+
+    }
     
     
     

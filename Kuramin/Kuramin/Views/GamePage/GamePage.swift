@@ -52,7 +52,7 @@ struct GamePage: View {
                     Spacer()
                     Button(action: {
                         
-                        controller.goToLobby(addDummyPlayer: true)
+                        controller.addDummyPlayerInLobby()
                         
                     }) {
                         Text("Add")

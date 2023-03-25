@@ -47,7 +47,7 @@ class GameTest2 : ObservableObject{
             //assert(game.me.cardsInHand == -1)
             assert(game.playerSize == 0)
 
-            controller.goToLobby(addDummyPlayer: false)
+            controller.goToLobby()
             
             // lets player to be fected from db
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -61,9 +61,9 @@ class GameTest2 : ObservableObject{
                 
                 // head: me
                 // Adds some dummy players in db
-                controller.goToLobby(addDummyPlayer: true)
-                controller.goToLobby(addDummyPlayer: true)
-                controller.goToLobby(addDummyPlayer: true)
+                controller.addDummyPlayerInLobby()
+                controller.addDummyPlayerInLobby()
+                controller.addDummyPlayerInLobby()
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                     // Assuming: playerSize 4

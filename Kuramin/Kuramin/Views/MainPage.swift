@@ -50,7 +50,7 @@ struct MainPage: View {
             Spacer()
             
             Button(action: {
-                controller.goToLobby(addDummyPlayer: false)
+                controller.goToLobby()
                 isGamePageLoading = true
 //                showGamePage = true
             }, label: {

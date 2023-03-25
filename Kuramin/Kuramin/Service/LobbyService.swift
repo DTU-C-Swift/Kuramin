@@ -28,7 +28,7 @@ class LobbyService : UserService {
         let game = controller.game
         game.setIsWaitingToLandInLobby(val: true)
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber,
-                                                cards: "")
+                                                cards: me.getCardsInStr())
         
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         
