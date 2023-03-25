@@ -24,7 +24,7 @@ class Controller : ObservableObject {
     let NOTSET = Util.NOT_SET
     
     var isGameInitializing = false
-    var isGameInitialized = false
+    //var isGameInitialized = false
 
     let gameLogic = GameLogic()
     
@@ -48,8 +48,8 @@ class Controller : ObservableObject {
         }
         
         let player = game.me
-        //player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-        player.setRandomNum(randNum: 10000)
+        player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        //player.setRandomNum(randNum: 10000)
         
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
         
@@ -103,7 +103,7 @@ class Controller : ObservableObject {
     
     
     func changeLobbyName() {
-        lobbyService.changedLobbyName(controller: self, newName: game.id)
+        lobbyService.changeLobbyName(controller: self)
     }
     
     
@@ -124,17 +124,17 @@ class Controller : ObservableObject {
     
     func initializeGame() {
         p.write("initializeGame is being called")
+        
         isGameInitializing = true
         DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
             
             if self.game.playerSize < 2 {
-                self.isGameInitialized = false
+                //self.isGameInitialized = false
+                self.isGameInitializing = false
                 return
             }
             
-            
-            
-            
+            //self.lobbyService.obsRef!.remove()
             
             if self.game.head!.prevPlayer!.id == self.game.me.id {
                 
@@ -142,26 +142,7 @@ class Controller : ObservableObject {
                 self.p.write("You are the host")
                 
                 self.changeLobbyName()
-                
-            } else {
-                // I am not the host
-                self.p.write("The host is \(self.game.head!.prevPlayer!.fullName)")
-                self.lobbyService.setMatchId(path: self.game.id)
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2)  {
-//                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
-//                }
-                
-                self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
-
-                
             }
-            
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() ) {
-                
-            }
-            
             
         }
         
@@ -219,11 +200,7 @@ class Controller : ObservableObject {
             
         }
         
-        // Setting up game id if it is notSet
-        if game.id == NOTSET || game.id == "" {
-            game.setGameId(gid: lobby.gameId)
-        }
-        
+
         
         
         // Stopping the buffering page
@@ -235,22 +212,88 @@ class Controller : ObservableObject {
         self.onSuccessLobbyLock.unlock()
         
         
-        if !isGameInitialized {
-            if lobby.players.count >= 2 {
-                self.initializeGame()
+        assert(game.id != "" || game.hostId != "")
+        assert(lobby.gameId != "" || lobby.hostId != "")
+        
+        
+    
+        if lobby.gameId == Util.NOT_SET {
+            
+            // Game is not initialized (in lobby).
+            
+            if !self.isGameInitializing {
+                
+                if lobby.players.count >= 2 && game.head!.prevPlayer!.id == game.me.id {
+                    self.initializeGame()
+                }
+                
+            }
+            
+
+            
+        } else {
+            // Game is initialized only in lobby or both lobby and local
+            
+            if game.id == NOTSET {
+                // Game is not initialized in local
+                lobbyService.setDocumentPath(path: lobby.gameId)
+                game.setGameId(gid: lobby.gameId)
+                lobbyService.observeLobby(game: game, onSuccessLobbySnapshot(lobby:))
+
+                
+            } else {
+                
+                // Game is initialized both in lobby and local
+                game.setHostId(hostId: lobby.hostId)
+                game.setPlayerTurnId(pid: lobby.whosTurn)
             }
             
             
+
             
-        } else {
             
-            // Game is initialized
-            game.setHostId(hostId: lobby.hostId)
-            game.setPlayerTurnId(pid: lobby.whosTurn)
+
             
         }
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+//        if !isGameInitialized {
+//            if lobby.players.count >= 2 {
+//                self.initializeGame()
+//            }
+//
+//
+//
+//        } else {
+//
+//            // Game is initialized
+//            game.setHostId(hostId: lobby.hostId)
+//            game.setPlayerTurnId(pid: lobby.whosTurn)
+//
+//        }
         
     }
     
     
 }
+
+
+
+//// I am not the host
+//self.p.write("The host is \(self.game.head!.prevPlayer!.fullName)")
+//self.lobbyService.setMatchId(path: self.game.id)
+//
+////                DispatchQueue.main.asyncAfter(deadline: .now() + 2)  {
+////                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
+////                }
+//
+//self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))

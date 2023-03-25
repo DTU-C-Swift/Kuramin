@@ -20,11 +20,12 @@ class GameTest3 : ObservableObject {
     
     
     func run() {
+        // This is the host player
         thread = ThreadOtherPlayer()
         thread!.start()
         
         
-        
+        // This is not the host player
         DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
             self.thread_me()
         }
@@ -40,7 +41,7 @@ class GameTest3 : ObservableObject {
         let controller = Controller()
         let game = controller.game
         let lobbyService = controller.lobbyService
-        controller.lobbyService.setMatchPath(collStr: "test3")
+        controller.lobbyService.setCollectionPath(collStr: "test3")
 
         assert(game.me.id == Util.NOT_SET)
 
@@ -76,7 +77,7 @@ class GameTest3 : ObservableObject {
     
     func gameInitializationTest(controller: Controller, game: Game, lobbyService: LobbyService) {
         
-        assert(game.id == lobbyService.MATCH_ID)
+        assert(game.id == lobbyService.DOC_PATH)
         
         assert(game.hostId == "testId1")
         assert(game.head!.cards.count == 4)

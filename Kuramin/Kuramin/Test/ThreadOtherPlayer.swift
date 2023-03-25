@@ -36,7 +36,7 @@ class ThreadOtherPlayer : Thread {
         
         
         let lobbyService = controller.lobbyService
-        controller.lobbyService.setMatchPath(collStr: "test3")
+        controller.lobbyService.setCollectionPath(collStr: "test3")
         
         
         

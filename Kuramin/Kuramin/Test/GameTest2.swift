@@ -32,7 +32,7 @@ class GameTest2 : ObservableObject{
         
         let controller = Controller()
         
-        controller.lobbyService.setMatchPath(collStr: "test")
+        controller.lobbyService.setCollectionPath(collStr: "test")
 
         let game = controller.game
         //game.setGameId(gid: Int(.random(in: <#T##ClosedRange<Double>#>)))
@@ -72,7 +72,6 @@ class GameTest2 : ObservableObject{
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + controller.lobbyService.waitTimeSec) {
                         
-                        assert(controller.isGameInitialized)
                         assert(game.head!.cards.count == 4)
                         assert(game.head!.nextPlayer!.cards.count == 4)
                         assert(game.head!.nextPlayer!.nextPlayer!.cards.count == 4)

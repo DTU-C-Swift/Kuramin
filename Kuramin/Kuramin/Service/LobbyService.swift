@@ -16,8 +16,8 @@ class LobbyService : UserService {
     private let db = Firestore.firestore()
     private let printer = Printer(tag: "LobbyService", displayPrints: true)
     let waitTimeSec = 10.0
-    private (set) var MATCH_ID = "lobby"
-    private (set) var MATCHES = "matches"
+    private (set) var DOC_PATH = "lobby"
+    private (set) var COLL_PATH = "matches"
 
     
     
@@ -30,7 +30,7 @@ class LobbyService : UserService {
         let dbPlayerNullable = DbPlayerNullable(pName: me.fullName, pid: me.id, randomNum: me.randomNumber,
                                                 cards: me.getCardsInStr())
         
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
         
         // Transactional call
         db.runTransaction({ (transaction, errorPointer) -> Any? in
@@ -48,9 +48,9 @@ class LobbyService : UserService {
             if !lobbyDocument.exists {
                 self.printer.write("Document in lobby does not exit")
                 
-                let gameId = String(UUID().uuidString.prefix(15))
+                //let gameId = String(UUID().uuidString.prefix(15))
                 
-                let dbLobby = DbLobbyNullable(gameId: gameId, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
+                let dbLobby = DbLobbyNullable(gameId: Util.NOT_SET, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
                 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: docRef)
@@ -130,11 +130,12 @@ class LobbyService : UserService {
     
     func observeLobby(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
         if isLobbyObserving {
+            assert(obsRef != nil)
             obsRef?.remove()
             printer.write("Lobby observer removed.")
         }
         
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
         self.printer.write("Observing \(docRef.path) ...")
         isLobbyObserving = true
         
@@ -171,28 +172,18 @@ class LobbyService : UserService {
                 
                 
             }
-            
-            
         }
-        
-        
-        
+                
     }
     
     
     
+    /// This method first fetch the lobby and then calls "createLobby" method which creates match with a generated id, and then calls "delete" method to delete the existing lobby.
+    /// - Note This method must only be called if the player is the host
     
-    /// This method must only be called if the player is the host
-    
-    func changedLobbyName(controller: Controller, newName: String)  {
+    func changeLobbyName(controller: Controller)  {
         
-        
-        if newName == NOTSET {
-            printer.write("Lobby name can't be changed. Cause: gameId is \(NOTSET)")
-            return
-        }
-        
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
         
         docRef.getDocument(as: DbLobbyNullable.self) { result in
             
@@ -200,8 +191,9 @@ class LobbyService : UserService {
             case .success(let dbLobbyNullable):
                 
                 self.printer.write("Lobby has been fetched")
+            
+                self.createLobby(controller: controller, dbLobbyNullable: dbLobbyNullable)
                 
-                self.delete_and_create_lobby(controller: controller, dbLobbyNullabe: dbLobbyNullable, newName: newName)
                 
             case .failure(let err):
                 self.printer.write("Error while fetching lobby. Cause: \(err)")
@@ -215,30 +207,10 @@ class LobbyService : UserService {
     
     
     
-    func delete_and_create_lobby(controller: Controller, dbLobbyNullabe: DbLobbyNullable, newName: String) {
-        
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
-        docRef.delete() { err in
-            
-            if err != nil {
-                self.printer.write("Error deleting lobby. Cause: \(err.debugDescription)")
-                
-            } else {
-                self.printer.write("Lobby successfully deleted")
-                self.setMatchId(path: newName)
-
-                self.createLobby(controller: controller, dbLobbyNullable: dbLobbyNullabe)
-                
-                
-            }
-            
-        }
-    }
     
     
-    
-    
-    /// Set hotsId as 'me.id' and create a match with given matchId (MATCH_ID)
+    /// This function first creates a lobby with a generated gameId and then deletes 'lobby'.
+    /// 
     
     func createLobby(controller: Controller, dbLobbyNullable dl: DbLobbyNullable) {
         
@@ -248,20 +220,23 @@ class LobbyService : UserService {
         
         dbLobbyNullabeDup.whoseTurn = controller.game.me.nextPlayer!.id
         
+        let gameId = String(UUID().uuidString.prefix(15))
+        
+        dbLobbyNullabeDup.gameId = gameId
         dbLobbyNullabeDup.hostId = controller.game.me.id
-                
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        
+     
+        
+        
+        let docRef = db.collection(COLL_PATH).document(gameId)
         printer.write("createLobby being called. ColRef: \(docRef.path)")
         do {
             try docRef.setData(from: dbLobbyNullabeDup)
+            
             printer.write("Lobby created.")
-            controller.isGameInitialized = true
-            controller.isGameInitializing = false
-            
-            
-            /// Change the document reference
 
-            observeLobby(game: controller.game, controller.onSuccessLobbySnapshot(lobby:))
+            self.updateGameId(newGameId: gameId)
+            
         } catch let err {
             printer.write("Error creating lobby. Cause: \(err.localizedDescription)")
         }
@@ -271,8 +246,58 @@ class LobbyService : UserService {
     
     
     
+    
+    
+    func updateGameId(newGameId: String) {
+        
+        self.printer.write("'updateGameId' is being called, new gameId \(newGameId)")
+        
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
+        
+        docRef.updateData(["gameId": newGameId]) { err in
+            
+            if let err = err {
+                print("Error updating game Id: \(err)")
+            } else {
+                print("Game ID successfully updated. new gameId \(newGameId)")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.deleteLobby(docRef: docRef)
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    
+
+    
+    func deleteLobby(docRef: DocumentReference) {
+        
+        docRef.delete() { err in
+            
+            if err != nil {
+                self.printer.write("Error deleting lobby. Cause: \(err.debugDescription)")
+                
+            } else {
+                self.printer.write("Lobby successfully deleted")
+
+            }
+            
+        }
+    }
+    
+    
+    
+
+    
+    
+    
+    
     func exitLobby(game: Game, player: Player) {
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
         
         let playerToRemove = DbPlayerNullable(pName: player.fullName, pid: player.id, randomNum: player.randomNumber, cards: player.getCardsInStr()).toDictionary()
         
@@ -303,39 +328,7 @@ class LobbyService : UserService {
     
     
     
-    
-//    func setHostId_ifIamHost(controller: Controller) {
-//        let game = controller.game
-//        printer.write("setHostId is being called")
-//        DispatchQueue.main.asyncAfter(deadline: .now() + waitTimeSec) {
-//
-//            if game.playerSize < 2 {
-//                //controller.has_host_id_setterMethod_been_called = false
-//                return}
-//
-//
-//
-//            if game.head!.prevPlayer!.id == game.me.id {
-//
-//
-//                let docRef = self.db.collection(self.MATCHES).document(self.MATCH_ID)
-//
-//                docRef.updateData([
-//                    "hostId": game.me.id
-//                ]) { err in
-//                    if let err = err {
-//                        print("Error updating host Id: \(err)")
-//                    } else {
-//                        print("Host ID successfully updated")
-//                        //controller.has_host_id_setterMethod_been_called = true
-//
-//                    }
-//                }
-//
-//
-//            }
-//        }
-//    }
+
     
     
     
@@ -343,7 +336,7 @@ class LobbyService : UserService {
     
     
     func deleteLobby() {
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
         
         docRef.delete() { err in
             
@@ -361,23 +354,23 @@ class LobbyService : UserService {
     
     
     
-    func setMatchPath(collStr: String) {
+    func setCollectionPath(collStr: String) {
         
         if collStr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         {
             return
         }
-        self.MATCHES = collStr
+        self.COLL_PATH = collStr
         
     }
     
     
-    func setMatchId(path: String) {
+    func setDocumentPath(path: String) {
         
         if path.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {return}
         
-        if MATCH_ID != path {
-            self.MATCH_ID = path
+        if DOC_PATH != path {
+            self.DOC_PATH = path
         }
     }
     
