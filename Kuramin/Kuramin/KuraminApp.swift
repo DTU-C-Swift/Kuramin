@@ -39,10 +39,9 @@ struct KuraminApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            TestVIew()
+            ContentView()
+            //TestVIew()
             
-                
                 //.environmentObject(DataHolder.controller)
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 

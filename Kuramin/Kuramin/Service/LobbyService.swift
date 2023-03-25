@@ -48,7 +48,7 @@ class LobbyService : UserService {
             if !lobbyDocument.exists {
                 self.printer.write("Document in lobby does not exit")
                 
-                let gameId = String(UUID().uuidString.prefix(10))
+                let gameId = String(UUID().uuidString.prefix(15))
                 
                 let dbLobby = DbLobbyNullable(gameId: gameId, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
                 
@@ -199,7 +199,7 @@ class LobbyService : UserService {
             switch result {
             case .success(let dbLobbyNullable):
                 
-                self.printer.write("Lobby has been fetch")
+                self.printer.write("Lobby has been fetched")
                 
                 self.delete_and_create_lobby(controller: controller, dbLobbyNullabe: dbLobbyNullable, newName: newName)
                 
@@ -243,7 +243,9 @@ class LobbyService : UserService {
     func createLobby(controller: Controller, dbLobbyNullable dl: DbLobbyNullable) {
         
         var dbLobbyNullabeDup = dl
+        
         controller.game.deck.setIntialCardToLobby(dbLobby: &dbLobbyNullabeDup)
+        
         dbLobbyNullabeDup.whoseTurn = controller.game.me.nextPlayer!.id
         
         dbLobbyNullabeDup.hostId = controller.game.me.id
@@ -253,6 +255,8 @@ class LobbyService : UserService {
         do {
             try docRef.setData(from: dbLobbyNullabeDup)
             printer.write("Lobby created.")
+            controller.isGameInitialized = true
+            controller.isGameInitializing = false
             
             
             /// Change the document reference
@@ -300,38 +304,38 @@ class LobbyService : UserService {
     
     
     
-    func setHostId_ifIamHost(controller: Controller) {
-        let game = controller.game
-        printer.write("setHostId is being called")
-        DispatchQueue.main.asyncAfter(deadline: .now() + waitTimeSec) {
-            
-            if game.playerSize < 2 {
-                //controller.has_host_id_setterMethod_been_called = false
-                return}
-            
-            
-            
-            if game.head!.prevPlayer!.id == game.me.id {
-                
-                
-                let docRef = self.db.collection(self.MATCHES).document(self.MATCH_ID)
-                
-                docRef.updateData([
-                    "hostId": game.me.id
-                ]) { err in
-                    if let err = err {
-                        print("Error updating host Id: \(err)")
-                    } else {
-                        print("Host ID successfully updated")
-                        //controller.has_host_id_setterMethod_been_called = true
-                        
-                    }
-                }
-                
-                
-            }
-        }
-    }
+//    func setHostId_ifIamHost(controller: Controller) {
+//        let game = controller.game
+//        printer.write("setHostId is being called")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + waitTimeSec) {
+//
+//            if game.playerSize < 2 {
+//                //controller.has_host_id_setterMethod_been_called = false
+//                return}
+//
+//
+//
+//            if game.head!.prevPlayer!.id == game.me.id {
+//
+//
+//                let docRef = self.db.collection(self.MATCHES).document(self.MATCH_ID)
+//
+//                docRef.updateData([
+//                    "hostId": game.me.id
+//                ]) { err in
+//                    if let err = err {
+//                        print("Error updating host Id: \(err)")
+//                    } else {
+//                        print("Host ID successfully updated")
+//                        //controller.has_host_id_setterMethod_been_called = true
+//
+//                    }
+//                }
+//
+//
+//            }
+//        }
+//    }
     
     
     

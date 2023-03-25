@@ -22,7 +22,10 @@ class Controller : ObservableObject {
     let onSuccessLobbyLock = NSLock()
     var previousLobby: Lobby?
     let NOTSET = Util.NOT_SET
+    
+    var isGameInitializing = false
     var isGameInitialized = false
+
     let gameLogic = GameLogic()
     
     
@@ -45,8 +48,8 @@ class Controller : ObservableObject {
         }
         
         let player = game.me
-        player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-        //player.setRandomNum(randNum: 1)
+        //player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        player.setRandomNum(randNum: 10000)
         
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
         
@@ -121,12 +124,15 @@ class Controller : ObservableObject {
     
     func initializeGame() {
         p.write("initializeGame is being called")
+        isGameInitializing = true
         DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
             
             if self.game.playerSize < 2 {
                 self.isGameInitialized = false
                 return
             }
+            
+            
             
             
             
@@ -139,15 +145,27 @@ class Controller : ObservableObject {
                 
             } else {
                 // I am not the host
-                self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")
+                self.p.write("The host is \(self.game.head!.prevPlayer!.fullName)")
                 self.lobbyService.setMatchId(path: self.game.id)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5)  {
-                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
-                }
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2)  {
+//                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
+//                }
+                
+                self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
+
                 
             }
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() ) {
+                
+            }
+            
+            
         }
+        
+        
     }
     
     
@@ -220,7 +238,6 @@ class Controller : ObservableObject {
         if !isGameInitialized {
             if lobby.players.count >= 2 {
                 self.initializeGame()
-                self.isGameInitialized = true
             }
             
             
