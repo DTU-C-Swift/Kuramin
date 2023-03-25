@@ -14,7 +14,7 @@ import Firebase
 class LobbyService : UserService {
     
     private let db = Firestore.firestore()
-    private let printer = Printer(tag: "Service", displayPrints: true)
+    private let printer = Printer(tag: "LobbyService", displayPrints: true)
     let waitTimeSec = 10.0
     private (set) var MATCH_ID = "lobby"
     private (set) var MATCHES = "matches"
@@ -241,10 +241,11 @@ class LobbyService : UserService {
     /// Set hotsId as 'me.id' and create a match with given matchId (MATCH_ID)
     
     func createLobby(controller: Controller, dbLobbyNullable dl: DbLobbyNullable) {
-
+        
         var dbLobbyNullabeDup = dl
         controller.game.deck.setIntialCardToLobby(dbLobby: &dbLobbyNullabeDup)
         dbLobbyNullabeDup.whoseTurn = controller.game.me.nextPlayer!.id
+        
         dbLobbyNullabeDup.hostId = controller.game.me.id
                 
         let docRef = db.collection(MATCHES).document(MATCH_ID)

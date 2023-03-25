@@ -38,16 +38,18 @@ class Controller : ObservableObject {
     
     
     func goToLobby() {
-
+        
         if game.me.id == NOTSET || game.me.fullName == NOTSET  {
             p.write("Can't go to lobby. Caus: pid: \(game.me.id), fullName: \(game.me.fullName)")
             return
         }
         
         let player = game.me
-        player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        //player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        player.setRandomNum(randNum: 1)
+        
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
-
+        
     }
     
     
@@ -58,12 +60,12 @@ class Controller : ObservableObject {
         dummyPlayerCounter += 1
         
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
-
+        
     }
     
     
     
-
+    
     
     
     
@@ -137,9 +139,13 @@ class Controller : ObservableObject {
                 
             } else {
                 // I am not the host
-                self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")                
+                self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")
                 self.lobbyService.setMatchId(path: self.game.id)
-                self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5)  {
+                    self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
+                }
+                
             }
         }
     }
@@ -148,7 +154,7 @@ class Controller : ObservableObject {
     
     
     
-
+    
     
     
     // --------------- This method will be called when a snapshot of observLobby is recieved --------------//
@@ -160,18 +166,11 @@ class Controller : ObservableObject {
         
         // TODO compare with previousLobby(not just ids, all the values)
         
-        
         // Removes player from the display
         game.updatePlayerList(lobby: lobby)
         
-        
-        
         for crrDbPlayer in lobby.players {
-            
-            
-            
             self.p.write("observeLobby: id: \(crrDbPlayer.pid)")
-            
             
             // It is me
             if crrDbPlayer.pid == game.me.id {
@@ -183,34 +182,33 @@ class Controller : ObservableObject {
                     p.write("Me being added to player list")
                 }
                 else {p.write("Me being updated")}
-                continue
                 
                 
             } else if let pRef = game.getPlayerRef(pid: crrDbPlayer.pid, shouldLock: true) {
+                // Updating an existing player
                 
                 pRef.updateInfo(dbPlayer: crrDbPlayer)
                 p.write("Player \(crrDbPlayer.pid) updated")
                 
                 
             } else {
+                // Creating a new player
                 
                 let newPlayer =  crrDbPlayer.createPlayer()
                 if game.addNode(nodeToAdd: newPlayer) {}
                 userService.downloadImg(player: newPlayer)
             }
             
-            
-            
         }
         
+        // Setting up game id if it is notSet
         if game.id == NOTSET || game.id == "" {
             game.setGameId(gid: lobby.gameId)
         }
         
         
-        game.setHostId(hostId: lobby.hostId)
-        game.setPlayerTurnId(pid: lobby.whosTurn)
         
+        // Stopping the buffering page
         if !game.isLandingInLobbySucceded {
             game.setIsLandingInLobbySucceded(val: true)
         }
@@ -219,26 +217,23 @@ class Controller : ObservableObject {
         self.onSuccessLobbyLock.unlock()
         
         
-        
-        
         if !isGameInitialized {
             if lobby.players.count >= 2 {
                 self.initializeGame()
                 self.isGameInitialized = true
             }
             
+            
+            
         } else {
             
-            if lobby.whosTurn == game.me.id {
-                // my turn..
-                
-                game.setIsMyturn(true)
-                
-            }
+            // Game is initialized
+            game.setHostId(hostId: lobby.hostId)
+            game.setPlayerTurnId(pid: lobby.whosTurn)
             
         }
         
     }
-
+    
     
 }

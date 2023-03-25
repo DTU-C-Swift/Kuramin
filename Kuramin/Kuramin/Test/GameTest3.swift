@@ -61,7 +61,7 @@ class GameTest3 : ObservableObject {
                 assert(game.head!.randomNumber < game.head!.nextPlayer!.randomNumber)
                 assert(game.head!.id == game.me.id)
 
-                DispatchQueue.main.asyncAfter(deadline:  .now() + lobbyService.waitTimeSec) {
+                DispatchQueue.main.asyncAfter(deadline:  .now() + lobbyService.waitTimeSec + 3) {
                 
                     self.gameInitializationTest(controller: controller, game: game, lobbyService: lobbyService)
                 }

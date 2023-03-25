@@ -14,7 +14,7 @@ public class Game : ObservableObject {
     private let semephore = DispatchSemaphore(value: 1)
     private (set) var playerSize = 0
     
-    private (set) var hostId = ""
+    private (set) var hostId = Util.NOT_SET
     let p = Printer(tag: "Game", displayPrints: true)
     private var lockCount = 0
     let deck = Deck()
@@ -642,16 +642,16 @@ public class Game : ObservableObject {
     }
     
     
-    func setIsMyturn(_ val: Bool) {
-        if isMyTurn == val {return}
-        
-        Task {
-            
-            await MainActor.run(body: {
-                isMyTurn = val
-            })
-        }
-    }
+//    func setIsMyturn(_ val: Bool) {
+//        if isMyTurn == val {return}
+//        
+//        Task {
+//            
+//            await MainActor.run(body: {
+//                isMyTurn = val
+//            })
+//        }
+//    }
     
     
     
@@ -663,6 +663,12 @@ public class Game : ObservableObject {
         
         if playerTurnId != pid {
             self.playerTurnId = pid
+            
+            if pid == me.id {
+                self.isMyTurn = true
+            }
+            
+            
         }
         
     }
