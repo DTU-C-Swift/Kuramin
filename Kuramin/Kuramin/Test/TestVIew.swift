@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TestVIew: View {
-    //@ObservedObject var gameTest = GameTest()
     @ObservedObject var gameTest1 = GameTest1()
     @ObservedObject var gameTest2 = GameTest2()
     @ObservedObject var gameTest3 = GameTest2()

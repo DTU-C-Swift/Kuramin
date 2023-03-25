@@ -315,9 +315,9 @@
 		56E2656F29C2551400738F12 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				56E2657029C2552A00738F12 /* GameTest2.swift */,
 				56E2657229C2609E00738F12 /* TestVIew.swift */,
 				56E75FB429C5C5F600215C71 /* GameTest1.swift */,
+				56E2657029C2552A00738F12 /* GameTest2.swift */,
 				561DCBA129CF16CA00743070 /* GameTest3.swift */,
 			);
 			path = Test;
