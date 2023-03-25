@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		561DCBA229CF16CA00743070 /* GameTest3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DCBA129CF16CA00743070 /* GameTest3.swift */; };
 		563AE91629C31AE300E950DE /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563AE91529C31AE300E950DE /* HowToPlayView.swift */; };
 		563AE91829C31B4900E950DE /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563AE91729C31B4900E950DE /* ProfilePageView.swift */; };
 		563AE91A29C31E5A00E950DE /* iconContributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 563AE91929C31E5A00E950DE /* iconContributions.txt */; };
@@ -50,10 +51,10 @@
 		56BC82B529C3D7410011BDCD /* DbLobbyNullable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BC82B429C3D7410011BDCD /* DbLobbyNullable.swift */; };
 		56C6DCB029CC47440024AE17 /* LobbyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6DCAF29CC47430024AE17 /* LobbyService.swift */; };
 		56C6DCB429CC68700024AE17 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6DCB329CC68700024AE17 /* GameLogic.swift */; };
-		56E2657129C2552A00738F12 /* SubGameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657029C2552A00738F12 /* SubGameTest.swift */; };
+		56E2657129C2552A00738F12 /* GameTest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657029C2552A00738F12 /* GameTest2.swift */; };
 		56E2657329C2609E00738F12 /* TestVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2657229C2609E00738F12 /* TestVIew.swift */; };
 		56E75FB129C500A200215C71 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E75FB029C500A200215C71 /* PlayersView.swift */; };
-		56E75FB529C5C5F600215C71 /* GameTestMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E75FB429C5C5F600215C71 /* GameTestMain.swift */; };
+		56E75FB529C5C5F600215C71 /* GameTest1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E75FB429C5C5F600215C71 /* GameTest1.swift */; };
 		56F0D3F629CDCAA20026DCDA /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0D3F529CDCAA20026DCDA /* Deck.swift */; };
 		56F0D3F829CDE6DC0026DCDA /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0D3F729CDE6DC0026DCDA /* CardsView.swift */; };
 		56F6642129C2FE9B0047DECA /* DbPlayerNullable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F6642029C2FE9B0047DECA /* DbPlayerNullable.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		561DCBA129CF16CA00743070 /* GameTest3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest3.swift; sourceTree = "<group>"; };
 		563AE91529C31AE300E950DE /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		563AE91729C31B4900E950DE /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		563AE91929C31E5A00E950DE /* iconContributions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iconContributions.txt; sourceTree = "<group>"; };
@@ -120,10 +122,10 @@
 		56BC82B429C3D7410011BDCD /* DbLobbyNullable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbLobbyNullable.swift; sourceTree = "<group>"; };
 		56C6DCAF29CC47430024AE17 /* LobbyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyService.swift; sourceTree = "<group>"; };
 		56C6DCB329CC68700024AE17 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
-		56E2657029C2552A00738F12 /* SubGameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGameTest.swift; sourceTree = "<group>"; };
+		56E2657029C2552A00738F12 /* GameTest2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest2.swift; sourceTree = "<group>"; };
 		56E2657229C2609E00738F12 /* TestVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVIew.swift; sourceTree = "<group>"; };
 		56E75FB029C500A200215C71 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
-		56E75FB429C5C5F600215C71 /* GameTestMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTestMain.swift; sourceTree = "<group>"; };
+		56E75FB429C5C5F600215C71 /* GameTest1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest1.swift; sourceTree = "<group>"; };
 		56F0D3F529CDCAA20026DCDA /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		56F0D3F729CDE6DC0026DCDA /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		56F6642029C2FE9B0047DECA /* DbPlayerNullable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbPlayerNullable.swift; sourceTree = "<group>"; };
@@ -313,9 +315,10 @@
 		56E2656F29C2551400738F12 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				56E2657029C2552A00738F12 /* SubGameTest.swift */,
+				56E2657029C2552A00738F12 /* GameTest2.swift */,
 				56E2657229C2609E00738F12 /* TestVIew.swift */,
-				56E75FB429C5C5F600215C71 /* GameTestMain.swift */,
+				56E75FB429C5C5F600215C71 /* GameTest1.swift */,
+				561DCBA129CF16CA00743070 /* GameTest3.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -489,7 +492,7 @@
 			files = (
 				56954C1929C235DF00155181 /* CirclePicView.swift in Sources */,
 				56954C2129C236A700155181 /* GamePage.swift in Sources */,
-				56E2657129C2552A00738F12 /* SubGameTest.swift in Sources */,
+				56E2657129C2552A00738F12 /* GameTest2.swift in Sources */,
 				56954C1529C2358600155181 /* BackgroundView.swift in Sources */,
 				56BC82B529C3D7410011BDCD /* DbLobbyNullable.swift in Sources */,
 				56F6642329C301010047DECA /* DbCard.swift in Sources */,
@@ -510,6 +513,7 @@
 				56954C4529C2396C00155181 /* FbAuth.swift in Sources */,
 				563AE91629C31AE300E950DE /* HowToPlayView.swift in Sources */,
 				56954C3329C2386E00155181 /* ServiceHelper.swift in Sources */,
+				561DCBA229CF16CA00743070 /* GameTest3.swift in Sources */,
 				56E75FB129C500A200215C71 /* PlayersView.swift in Sources */,
 				56954C2529C2370100155181 /* MenuPopup.swift in Sources */,
 				569C5CE329C2206C00D1D7FE /* CoreData.swift in Sources */,
@@ -517,7 +521,7 @@
 				56954C4029C2391E00155181 /* Controller.swift in Sources */,
 				56954C4229C2393F00155181 /* DataHolder.swift in Sources */,
 				56C6DCB429CC68700024AE17 /* GameLogic.swift in Sources */,
-				56E75FB529C5C5F600215C71 /* GameTestMain.swift in Sources */,
+				56E75FB529C5C5F600215C71 /* GameTest1.swift in Sources */,
 				56F0D3F629CDCAA20026DCDA /* Deck.swift in Sources */,
 				569C5CE129C2206C00D1D7FE /* KuraminApp.swift in Sources */,
 				56954C1729C235AF00155181 /* CardView.swift in Sources */,

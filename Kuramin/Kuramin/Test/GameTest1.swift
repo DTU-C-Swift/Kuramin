@@ -7,12 +7,12 @@
 
 import Foundation
 
-class GameTestMain : ObservableObject {
+class GameTest1 : ObservableObject {
     @Published var testPassed: Bool = false
 
     
     
-    func main() {
+    func run() {
 
         
 //        for i in 0...10 {

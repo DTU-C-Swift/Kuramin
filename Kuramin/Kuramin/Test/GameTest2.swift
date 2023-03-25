@@ -10,14 +10,14 @@ import FirebaseAuth
 import SwiftUI
 
 
-class SubGameTest : ObservableObject{
-    let p = Printer(tag: "SubGameTest", displayPrints: true)
+class GameTest2 : ObservableObject{
+    let p = Printer(tag: "GameTest2", displayPrints: true)
     @Published var testPassed: Bool = false
 
 
     
 
-    func main() {
+    func run() {
         updateMethodTest()
         goToLobby_usecase_test(onSuccess: goToLobby_usecase_test_onSuccess)
         

@@ -9,8 +9,10 @@ import SwiftUI
 
 struct TestVIew: View {
     //@ObservedObject var gameTest = GameTest()
-    @ObservedObject var gameTest = GameTestMain()
-    @ObservedObject var subTest = SubGameTest()
+    @ObservedObject var gameTest1 = GameTest1()
+    @ObservedObject var gameTest2 = GameTest2()
+    @ObservedObject var gameTest3 = GameTest2()
+
 
 
     
@@ -21,23 +23,47 @@ struct TestVIew: View {
         
         VStack {
             
-            if gameTest.testPassed  {
-                Text("MainTest passed")
+            if gameTest1.testPassed  {
+                Text("GameTest1 passed")
+                    .background(.green)
+                
+            } else {
+                Text("GameTest1 running")
+                    .background(.yellow)
+
             }
             
-            if subTest.testPassed {
-                Text("SubTest passed")
+            if gameTest2.testPassed {
+                Text("GameTest2 passed")
+                    .background(.green)
+
+                
+            } else {
+                Text("GameTest2 running")
+                    .background(.yellow)
+
             }
             
-            if !subTest.testPassed && !gameTest.testPassed {
-                Text("Test Running")
+            
+            if gameTest3.testPassed {
+                Text("GameTest3 passed")
+                    .background(.green)
+
+                
+            } else {
+                Text("GameTest3 running")
+                    .background(.yellow)
+
             }
+            
+            
 
         }
         .onAppear {
             
-            gameTest.main()
-            subTest.main()
+            gameTest1.run()
+            gameTest2.run()
+            gameTest3.run()
         }
     }
     
