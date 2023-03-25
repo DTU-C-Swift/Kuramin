@@ -16,6 +16,8 @@ class LobbyService : UserService {
     private let db = Firestore.firestore()
     private let printer = Printer(tag: "Service", displayPrints: true)
     let waitTimeSec = 10.0
+    private (set) var MATCH_ID = "lobby"
+    private (set) var MATCHES = "matches"
 
     
     
@@ -223,7 +225,7 @@ class LobbyService : UserService {
                 
             } else {
                 self.printer.write("Lobby successfully deleted")
-                self.setLobbyDocumentRef(collStr: self.MATCHES, path: newName)
+                self.setMatchId(path: newName)
 
                 self.createLobby(controller: controller, dbLobbyNullable: dbLobbyNullabe)
                 
@@ -333,5 +335,43 @@ class LobbyService : UserService {
     
     
     
+    func deleteLobby() {
+        let docRef = db.collection(MATCHES).document(MATCH_ID)
+        
+        docRef.delete() { err in
+            
+            if err != nil {
+                self.printer.write("Error deleting lobby. Cause: \(err.debugDescription)")
+                
+            } else {
+                self.printer.write("Lobby successfully deleted")
+                
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    func setMatchPath(collStr: String) {
+        
+        if collStr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        {
+            return
+        }
+        self.MATCHES = collStr
+        
+    }
+    
+    
+    func setMatchId(path: String) {
+        
+        if path.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {return}
+        
+        if MATCH_ID != path {
+            self.MATCH_ID = path
+        }
+    }
     
 }

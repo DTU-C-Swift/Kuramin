@@ -21,9 +21,15 @@ struct TestVIew: View {
         
         VStack {
             
-            if gameTest.testPassed && subTest.testPassed {
-                Text("All test passed")
-            } else {
+            if gameTest.testPassed  {
+                Text("MainTest passed")
+            }
+            
+            if subTest.testPassed {
+                Text("SubTest passed")
+            }
+            
+            if !subTest.testPassed && !gameTest.testPassed {
                 Text("Test Running")
             }
 

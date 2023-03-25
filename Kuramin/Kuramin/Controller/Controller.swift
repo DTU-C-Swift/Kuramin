@@ -15,7 +15,7 @@ class Controller : ObservableObject {
     let lobbyService = LobbyService()
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
-    @Published var profile = Player(id: Util().NOT_SET)
+    @Published var profile = Player(id: Util.NOT_SET)
     
     //@Published var image: UIImage? = nil
     var dummyPlayerCounter = 1
@@ -41,13 +41,14 @@ class Controller : ObservableObject {
     func goToLobby(addDummyPlayer: Bool) {
 
         
-        var player = Player(id: "testId\(dummyPlayerCounter)")
+        var player: Player?
 
         
         
         if addDummyPlayer {
-            player.setFullName(fullName: "Name\(dummyPlayerCounter)")
-            player.setRandomNum(randNum: dummyPlayerCounter)
+            player = Player(id: "testId\(dummyPlayerCounter)")
+            player!.setFullName(fullName: "Name\(dummyPlayerCounter)")
+            player!.setRandomNum(randNum: dummyPlayerCounter)
             dummyPlayerCounter += 1
         } else {
             
@@ -57,7 +58,7 @@ class Controller : ObservableObject {
             }
             
             player = game.me
-            player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+            player!.setRandomNum(randNum: Int(arc4random_uniform(10000)))
 
         }
         
@@ -65,13 +66,11 @@ class Controller : ObservableObject {
         // TODO Needs to find out card size. 20 is just for now
 
         if addDummyPlayer {
-            lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
+            lobbyService.goToLobby(me: player!, controller:  self, shouldCall_lobbyObserver: false)
         } else {
-            lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
-
+            lobbyService.goToLobby(me: player!, controller:  self, shouldCall_lobbyObserver: true)
         }
         
-
 
     }
     
@@ -151,8 +150,8 @@ class Controller : ObservableObject {
                 
             } else {
                 // I am not the host
-                self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")
-                self.lobbyService.setLobbyDocumentRef(collStr: self.lobbyService.MATCHES, path: self.game.id)
+                self.p.write("The host is \(String(describing: self.game.head!.prevPlayer))")                
+                self.lobbyService.setMatchId(path: self.game.id)
                 self.lobbyService.observeLobby(game: self.game, self.onSuccessLobbySnapshot(lobby:))
             }
         }

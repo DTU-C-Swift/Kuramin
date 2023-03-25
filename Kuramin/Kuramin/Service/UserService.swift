@@ -19,8 +19,7 @@ class UserService {
     private let storage = Storage.storage()
     private let printer = Printer(tag: "Service", displayPrints: true)
     
-    var MATCH_ID = "lobby"
-    var MATCHES = "matches"
+
 
     let NOTSET = Util.NOT_SET
     
@@ -243,36 +242,10 @@ class UserService {
     }
     
     
-    
-    func deleteLobby() {
-        let docRef = db.collection(MATCHES).document(MATCH_ID)
-        
-        docRef.delete() { err in
-            
-            if err != nil {
-                self.printer.write("Error deleting lobby. Cause: \(err.debugDescription)")
-                
-            } else {
-                self.printer.write("Lobby successfully deleted")
-                
-            }
-            
-        }
-    }
+
     
     
-    func setLobbyDocumentRef(collStr: String, path: String) {
-        
-        if collStr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
-            path.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return
-        }
-        
-        self.MATCHES = collStr
-        self.MATCH_ID = path
-        
-        self.printer.write("lobby document reference changed")
-    }
+
     
     
 }

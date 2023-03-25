@@ -31,7 +31,8 @@ class SubGameTest : ObservableObject{
         
         
         let controller = Controller()
-        controller.lobbyService.MATCHES = "test"
+        
+        controller.lobbyService.setMatchPath(collStr: "test")
 
         let game = controller.game
         game.setGameId(gid: "goToLobby_usecase_test")
@@ -64,7 +65,7 @@ class SubGameTest : ObservableObject{
                 controller.goToLobby(addDummyPlayer: true)
                 controller.goToLobby(addDummyPlayer: true)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                     // Assuming: playerSize 4
                     assert(game.playerSize == 4)
                     

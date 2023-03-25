@@ -40,7 +40,7 @@ struct ProfilePageView: View {
                     .shadow(radius: 10)
                 
                 VStack {
-                    if profile.fullName != Util().NOT_SET {
+                    if profile.fullName != Util.NOT_SET {
                         Text(profile.fullName)
                             .font(.title)
                             .bold()
