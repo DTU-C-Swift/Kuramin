@@ -144,8 +144,10 @@ class Controller : ObservableObject {
             
             
             if self.game.head!.prevPlayer!.id == self.game.me.id {
-                // I am the host
+                
+                //------------- I am the host -------------//
                 self.p.write("You are the host")
+                
                 self.changeLobbyName()
                 
             } else {
@@ -216,11 +218,13 @@ class Controller : ObservableObject {
             
         }
         
-        if game.id == NOTSET {
+        if game.id == NOTSET || game.id == "" {
             game.setGameId(gid: lobby.gameId)
         }
         
-        //game.setHostId(hostId: lobby.hostId)
+        
+        game.setHostId(hostId: lobby.hostId)
+        game.setPlayerTurnId(pid: lobby.whosTurn)
         
         if !game.isLandingInLobbySucceded {
             game.setIsLandingInLobbySucceded(val: true)

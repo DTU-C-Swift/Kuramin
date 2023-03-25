@@ -182,7 +182,7 @@ class LobbyService : UserService {
     
     
     
-    
+    /// This method must only be called if the player is the host
     
     func changedLobbyName(controller: Controller, newName: String)  {
         
@@ -238,12 +238,14 @@ class LobbyService : UserService {
     
     
     
+    /// Set hotsId as 'me.id' and create a match with given matchId (MATCH_ID)
     
     func createLobby(controller: Controller, dbLobbyNullable dl: DbLobbyNullable) {
 
         var dbLobbyNullabeDup = dl
         controller.game.deck.setIntialCardToLobby(dbLobby: &dbLobbyNullabeDup)
         dbLobbyNullabeDup.whoseTurn = controller.game.me.nextPlayer!.id
+        dbLobbyNullabeDup.hostId = controller.game.me.id
                 
         let docRef = db.collection(MATCHES).document(MATCH_ID)
         printer.write("createLobby being called. ColRef: \(docRef.path)")

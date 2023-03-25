@@ -31,6 +31,7 @@ public class Game : ObservableObject {
     @Published private (set) var sevenFromRight: Player?
     @Published private (set) var isLandingInLobbySucceded = false
     @Published var isWaitingToLandInLobby = false
+    private (set) var playerTurnId = Util.NOT_SET
     
     @Published private (set) var isMyTurn = false
 
@@ -650,6 +651,20 @@ public class Game : ObservableObject {
                 isMyTurn = val
             })
         }
+    }
+    
+    
+    
+    
+    func setPlayerTurnId(pid: String) {
+        if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+            return
+        }
+        
+        if playerTurnId != pid {
+            self.playerTurnId = pid
+        }
+        
     }
 }
 

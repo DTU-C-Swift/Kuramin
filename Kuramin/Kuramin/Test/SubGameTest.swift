@@ -35,7 +35,7 @@ class SubGameTest : ObservableObject{
         controller.lobbyService.setMatchPath(collStr: "test")
 
         let game = controller.game
-        game.setGameId(gid: "goToLobby_usecase_test")
+        //game.setGameId(gid: Int(.random(in: <#T##ClosedRange<Double>#>)))
 
         controller.observeMeInDB()
         
@@ -69,7 +69,26 @@ class SubGameTest : ObservableObject{
                     // Assuming: playerSize 4
                     assert(game.playerSize == 4)
                     
-                    onSuccess(controller)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + controller.lobbyService.waitTimeSec) {
+                        
+                        assert(controller.isGameInitialized)
+                        assert(game.head!.cards.count == 4)
+                        assert(game.head!.nextPlayer!.cards.count == 4)
+                        assert(game.head!.nextPlayer!.nextPlayer!.cards.count == 4)
+                        assert(game.head!.nextPlayer!.nextPlayer!.nextPlayer!.cards.count == 4)
+
+                        assert(game.hostId == game.head!.prevPlayer!.id)
+                        assert(game.playerTurnId == game.head!.id)
+
+                        
+                        onSuccess(controller)
+
+                    }
+                    
+                    
+                    
+                    
                     
 
 
@@ -83,17 +102,7 @@ class SubGameTest : ObservableObject{
     
     
     func goToLobby_usecase_test_onSuccess(controller: Controller) {
-
-        //controller.service.deleteLobby()
-
-        
-        
-        
         self.testPassed = true
-
-        //service.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: false)
-
-        
     }
     
     
