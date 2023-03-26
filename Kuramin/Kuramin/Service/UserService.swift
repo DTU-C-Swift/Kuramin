@@ -18,11 +18,12 @@ class UserService {
     private var db = Firestore.firestore()
     private let storage = Storage.storage()
     private let printer = Printer(tag: "UserService", displayPrints: true)
+    var observeMeDocRef: ListenerRegistration?
     
-
-
+    
+    
     let NOTSET = Util.NOT_SET
-        
+    
     
     func create_or_update_user(userImage: UIImage?, game: Game) {
         
@@ -130,17 +131,19 @@ class UserService {
                 me.setId(pid: user.uid)
             }
         }
-        
-        
-        
+
         
         // Gets user image from storage
         self.downloadImg(player: me)
         
         
-        
         // Gets user from firestore
-        db.collection("users").document(me.id).addSnapshotListener { snapshot, error in
+        let docRef = db.collection("users").document(me.id)
+        
+        
+        observeMeDocRef = docRef.addSnapshotListener { snapshot, error in
+            
+            
             guard let document = snapshot else {
                 self.printer.write("Error fetching document: \(error!)")
                 
@@ -161,7 +164,6 @@ class UserService {
                 self.printer.write("getUser failed: \(data)")
                 
             }
-            
             
         }
         
@@ -201,7 +203,7 @@ class UserService {
     }
     
     
-
+    
     
     func isUserloggedIn_viaFacebook() -> Bool {
         
@@ -237,10 +239,10 @@ class UserService {
     }
     
     
-
     
     
-
+    
+    
     
     
 }

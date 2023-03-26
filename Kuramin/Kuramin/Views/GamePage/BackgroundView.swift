@@ -35,8 +35,7 @@ struct BackgroundView: View {
                 .padding(.top, 30)
             
             
-            
-            HStack {
+            VStack {
                 Spacer()
                 Spacer()
                 
@@ -45,18 +44,26 @@ struct BackgroundView: View {
                         .resizable()
                         .scaledToFit()
                         .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
-                        .frame(width: 60, height: 130)
-
+                        .frame(width: 60, height: 100)
+                    
                 }
+                
+                
                 
 //                Image("H3")
 //                    .resizable()
 //                    .scaledToFit()
 //                    .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
-//                    .frame(width: 60, height: 130)
-
+//                    .frame(width: 60, height: 110)
+                Spacer()
+                Spacer()
+                Spacer()
                 
-                
+            }
+            
+            HStack {
+                Spacer()
+                Spacer()
                 Spacer()
                 VStack {
                     Text("Rewards")

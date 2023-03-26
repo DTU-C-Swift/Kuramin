@@ -21,6 +21,12 @@ class LobbyService : UserService {
     var previousLobbyNullable: DbLobbyNullable?
     var isLobbyObserving = false
 
+    
+    var lobbyObsRef: ListenerRegistration? = nil
+    var isObservingLobbyFirstTime = true
+    var hasObserverHelperBeenCalled = false
+    let semephoreOberservLobby = DispatchSemaphore(value: 1)
+    var lobbySnapsot: DocumentSnapshot?
 
     
     
@@ -136,17 +142,13 @@ class LobbyService : UserService {
     
     
     
-    var obsRef: ListenerRegistration? = nil
-    var isObservingLobbyFirstTime = true
-    var hasObserverHelperBeenCalled = false
-    let semephoreOberservLobby = DispatchSemaphore(value: 1)
-    var lobbySnapsot: DocumentSnapshot?
+
     
     
     func observeLobby(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
         if isLobbyObserving {
-            assert(obsRef != nil)
-            obsRef!.remove()
+            assert(lobbyObsRef != nil)
+            lobbyObsRef!.remove()
             printer.write("Lobby observer removed.")
         }
         
@@ -155,7 +157,7 @@ class LobbyService : UserService {
         isLobbyObserving = true
         
         
-        obsRef = docRef.addSnapshotListener { [self] snapshot, err in
+        lobbyObsRef = docRef.addSnapshotListener { [self] snapshot, err in
             
             
             guard let snapshot = snapshot, snapshot.exists else {
@@ -298,6 +300,7 @@ class LobbyService : UserService {
             printer.write("Lobby created.")
             
             self.updateGameId(newGameId: gameId)
+            controller.isGameInitializing = false
             
         } catch let err {
             printer.write("Error creating lobby. Cause: \(err.localizedDescription)")

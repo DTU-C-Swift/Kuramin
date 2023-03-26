@@ -11,8 +11,8 @@ import Firebase
 
 class Controller : ObservableObject {
     @Published var game: Game = Game()
-    let userService = UserService()
-    let lobbyService = LobbyService()
+    var userService = UserService()
+    var lobbyService = LobbyService()
     @Published var isLoggedIn: Bool = false
     @Published var bufferState: String = ""
     @Published var profile = Player(id: Util.NOT_SET)
@@ -111,8 +111,14 @@ class Controller : ObservableObject {
     
     func exitLobby() {
         lobbyService.exitLobby(game: game, player: game.me)
-        lobbyService.obsRef?.remove()
-        lobbyService.setDocumentPath(path: "lobby")
+        lobbyService.lobbyObsRef?.remove()
+        lobbyService.observeMeDocRef?.remove()
+        lobbyService = LobbyService()
+        let oldGame = game
+        game = Game()
+        game.me.setId(pid: oldGame.me.id)
+        game.me.setFullName(fullName: oldGame.me.fullName)
+        observeMeInDB()
     }
     
     
@@ -253,7 +259,6 @@ class Controller : ObservableObject {
                 //self.isGameInitialized = false
                 return
             }
-            
             
             
             
