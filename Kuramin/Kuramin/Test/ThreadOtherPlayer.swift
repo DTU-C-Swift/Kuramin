@@ -47,7 +47,7 @@ class ThreadOtherPlayer : Thread {
             //self.controller.goToLobby()
             self.controller.lobbyService.goToLobby(me: game.me, controller: self.controller, shouldCall_lobbyObserver: true)
                                     
-            DispatchQueue.main.asyncAfter(deadline:  .now() + self.waitTime1) {
+            DispatchQueue.main.asyncAfter(deadline:  .now() + self.waitTime1 + 4) {
                 
                 assert(game.playerSize == 1)
                 assert(game.hostId == Util.NOT_SET)

@@ -50,7 +50,7 @@ class GameTest2 : ObservableObject{
             controller.goToLobby()
             
             // lets player to be fected from db
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
                 assert(game.me.cards.count == 0)
                 assert(game.playerSize == 1)
                 assert(game.head === game.me)

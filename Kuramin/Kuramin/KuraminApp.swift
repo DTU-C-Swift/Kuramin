@@ -16,22 +16,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-//        clearCache()
-//        return true
+
     }
     
-    
-//    func applicationDidEnterBackground(_ application: UIApplication) {
-//        clearCache()
-//    }
-    
 
-    
-    
-    
-    
-    
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -56,8 +44,8 @@ struct KuraminApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
-            //TestVIew()
+            //ContentView()
+            TestVIew()
             
                 //.environmentObject(DataHolder.controller)
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)

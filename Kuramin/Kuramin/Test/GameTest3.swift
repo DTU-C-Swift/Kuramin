@@ -55,7 +55,7 @@ class GameTest3 : ObservableObject {
             controller.goToLobby()
             
 
-            DispatchQueue.main.asyncAfter(deadline:  .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline:  .now() + 6) {
                 
                 assert(game.playerSize == 2)
                 assert(game.hostId == Util.NOT_SET)

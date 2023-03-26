@@ -61,8 +61,8 @@ struct TestVIew: View {
         .onAppear {
             
             gameTest1.run()
-//            gameTest2.run()
-//            gameTest3.run()
+            gameTest2.run()
+            gameTest3.run()
         }
     }
     
