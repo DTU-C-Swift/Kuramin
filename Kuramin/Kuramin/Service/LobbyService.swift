@@ -15,10 +15,10 @@ class LobbyService : UserService {
     
     private let db = Firestore.firestore()
     private let printer = Printer(tag: "LobbyService", displayPrints: true)
-    let waitTimeSec = 10.0
+    let waitTimeSec = 1000.0
     private (set) var DOC_PATH = "lobby"
     private (set) var COLL_PATH = "matches"
-
+    
     
     
     //-------------------------------- New implementation of lobby -----------------------------//
@@ -83,9 +83,9 @@ class LobbyService : UserService {
                         // Checks If there are already 8 players.
                         if dbLobby.players.count >= 8 {
                             self.printer.write("You need to wait, there are 8 players in lobby")
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//                                self.goToLobby(me: me, controller: controller, shouldCall_lobbyObserver: shouldCall_lobbyObserver)
-//                            }
+                            //                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                            //                                self.goToLobby(me: me, controller: controller, shouldCall_lobbyObserver: shouldCall_lobbyObserver)
+                            //                            }
                             game.setIsWaitingToLandInLobby(val: false)
                             isSucceded = false
                             return
@@ -126,12 +126,23 @@ class LobbyService : UserService {
         
     }
     
+    
+    
+    
+    
+    
+    
     var obsRef: ListenerRegistration? = nil
+    var isObservingLobbyFirstTime = true
+    var hasObserverHelperBeenCalled = false
+    let semephoreOberservLobby = DispatchSemaphore(value: 1)
+    var lobbySnapsot: DocumentSnapshot?
+    
     
     func observeLobby(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
         if isLobbyObserving {
             assert(obsRef != nil)
-            obsRef?.remove()
+            obsRef!.remove()
             printer.write("Lobby observer removed.")
         }
         
@@ -140,41 +151,183 @@ class LobbyService : UserService {
         isLobbyObserving = true
         
         
-        obsRef = docRef.addSnapshotListener { snapshot, err in
+        obsRef = docRef.addSnapshotListener { [self] snapshot, err in
             
-            do {
-                if let dbLobbyNullable = try snapshot?.data(as: DbLobbyNullable.self) {
+            
+            guard let snapshot = snapshot, snapshot.exists else {
+                self.printer.write("Document(observeLobby) does not exist")
+                return
+            }
+            
+                       
+            lobbySnapsot = snapshot
+            
+            
+            
+            //---------------------------------
+            
+            
+//            do {
+//                let dbLobbyNullable = try lobbySnapsot!.data(as: DbLobbyNullable.self)
+//
+//                guard let lobby = dbLobbyNullable.mapToLobby() else {
+//                    self.printer.write("mapToLobby returned nil")
+//                    game.remove_all_players()
+//                    return
+//                }
+//
+//                printer.write("Document players: \(lobby.players.count)")
+//
+//            } catch {}
+            
+            
+            
+            //......................................
+            
+            
+            
+
+            if self.isObservingLobbyFirstTime {
+                
+                if !hasObserverHelperBeenCalled {
+                    hasObserverHelperBeenCalled = true
+                    self.printer.write("Document1")
+
                     
-                    guard let lobby = dbLobbyNullable.mapToLobby() else {
-                        self.printer.write("mapToLobby returned nil")
-                        game.remove_all_players()
-                        return
+                    DispatchQueue.global().async {
+                        self.observerHelper1(game: game, onSuccess)
                     }
                     
-                    self.printer.write("Snapshot from lobby recieved")
-                    onSuccess(lobby)
-                    
-                    
                 }
+                
+                self.printer.write("Document hasObserverHelperBeenCalled")
+                
+            } else {
+                
+                self.callOnSuccessMethod(game: game, onSuccess)
             }
             
-            catch {
-                
-                self.printer.write("Error in mapping to DbLobbyNullable. \(String(describing: err))")
-                
-//                if let obsRef = obsRef {
-//                    //game.remove_all_players()
-//                    obsRef.remove()
-//                    self.isLobbyObserving = false
-//                    self.printer.write("ObserveLobby removed")
-//
-//                }
-                
-                
-            }
+
+            self.printer.write("Document4")
         }
-                
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    func observerHelper1(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
+        printer.write("observerHelper1 is being called")
+
+        //semephoreOberservLobby.wait()
+        Task {
+            try await Task.sleep(nanoseconds: 5_000_000_000)
+            //self.semephoreOberservLobby.signal()
+            self.isObservingLobbyFirstTime = false
+            self.hasObserverHelperBeenCalled = false
+            callOnSuccessMethod(game: game, onSuccess)
+
+        }
+        
+        
+
+                        
+//        semephoreOberservLobby.wait()
+//        semephoreOberservLobby.signal()
+        
+
+        
+        
+
+        
+        
+        
+        
+//        if semephoreOberservLobby.wait(timeout: .now()) == .success {
+//            // Semaphore is available
+//
+//            Task {
+//                try await Task.sleep(nanoseconds: 5_000_000_000)
+//                self.semephoreOberservLobby.signal()
+//                self.isObservingLobbyFirstTime = false
+//                self.hasObserverHelperBeenCalled = false
+//            }
+//
+//
+//        } else {
+//            // Semaphore is not available
+//            return
+//        }
+        
+        
+//
+//        do {
+//            let dbLobbyNullable = try lobbySnapsot!.data(as: DbLobbyNullable.self)
+//
+//            printer.write("Document \(dbLobbyNullable.players!.count)")
+//
+//
+//
+//            let dbLobbyNullable2 = try self.lobbySnapsot!.data(as: DbLobbyNullable.self)
+//            self.printer.write("Document1 \(dbLobbyNullable.players!.count)")
+//            self.printer.write("Document2 \(dbLobbyNullable2.players!.count)")
+//
+//
+//
+//
+//
+//            guard let lobby = dbLobbyNullable.mapToLobby() else {
+//                self.printer.write("mapToLobby returned nil")
+//                game.remove_all_players()
+//                return
+//            }
+//
+//
+//            self.printer.write("Snapshot from lobby recieved")
+//            onSuccess(lobby)
+//
+//
+//        }
+//
+//        catch {
+//
+//            self.printer.write("Error in mapping to DbLobbyNullable.")
+//        }
+        
+    }
+    
+    
+    
+    
+    
+    func callOnSuccessMethod(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
+        printer.write("Document observerHelper2 is being called")
+        
+        do {
+            let dbLobbyNullable = try lobbySnapsot!.data(as: DbLobbyNullable.self)
+            
+            guard let lobby = dbLobbyNullable.mapToLobby() else {
+                self.printer.write("mapToLobby returned nil")
+                game.remove_all_players()
+                return
+            }
+            
+            printer.write("Document players: \(lobby.players.count)")
+
+            onSuccess(lobby)
+            
+        }
+        
+        catch {
+            printer.write("Error in mapping to DbLobbyNullable.")
+        }
+        
+    }
+
+    
     
     
     
@@ -191,7 +344,7 @@ class LobbyService : UserService {
             case .success(let dbLobbyNullable):
                 
                 self.printer.write("Lobby has been fetched")
-            
+                
                 self.createLobby(controller: controller, dbLobbyNullable: dbLobbyNullable)
                 
                 
@@ -210,7 +363,7 @@ class LobbyService : UserService {
     
     
     /// This function first creates a lobby with a generated gameId and then deletes 'lobby'.
-    /// 
+    ///
     
     func createLobby(controller: Controller, dbLobbyNullable dl: DbLobbyNullable) {
         
@@ -225,7 +378,7 @@ class LobbyService : UserService {
         dbLobbyNullabeDup.gameId = gameId
         dbLobbyNullabeDup.hostId = controller.game.me.id
         
-     
+        
         
         
         let docRef = db.collection(COLL_PATH).document(gameId)
@@ -234,7 +387,7 @@ class LobbyService : UserService {
             try docRef.setData(from: dbLobbyNullabeDup)
             
             printer.write("Lobby created.")
-
+            
             self.updateGameId(newGameId: gameId)
             
         } catch let err {
@@ -272,7 +425,7 @@ class LobbyService : UserService {
     
     
     
-
+    
     
     func deleteLobby(docRef: DocumentReference) {
         
@@ -283,7 +436,7 @@ class LobbyService : UserService {
                 
             } else {
                 self.printer.write("Lobby successfully deleted")
-
+                
             }
             
         }
@@ -291,7 +444,7 @@ class LobbyService : UserService {
     
     
     
-
+    
     
     
     
@@ -308,7 +461,7 @@ class LobbyService : UserService {
                     print("Error setting hostId: \(err.localizedDescription)")
                 }
             }
- 
+            
             
         }
         
@@ -321,14 +474,14 @@ class LobbyService : UserService {
             }
         }
     }
-
     
     
     
     
     
     
-
+    
+    
     
     
     

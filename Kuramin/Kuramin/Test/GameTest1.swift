@@ -11,23 +11,14 @@ class GameTest1 : ObservableObject {
     @Published var testPassed: Bool = false
 
     
-    
     func run() {
-
-        
-//        for i in 0...10 {
-//            addAndRemoveMethodsTest()
-//            addAndRemoveWithIdMethodsTest()
-//            SubGameTest().main()
-//        }
-        
-        
-        
+            
         addAndRemoveMethodsTest()
         addAndRemoveWithIdMethodsTest()
         
         testPassed = true
     }
+    
     
     
     

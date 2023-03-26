@@ -55,6 +55,17 @@ public struct DbLobbyNullable: Codable {
         
         return nil
     }
+    
+    
+    
+    
+    
+    
+    
+    func isDuplicate(anotherDbLobbyNullable: DbLobbyNullable) {
+        
+        
+    }
 }
 
 

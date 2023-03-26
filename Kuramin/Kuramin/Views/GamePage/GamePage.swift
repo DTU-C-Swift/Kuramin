@@ -37,6 +37,7 @@ struct GamePage: View {
                     
                     
                     Button(action: {
+                        controller.exitLobby()
                         pm.wrappedValue.dismiss()
                         //game.removeNode(nodeToRemove: game.head!.nextPlayer!)
                         
