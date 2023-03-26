@@ -25,7 +25,7 @@ class Controller : ObservableObject {
     
     var isGameInitializing = false
     //var isGameInitialized = false
-
+    
     let gameLogic = GameLogic()
     
     
@@ -49,7 +49,7 @@ class Controller : ObservableObject {
         
         let player = game.me
         //player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-        player.setRandomNum(randNum: 30001)
+        player.setRandomNum(randNum: 31)
         
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
         
@@ -111,7 +111,7 @@ class Controller : ObservableObject {
     func exitLobby() {
         lobbyService.exitLobby(game: game, player: game.me)
         lobbyService.obsRef?.remove()
-        lobbyService.setDocumentPath(path: "lobby")        
+        lobbyService.setDocumentPath(path: "lobby")
     }
     
     
@@ -123,7 +123,7 @@ class Controller : ObservableObject {
     
     
     
-
+    
     
     
     
@@ -176,7 +176,7 @@ class Controller : ObservableObject {
             
         }
         
-
+        
         
         
         // Stopping the buffering page
@@ -184,7 +184,7 @@ class Controller : ObservableObject {
             game.setIsLandingInLobbySucceded(val: true)
         }
         
-        // __________________//
+        //-------------------------------//
         game.setHostId(hostId: lobby.hostId)
         game.setPlayerTurnId(pid: lobby.whosTurn)
         
@@ -196,29 +196,14 @@ class Controller : ObservableObject {
         assert(lobby.gameId != "" || lobby.hostId != "")
         
         gameInitialization(lobby: lobby)
-    
-  
+        
+        
     }
     
     
-    var isItFirstTime = true
-    let semephoreGameInit = DispatchSemaphore(value: 0)
     
     
     func gameInitialization(lobby: Lobby) {
-        
-        
-//        let waittingTime: UInt64?
-//        
-//        if isItFirstTime {
-//            waittingTime = UInt64(2) * 1_000_000_000
-//        } else {
-//            waittingTime = UInt64(1) * 1_000_000_000
-//
-//        }
-        
-
-        
         
         
         if lobby.gameId == Util.NOT_SET {
@@ -243,17 +228,72 @@ class Controller : ObservableObject {
             } else {
                 
                 // Game is initialized both in lobby and local
-
+                
             }
             
         }
         
         
         
+    }
+    
+    
+    
+    
+    
+    
+    func initializeGame() {
+        p.write("initializeGame is being called")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
+            
+            if self.game.playerSize < 2 {
+                //self.isGameInitialized = false
+                return
+            }
+            
+            
+            
+            
+            //self.lobbyService.obsRef!.remove()
+            
+            if self.game.head!.prevPlayer!.id == self.game.me.id {
+                
+                if self.isGameInitializing { return }
+                
+                self.isGameInitializing = true
+                
+                //------------- I am the host -------------//
+                self.p.write("You are the host")
+                
+                self.changeLobbyName()
+            }
+            
+        }
         
         
-        
-        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //        Task {
 //
 //            try await Task.sleep(nanoseconds: waittingTime ?? 2_000_000_000)
@@ -289,67 +329,15 @@ class Controller : ObservableObject {
 //
 //
 //        }
-        
-        
-        
-        
-        
+
+
+
+
+
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
 //
 //
 //
 //
 //        }
-        
-        
-
-        
-    }
-    
-    
-    
-    
-    
-    
-    func initializeGame() {
-        p.write("initializeGame is being called")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
-            
-            if self.game.playerSize < 2 {
-                //self.isGameInitialized = false
-                return
-            }
-            
-
-            
-            
-            //self.lobbyService.obsRef!.remove()
-            
-            if self.game.head!.prevPlayer!.id == self.game.me.id {
-                
-                if self.isGameInitializing { return }
-                
-                self.isGameInitializing = true
-                
-                //------------- I am the host -------------//
-                self.p.write("You are the host")
-                
-                self.changeLobbyName()
-            }
-            
-        }
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-}
-
 

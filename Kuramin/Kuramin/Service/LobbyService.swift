@@ -15,7 +15,7 @@ class LobbyService : UserService {
     
     private let db = Firestore.firestore()
     private let printer = Printer(tag: "LobbyService", displayPrints: true)
-    let waitTimeSec = 1000.0
+    let waitTimeSec = 10.0
     private (set) var DOC_PATH = "lobby"
     private (set) var COLL_PATH = "matches"
     
@@ -318,7 +318,7 @@ class LobbyService : UserService {
             } else {
                 print("Game ID successfully updated. new gameId \(newGameId)")
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     self.deleteLobby(docRef: docRef)
                 }
                 
