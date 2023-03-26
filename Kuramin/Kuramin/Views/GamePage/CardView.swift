@@ -24,7 +24,13 @@ struct CardView: View {
         
         HStack {
             Button(action: {
-                controller.send_card_to_next_player(cardIndex: cardIndex)
+                
+                if controller.game.isMyTurn {
+                    controller.send_card_to_next_player(cardIndex: cardIndex)
+                } else {
+                    Text("It now your turn")
+                }
+                
                 
             }) {
                 

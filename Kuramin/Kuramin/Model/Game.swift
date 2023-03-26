@@ -671,7 +671,12 @@ public class Game : ObservableObject {
             
             if pid == me.id {
                 self.isMyTurn = true
+                
+            } else {
+                self.isMyTurn = false
+                
             }
+                
             
             
         }

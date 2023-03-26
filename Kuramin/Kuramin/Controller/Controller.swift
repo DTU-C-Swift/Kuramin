@@ -49,8 +49,8 @@ class Controller : ObservableObject {
         }
         
         let player = game.me
-        //player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-        player.setRandomNum(randNum: 10)
+        player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
+        //player.setRandomNum(randNum: 10)
         
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
         

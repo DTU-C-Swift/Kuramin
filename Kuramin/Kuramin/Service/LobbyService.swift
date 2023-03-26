@@ -323,7 +323,7 @@ class LobbyService : UserService {
             } else {
                 print("Game ID successfully updated. new gameId \(newGameId)")
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.deleteLobby(docRef: docRef)
                 }
                 

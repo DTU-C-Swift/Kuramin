@@ -10,6 +10,7 @@ import Foundation
 class Deck {
     
     var cards: [Card] = []
+    let amountOfInitCards = 8
     
     
     
@@ -66,10 +67,10 @@ class Deck {
             
             var str = ""
             
-            for i in 0...3 {
+            for i in 0..<amountOfInitCards {
                 
                 str += "\(cards.popLast()!.toString())"
-                if i < 3 {str += " "}
+                if i < amountOfInitCards-1  {str += " "}
             }
             
             dbLobby.players![index].cards = str

@@ -10,20 +10,5 @@ import Foundation
 class SubGame {
     
     
-
-    
-//
-//    func send_card_to_next_player(cardIndex: Int) {
-//
-//
-//        Task {
-//
-//            await MainActor.run(body: {
-//
-//            })
-//        }
-//
-//
-//    }
     
 }
