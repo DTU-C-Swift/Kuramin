@@ -70,12 +70,12 @@ class GameTest2 : ObservableObject{
                     assert(game.playerSize == 4)
                     
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + controller.lobbyService.waitTimeSec) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + controller.lobbyService.waitTimeSec ) {
                         
-                        assert(game.head!.cards.count == 4)
-                        assert(game.head!.nextPlayer!.cards.count == 4)
-                        assert(game.head!.nextPlayer!.nextPlayer!.cards.count == 4)
-                        assert(game.head!.nextPlayer!.nextPlayer!.nextPlayer!.cards.count == 4)
+                        assert(game.head!.cards.count == game.deck.amountOfInitCards)
+                        assert(game.head!.nextPlayer!.cards.count == game.deck.amountOfInitCards)
+                        assert(game.head!.nextPlayer!.nextPlayer!.cards.count == game.deck.amountOfInitCards)
+                        assert(game.head!.nextPlayer!.nextPlayer!.nextPlayer!.cards.count == game.deck.amountOfInitCards)
 
                         assert(game.hostId == game.head!.prevPlayer!.id)
                         assert(game.playerTurnId == game.head!.id)

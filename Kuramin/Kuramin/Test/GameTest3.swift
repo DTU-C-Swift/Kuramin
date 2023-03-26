@@ -80,8 +80,8 @@ class GameTest3 : ObservableObject {
         assert(game.id == lobbyService.DOC_PATH)
         
         assert(game.hostId == "testId1")
-        assert(game.head!.cards.count == 4)
-        assert(game.head!.nextPlayer!.cards.count == 4)
+        assert(game.head!.cards.count == game.deck.amountOfInitCards)
+        assert(game.head!.nextPlayer!.cards.count == game.deck.amountOfInitCards)
 
         if thread!.testPassed {
             self.testPassed = true
