@@ -60,6 +60,7 @@ struct MyPlayerViewInGamePage: View {
                         
                         HStack {
                             Image("coins_30")
+                                .padding(.leading)
                             Text("\(coins)\(str)")
                             Spacer()
                             

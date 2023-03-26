@@ -60,7 +60,6 @@ struct GamePage: View {
                     }
                     
                     
-                    
                 }
                 
                 Spacer()
@@ -71,29 +70,13 @@ struct GamePage: View {
                         
                         Spacer()
                         MyPlayerViewInGamePage(me: controller.game.me, game: game)
-                            .padding(.bottom, 10)
+                            .padding(.bottom, 0)
                         Spacer()
                         
                     }
-                    
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            
-                            //controller.changeLobbyName()
-                            //controller.exitLobby()
-                            
-                        }) {
-                            Text("Rename lobby")
-                        }
 
-                    }
-                    
-                    
                 }
-                
-                
+
             }
             
             
