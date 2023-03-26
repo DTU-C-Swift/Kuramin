@@ -10,7 +10,7 @@
 
 import SwiftUI
 
-struct TimerPrgressBar: View {
+struct TimerProgressBar: View {
     @State var progress: Double = 0
     var progressTime: Int
     let interval = 0.20
@@ -29,7 +29,7 @@ struct TimerPrgressBar: View {
             Circle()
                 .stroke(
                     Color.green.opacity(0.5),
-                    lineWidth: 30
+                    lineWidth: 8
                 )
             
             
@@ -38,7 +38,7 @@ struct TimerPrgressBar: View {
                 .stroke(
                     Color.red,
                     style: StrokeStyle(
-                        lineWidth: 30,
+                        lineWidth: 8,
                         lineCap: .round
                     )
                 )
@@ -54,7 +54,7 @@ struct TimerPrgressBar: View {
                 }
             
         }
-        .padding(.all, 20)
+//        .padding(.all, 20)
     }
     
     
@@ -64,7 +64,7 @@ struct TimerPrgressBar: View {
 struct TimerPrgressBar_Previews: PreviewProvider {
     static var previews: some View {
         
-        TimerPrgressBar(progressTime: 20)
+        TimerProgressBar(progressTime: 20)
         
     }
 }

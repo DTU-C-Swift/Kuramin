@@ -10,6 +10,7 @@ import SwiftUI
 struct CirclePicView: View {
     @ObservedObject var player: Player
     @ObservedObject var game: Game
+    let progressTime = 20
     
     init(player: Player, game: Game) {
         self.player = player
@@ -34,6 +35,9 @@ struct CirclePicView: View {
                         .shadow(radius: 7)
                 }
             
+                TimerProgressBar(progressTime: progressTime)
+                .frame(width: 60, height: 60)
+//                .scaleEffect(0.6)
             
             
             
