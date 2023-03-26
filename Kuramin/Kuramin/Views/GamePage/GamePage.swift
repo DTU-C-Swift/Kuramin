@@ -18,8 +18,10 @@ struct GamePage: View {
     //@EnvironmentObject var controller: Controller
     @ObservedObject var controller = DataHolder.controller
     @ObservedObject var game = DataHolder.controller.game
-    @State var earlier: String = ""
-    @State var later: String = ""
+    //@State var earlier: String = ""
+    //@State var later: String = ""
+    @State private var showingQuitGameAlert = false
+
     
     
     
@@ -31,17 +33,15 @@ struct GamePage: View {
             
             PlayersView(game: game)
             
-            
+            //------------ Back button ------------//
             VStack {
                 Spacer()
                 HStack {
                     
                     Button(action: {
-                        controller.exitLobby()
-                        pm.wrappedValue.dismiss()
-                        //game.removeNode(nodeToRemove: game.head!.nextPlayer!)
-                        
+                        showingQuitGameAlert = true
                     }) {
+                        
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.white)
                             .scaleEffect(1.4)
@@ -49,6 +49,16 @@ struct GamePage: View {
                         
                     }
                     .padding(.bottom, 10)
+                    
+                    .alert(isPresented: $showingQuitGameAlert) {
+                        Alert(title: Text("Confirmation"), message: Text("Are you sure you want to quit?"), primaryButton: .destructive(Text("Yes")) {
+                            
+                            
+                            controller.exitLobby()
+                            pm.wrappedValue.dismiss()
+                        }, secondaryButton: .cancel())
+                    }
+                    
                     
                     Spacer()
                 }
@@ -62,21 +72,6 @@ struct GamePage: View {
 
                 
                 HStack{
-                    
-                    
-//                    Button(action: {
-//                        controller.exitLobby()
-//                        pm.wrappedValue.dismiss()
-//                        //game.removeNode(nodeToRemove: game.head!.nextPlayer!)
-//
-//                    }) {
-//                        Image(systemName: "chevron.backward")
-//                            .foregroundColor(.white)
-//                            .scaleEffect(1.6)
-//                            .padding(.leading, 20)
-//
-//                    }
-//                    .padding(.top, 10)
                     
                     Spacer()
                     Button(action: {
@@ -93,7 +88,6 @@ struct GamePage: View {
                 Spacer()
                 
                 ZStack {
-                    
                     
                     HStack {
                         
@@ -114,6 +108,14 @@ struct GamePage: View {
         }
 
         .navigationBarBackButtonHidden(true)
+        .persistentSystemOverlays(.hidden)
+
+        
+        
+        
+        
+        
+        
 //        .onChange(of: scenePhase) { newPhase in
 //
 //            self.printer.write("on change")
@@ -134,9 +136,7 @@ struct GamePage: View {
 //        }
 
         
-        .persistentSystemOverlays(.hidden)
         .onAppear() {
-            //controller.game.addDummyPlayers(val: 7)
         }
 
         
