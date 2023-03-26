@@ -26,13 +26,8 @@ struct TimerProgressBar: View {
     
     var body: some View {
         ZStack {
-            Circle()
-                .stroke(
-                    Color.green.opacity(0.5),
-                    lineWidth: 8
-                )
-            
-            
+
+                        
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(

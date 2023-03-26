@@ -26,6 +26,7 @@ struct CirclePicView: View {
 
         ZStack(alignment: .top) {
             
+            
             Image(uiImage: player.image)
                 .frame(width: 60, height: 60)
                 .scaleEffect(0.6)
@@ -35,9 +36,36 @@ struct CirclePicView: View {
                         .shadow(radius: 7)
                 }
             
+            
+            
+
+            
+            
+            
+            if game.playerTurnId == player.id {
+                Circle()
+                    .stroke(
+                        Color.green.opacity(0.5),
+                        lineWidth: 8
+                    )
+                    .frame(width: 60, height: 60)
+                
+                
                 TimerProgressBar(progressTime: progressTime)
-                .frame(width: 60, height: 60)
-//                .scaleEffect(0.6)
+                    .frame(width: 60, height: 60)
+                
+                    
+            } else {
+                
+                
+                Circle()
+                    .stroke(
+                        Color.red.opacity(0.5),
+                        lineWidth: 8
+                    )
+                    .frame(width: 60, height: 60)
+            }
+
             
             
             
