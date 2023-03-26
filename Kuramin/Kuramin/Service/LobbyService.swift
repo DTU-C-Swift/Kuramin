@@ -159,56 +159,28 @@ class LobbyService : UserService {
                 return
             }
             
-                       
+            
             lobbySnapsot = snapshot
             
             
-            
-            //---------------------------------
-            
-            
-//            do {
-//                let dbLobbyNullable = try lobbySnapsot!.data(as: DbLobbyNullable.self)
-//
-//                guard let lobby = dbLobbyNullable.mapToLobby() else {
-//                    self.printer.write("mapToLobby returned nil")
-//                    game.remove_all_players()
-//                    return
-//                }
-//
-//                printer.write("Document players: \(lobby.players.count)")
-//
-//            } catch {}
-            
-            
-            
-            //......................................
-            
-            
-            
-
             if self.isObservingLobbyFirstTime {
                 
                 if !hasObserverHelperBeenCalled {
                     hasObserverHelperBeenCalled = true
-                    self.printer.write("Document1")
-
                     
                     DispatchQueue.global().async {
-                        self.observerHelper1(game: game, onSuccess)
+                        self.wait_for_repeated_snapshot(game: game, onSuccess)
                     }
                     
                 }
                 
-                self.printer.write("Document hasObserverHelperBeenCalled")
                 
             } else {
                 
                 self.callOnSuccessMethod(game: game, onSuccess)
             }
             
-
-            self.printer.write("Document4")
+            self.printer.write("Snapshot triggered")
         }
         
     }
@@ -219,83 +191,15 @@ class LobbyService : UserService {
     
     
     
-    func observerHelper1(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
-        printer.write("observerHelper1 is being called")
-
-        //semephoreOberservLobby.wait()
+    func wait_for_repeated_snapshot(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
+        printer.write("Function 'wait_for_repeated_snapshot' is being called")
+        
         Task {
-            try await Task.sleep(nanoseconds: 5_000_000_000)
-            //self.semephoreOberservLobby.signal()
+            try await Task.sleep(nanoseconds: 3_000_000_000)
             self.isObservingLobbyFirstTime = false
             self.hasObserverHelperBeenCalled = false
             callOnSuccessMethod(game: game, onSuccess)
-
         }
-        
-        
-
-                        
-//        semephoreOberservLobby.wait()
-//        semephoreOberservLobby.signal()
-        
-
-        
-        
-
-        
-        
-        
-        
-//        if semephoreOberservLobby.wait(timeout: .now()) == .success {
-//            // Semaphore is available
-//
-//            Task {
-//                try await Task.sleep(nanoseconds: 5_000_000_000)
-//                self.semephoreOberservLobby.signal()
-//                self.isObservingLobbyFirstTime = false
-//                self.hasObserverHelperBeenCalled = false
-//            }
-//
-//
-//        } else {
-//            // Semaphore is not available
-//            return
-//        }
-        
-        
-//
-//        do {
-//            let dbLobbyNullable = try lobbySnapsot!.data(as: DbLobbyNullable.self)
-//
-//            printer.write("Document \(dbLobbyNullable.players!.count)")
-//
-//
-//
-//            let dbLobbyNullable2 = try self.lobbySnapsot!.data(as: DbLobbyNullable.self)
-//            self.printer.write("Document1 \(dbLobbyNullable.players!.count)")
-//            self.printer.write("Document2 \(dbLobbyNullable2.players!.count)")
-//
-//
-//
-//
-//
-//            guard let lobby = dbLobbyNullable.mapToLobby() else {
-//                self.printer.write("mapToLobby returned nil")
-//                game.remove_all_players()
-//                return
-//            }
-//
-//
-//            self.printer.write("Snapshot from lobby recieved")
-//            onSuccess(lobby)
-//
-//
-//        }
-//
-//        catch {
-//
-//            self.printer.write("Error in mapping to DbLobbyNullable.")
-//        }
         
     }
     
@@ -304,7 +208,7 @@ class LobbyService : UserService {
     
     
     func callOnSuccessMethod(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {
-        printer.write("Document observerHelper2 is being called")
+        printer.write("Function 'callOnSuccessMethod' is being called")
         
         do {
             let dbLobbyNullable = try lobbySnapsot!.data(as: DbLobbyNullable.self)
@@ -315,8 +219,8 @@ class LobbyService : UserService {
                 return
             }
             
-            printer.write("Document players: \(lobby.players.count)")
-
+            printer.write("Function 'callOnSuccessMethod' players: \(lobby.players.count)")
+            
             onSuccess(lobby)
             
         }
@@ -326,7 +230,7 @@ class LobbyService : UserService {
         }
         
     }
-
+    
     
     
     
