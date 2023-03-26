@@ -34,13 +34,15 @@ public class Game : ObservableObject {
     private (set) var playerTurnId = Util.NOT_SET
     
     @Published private (set) var isMyTurn = false
-
+    
+    var subGame = SubGame()
     
     
     
     init () {
         //me.setRandomNum(randNum: 530)
         //addNode(nodeToAdd: me)
+        
         
     }
     
@@ -657,7 +659,7 @@ public class Game : ObservableObject {
     
     
     func setPlayerTurnId(pid: String) {
-        if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+        if pid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true || pid == Util.NOT_SET {
             return
         }
         

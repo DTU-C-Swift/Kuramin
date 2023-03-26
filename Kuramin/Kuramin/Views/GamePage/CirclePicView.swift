@@ -16,6 +16,8 @@ struct CirclePicView: View {
         self.game = game
     }
     
+    @State private var opacity: Double = 0.5
+
     
     var body: some View {
         
@@ -31,6 +33,10 @@ struct CirclePicView: View {
                     Circle().stroke(Color.white, lineWidth: 4)
                         .shadow(radius: 7)
                 }
+            
+            
+            
+            
             
             
             VStack {

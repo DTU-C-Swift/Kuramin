@@ -11,15 +11,23 @@ class Deck {
     
     var cards: [Card] = []
     
+    
+    
     init() {
-        setCards()
-        setCards()
-        cards.shuffle()
-        cards.shuffle()
+        initalizeDeck()
     }
     
     
-    func setCards() {
+    func initalizeDeck() {
+        createCardDeck()
+        createCardDeck()
+        cards.shuffle()
+        cards.shuffle()
+        
+    }
+    
+    
+    private func createCardDeck() {
         
         for i in 1...13 {
             let newCard = Card(suit: "H", value: i)
@@ -51,6 +59,7 @@ class Deck {
     
     func setIntialCardToLobby(dbLobby: inout DbLobbyNullable) {
         if dbLobby.players == nil {return}
+        
         
         for (index, _) in dbLobby.players!.enumerated() {
             
