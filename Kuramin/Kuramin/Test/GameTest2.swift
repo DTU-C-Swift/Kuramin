@@ -186,7 +186,7 @@ class GameTest2 : ObservableObject{
         dbPlayers.remove(at: 0)
         dbPlayers.remove(at: 0)
         // dbPlayers: p3, p4, p5, p6, p7, me
-        let lobby = Lobby(gameId: "12345", host: dbPlayers[1].pid, whosTurn: Util.NOT_SET, players: dbPlayers)
+        let lobby = Lobby(gameId: "12345", host: dbPlayers[1].pid, whosTurn: Util.NOT_SET, players: dbPlayers, cardOnBoard: "")
 
         game.updatePlayerList(lobby: lobby)
         assert(game.playerSize == 2)

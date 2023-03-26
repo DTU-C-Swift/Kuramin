@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct BackgroundView: View {
+    var controller: Controller
+    @ObservedObject var game: Game
+    
+    init(controller: Controller, game: Game) {
+        self.controller = controller
+        self.game = game
+    }
+    
     var body: some View {
         ZStack {
             
@@ -31,6 +39,24 @@ struct BackgroundView: View {
             HStack {
                 Spacer()
                 Spacer()
+                
+                if game.cardOnBoard != nil {
+                    Image(game.cardOnBoard!.toString())
+                        .resizable()
+                        .scaledToFit()
+                        .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
+                        .frame(width: 60, height: 130)
+
+                }
+                
+//                Image("H3")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
+//                    .frame(width: 60, height: 130)
+
+                
+                
                 Spacer()
                 VStack {
                     Text("Rewards")
@@ -51,6 +77,6 @@ struct BackgroundView: View {
 
 struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        BackgroundView()
+        BackgroundView(controller: DataHolder.controller, game: DataHolder.controller.game)
     }
 }

@@ -14,6 +14,7 @@
 		563AE91A29C31E5A00E950DE /* iconContributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 563AE91929C31E5A00E950DE /* iconContributions.txt */; };
 		563D6DB429CB4102007E7F06 /* SignUpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563D6DB329CB4102007E7F06 /* SignUpPage.swift */; };
 		5675F72529D07B1100A533E2 /* TimerProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675F72429D07B1100A533E2 /* TimerProgressBar.swift */; };
+		5675F72729D0894F00A533E2 /* SubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675F72629D0894F00A533E2 /* SubController.swift */; };
 		567FD3D129D064D200B75BC1 /* SubGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567FD3D029D064D200B75BC1 /* SubGame.swift */; };
 		56954C1529C2358600155181 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1429C2358600155181 /* BackgroundView.swift */; };
 		56954C1729C235AF00155181 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56954C1629C235AF00155181 /* CardView.swift */; };
@@ -89,6 +90,7 @@
 		563AE91929C31E5A00E950DE /* iconContributions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iconContributions.txt; sourceTree = "<group>"; };
 		563D6DB329CB4102007E7F06 /* SignUpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPage.swift; sourceTree = "<group>"; };
 		5675F72429D07B1100A533E2 /* TimerProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressBar.swift; sourceTree = "<group>"; };
+		5675F72629D0894F00A533E2 /* SubController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController.swift; sourceTree = "<group>"; };
 		567FD3D029D064D200B75BC1 /* SubGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGame.swift; sourceTree = "<group>"; };
 		56954C1429C2358600155181 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		56954C1629C235AF00155181 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				56954C3F29C2391E00155181 /* Controller.swift */,
 				56954C4129C2393F00155181 /* DataHolder.swift */,
 				56C6DCB329CC68700024AE17 /* GameLogic.swift */,
+				5675F72629D0894F00A533E2 /* SubController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				56954C3D29C238F300155181 /* Player.swift in Sources */,
 				56F0D3F829CDE6DC0026DCDA /* CardsView.swift in Sources */,
 				561DCBA429CF3F1B00743070 /* ThreadOtherPlayer.swift in Sources */,
+				5675F72729D0894F00A533E2 /* SubController.swift in Sources */,
 				569C5CEA29C2206D00D1D7FE /* Persistence.swift in Sources */,
 				56C6DCB029CC47440024AE17 /* LobbyService.swift in Sources */,
 				56954C3129C2384500155181 /* UserService.swift in Sources */,

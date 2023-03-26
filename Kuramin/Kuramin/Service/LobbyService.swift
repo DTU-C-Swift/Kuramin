@@ -18,6 +18,10 @@ class LobbyService : UserService {
     let waitTimeSec = 10.0
     private (set) var DOC_PATH = "lobby"
     private (set) var COLL_PATH = "matches"
+    var previousLobbyNullable: DbLobbyNullable?
+    var isLobbyObserving = false
+
+
     
     
     
@@ -50,7 +54,7 @@ class LobbyService : UserService {
                 
                 //let gameId = String(UUID().uuidString.prefix(15))
                 
-                let dbLobby = DbLobbyNullable(gameId: Util.NOT_SET, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable])
+                let dbLobby = DbLobbyNullable(gameId: Util.NOT_SET, hostId: Util.NOT_SET, whoseTurn: Util.NOT_SET, players: [dbPlayerNullable], cardOnBoard: "")
                 
                 do {
                     try transaction.setData(from: dbLobby, forDocument: docRef)
@@ -220,6 +224,7 @@ class LobbyService : UserService {
             }
             
             printer.write("Function 'callOnSuccessMethod' players: \(lobby.players.count)")
+            previousLobbyNullable = dbLobbyNullable
             
             onSuccess(lobby)
             
@@ -429,6 +434,33 @@ class LobbyService : UserService {
         if DOC_PATH != path {
             self.DOC_PATH = path
         }
+    }
+    
+    
+    
+    func updateLobby(lobbyNullable: DbLobbyNullable) {
+        
+        let docRef = db.collection(COLL_PATH).document(DOC_PATH)
+        
+        
+        do {
+            try docRef.setData(from: lobbyNullable, merge: true) { [self]err in
+                
+                if let err = err {
+                    printer.write("Error updating lobby. Cause: \(err.localizedDescription)")
+                    
+                } else {
+                    
+                    printer.write("Lobby updated")
+                    
+                }
+                
+            }
+            
+        } catch let err {
+            printer.write("Error while mapping lobby. Cause: \(err.localizedDescription)")
+        }
+        
     }
     
 }

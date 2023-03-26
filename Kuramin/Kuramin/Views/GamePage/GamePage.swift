@@ -27,7 +27,7 @@ struct GamePage: View {
         
         ZStack {
             
-            BackgroundView()
+            BackgroundView(controller: controller, game: game)
             
             PlayersView(game: game)
             

@@ -22,12 +22,7 @@ class UserService {
 
 
     let NOTSET = Util.NOT_SET
-    
-    var previousLobby: FirstLobby = FirstLobby(host: "", playerIds: [""])
-    var isLobbyObserving = false
-    
-    
-    
+        
     
     func create_or_update_user(userImage: UIImage?, game: Game) {
         

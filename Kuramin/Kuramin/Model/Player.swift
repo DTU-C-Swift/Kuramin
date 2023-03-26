@@ -378,6 +378,31 @@ class Player : ObservableObject {
     }
     
     
+    
+    
+    
+    func removeCardAt(index: Int) {
+        
+        if index >= cards.count {
+            p.write("Remove request at index \(index) is possible")
+            return
+        }
+
+        cards.remove(at: index)
+
+//        Task {
+//            await MainActor.run(body: {
+//                cards.remove(at: index)
+//            })
+//
+//        }
+        
+    }
+    
+    
+    
+    
+    
     func getCardsInStr() -> String {
         
         var str = ""

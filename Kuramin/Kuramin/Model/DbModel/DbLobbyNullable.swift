@@ -15,6 +15,7 @@ public struct DbLobbyNullable: Codable {
     var hostId: String?
     var whoseTurn: String?
     var players: [DbPlayerNullable]?
+    var cardOnBoard: String?
     
     
     
@@ -43,9 +44,9 @@ public struct DbLobbyNullable: Codable {
         
         
         
-        if let gameId = self.gameId, let host = self.hostId, let whosTurn = self.whoseTurn {
+        if let gameId = self.gameId, let host = self.hostId, let whosTurn = self.whoseTurn, let cardOnBoard = self.cardOnBoard {
             
-            return Lobby(gameId: gameId, host: host, whosTurn: whosTurn, players: dbPlayers)
+            return Lobby(gameId: gameId, host: host, whosTurn: whosTurn, players: dbPlayers, cardOnBoard: cardOnBoard)
             
         } else {
             
@@ -62,10 +63,10 @@ public struct DbLobbyNullable: Codable {
     
     
     
-    func isDuplicate(anotherDbLobbyNullable: DbLobbyNullable) {
-        
-        
-    }
+//    func isDuplicate(anotherDbLobbyNullable: DbLobbyNullable) {
+//
+//
+//    }
 }
 
 
@@ -74,19 +75,44 @@ public struct Lobby {
     var hostId: String
     var whosTurn: String
     var players: [DbPlayer]
+    var cardOnBoard: String
+
     
     
     
-    init(gameId: String, host: String, whosTurn: String, players: [DbPlayer]) {
+    init(gameId: String, host: String, whosTurn: String, players: [DbPlayer], cardOnBoard: String
+) {
         self.gameId = gameId
         self.hostId = host
         self.whosTurn = whosTurn
         self.players = players
+        self.cardOnBoard = cardOnBoard
     }
     
     
     
         
+    func getCardOnBoard() -> Card? {
+        
+        if cardOnBoard.isEmpty == true { return nil}
+        
+        
+        var str = cardOnBoard
+        // get the index of the 0th character
+        let index = str.index(str.startIndex, offsetBy: 0)
+        let suit = str.remove(at: index)
+        
+        //let suit = getElement(str: String(crrVal), index: 0)
+        //let valueStr = getElement(str: String(crrVal), index: 1)
+        
+        let valueInt = Int(str)
+        
+        if valueInt != nil {
+            return Card(suit: suit, value: valueInt!)
+        }
+        
+        return nil
+    }
     
     
 //    func isDuplicateLobby(compareWith: Lobby) -> Bool {
@@ -108,4 +134,5 @@ public struct Lobby {
 //
 //        return true
 //    }
+    
 }

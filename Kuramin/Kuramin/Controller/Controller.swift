@@ -27,6 +27,7 @@ class Controller : ObservableObject {
     //var isGameInitialized = false
     
     let gameLogic = GameLogic()
+    let subController = SubController()
     
     
     
@@ -49,7 +50,7 @@ class Controller : ObservableObject {
         
         let player = game.me
         //player.setRandomNum(randNum: Int(arc4random_uniform(10000)))
-        player.setRandomNum(randNum: 31)
+        player.setRandomNum(randNum: 10)
         
         lobbyService.goToLobby(me: player, controller:  self, shouldCall_lobbyObserver: true)
         
@@ -126,12 +127,6 @@ class Controller : ObservableObject {
     
     
     
-    
-    
-    
-    
-    
-    
     // --------------- This method will be called when a snapshot of observLobby is recieved --------------//
     
     func onSuccessLobbySnapshot(lobby: Lobby) {
@@ -140,6 +135,9 @@ class Controller : ObservableObject {
         self.onSuccessLobbyLock.lock()
         
         // TODO compare with previousLobby(not just ids, all the values)
+        
+        previousLobby = lobby
+        
         
         // Removes player from the display
         game.updatePlayerList(lobby: lobby)
@@ -187,6 +185,10 @@ class Controller : ObservableObject {
         //-------------------------------//
         game.setHostId(hostId: lobby.hostId)
         game.setPlayerTurnId(pid: lobby.whosTurn)
+        
+        if let cardOnBoard = lobby.getCardOnBoard() {
+            game.setCardOnBoard(card: cardOnBoard)
+        }
         
         
         self.onSuccessLobbyLock.unlock()
@@ -280,64 +282,14 @@ class Controller : ObservableObject {
     
     
     
+    func send_card_to_next_player (cardIndex: Int) {
+        subController.send_card_to_next_player(controller: self, player: game.me , cardIndex: cardIndex)
+    }
+    
+    
+    
     
 }
 
 
-
-
-
-
-
-
-
-
-
-
-//        Task {
-//
-//            try await Task.sleep(nanoseconds: waittingTime ?? 2_000_000_000)
-//
-//            if lobby.gameId == Util.NOT_SET {
-//
-//                // Game is not initialized (in lobby).
-//
-//                if lobby.players.count >= 2 && game.head!.prevPlayer!.id == game.me.id {
-//                    initializeGame()
-//                }
-//
-//
-//            } else {
-//                // Game is initialized only in lobby or both lobby and local
-//
-//                if game.id == NOTSET {
-//                    // Game is not initialized in local
-//                    lobbyService.setDocumentPath(path: lobby.gameId)
-//                    game.setGameId(gid: lobby.gameId)
-//                    lobbyService.observeLobby(game: game, onSuccessLobbySnapshot(lobby:))
-//
-//
-//                } else {
-//
-//                    // Game is initialized both in lobby and local
-//                    game.setHostId(hostId: lobby.hostId)
-//                    game.setPlayerTurnId(pid: lobby.whosTurn)
-//                }
-//
-//            }
-//
-//
-//
-//        }
-
-
-
-
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-//
-//
-//
-//
-//        }
 

@@ -37,10 +37,7 @@ struct CirclePicView: View {
                 }
             
             
-            
-
-            
-            
+                    
             
             if game.playerTurnId == player.id {
                 Circle()
