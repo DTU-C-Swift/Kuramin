@@ -45,7 +45,7 @@ struct BackgroundView: View {
                         .scaledToFit()
                         .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
                         .frame(width: 60, height: 100)
-                    
+
                 }
                 
                 
@@ -61,17 +61,27 @@ struct BackgroundView: View {
                 
             }
             
-            HStack {
+            
+            
+            VStack {
                 Spacer()
                 Spacer()
-                Spacer()
-                VStack {
-                    Text("Rewards")
-                    Text("1: 100")
-                    Text("2: 50 ")
-                    Text("3: 25 ")
+                HStack {
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    VStack {
+                        Text("Rewards")
+                        Text("1: 100")
+                        Text("2: 50 ")
+                        Text("3: 25 ")
 
-                }.foregroundColor(.white)
+                    }.foregroundColor(.white)
+                    Spacer()
+                }
+                
+                Spacer()
+                Spacer()
                 Spacer()
             }
             
