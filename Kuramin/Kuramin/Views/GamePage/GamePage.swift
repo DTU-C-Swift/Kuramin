@@ -31,10 +31,10 @@ struct GamePage: View {
             
             PlayersView(game: game)
             
+            
             VStack {
-                
-                HStack{
-                    
+                Spacer()
+                HStack {
                     
                     Button(action: {
                         controller.exitLobby()
@@ -44,11 +44,39 @@ struct GamePage: View {
                     }) {
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.white)
-                            .scaleEffect(1.6)
+                            .scaleEffect(1.4)
                             .padding(.leading, 20)
                         
                     }
-                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                    
+                    Spacer()
+                }
+            }
+            
+            
+            
+            
+            
+            VStack {
+
+                
+                HStack{
+                    
+                    
+//                    Button(action: {
+//                        controller.exitLobby()
+//                        pm.wrappedValue.dismiss()
+//                        //game.removeNode(nodeToRemove: game.head!.nextPlayer!)
+//
+//                    }) {
+//                        Image(systemName: "chevron.backward")
+//                            .foregroundColor(.white)
+//                            .scaleEffect(1.6)
+//                            .padding(.leading, 20)
+//
+//                    }
+//                    .padding(.top, 10)
                     
                     Spacer()
                     Button(action: {
@@ -66,6 +94,7 @@ struct GamePage: View {
                 
                 ZStack {
                     
+                    
                     HStack {
                         
                         Spacer()
@@ -74,6 +103,7 @@ struct GamePage: View {
                         Spacer()
                         
                     }
+                    
 
                 }
 
