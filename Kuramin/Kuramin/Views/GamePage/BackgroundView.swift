@@ -10,6 +10,9 @@ import SwiftUI
 struct BackgroundView: View {
     var controller: Controller
     @ObservedObject var game: Game
+    @State private var dots: String = ""
+
+
     
     init(controller: Controller, game: Game) {
         self.controller = controller
@@ -45,16 +48,27 @@ struct BackgroundView: View {
                         .scaledToFit()
                         .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
                         .frame(width: 60, height: 100)
-
                 }
                 
                 
+                // Waiting for players to join msg
+                if game.id == Util.NOT_SET || game.id == "" {
+                    VStack {
+                        ZStack {
+                            Text("Waiting for players to join\(dots)")
+                                .frame(width: 235, alignment: .leading)
+                        }
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                                                
+                    }
+                    .onAppear {
+                        animateDots()
+                    }
+                }
                 
-//                Image("H3")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
-//                    .frame(width: 60, height: 110)
                 Spacer()
                 Spacer()
                 Spacer()
@@ -84,12 +98,21 @@ struct BackgroundView: View {
                 Spacer()
                 Spacer()
             }
-            
-            
         }
         
 
     }
+    
+    
+    
+    func animateDots() {
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+            
+            dots += "."
+            if dots.count > 3 { dots = "" }
+        }
+    }
+    
 }
 
 struct BackgroundView_Previews: PreviewProvider {

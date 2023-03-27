@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 public class Game : ObservableObject {
-    private (set) var id: String = Util.NOT_SET
     var head: Player?
     private let semephore = DispatchSemaphore(value: 1)
     private (set) var playerSize = 0
@@ -21,6 +20,7 @@ public class Game : ObservableObject {
     
     private (set) var isGameStarted = false
     
+    @Published private (set) var id: String = Util.NOT_SET
     @Published private (set) var me: Player = Player(id: Util.NOT_SET)
     @Published private (set) var oneFromRight: Player?
     @Published private (set) var twoFromRight: Player?

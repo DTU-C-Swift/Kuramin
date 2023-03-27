@@ -33,6 +33,8 @@ struct GamePage: View {
             
             PlayersView(game: game)
             
+            
+            
             //------------ Back button ------------//
             VStack {
                 Spacer()
@@ -76,7 +78,9 @@ struct GamePage: View {
                     Spacer()
                     Button(action: {
                         
-                        controller.addDummyPlayerInLobby()
+                        if game.id == Util.NOT_SET || game.id == "" {
+                            controller.addDummyPlayerInLobby()
+                        }
                         
                     }) {
                         Text("Add")
@@ -116,28 +120,11 @@ struct GamePage: View {
         
         
         
-//        .onChange(of: scenePhase) { newPhase in
-//
-//            self.printer.write("on change")
-//
-//
-//            if newPhase == .background {
-//                // App is about to be closed
-//                self.printer.write("app is closing")
-//
-//            }
-//            else {
-//                self.printer.write("app is oppening")
-//            }
-//        }
+
 //        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
 //            // App is about to be closed
 //            self.printer.write("app is closing")
 //        }
-
-        
-        .onAppear() {
-        }
 
         
     }
