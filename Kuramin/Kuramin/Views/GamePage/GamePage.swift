@@ -76,16 +76,18 @@ struct GamePage: View {
                 HStack{
                     
                     Spacer()
-                    Button(action: {
-                        
-                        if game.id == Util.NOT_SET || game.id == "" {
-                            controller.addDummyPlayerInLobby()
-                        }
-                        
-                    }) {
-                        Text("Add")
-                    }
                     
+                    
+                    if game.id == Util.NOT_SET || game.id == "" {
+                        Button(action: {
+                            controller.addDummyPlayerInLobby()
+
+                        }) {
+                            Text("Invite player")
+                        }
+                        .padding(.all)
+                    }
+
                     
                 }
                 
