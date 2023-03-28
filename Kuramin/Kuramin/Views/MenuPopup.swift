@@ -87,6 +87,7 @@ struct MenuPopup: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .persistentSystemOverlays(.hidden)
+        
 
         
         

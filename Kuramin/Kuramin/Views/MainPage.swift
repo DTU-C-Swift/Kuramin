@@ -100,6 +100,7 @@ struct MainPage: View {
         .sheet(isPresented: $showMenu) {
             MenuPopup()
         }
+
         .sheet(isPresented: $showProfile) {
             ProfilePageView()
         }
@@ -118,7 +119,7 @@ struct MainPage: View {
 //            }
 //        }
         
-        .sheet(isPresented: $game.isWaitingToLandInLobby) {
+        .fullScreenCover(isPresented: $game.isWaitingToLandInLobby) {
             
             
             Group {
