@@ -15,7 +15,7 @@ class LobbyService : UserService {
     
     private let db = Firestore.firestore()
     private let printer = Printer(tag: "LobbyService", displayPrints: true)
-    let waitTimeSec = 10.0
+    var waitTimeSec = 20.0
     private (set) var DOC_PATH = "lobby"
     private (set) var COLL_PATH = "matches"
     var previousLobbyNullable: DbLobbyNullable?
@@ -299,8 +299,8 @@ class LobbyService : UserService {
             
             printer.write("Lobby created.")
             
-            self.updateGameId(newGameId: gameId)
-            controller.isGameInitializing = false
+            self.updateGameId(controller: controller, newGameId: gameId)
+            //controller.isGameInitializing = false
             
         } catch let err {
             printer.write("Error creating lobby. Cause: \(err.localizedDescription)")
@@ -313,7 +313,7 @@ class LobbyService : UserService {
     
     
     
-    func updateGameId(newGameId: String) {
+    func updateGameId(controller: Controller, newGameId: String) {
         
         self.printer.write("'updateGameId' is being called, new gameId \(newGameId)")
         
@@ -327,7 +327,7 @@ class LobbyService : UserService {
                 print("Game ID successfully updated. new gameId \(newGameId)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.deleteLobby(docRef: docRef)
+                    self.deleteLobby(controller: controller, docRef: docRef)
                 }
                 
             }
@@ -339,7 +339,7 @@ class LobbyService : UserService {
     
     
     
-    func deleteLobby(docRef: DocumentReference) {
+    func deleteLobby(controller: Controller, docRef: DocumentReference) {
         
         docRef.delete() { err in
             
@@ -351,6 +351,7 @@ class LobbyService : UserService {
                 
             }
             
+            controller.isGameInitializing = false
         }
     }
     

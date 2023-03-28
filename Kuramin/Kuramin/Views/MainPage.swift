@@ -94,6 +94,7 @@ struct MainPage: View {
         
         }
         .navigationBarBackButtonHidden(true)
+        
         .onAppear {
         }
         .sheet(isPresented: $showMenu) {

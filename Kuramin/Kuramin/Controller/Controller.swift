@@ -253,26 +253,19 @@ class Controller : ObservableObject {
     func initializeGame() {
         p.write("initializeGame is being called")
         
+        lobbyService.waitTimeSec += 2
         DispatchQueue.main.asyncAfter(deadline: .now() + lobbyService.waitTimeSec) {
             
-            if self.game.playerSize < 2 {
-                //self.isGameInitialized = false
+            if self.game.playerSize < 2 || self.isGameInitializing || self.game.id != Util.NOT_SET {
                 return
             }
             
             
-            
-            //self.lobbyService.obsRef!.remove()
-            
             if self.game.head!.prevPlayer!.id == self.game.me.id {
-                
-                if self.isGameInitializing { return }
-                
-                self.isGameInitializing = true
                 
                 //------------- I am the host -------------//
                 self.p.write("You are the host")
-                
+                self.isGameInitializing = true
                 self.changeLobbyName()
             }
             
