@@ -6,12 +6,14 @@
 //  Created by Numan Bashir on 16/02/2023.
 //
 
+
+
 import SwiftUI
 import Firebase
 import FBSDKCoreKit
 
 
-
+// From Facebook
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -38,7 +40,7 @@ struct KuraminApp: App {
     let persistenceController = PersistenceController.shared
     
     init() {
-        clearCache()
+        //clearCache()
         FirebaseApp.configure()
 
     }
@@ -64,15 +66,15 @@ func applicationDidEnterBackground(_ application: UIApplication) {
 
 
 
-func clearCache() {
-    let fileManager = FileManager.default
-    let cacheUrl = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-    if let contents = try? fileManager.contentsOfDirectory(at: cacheUrl, includingPropertiesForKeys: nil, options: []) {
-        for fileUrl in contents {
-            do {
-                try fileManager.removeItem(at: fileUrl)
-            } catch {
-            }
-        }
-    }
-}
+//func clearCache() {
+//    let fileManager = FileManager.default
+//    let cacheUrl = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+//    if let contents = try? fileManager.contentsOfDirectory(at: cacheUrl, includingPropertiesForKeys: nil, options: []) {
+//        for fileUrl in contents {
+//            do {
+//                try fileManager.removeItem(at: fileUrl)
+//            } catch {
+//            }
+//        }
+//    }
+//}
