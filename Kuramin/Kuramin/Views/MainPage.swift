@@ -14,7 +14,7 @@ struct MainPage: View {
     @State private var showHowTo = false
     @State private var showGamePage = false
     @State private var isGamePageLoading = true
-    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase) private var scenePhase // To notify when app goes in background
 
 
 

@@ -14,7 +14,7 @@ struct ContentView: View {
     @State var navigateToMainPage = false
     @State var selection: String? = "NON"
     @State var showAlert = false
-    @ObservedObject var navSate: NavState = NavState()
+    @StateObject var navSate: NavState = NavState()
     
     @State var email: String = ""
     @State var password: String = ""

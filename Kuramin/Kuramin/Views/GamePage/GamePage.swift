@@ -15,6 +15,7 @@ struct GamePage: View {
     //@State var earlier: String = ""
     //@State var later: String = ""
     //@State private var changedTopColumn = false
+    //@StateObject var game = Game()
 
 
 
