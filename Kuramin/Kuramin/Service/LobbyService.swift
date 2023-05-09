@@ -143,6 +143,7 @@ class LobbyService : UserService {
     
     
 
+    // @escaping makes possible to be called the closure parameter in outside of the function
     
     
     func observeLobby(game: Game, _ onSuccess: @escaping (Lobby) -> Void) {

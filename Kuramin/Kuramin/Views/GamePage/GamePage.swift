@@ -9,17 +9,19 @@ import SwiftUI
 
 
 struct GamePage: View {
-    @State private var isAnimating = false
-    @Environment(\.presentationMode) var pm: Binding<PresentationMode>
-    @EnvironmentObject var navState: NavState
-    let printer = Printer(tag: "GamePage", displayPrints: true)
-    @State private var changedTopColumn = false
-
+    //@State private var isAnimating = false
+    //@EnvironmentObject var navState: NavState
     //@EnvironmentObject var controller: Controller
-    @ObservedObject var controller = DataHolder.controller
-    @ObservedObject var game = DataHolder.controller.game
     //@State var earlier: String = ""
     //@State var later: String = ""
+    //@State private var changedTopColumn = false
+
+
+
+    @Environment(\.presentationMode) var pm: Binding<PresentationMode>
+    let printer = Printer(tag: "GamePage", displayPrints: true)
+    @ObservedObject var controller = DataHolder.controller
+    @ObservedObject var game = DataHolder.controller.game
     @State private var showingQuitGameAlert = false
 
     
