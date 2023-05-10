@@ -23,6 +23,7 @@ struct ProfilePageView: View {
     @State private var fullName = ""
     @State private var userCoins = 0
     
+    
     var body: some View {
         
         
@@ -31,7 +32,7 @@ struct ProfilePageView: View {
             
             VStack {
                 
-                Image("person_34")
+                Image(uiImage: profile.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 80, height: 80)
@@ -136,7 +137,7 @@ struct ProfilePageView: View {
                 
                 do {
                     let dbUser = try document.data(as: DbUser.self)
-                    print(dbUser)
+                    controller.userService.downloadImg(player: profile)
                     controller.profile.updateMe(dbUser: dbUser)
                     
                 }
