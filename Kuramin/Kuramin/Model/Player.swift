@@ -277,7 +277,7 @@ class Player : ObservableObject {
     
     
     
-    func setStrImg(img newImg: UIImage) {
+    func setImg(img newImg: UIImage) {
         
         //let newImg = UIImage(imageLiteralResourceName: imgName)
 

@@ -70,6 +70,7 @@ class UserService {
         
         if let uid = dbUser.uid {
             
+            uploadImg(userId: uid, img: userImage)
             do {
                 try db.collection("users").document(uid).setData(from: dbUser)
                 
@@ -77,7 +78,7 @@ class UserService {
                 self.printer.write("Error creating user in db: \(error)")
             }
             
-            uploadImg(userId: uid, img: userImage)
+            //uploadImg(userId: uid, img: userImage)
             
         } else {
             self.printer.write("User in nil")
@@ -114,6 +115,8 @@ class UserService {
             }
             
             self.printer.write("Image uploaded successfully!")
+            
+            
         }
         
     }
@@ -187,7 +190,7 @@ class UserService {
             else {
                 if let img = UIImage(data: data!) {
                     
-                    player.setStrImg(img: img)
+                    player.setImg(img: img)
                     
                     //                    if shouldAddPlayerToGame {
                     //                        game.addNode(nodeToAdd: player)

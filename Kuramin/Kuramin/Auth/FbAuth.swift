@@ -113,11 +113,11 @@ struct login : UIViewRepresentable {
                             URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
                                 if let data = data {
                                     let image = UIImage(data: data)
-                                    // Use the image as needed
-                                    //DataHolder.controller.image = image
-//                                    if let image = image {
-//                                        DataHolder.controller.game.me.image = image
-//                                    }
+                                    
+                                    if image != nil {
+                                        DataHolder.controller.game.me.setImg(img: image!)
+                                    }
+
                                     self.p.write("Facebook login fully done, and create_or_update_user has been called")
                                     DataHolder.controller.create_or_update_user(userImage: image)
                                 }
